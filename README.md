@@ -289,6 +289,7 @@ dolphain.plot_denoising_comparison(data, fmax=5000)  - `timestamps`: list of tim
 - **`wavelet_demo.ipynb`** - Comprehensive wavelet denoising tutorial  - `duration`: duration in seconds
 
 - **`batch_experiments.ipynb`** - Batch processing and experiment framework
+- **`dolphin_communication_analysis.ipynb`** - Ongoing dolphin click/whistle research featuring runtime guardrails, special-file comparisons, and threshold sweeps (CSV outputs saved under `reports/`).
 
 # Try different wavelets  - `n_samples`: number of samples
 

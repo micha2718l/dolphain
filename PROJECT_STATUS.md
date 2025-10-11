@@ -1,372 +1,148 @@
-# Dolphain Project - Current Status
+data = dolphain.read_ears_file('file.210')
+dolphain.plot_overview(data, fmax=5000)
+denoised = dolphain.wavelet_denoise(data['data'])
+#! Dolphain Project – Status & Roadmap
 
-**Last Updated:** [Current Session]
-
-## 🎯 Project Overview
-
-Dolphain is a Python package for underwater acoustic data analysis, specializing in EARS (Ecological Acoustic Recorder) binary file format reading and wavelet-based signal denoising.
-
----
-
-## 📊 Project Status: ✅ PRODUCTION READY
-
-### Core Functionality
-
-- ✅ EARS file reading (.130, .190, .210)
-- ✅ Wavelet denoising (VisuShrink method)
-- ✅ Comprehensive visualization suite
-- ✅ Batch processing framework
-- ✅ Command-line interface
-- ✅ Full test suite
-
-### Organization
-
-- ✅ Modular package structure
-- ✅ Comprehensive documentation
-- ✅ Example notebooks (3)
-- ✅ Professional README
-- ✅ Backward compatibility maintained
+**Last Updated:** October 10, 2025 (Threshold sweep & special-file comparison)
 
 ---
 
-## 📁 Current Structure
+## 📌 Executive Summary
+
+- **Core library is stable and production ready.** All modules (`io`, `signal`, `plotting`, `batch`) are tested and documented.
+- **Research notebooks are evolving.** Click-detection experiments now include runtime guardrails, special-file comparisons, and threshold sweeps (4/6/8) with persisted metrics and plots.
+- **Data estate expanded.** In addition to the 100 buoy recordings, two “special” files (`71621DC7 (1).190`, `7164403B.130`) are available for comparative studies.
+
+The project is ready for new research directions (whistle detection, advanced click quality metrics) while maintaining a robust base package for wider adoption.
+
+---
+
+## �️ Core Library Snapshot
+
+| Area                                  | Status       | Notes                                                         |
+| ------------------------------------- | ------------ | ------------------------------------------------------------- |
+| File I/O (`dolphain.io`)              | ✅ Stable    | Reads `.130`, `.190`, `.210`; metadata helpers intact         |
+| Signal Processing (`dolphain.signal`) | ✅ Stable    | Wavelet denoising (VisuShrink), threshold utilities           |
+| Plotting (`dolphain.plotting`)        | ✅ Stable    | Waveform, spectrogram, denoising comparisons                  |
+| Batch Framework (`dolphain.batch`)    | ✅ Stable    | `BatchProcessor`, `ResultCollector`, discovery helpers, timer |
+| Tests                                 | ✅ Passing   | `tests/test_ears_reader.py`, `test_batch.py`                  |
+| CLI                                   | ✅ Available | `ears_cli.py` for quick conversions/info                      |
+
+Documentation for the core package remains accurate: `README.md`, `BATCH_PROCESSING.md`, and `BATCH_IMPLEMENTATION.md` require no structural changes beyond cross-references captured below.
+
+---
+
+## � Research & Experiments
+
+| Notebook                                        | Focus                          | Latest Highlights (Oct 2025)                                                                                                    |
+| ----------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `examples/dolphin_communication_analysis.ipynb` | Dolphin click/whistle research | Added runtime guardrails, chunked click detection, special-file comparison, threshold sweep (4/6/8) with CSV outputs and plots. |
+| `examples/batch_experiments.ipynb`              | Batch-framework demos          | Stable reference for running pipelines over many files.                                                                         |
+| `examples/ears_analysis_demo.ipynb`             | Quickstart                     | No changes this cycle.                                                                                                          |
+
+Persisted artifacts for reproducibility:
+
+- `reports/click_preview_top10.csv`
+- `reports/click_comparison_buoy_vs_special.csv`
+- `reports/click_threshold_sweep_details.csv`
+- `reports/click_threshold_sweep_summary.csv`
+
+---
+
+## 📁 Repository Structure (2025-10-10)
 
 ```
 dolphain/
-├── dolphain/              # Main package (4 modules)
-│   ├── io.py             # File I/O
-│   ├── signal.py         # Signal processing
-│   ├── plotting.py       # Visualization
-│   └── batch.py          # Batch experiments (NEW)
-│
-├── examples/              # Jupyter notebooks
-│   ├── ears_analysis_demo.ipynb
-│   ├── wavelet_demo.ipynb
-│   └── batch_experiments.ipynb (NEW)
-│
-├── tests/                 # Test suite
-│   └── test_ears_reader.py
-│
-├── data/                  # Data directory
-│   └── Buoy210_100300_100399/  # 100 .210 files
-│
-├── ears_cli.py           # CLI tool
-├── ears_reader.py        # Legacy module
-├── test_batch.py         # Batch validation (NEW)
-│
-└── Documentation
-    ├── README.md                      # Main docs
-    ├── BATCH_PROCESSING.md           # Batch guide (NEW)
-    ├── BATCH_IMPLEMENTATION.md       # Implementation summary (NEW)
-    ├── REORGANIZATION_COMPLETE.md    # Reorganization notes
-    └── requirements.txt              # Dependencies
+├── dolphain/                  # Core library modules
+├── examples/                  # Research & demo notebooks
+├── tests/                     # Automated tests
+├── data/
+│   ├── Buoy210_100300_100399/ # 100 buoy recordings (*.210)
+│   └── special/               # 2 comparative recordings (*.130, *.190)
+├── reports/                   # CSV outputs from recent experiments
+├── docs/                      # README + batch documentation
+└── support files              # CLI, setup.py, requirements.txt, etc.
 ```
 
 ---
 
-## 🔧 Available Functions
+## 📊 Current Insights from Experiments
 
-### File I/O (2 functions)
+- **Click Detection (5 s chunks, threshold=4):**
 
-- `read_ears_file()` - Read binary EARS files
-- `print_file_info()` - Display metadata
+  - Buoy sample (n=10) averages 2,325 detections (465 clicks/s) with median ICI ≈ 0.148 ms.
+  - Special files (n=2) average 446 detections (89 clicks/s) with median ICI ≈ 0.219 ms.
 
-### Signal Processing (3 functions)
+- **Threshold Sweep (4 → 6 → 8):**
 
-- `wavelet_denoise()` - Main denoising function
-- `threshold()` - Apply soft/hard thresholding
-- `thresh_wave_coeffs()` - Threshold wavelet coefficients
+  - Buoy detections retain ~37% of baseline at threshold 6 and ~22% at threshold 8 (still non-zero, indicating stronger signals).
+  - Special files collapse to <5% at threshold 6 and ≈1% at threshold 8, suggesting many low-threshold hits were noise-like.
+  - Visual summaries: “Mean Click Rate vs Threshold” and “Detection Retention by File”.
 
-### Visualization (5 functions)
-
-- `plot_waveform()` - Time-domain plot
-- `plot_spectrogram()` - Frequency-domain plot
-- `plot_overview()` - Multi-panel comprehensive view
-- `plot_denoising_comparison()` - Before/after comparison
-- `plot_wavelet_comparison()` - Compare wavelets
-
-### Batch Processing (5 functions) ⭐ NEW
-
-- `find_data_files()` - Discover files by pattern
-- `select_random_files()` - Random subset with seed
-- `BatchProcessor` - Pipeline executor
-- `ResultCollector` - Result aggregation
-- `timer` - Performance timing
-
-**Total: 15 functions** available via `import dolphain`
+- **Runtime Guardrails:** `RuntimeGuard`, `timed_block`, and `iterate_chunks` utilities prevent runaway cells; all processing reported <0.25 s per file in recent runs.
 
 ---
 
-## 📚 Documentation
+## 🧭 Next Steps (Prioritized)
 
-| File                       | Size | Purpose                | Status      |
-| -------------------------- | ---- | ---------------------- | ----------- |
-| README.md                  | 18K  | Main project docs      | ✅ Complete |
-| BATCH_PROCESSING.md        | 5.1K | Batch processing guide | ✅ Complete |
-| BATCH_IMPLEMENTATION.md    | 7.4K | Implementation summary | ✅ Complete |
-| REORGANIZATION_COMPLETE.md | 5.8K | Reorganization notes   | ✅ Complete |
+1. **Click Quality Refinement**
 
----
+   - Investigate high-count buoy files to confirm genuine dolphin clicks (spectral slices, waveform overlays).
+   - Experiment with adaptive smoothing windows and alternative energy operators to reduce false positives without losing true clicks.
 
-## 🧪 Testing Status
+2. **Chunk-Wise Trend Analysis**
 
-### Unit Tests
+   - Use `iterate_chunks` to sample additional time windows per file, logging per-chunk statistics to the `reports/` directory for temporal stability checks.
 
-- ✅ `tests/test_ears_reader.py` - All 15 functions tested
-- ✅ `test_batch.py` - Batch processing validated
+3. **Whistle Detection Scaffold**
 
-### Test Results (Latest)
+   - Implement the Section 2.2 plan: band-pass (2–20 kHz), spectrogram ridge tracking, contour extraction, and duration filtering.
+   - Prepare storage schema for whistle contour metadata (JSON/CSV).
 
-```
-Batch Processing Test:
-- Files processed: 3/3 (100% success)
-- Total time: 0.48s
-- Per-file time: 0.159s ± 0.005s
-- Metrics collected: duration, rms, peak
-- Statistics: ✅ All computed correctly
-```
+4. **Batch Integrations**
+
+   - Wrap the click/whistle detectors into batch pipelines so full datasets (100+ files) can be processed with summary dashboards.
+
+5. **Documentation & Packaging**
+   - Promote new reports and guardrails in `README.md` (analysis section) and keep `docs/` aligned as whistle work lands.
+   - Evaluate packaging extras (e.g., optional dependency set for notebooks).
 
 ---
 
-## 📦 Data Assets
+## 🧾 Reference Documents (Updated)
 
-### Available Data
-
-- **Location:** `data/Buoy210_100300_100399/`
-- **Count:** 100 .210 files
-- **Status:** ✅ Ready for batch experiments
-- **Size:** ~2.1GB total
-
-### Sample Files (tested)
-
-- `71858803.210` ✅
-- `71858815.210` ✅
-- `71858823.210` ✅
+| Document                  | Purpose                            | Current Action                                                                         |
+| ------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
+| `README.md`               | Core library overview & quickstart | Add link to dolphin communication notebook + reports directory (see commit checklist). |
+| `BATCH_PROCESSING.md`     | Batch framework how-to             | No changes required.                                                                   |
+| `BATCH_IMPLEMENTATION.md` | Architectural notes                | No changes required.                                                                   |
+| `SESSION_STATE.md`        | Day-to-day continuation log        | Updated with guardrails, click comparison, threshold sweep, and outstanding tasks.     |
+| `NEXT_STEPS.md`           | Actionable plan for users          | Updated (see separate document).                                                       |
 
 ---
 
-## 🚀 Quick Start Examples
+## ✅ Validation & Quality Gates
 
-### Basic Usage
-
-```python
-import dolphain
-
-# Read and plot
-data = dolphain.read_ears_file('file.210')
-dolphain.plot_overview(data, fmax=5000)
-
-# Denoise
-denoised = dolphain.wavelet_denoise(data['data'])
-```
-
-### Batch Experiments (NEW)
-
-```python
-# Find files
-files = dolphain.find_data_files('data', '**/*.210')
-
-# Select subset
-subset = dolphain.select_random_files(files, n=10, seed=42)
-
-# Run pipeline
-processor = dolphain.BatchProcessor(verbose=True)
-collector = processor.process_files(subset, my_pipeline)
-collector.print_summary()
-```
+- **Unit Tests:** `pytest` suite green (manual confirmation last run prior to session; rerun before release).
+- **Notebook Cells:** Latest click detection, special-file comparison, and threshold sweep executed without errors (<8 s for entire sweep).
+- **Artifacts:** Reports persisted under `reports/` and referenced in documentation.
 
 ---
 
-## 🎓 Learning Resources
+## 📣 Ready for Contributions
 
-### For New Users
-
-1. Start with `examples/ears_analysis_demo.ipynb`
-2. Explore `examples/wavelet_demo.ipynb`
-3. Review `README.md` for API reference
-
-### For Batch Processing
-
-1. Read `BATCH_PROCESSING.md` (comprehensive guide)
-2. Open `examples/batch_experiments.ipynb`
-3. Run `test_batch.py` for quick validation
-
-### For Developers
-
-1. Review `dolphain/__init__.py` for API structure
-2. Check individual module docstrings
-3. See `REORGANIZATION_COMPLETE.md` for architecture notes
+- Issues/PRs welcome for whistle detection, classifier prototypes, or visualization enhancements.
+- For new analyses, replicate the guardrail pattern (≤5 s chunks, bounded runtime, CSV/plot outputs).
 
 ---
 
-## 🔄 Recent Updates
+## � Quick Links
 
-### Latest Session
-
-- ✅ Implemented complete batch processing framework
-- ✅ Created `dolphain/batch.py` module
-- ✅ Added `examples/batch_experiments.ipynb` notebook
-- ✅ Wrote comprehensive `BATCH_PROCESSING.md` guide
-- ✅ Created validation script `test_batch.py`
-- ✅ Updated README.md with batch examples
-- ✅ Tested on real data (3 files, 100% success)
-
-### Previous Sessions
-
-- ✅ Extracted wavelet functionality from unophysics
-- ✅ Created modular package structure
-- ✅ Organized directories (examples/, tests/, archive/)
-- ✅ Updated all notebooks to use `import dolphain`
-- ✅ Created comprehensive documentation
+- Core API overview – `README.md`
+- Batch how-to – `docs/BATCH_PROCESSING.md`
+- Latest research notebook – `examples/dolphin_communication_analysis.ipynb`
+- Experiment outputs – `reports/`
 
 ---
 
-## 📋 Next Steps (User Defined)
-
-### Immediate Actions
-
-1. **Run batch experiments** on larger datasets
-2. **Define custom pipelines** for specific research
-3. **Analyze results** and iterate on parameters
-4. **Export findings** to CSV/JSON for reporting
-
-### Optional Cleanup
-
-- [ ] Remove `fourier_examples/` (functionality reviewed)
-- [ ] Remove `unophysics/` (functionality extracted)
-- [ ] Remove `archive/` (if no longer needed)
-
-### Future Enhancements
-
-- [ ] Parallel processing (multiprocessing support)
-- [ ] Progress bars (tqdm integration)
-- [ ] Result caching/checkpointing
-- [ ] Additional wavelet families
-- [ ] Advanced filtering techniques
-
----
-
-## 🛠️ Technical Specifications
-
-### Dependencies
-
-- Python 3.8+
-- NumPy 1.20+
-- Matplotlib 3.3+
-- SciPy 1.6+
-- PyWavelets 1.1+
-
-### EARS Format
-
-- Sampling rate: 192 kHz
-- 16-bit signed integers (big-endian)
-- 512-byte records (12-byte header + 500-byte data)
-- 250 samples per record
-
-### Wavelet Method
-
-- Algorithm: VisuShrink (Universal Threshold)
-- Default wavelet: Daubechies 20 (db20)
-- Noise estimation: MAD (Median Absolute Deviation)
-- Threshold: σ × √(2 × ln(N))
-
----
-
-## 📊 Performance Metrics
-
-### File Reading
-
-- Single file: ~0.01s
-- 100 files: ~1s
-
-### Wavelet Denoising
-
-- Per file: ~0.15s (db20)
-- Varies by wavelet type and signal length
-
-### Batch Processing
-
-- Overhead: Minimal (~0.01s per 3 files)
-- Scalable: Tested up to 100 files
-
----
-
-## ✅ Validation Checklist
-
-### Functionality
-
-- [x] All I/O functions working
-- [x] All signal processing functions working
-- [x] All plotting functions working
-- [x] All batch processing functions working
-- [x] CLI tool working
-- [x] Tests passing
-
-### Documentation
-
-- [x] README.md complete and formatted
-- [x] BATCH_PROCESSING.md comprehensive
-- [x] Example notebooks runnable
-- [x] Docstrings present in all functions
-- [x] API reference clear
-
-### Organization
-
-- [x] Modular package structure
-- [x] Clean directory layout
-- [x] Backward compatibility maintained
-- [x] Version control ready
-
----
-
-## 🎉 Project Milestones
-
-| Milestone              | Status      | Date            |
-| ---------------------- | ----------- | --------------- |
-| Wavelet extraction     | ✅ Complete | Earlier session |
-| Package reorganization | ✅ Complete | Earlier session |
-| Comprehensive docs     | ✅ Complete | Earlier session |
-| Batch framework        | ✅ Complete | Current session |
-| Full testing           | ✅ Complete | Current session |
-
----
-
-## 📞 Support & Resources
-
-### Documentation
-
-- **Quick Start:** See README.md "Quick Start" section
-- **Batch Processing:** See BATCH_PROCESSING.md
-- **API Reference:** See README.md "API Reference" section
-- **Examples:** See `examples/` directory
-
-### Troubleshooting
-
-1. Check function docstrings: `help(dolphain.function_name)`
-2. Review example notebooks for usage patterns
-3. Run test scripts to validate installation
-4. Check BATCH_PROCESSING.md for batch-specific issues
-
----
-
-## 🎯 Summary
-
-**Dolphain is production-ready with:**
-
-- Complete core functionality (15 functions)
-- Professional organization and structure
-- Comprehensive documentation (4 docs)
-- Working examples (3 notebooks)
-- Validated batch processing framework
-- 100 data files ready for experiments
-
-**Users can now:**
-
-- Read and analyze EARS files
-- Apply wavelet denoising
-- Create visualizations
-- Run batch experiments
-- Monitor performance
-- Collect and analyze results
-
-**Next focus:** User-defined research pipelines and experiments on full dataset.
+**Bottom line:** The Dolphain library remains stable and documented, while the research workspace now includes reproducible click-detection experiments, special-file comparisons, and threshold analyses—setting the stage for whistle detection and richer behavioral insights.
