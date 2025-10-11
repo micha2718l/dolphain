@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dolphain - Understanding Dolphin Communication</title>
-    <meta name="description" content="A Python toolkit for analyzing underwater acoustic recordings and decoding dolphin communication patterns. Data from LADC-GEMM and GoMRI.">
-    <link rel="stylesheet" href="docs/style.css">
-</head>
-<body>
+    <meta
+      name="description"
+      content="A Python toolkit for analyzing underwater acoustic recordings and decoding dolphin communication patterns. Data from LADC-GEMM and GoMRI."
+    />
+    <link rel="stylesheet" href="docs/style.css" />
+  </head>
+  <body>
     <!-- Bubble background -->
     <div class="bubble"></div>
     <div class="bubble"></div>
@@ -16,285 +19,349 @@
     <div class="bubble"></div>
 
     <div class="container">
-        <header>
-            <h1>🐬 Dolphain</h1>
-            <p class="tagline">"So long, and thanks for all the fish data"</p>
-            <p class="subtitle">
-                A Python toolkit for analyzing underwater acoustic recordings 
-                and understanding dolphin communication patterns
-            </p>
-        </header>
+      <header>
+        <h1>🐬 Dolphain</h1>
+        <p class="tagline">"So long, and thanks for all the fish data"</p>
+        <p class="subtitle">
+          A Python toolkit for analyzing underwater acoustic recordings and
+          understanding dolphin communication patterns
+        </p>
+      </header>
 
-        <div class="quote-box">
-            "For instance, on the planet Earth, man had always assumed that he was more 
-            intelligent than dolphins because he had achieved so much—the wheel, New York, 
-            wars and so on—whilst all the dolphins had ever done was muck about in the water 
-            having a good time. But conversely, the dolphins had always believed that they were 
-            far more intelligent than man—for precisely the same reasons."
-            <div class="quote-author">— Douglas Adams, The Hitchhiker's Guide to the Galaxy</div>
+      <div class="quote-box">
+        "For instance, on the planet Earth, man had always assumed that he was
+        more intelligent than dolphins because he had achieved so much—the
+        wheel, New York, wars and so on—whilst all the dolphins had ever done
+        was muck about in the water having a good time. But conversely, the
+        dolphins had always believed that they were far more intelligent than
+        man—for precisely the same reasons."
+        <div class="quote-author">
+          — Douglas Adams, The Hitchhiker's Guide to the Galaxy
+        </div>
+      </div>
+
+      <section id="about">
+        <h2>What is Dolphain?</h2>
+        <p>
+          Dolphain is a scientifically rigorous Python package for analyzing
+          underwater acoustic recordings from the
+          <span class="highlight">Gulf of Mexico</span>. Our mission: decode
+          dolphin communication patterns through clicks and whistles.
+        </p>
+
+        <div class="attribution-box">
+          Data for this project comes from the
+          <strong>LADC-GEMM</strong> (Littoral Acoustic Demonstration Center -
+          Gulf Ecological Monitoring and Modeling) consortium, funded by the
+          <strong>Gulf of Mexico Research Initiative (GoMRI)</strong>. LADC-GEMM
+          deployed autonomous underwater vehicles and acoustic recorders
+          throughout the Gulf to track marine mammal recovery after the
+          Deepwater Horizon oil spill. <br /><br />
+          <a
+            href="https://github.com/micha2718l/dolphain/blob/main/docs/DATA_ATTRIBUTION.md"
+            style="color: var(--sand)"
+          >
+            Learn more about data sources and attributions →
+          </a>
         </div>
 
-        <section id="about">
-            <h2>What is Dolphain?</h2>
-            <p>
-                Dolphain is a scientifically rigorous Python package for analyzing underwater 
-                acoustic recordings from the <span class="highlight">Gulf of Mexico</span>. 
-                Our mission: decode dolphin communication patterns through clicks and whistles.
-            </p>
-            
-            <div class="attribution-box">
-                Data for this project comes from the <strong>LADC-GEMM</strong> (Littoral Acoustic 
-                Demonstration Center - Gulf Ecological Monitoring and Modeling) consortium, 
-                funded by the <strong>Gulf of Mexico Research Initiative (GoMRI)</strong>. 
-                LADC-GEMM deployed autonomous underwater vehicles and acoustic recorders throughout 
-                the Gulf to track marine mammal recovery after the Deepwater Horizon oil spill.
-                <br><br>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/docs/DATA_ATTRIBUTION.md" style="color: var(--sand);">
-                    Learn more about data sources and attributions →
-                </a>
-            </div>
-
-            <div class="science-fact">
-                Dolphins have individual "signature whistles" that function like names. 
-                They can remember these unique whistles for over 20 years, demonstrating 
-                long-term social memory comparable to humans.
-            </div>
-
-            <p>
-                We're working with EARS (Ecological Acoustic Recorder) data sampled at 
-                192 kHz, perfect for capturing the 2-20 kHz range where dolphins 
-                communicate with each other.
-            </p>
-        </section>
-
-        <div class="wave-divider">
-            <div class="wave"></div>
+        <div class="science-fact">
+          Dolphins have individual "signature whistles" that function like
+          names. They can remember these unique whistles for over 20 years,
+          demonstrating long-term social memory comparable to humans.
         </div>
 
-        <section id="features">
-            <h2>Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">📁</span>
-                    <h3>EARS File I/O</h3>
-                    <p>Read and process EARS binary format (.130, .190, .210) with full metadata extraction.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌊</span>
-                    <h3>Signal Processing</h3>
-                    <p>Wavelet-based denoising using VisuShrink thresholding for clean acoustic data.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
-                    <h3>Visualization</h3>
-                    <p>Beautiful spectrograms, waveforms, and comparative analysis plots.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">⚡</span>
-                    <h3>Batch Processing</h3>
-                    <p>Process hundreds of files with progress tracking, timing, and error handling.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🔍</span>
-                    <h3>Click Detection</h3>
-                    <p>Teager-Kaiser energy operator for detecting dolphin echolocation clicks.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🎵</span>
-                    <h3>Whistle Analysis</h3>
-                    <p>Extract and analyze dolphin whistle contours (in development).</p>
-                </div>
-            </div>
-        </section>
+        <p>
+          We're working with EARS (Ecological Acoustic Recorder) data sampled at
+          192 kHz, perfect for capturing the 2-20 kHz range where dolphins
+          communicate with each other.
+        </p>
+      </section>
 
-        <section id="quickstart">
-            <h2>Quick Start</h2>
-            
-            <h3>Installation</h3>
-            <div class="code-block"><code># Clone the repository
-git clone https://github.com/micha2718l/dolphain.git
-cd dolphain
+      <div class="wave-divider">
+        <div class="wave"></div>
+      </div>
 
-# Create virtual environment
-python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install in development mode
-pip install -e .</code></div>
-
-            <h3>Basic Usage</h3>
-            <div class="code-block"><code><span class="highlight">import</span> dolphain
-
-<span class="highlight"># Read an EARS file</span>
-data = dolphain.read_ears_file('data/recording.210')
-
-<span class="highlight"># Create a quick overview plot</span>
-dolphain.plot_overview(data, fmax=50000)
-
-<span class="highlight"># Denoise the signal</span>
-denoised = dolphain.wavelet_denoise(data['data'])
-
-<span class="highlight"># View the difference</span>
-dolphain.plot_denoising_comparison(
-    data['data'], 
-    denoised, 
-    data['sample_rate']
-)</code></div>
-
-            <div class="science-fact">
-                Dolphins use echolocation clicks at frequencies above 110 kHz (often >220 kHz) 
-                to navigate and hunt. These clicks can be as loud as 220 dB and can detect 
-                objects the size of a golf ball from 100 meters away.
-            </div>
-        </section>
-
-        <section id="science">
-            <h2>The Science of Dolphin Communication</h2>
-            
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <span class="stat-number">2-20</span>
-                    <span class="stat-label">kHz Whistle Range</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">>220</span>
-                    <span class="stat-label">kHz Click Frequency</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">20+</span>
-                    <span class="stat-label">Years Memory</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">10×</span>
-                    <span class="stat-label">Larger Acoustic Brain</span>
-                </div>
-            </div>
-
-            <h3>Two Types of Sounds</h3>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">📍</span>
-                    <h3>Clicks (Echolocation)</h3>
-                    <p><strong>Purpose:</strong> Navigation and hunting</p>
-                    <p><strong>Frequency:</strong> >110 kHz, peaks >220 kHz</p>
-                    <p><strong>Duration:</strong> Microseconds to milliseconds</p>
-                    <p><strong>Pattern:</strong> Rapid trains ending in "terminal buzz" (200+ clicks/sec)</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💬</span>
-                    <h3>Whistles (Communication)</h3>
-                    <p><strong>Purpose:</strong> Social interaction</p>
-                    <p><strong>Frequency:</strong> 2-20 kHz</p>
-                    <p><strong>Duration:</strong> 0.5-1.5 seconds</p>
-                    <p><strong>Types:</strong> Signature whistles (individual "names"), pulsed calls</p>
-                </div>
-            </div>
-
-            <div class="science-fact">
-                The acoustic processing area of a dolphin's brain is 10 times larger than 
-                the equivalent area in humans. Dolphins understand complex syntax, word order, 
-                and demonstrate self-awareness—capabilities shared by very few species.
-            </div>
-        </section>
-
-        <section id="research">
-            <h2>Current Research</h2>
-            
+      <section id="features">
+        <h2>Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="feature-icon">📁</span>
+            <h3>EARS File I/O</h3>
             <p>
-                We're analyzing 100+ underwater recordings from the Gulf of Mexico, 
-                developing algorithms to automatically detect and classify dolphin vocalizations.
+              Read and process EARS binary format (.130, .190, .210) with full
+              metadata extraction.
             </p>
-
-            <h3>Research Context</h3>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🌊</span>
+            <h3>Signal Processing</h3>
             <p>
-                This work builds upon the LADC-GEMM project's extensive acoustic monitoring 
-                infrastructure. The consortium deployed autonomous underwater gliders, research 
-                vessels, and bottom-mounted EARS recorders throughout the Gulf to assess 
-                marine mammal populations and ambient noise levels following the Deepwater 
-                Horizon oil spill.
+              Wavelet-based denoising using VisuShrink thresholding for clean
+              acoustic data.
             </p>
-
-            <div class="science-fact">
-                The LADC-GEMM project involved researchers from Oregon State University, 
-                University of Louisiana at Lafayette, University of New Orleans, University of 
-                Southern Mississippi, and multiple industry partners—generating thousands of 
-                hours of acoustic recordings for scientific analysis.
-            </div>
-
-            <h3>Achievements</h3>
-            <ul style="list-style: none; padding-left: 0;">
-                <li>✅ <strong>Core Library:</strong> Stable and production-ready</li>
-                <li>✅ <strong>Click Detection:</strong> Teager-Kaiser energy operator with threshold tuning</li>
-                <li>✅ <strong>Batch Framework:</strong> Process hundreds of files efficiently</li>
-                <li>✅ <strong>Runtime Guardrails:</strong> Safe, memory-efficient processing</li>
-                <li>⏳ <strong>Whistle Detection:</strong> In development</li>
-                <li>⏳ <strong>Signature Matching:</strong> Future work</li>
-            </ul>
-
-            <p style="margin-top: 2rem;">
-                <strong>Want to contribute?</strong> Check out our 
-                <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" 
-                   style="color: var(--coral); text-decoration: underline;">
-                    Continuation Guide
-                </a> for detailed instructions on where we are and where we're going.
-            </p>
-        </section>
-
-        <section id="getting-started">
-            <h2>Dive In</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
-                Ready to help decode dolphin communication?
-            </p>
-            <div style="text-align: center;">
-                <a href="https://github.com/micha2718l/dolphain" class="cta-button">
-                    View on GitHub
-                </a>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/README.md" class="cta-button secondary">
-                    Read the Docs
-                </a>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" class="cta-button secondary">
-                    Continue Research
-                </a>
-            </div>
-
-            <div class="science-fact" style="margin-top: 3rem;">
-                Dolphins have been observed teaching their young the specific whistles 
-                associated with their social group—demonstrating cultural transmission 
-                of vocal learning across generations. This is extremely rare in the animal kingdom.
-            </div>
-        </section>
-
-        <footer>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">📊</span>
+            <h3>Visualization</h3>
             <p>
-                <strong>Dolphain</strong> – Understanding dolphin communication, one whistle at a time
+              Beautiful spectrograms, waveforms, and comparative analysis plots.
             </p>
-            <p style="margin-top: 1rem;">
-                Data from <a href="http://ladcgemm.org/">LADC-GEMM</a> | 
-                Funded by <a href="https://gulfresearchinitiative.org/">GoMRI</a>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3>Batch Processing</h3>
+            <p>
+              Process hundreds of files with progress tracking, timing, and
+              error handling.
             </p>
-            <p style="margin-top: 0.5rem;">
-                Built with <span class="emoji">🌊</span> and <span class="emoji">🐬</span> 
-                | <a href="https://github.com/micha2718l/dolphain">GitHub</a>
-                | <a href="https://github.com/micha2718l/dolphain/blob/main/docs/DATA_ATTRIBUTION.md">Data Attribution</a>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🔍</span>
+            <h3>Click Detection</h3>
+            <p>
+              Teager-Kaiser energy operator for detecting dolphin echolocation
+              clicks.
             </p>
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; font-style: italic;">
-                "This research was made possible by a grant from The Gulf of Mexico Research Initiative."
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🎵</span>
+            <h3>Whistle Analysis</h3>
+            <p>
+              Extract and analyze dolphin whistle contours (in development).
             </p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem; font-style: italic;">
-                "The Answer to the Ultimate Question of Life, the Universe, and Everything 
-                might just be hidden in the clicks and whistles we haven't decoded yet."
+          </div>
+        </div>
+      </section>
+
+      <section id="quickstart">
+        <h2>Quick Start</h2>
+
+        <h3>Installation</h3>
+        <div class="code-block">
+          <code
+            ># Clone the repository git clone
+            https://github.com/micha2718l/dolphain.git cd dolphain # Create
+            virtual environment python3 -m venv .venv source .venv/bin/activate
+            # On Windows: .venv\Scripts\activate # Install in development mode
+            pip install -e .</code
+          >
+        </div>
+
+        <h3>Basic Usage</h3>
+        <div class="code-block">
+          <code
+            ><span class="highlight">import</span> dolphain
+
+            <span class="highlight"># Read an EARS file</span>
+            data = dolphain.read_ears_file('data/recording.210')
+
+            <span class="highlight"># Create a quick overview plot</span>
+            dolphain.plot_overview(data, fmax=50000)
+
+            <span class="highlight"># Denoise the signal</span>
+            denoised = dolphain.wavelet_denoise(data['data'])
+
+            <span class="highlight"># View the difference</span>
+            dolphain.plot_denoising_comparison( data['data'], denoised,
+            data['sample_rate'] )</code
+          >
+        </div>
+
+        <div class="science-fact">
+          Dolphins use echolocation clicks at frequencies above 110 kHz (often
+          >220 kHz) to navigate and hunt. These clicks can be as loud as 220 dB
+          and can detect objects the size of a golf ball from 100 meters away.
+        </div>
+      </section>
+
+      <section id="science">
+        <h2>The Science of Dolphin Communication</h2>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-number">2-20</span>
+            <span class="stat-label">kHz Whistle Range</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">>220</span>
+            <span class="stat-label">kHz Click Frequency</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">20+</span>
+            <span class="stat-label">Years Memory</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">10×</span>
+            <span class="stat-label">Larger Acoustic Brain</span>
+          </div>
+        </div>
+
+        <h3>Two Types of Sounds</h3>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="feature-icon">📍</span>
+            <h3>Clicks (Echolocation)</h3>
+            <p><strong>Purpose:</strong> Navigation and hunting</p>
+            <p><strong>Frequency:</strong> >110 kHz, peaks >220 kHz</p>
+            <p><strong>Duration:</strong> Microseconds to milliseconds</p>
+            <p>
+              <strong>Pattern:</strong> Rapid trains ending in "terminal buzz"
+              (200+ clicks/sec)
             </p>
-        </footer>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">💬</span>
+            <h3>Whistles (Communication)</h3>
+            <p><strong>Purpose:</strong> Social interaction</p>
+            <p><strong>Frequency:</strong> 2-20 kHz</p>
+            <p><strong>Duration:</strong> 0.5-1.5 seconds</p>
+            <p>
+              <strong>Types:</strong> Signature whistles (individual "names"),
+              pulsed calls
+            </p>
+          </div>
+        </div>
+
+        <div class="science-fact">
+          The acoustic processing area of a dolphin's brain is 10 times larger
+          than the equivalent area in humans. Dolphins understand complex
+          syntax, word order, and demonstrate self-awareness—capabilities shared
+          by very few species.
+        </div>
+      </section>
+
+      <section id="research">
+        <h2>Current Research</h2>
+
+        <p>
+          We're analyzing 100+ underwater recordings from the Gulf of Mexico,
+          developing algorithms to automatically detect and classify dolphin
+          vocalizations.
+        </p>
+
+        <h3>Research Context</h3>
+        <p>
+          This work builds upon the LADC-GEMM project's extensive acoustic
+          monitoring infrastructure. The consortium deployed autonomous
+          underwater gliders, research vessels, and bottom-mounted EARS
+          recorders throughout the Gulf to assess marine mammal populations and
+          ambient noise levels following the Deepwater Horizon oil spill.
+        </p>
+
+        <div class="science-fact">
+          The LADC-GEMM project involved researchers from Oregon State
+          University, University of Louisiana at Lafayette, University of New
+          Orleans, University of Southern Mississippi, and multiple industry
+          partners—generating thousands of hours of acoustic recordings for
+          scientific analysis.
+        </div>
+
+        <h3>Achievements</h3>
+        <ul style="list-style: none; padding-left: 0">
+          <li>✅ <strong>Core Library:</strong> Stable and production-ready</li>
+          <li>
+            ✅ <strong>Click Detection:</strong> Teager-Kaiser energy operator
+            with threshold tuning
+          </li>
+          <li>
+            ✅ <strong>Batch Framework:</strong> Process hundreds of files
+            efficiently
+          </li>
+          <li>
+            ✅ <strong>Runtime Guardrails:</strong> Safe, memory-efficient
+            processing
+          </li>
+          <li>⏳ <strong>Whistle Detection:</strong> In development</li>
+          <li>⏳ <strong>Signature Matching:</strong> Future work</li>
+        </ul>
+
+        <p style="margin-top: 2rem">
+          <strong>Want to contribute?</strong> Check out our
+          <a
+            href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+            style="color: var(--coral); text-decoration: underline"
+          >
+            Continuation Guide
+          </a>
+          for detailed instructions on where we are and where we're going.
+        </p>
+      </section>
+
+      <section id="getting-started">
+        <h2>Dive In</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem">
+          Ready to help decode dolphin communication?
+        </p>
+        <div style="text-align: center">
+          <a href="https://github.com/micha2718l/dolphain" class="cta-button">
+            View on GitHub
+          </a>
+          <a
+            href="https://github.com/micha2718l/dolphain/blob/main/README.md"
+            class="cta-button secondary"
+          >
+            Read the Docs
+          </a>
+          <a
+            href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+            class="cta-button secondary"
+          >
+            Continue Research
+          </a>
+        </div>
+
+        <div class="science-fact" style="margin-top: 3rem">
+          Dolphins have been observed teaching their young the specific whistles
+          associated with their social group—demonstrating cultural transmission
+          of vocal learning across generations. This is extremely rare in the
+          animal kingdom.
+        </div>
+      </section>
+
+      <footer>
+        <p>
+          <strong>Dolphain</strong> – Understanding dolphin communication, one
+          whistle at a time
+        </p>
+        <p style="margin-top: 1rem">
+          Data from <a href="http://ladcgemm.org/">LADC-GEMM</a> | Funded by
+          <a href="https://gulfresearchinitiative.org/">GoMRI</a>
+        </p>
+        <p style="margin-top: 0.5rem">
+          Built with <span class="emoji">🌊</span> and
+          <span class="emoji">🐬</span> |
+          <a href="https://github.com/micha2718l/dolphain">GitHub</a> |
+          <a
+            href="https://github.com/micha2718l/dolphain/blob/main/docs/DATA_ATTRIBUTION.md"
+            >Data Attribution</a
+          >
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8">
+          Website and documentation created with assistance from GitHub Copilot (AI) | 
+          Research and analysis by Michael Haas
+        </p>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; font-style: italic">
+          "This research was made possible by a grant from The Gulf of Mexico
+          Research Initiative."
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; font-style: italic">
+          "The Answer to the Ultimate Question of Life, the Universe, and
+          Everything might just be hidden in the clicks and whistles we haven't
+          decoded yet."
+        </p>
+      </footer>
     </div>
 
     <!-- The 42 Easter Egg -->
     <div class="forty-two" title="Don't Panic!">42</div>
     <div class="forty-two-tooltip">
-        The Answer to the Ultimate Question of Life, the Universe, and Everything.<br>
-        <em>Don't forget your towel!</em>
+      The Answer to the Ultimate Question of Life, the Universe, and
+      Everything.<br />
+      <em>Don't forget your towel!</em>
     </div>
 
     <script src="docs/script.js"></script>
-</body>
+  </body>
 </html>
