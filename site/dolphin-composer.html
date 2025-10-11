@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐬 Dolphin Composer - Create Your Own Dolphin Sounds!</title>
+    <meta name="description" content="An interactive web-based synthesizer for creating dolphin-like clicks and whistles. Draw whistle contours, sequence clicks, and explore marine mammal communication!">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(180deg, #0a1828 0%, #178ca4 50%, #3ab0c8 100%);
+            color: #e8f4f8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #f5e6d3;
+            margin-bottom: 1rem;
+        }
+
+        .intro {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 968px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .panel h2 {
+            color: #f5e6d3;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #3ab0c8;
+            padding-bottom: 0.5rem;
+        }
+
+        canvas {
+            width: 100%;
+            border: 2px solid #3ab0c8;
+            border-radius: 8px;
+            cursor: crosshair;
+            background: rgba(0, 0, 0, 0.6);
+            display: block;
+            margin: 1rem 0;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #f5e6d3;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            border: none;
+        }
+
+        .value-display {
+            font-size: 0.85rem;
+            color: #3ab0c8;
+            font-weight: bold;
+        }
+
+        button {
+            background: linear-gradient(135deg, #178ca4, #3ab0c8);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin: 0.5rem;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .preset-button {
+            background: linear-gradient(135deg, #2d5f3f, #178ca4);
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .danger-button {
+            background: linear-gradient(135deg, #ff6b6b, #ff8787);
+        }
+
+        .click-grid {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: 4px;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .click-cell {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .click-cell.active {
+            background: #ff6b6b;
+            box-shadow: 0 0 10px #ff6b6b;
+        }
+
+        .click-cell:hover {
+            background: rgba(255, 107, 107, 0.5);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #f5e6d3;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(45, 95, 63, 0.4), rgba(23, 140, 164, 0.4));
+            border-left: 4px solid #2d5f3f;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-box::before {
+            content: "🐬 Dolphin Fact: ";
+            font-weight: bold;
+            color: #f5e6d3;
+        }
+
+        .easter-egg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.5);
+            z-index: 1000;
+        }
+
+        .easter-egg:hover {
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .playing {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0a1828, #178ca4);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            text-align: center;
+            border: 3px solid #3ab0c8;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #f5e6d3;
+        }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #3ab0c8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #f5e6d3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐬 Dolphin Composer 🎵</h1>
+            <p class="tagline">Create your own dolphin sounds and explore marine mammal communication!</p>
+        </header>
+
+        <div class="intro">
+            <p>Welcome to the Dolphin Composer! This interactive playground lets you create dolphin-like sounds right in your browser. Draw whistles by dragging on the canvas, sequence echolocation clicks, and experiment with different parameters. Each sound you create is synthesized in real-time using the Web Audio API.</p>
+            <p style="margin-top: 1rem;"><strong>How it works:</strong> Dolphins produce two main types of sounds - whistles (2-20 kHz) for communication and clicks (>20 kHz) for echolocation. Try the presets to hear examples, then create your own!</p>
+        </div>
+
+        <div class="workspace">
+            <!-- Whistle Composer -->
+            <div class="panel">
+                <h2>🎨 Whistle Composer</h2>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem;">Draw a whistle contour by clicking and dragging on the canvas. The vertical axis is frequency (2-20 kHz).</p>
+                
+                <canvas id="whistleCanvas" width="600" height="400"></canvas>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Duration: <span class="value-display" id="durationValue">1.0s</span></label>
+                        <input type="range" id="duration" min="0.3" max="3.0" step="0.1" value="1.0">
+                    </div>
+                    <div class="control-group">
+                        <label>Volume: <span class="value-display" id="volumeValue">0.3</span></label>
+                        <input type="range" id="volume" min="0.1" max="0.5" step="0.05" value="0.3">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="playWhistle()">▶️ Play Whistle</button>
+                    <button onclick="clearWhistle()" class="danger-button">🗑️ Clear</button>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="loadPreset('signature')" class="preset-button">Signature Whistle</button>
+                    <button onclick="loadPreset('rising')" class="preset-button">Rising Call</button>
+                    <button onclick="loadPreset('complex')" class="preset-button">Complex Pattern</button>
+                </div>
+
+                <div class="info-box">
+                    Signature whistles are unique to each dolphin - like a name! They can remember another dolphin's signature whistle for over 20 years.
+                </div>
+            </div>
+
+            <!-- Click Sequencer -->
+            <div class="panel">
+                <h2>⚡ Click Sequencer</h2>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem;">Create echolocation click patterns. Each cell is ~62ms. Click cells to toggle.</p>
+                
+                <div class="click-grid" id="clickGrid"></div>
+
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Click Pitch: <span class="value-display" id="clickPitchValue">8000 Hz</span></label>
+                        <input type="range" id="clickPitch" min="2000" max="12000" step="100" value="8000">
+                    </div>
+                    <div class="control-group">
+                        <label>BPM: <span class="value-display" id="bpmValue">120</span></label>
+                        <input type="range" id="bpm" min="60" max="240" step="10" value="120">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="playClicks()">▶️ Play Sequence</button>
+                    <button onclick="stopClicks()">⏹️ Stop</button>
+                    <button onclick="clearClicks()" class="danger-button">🗑️ Clear</button>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="loadClickPreset('hunting')" class="preset-button">Hunting Sequence</button>
+                    <button onclick="loadClickPreset('terminal')" class="preset-button">Terminal Buzz</button>
+                    <button onclick="loadClickPreset('scanning')" class="preset-button">Scanning Pattern</button>
+                </div>
+
+                <div class="info-box">
+                    During hunting, dolphins increase their click rate to 200+ clicks/sec in a "terminal buzz" as they close in on prey!
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="panel">
+            <h2>📊 Your Composition Stats</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="whistleCount">0</div>
+                    <div class="stat-label">Whistles Played</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="clickCount">0</div>
+                    <div class="stat-label">Clicks Played</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalSounds">0</div>
+                    <div class="stat-label">Total Sounds</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Part of the <a href="index.html">Dolphain Project</a> 🐬</p>
+            <p style="margin-top: 0.5rem;">Built with the Web Audio API,Canvas, and lots of dolphin love</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">Created with joy by GitHub Copilot during a hackathon-style session 🎉</p>
+        </footer>
+    </div>
+
+    <!-- Easter Egg -->
+    <div class="easter-egg" onclick="easterEgg()" title="Click 42 times...">
+        🐬
+    </div>
+
+    <!-- Modal for Easter Egg -->
+    <div class="modal" id="easterModal">
+        <div class="modal-content">
+            <h2>🎉 42! 🎉</h2>
+            <p>You've discovered the Answer to the Ultimate Question of Life, the Universe, and Everything!</p>
+            <p style="font-size: 1.5rem; margin: 2rem 0;">🐬 "So long, and thanks for all the fish!" 🐬</p>
+            <p>The dolphins have been trying to warn us all along...</p>
+            <button onclick="closeModal()" style="margin-top: 1rem;">Don't Panic!</button>
+        </div>
+    </div>
+
+    <script>
+        // Audio Context Setup
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Canvas Setup
+        const canvas = document.getElementById('whistleCanvas');
+        const ctx = canvas.getContext('2d');
+        let whistlePoints = [];
+        let isDrawing = false;
+
+        // Stats
+        let stats = { whistles: 0, clicks: 0 };
+
+        // Easter egg counter
+        let dolphinClicks = 0;
+
+        // Initialize
+        initCanvas();
+        initClickGrid();
+        initControls();
+
+        function initCanvas() {
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseleave', stopDrawing);
+            
+            // Touch support
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                startDrawing({ offsetX: x, offsetY: y });
+            });
+            
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                draw({ offsetX: x, offsetY: y });
+            });
+            
+            canvas.addEventListener('touchend', stopDrawing);
+            
+            drawGrid();
+        }
+
+        function drawGrid() {
+            ctx.fillStyle = '#0a1828';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw frequency lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i <= 10; i++) {
+                const y = (canvas.height / 10) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+                
+                // Frequency labels
+                const freq = 20 - (i * 2); // 20 kHz to 0 kHz
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.font = '10px monospace';
+                ctx.fillText(freq + 'k', 5, y - 3);
+            }
+            
+            // Draw time lines
+            for (let i = 0; i <= 10; i++) {
+                const x = (canvas.width / 10) * i;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            whistlePoints = [];
+            const point = { x: e.offsetX, y: e.offsetY };
+            whistlePoints.push(point);
+            drawWhistle();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const point = { x: e.offsetX, y: e.offsetY };
+            whistlePoints.push(point);
+            drawWhistle();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function drawWhistle() {
+            drawGrid();
+            
+            if (whistlePoints.length < 2) return;
+            
+            ctx.strokeStyle = '#ff6b6b';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            ctx.beginPath();
+            ctx.moveTo(whistlePoints[0].x, whistlePoints[0].y);
+            
+            for (let i = 1; i < whistlePoints.length; i++) {
+                ctx.lineTo(whistlePoints[i].x, whistlePoints[i].y);
+            }
+            
+            ctx.stroke();
+            
+            // Draw points
+            ctx.fillStyle = '#3ab0c8';
+            for (const point of whistlePoints) {
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function clearWhistle() {
+            whistlePoints = [];
+            drawGrid();
+        }
+
+        function playWhistle() {
+            if (whistlePoints.length < 2) {
+                alert('Draw a whistle first! Click and drag on the canvas.');
+                return;
+            }
+
+            const duration = parseFloat(document.getElementById('duration').value);
+            const volume = parseFloat(document.getElementById('volume').value);
+            
+            // Create oscillator
+            const osc = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Convert points to frequency values (2-20 kHz)
+            const freqValues = whistlePoints.map(point => {
+                const normalizedY = point.y / canvas.height;
+                return 2000 + (18000 * (1 - normalizedY)); // 2k to 20k Hz
+            });
+            
+            // Create frequency envelope
+            const timePerPoint = duration / whistlePoints.length;
+            const now = audioContext.currentTime;
+            
+            osc.frequency.setValueAtTime(freqValues[0], now);
+            
+            for (let i = 1; i < freqValues.length; i++) {
+                osc.frequency.linearRampToValueAtTime(freqValues[i], now + (timePerPoint * i));
+            }
+            
+            // Volume envelope (fade in/out)
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(volume, now + 0.05);
+            gainNode.gain.linearRampToValueAtTime(volume, now + duration - 0.1);
+            gainNode.gain.linearRampToValueAtTime(0, now + duration);
+            
+            osc.start(now);
+            osc.stop(now + duration);
+            
+            // Visual feedback
+            canvas.classList.add('playing');
+            setTimeout(() => canvas.classList.remove('playing'), duration * 1000);
+            
+            // Update stats
+            stats.whistles++;
+            updateStats();
+        }
+
+        function loadPreset(type) {
+            whistlePoints = [];
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            switch(type) {
+                case 'signature':
+                    // U-shaped signature whistle
+                    for (let i = 0; i <= 50; i++) {
+                        const t = i / 50;
+                        const x = t * width;
+                        const y = height * 0.3 + (height * 0.4 * Math.sin(t * Math.PI));
+                        whistlePoints.push({ x, y });
+                    }
+                    break;
+                    
+                case 'rising':
+                    // Smooth rising call
+                    for (let i = 0; i <= 40; i++) {
+                        const t = i / 40;
+                        const x = t * width;
+                        const y = height * 0.7 - (height * 0.5 * t);
+                        whistlePoints.push({ x, y });
+                    }
+                    break;
+                    
+                case 'complex':
+                    // Complex modulated pattern
+                    for (let i = 0; i <= 60; i++) {
+                        const t = i / 60;
+                        const x = t * width;
+                        const y = height * 0.5 + (height * 0.2 * Math.sin(t * Math.PI * 4)) - (height * 0.1 * t);
+                        whistlePoints.push({ x, y });
+                    }
+                    break;
+            }
+            
+            drawWhistle();
+        }
+
+        // Click Sequencer
+        let clickPattern = Array(16).fill(false);
+        let isPlayingClicks = false;
+        let clickInterval = null;
+
+        function initClickGrid() {
+            const grid = document.getElementById('clickGrid');
+            for (let i = 0; i < 16; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'click-cell';
+                cell.onclick = () => toggleClick(i);
+                grid.appendChild(cell);
+            }
+        }
+
+        function toggleClick(index) {
+            clickPattern[index] = !clickPattern[index];
+            updateClickGrid();
+        }
+
+        function updateClickGrid() {
+            const cells = document.querySelectorAll('.click-cell');
+            cells.forEach((cell, i) => {
+                cell.classList.toggle('active', clickPattern[i]);
+            });
+        }
+
+        function clearClicks() {
+            clickPattern = Array(16).fill(false);
+            updateClickGrid();
+        }
+
+        function playClicks() {
+            if (isPlayingClicks) return;
+            
+            const activeClicks = clickPattern.filter(x => x).length;
+            if (activeClicks === 0) {
+                alert('Add some clicks first! Click on the grid cells.');
+                return;
+            }
+            
+            isPlayingClicks = true;
+            const bpm = parseInt(document.getElementById('bpm').value);
+            const beatDuration = (60 / bpm) * 1000 / 4; // 16th notes
+            
+            let currentBeat = 0;
+            
+            clickInterval = setInterval(() => {
+                if (clickPattern[currentBeat]) {
+                    playClick();
+                    
+                    // Visual feedback
+                    const cells = document.querySelectorAll('.click-cell');
+                    cells[currentBeat].style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        cells[currentBeat].style.transform = 'scale(1)';
+                    }, 100);
+                }
+                
+                currentBeat = (currentBeat + 1) % 16;
+            }, beatDuration);
+        }
+
+        function stopClicks() {
+            isPlayingClicks = false;
+            if (clickInterval) {
+                clearInterval(clickInterval);
+                clickInterval = null;
+            }
+        }
+
+        function playClick() {
+            const pitch = parseFloat(document.getElementById('clickPitch').value);
+            
+            // Create a short, sharp click sound
+            const osc = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            osc.frequency.value = pitch;
+            osc.type = 'sine';
+            
+            const now = audioContext.currentTime;
+            const clickDuration = 0.01; // 10ms
+            
+            gainNode.gain.setValueAtTime(0.3, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, now + clickDuration);
+            
+            osc.start(now);
+            osc.stop(now + clickDuration);
+            
+            stats.clicks++;
+            updateStats();
+        }
+
+        function loadClickPreset(type) {
+            switch(type) {
+                case 'hunting':
+                    // Regular spaced clicks
+                    clickPattern = [true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true];
+                    break;
+                    
+                case 'terminal':
+                    // Rapid terminal buzz
+                    clickPattern = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+                    break;
+                    
+                case 'scanning':
+                    // Irregular scanning pattern
+                    clickPattern = [true, false, true, false, false, true, false, false, true, false, false, false, true, false, false, false];
+                    break;
+            }
+            
+            updateClickGrid();
+        }
+
+        // Controls
+        function initControls() {
+            const controls = [
+                { id: 'duration', display: 'durationValue', suffix: 's' },
+                { id: 'volume', display: 'volumeValue', suffix: '' },
+                { id: 'clickPitch', display: 'clickPitchValue', suffix: ' Hz' },
+                { id: 'bpm', display: 'bpmValue', suffix: '' }
+            ];
+            
+            controls.forEach(control => {
+                const input = document.getElementById(control.id);
+                const display = document.getElementById(control.display);
+                
+                input.addEventListener('input', (e) => {
+                    display.textContent = e.target.value + control.suffix;
+                });
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('whistleCount').textContent = stats.whistles;
+            document.getElementById('clickCount').textContent = stats.clicks;
+            document.getElementById('totalSounds').textContent = stats.whistles + stats.clicks;
+        }
+
+        // Easter Egg
+        function easterEgg() {
+            dolphinClicks++;
+            
+            if (dolphinClicks === 42) {
+                document.getElementById('easterModal').classList.add('show');
+                
+                // Play a special sound
+                playSpecialSound();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('easterModal').classList.remove('show');
+            dolphinClicks = 0;
+        }
+
+        function playSpecialSound() {
+            // Play a complex dolphin-like sequence
+            const frequencies = [5000, 8000, 12000, 8000, 5000];
+            let time = 0;
+            
+            frequencies.forEach((freq, i) => {
+                setTimeout(() => {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+                    
+                    osc.frequency.value = freq;
+                    gain.gain.value = 0.2;
+                    
+                    const now = audioContext.currentTime;
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }, time);
+                
+                time += 200;
+            });
+        }
+
+        // Prevent page scroll when drawing
+        document.body.addEventListener('touchmove', (e) => {
+            if (e.target === canvas) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
