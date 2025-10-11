@@ -19,15 +19,16 @@ Added section under "Dolphain Project Connection":
 
 ```markdown
 **Development Assistance:** GitHub Copilot (AI pair programming assistant)  
-**Note:** The landing page, documentation, and portions of the codebase were created 
-with assistance from GitHub Copilot, an AI coding assistant. All scientific content, 
+**Note:** The landing page, documentation, and portions of the codebase were created
+with assistance from GitHub Copilot, an AI coding assistant. All scientific content,
 data analysis approaches, and research direction are attributed to Michael Haas.
 ```
 
 Also added to Acknowledgments:
+
 ```markdown
-✓ **GitHub Copilot** - AI assistant that helped with code development, 
-   documentation, and website design
+✓ **GitHub Copilot** - AI assistant that helped with code development,
+documentation, and website design
 ```
 
 ### 2. **DEPLOYMENT_SUMMARY.md** (New File)
@@ -35,6 +36,7 @@ Also added to Acknowledgments:
 Added comprehensive section: **"🤖 AI Development Assistance"**
 
 Clearly delineates:
+
 - **What the AI contributed:** Landing page HTML/CSS/JS, documentation structure, integration of facts, H2G2 references
 - **What Michael Haas contributed:** All scientific research, data analysis, Dolphain library core, research methodology, project vision
 - **Collaborative Process:** Description of true human-AI collaboration
@@ -42,9 +44,10 @@ Clearly delineates:
 ### 3. **index.html**
 
 Added to footer:
+
 ```html
 <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8">
-  Website and documentation created with assistance from GitHub Copilot (AI) | 
+  Website and documentation created with assistance from GitHub Copilot (AI) |
   Research and analysis by Michael Haas
 </p>
 ```
@@ -52,14 +55,15 @@ Added to footer:
 ### 4. **LANDING_PAGE_NOTES.md**
 
 Updated header with:
+
 ```markdown
 **Developer:** Michael Haas (with GitHub Copilot AI assistance)
 
-**Attribution Note:** This landing page, associated documentation, and portions 
-of the Dolphain library were developed by Michael Haas with significant assistance 
-from GitHub Copilot, an AI pair programming assistant. The scientific research, 
-data analysis, and project direction are entirely attributable to Michael Haas. 
-The AI assisted with implementation, documentation structure, design elements, 
+**Attribution Note:** This landing page, associated documentation, and portions
+of the Dolphain library were developed by Michael Haas with significant assistance
+from GitHub Copilot, an AI pair programming assistant. The scientific research,
+data analysis, and project direction are entirely attributable to Michael Haas.
+The AI assisted with implementation, documentation structure, design elements,
 and technical writing.
 ```
 
@@ -70,6 +74,7 @@ and technical writing.
 ### Clear Separation of Contributions
 
 **Human Contributions (Michael Haas):**
+
 - ✅ All scientific research and analysis
 - ✅ Research methodology and approach
 - ✅ Data interpretation and findings
@@ -79,6 +84,7 @@ and technical writing.
 - ✅ Research objectives
 
 **AI Contributions (GitHub Copilot):**
+
 - ✅ Landing page implementation (HTML/CSS/JS)
 - ✅ Documentation structure and formatting
 - ✅ Code scaffolding and boilerplate
@@ -103,6 +109,7 @@ and technical writing.
 **Commit Message:** "Add comprehensive AI attribution and deployment summary"
 
 **Files Changed:**
+
 - DEPLOYMENT_SUMMARY.md (new file, 314 lines)
 - LANDING_PAGE_NOTES.md (modified, attribution added)
 - docs/DATA_ATTRIBUTION.md (modified, AI acknowledgment added)
