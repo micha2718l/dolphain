@@ -57,10 +57,7 @@
           deployed autonomous underwater vehicles and acoustic recorders
           throughout the Gulf to track marine mammal recovery after the
           Deepwater Horizon oil spill. <br /><br />
-          <a
-            href="DATA_ATTRIBUTION.html"
-            style="color: var(--sand)"
-          >
+          <a href="DATA_ATTRIBUTION.html" style="color: var(--sand)">
             Learn more about data sources and attributions →
           </a>
         </div>
@@ -86,59 +83,80 @@
       <section id="examples">
         <h2>See It In Action</h2>
         <p style="font-size: 1.1rem; margin-bottom: 2rem">
-          Real outputs from analyzing Gulf of Mexico underwater recordings.
-          All visualizations generated from actual EARS data files.
+          Real outputs from analyzing Gulf of Mexico underwater recordings. All
+          visualizations generated from actual EARS data files.
         </p>
 
         <div class="example-item">
           <h3>📈 Waveform Analysis</h3>
           <p>
-            Time-domain visualization of a 21-second underwater recording.
-            Each peak represents acoustic energy from marine life, boats, or environmental noise.
+            Time-domain visualization of a 21-second underwater recording. Each
+            peak represents acoustic energy from marine life, boats, or
+            environmental noise.
           </p>
-          <img src="images/waveform.png" alt="Underwater acoustic waveform" class="example-image">
+          <img
+            src="images/waveform.png"
+            alt="Underwater acoustic waveform"
+            class="example-image"
+          />
           <div class="code-block" style="margin-top: 1rem">
-            <code><span class="highlight">import</span> dolphain
-data = dolphain.read_ears_file('recording.210')
-<span class="highlight"># Plot the waveform</span>
-dolphain.plot_waveform(data)</code>
+            <code
+              ><span class="highlight">import</span> dolphain data =
+              dolphain.read_ears_file('recording.210')
+              <span class="highlight"># Plot the waveform</span>
+              dolphain.plot_waveform(data)</code
+            >
           </div>
         </div>
 
         <div class="example-item">
           <h3>🎨 Spectrogram Visualization</h3>
           <p>
-            Frequency-time representation showing where dolphin communication happens.
-            Whistles appear as contours in the 2-20 kHz range, while clicks show up as vertical lines at higher frequencies.
+            Frequency-time representation showing where dolphin communication
+            happens. Whistles appear as contours in the 2-20 kHz range, while
+            clicks show up as vertical lines at higher frequencies.
           </p>
-          <img src="images/spectrogram.png" alt="Spectrogram showing dolphin vocalizations" class="example-image">
+          <img
+            src="images/spectrogram.png"
+            alt="Spectrogram showing dolphin vocalizations"
+            class="example-image"
+          />
           <div class="science-fact" style="margin-top: 1rem">
-            The bright bands below 20 kHz indicate potential dolphin whistles. Higher frequency
-            clicks (>20 kHz) are used for echolocation and hunting.
+            The bright bands below 20 kHz indicate potential dolphin whistles.
+            Higher frequency clicks (>20 kHz) are used for echolocation and
+            hunting.
           </div>
         </div>
 
         <div class="example-item">
           <h3>🌊 Wavelet Denoising</h3>
           <p>
-            Before and after comparison showing how wavelet filtering removes background
-            noise while preserving dolphin vocalizations. The denoised signal reveals
-            clearer transient features for click detection.
+            Before and after comparison showing how wavelet filtering removes
+            background noise while preserving dolphin vocalizations. The
+            denoised signal reveals clearer transient features for click
+            detection.
           </p>
-          <img src="images/denoising.png" alt="Signal denoising comparison" class="example-image">
+          <img
+            src="images/denoising.png"
+            alt="Signal denoising comparison"
+            class="example-image"
+          />
           <div class="code-block" style="margin-top: 1rem">
-            <code><span class="highlight"># Clean the signal</span>
-denoised = dolphain.wavelet_denoise(data['data'])
-<span class="highlight"># Compare results</span>
-dolphain.plot_denoising_comparison(data['data'], denoised, data['fs'])</code>
+            <code
+              ><span class="highlight"># Clean the signal</span>
+              denoised = dolphain.wavelet_denoise(data['data'])
+              <span class="highlight"># Compare results</span>
+              dolphain.plot_denoising_comparison(data['data'], denoised,
+              data['fs'])</code
+            >
           </div>
         </div>
 
         <div class="attribution-box" style="margin-top: 2rem">
-          <strong>Real Data:</strong> All visualizations above were generated from
-          file <code>718587E0.210</code> recorded in the Gulf of Mexico as part of
-          the LADC-GEMM marine mammal monitoring project. Duration: 21.33 seconds,
-          Sample rate: 192 kHz.
+          <strong>Real Data:</strong> All visualizations above were generated
+          from file <code>718587E0.210</code> recorded in the Gulf of Mexico as
+          part of the LADC-GEMM marine mammal monitoring project. Duration:
+          21.33 seconds, Sample rate: 192 kHz.
         </div>
       </section>
 
@@ -203,33 +221,33 @@ dolphain.plot_denoising_comparison(data['data'], denoised, data['fs'])</code>
 
         <h3>Installation</h3>
         <div class="code-block">
-          <code># Clone the repository
-git clone https://github.com/micha2718l/dolphain.git
-cd dolphain
-
-# Create virtual environment
-python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install in development mode
-pip install -e .</code>
+          <code
+            ># Clone the repository git clone
+            https://github.com/micha2718l/dolphain.git cd dolphain # Create
+            virtual environment python3 -m venv .venv source .venv/bin/activate
+            # On Windows: .venv\Scripts\activate # Install in development mode
+            pip install -e .</code
+          >
         </div>
 
         <h3>Basic Usage</h3>
         <div class="code-block">
-          <code><span class="highlight">import</span> dolphain
+          <code
+            ><span class="highlight">import</span> dolphain
 
-<span class="highlight"># Read an EARS file</span>
-data = dolphain.read_ears_file('data/recording.210')
+            <span class="highlight"># Read an EARS file</span>
+            data = dolphain.read_ears_file('data/recording.210')
 
-<span class="highlight"># Create a quick overview plot</span>
-dolphain.plot_overview(data, fmax=50000)
+            <span class="highlight"># Create a quick overview plot</span>
+            dolphain.plot_overview(data, fmax=50000)
 
-<span class="highlight"># Denoise the signal</span>
-denoised = dolphain.wavelet_denoise(data['data'])
+            <span class="highlight"># Denoise the signal</span>
+            denoised = dolphain.wavelet_denoise(data['data'])
 
-<span class="highlight"># View the difference</span>
-dolphain.plot_denoising_comparison(data['data'], denoised, data['fs'])</code>
+            <span class="highlight"># View the difference</span>
+            dolphain.plot_denoising_comparison(data['data'], denoised,
+            data['fs'])</code
+          >
         </div>
 
         <div class="science-fact">
@@ -400,8 +418,8 @@ dolphain.plot_denoising_comparison(data['data'], denoised, data['fs'])</code>
           <a href="DATA_ATTRIBUTION.html">Data Attribution</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8">
-          Website and documentation created with assistance from GitHub Copilot (AI) | 
-          Research and analysis by Michael Haas
+          Website and documentation created with assistance from GitHub Copilot
+          (AI) | Research and analysis by Michael Haas
         </p>
         <p style="margin-top: 1.5rem; font-size: 0.85rem; font-style: italic">
           "This research was made possible by a grant from The Gulf of Mexico

@@ -16,12 +16,14 @@
 ### 1. ⭐ Real Examples Section
 
 **Added to the site:**
+
 - Three professional visualizations generated from **real EARS data**
 - **Waveform:** 21-second underwater recording from Gulf of Mexico
 - **Spectrogram:** Frequency analysis showing dolphin communication bands
 - **Denoising:** Before/after comparison of wavelet filtering
 
 **Each example includes:**
+
 - High-quality image (100 DPI, web-optimized)
 - Explanation of what it shows
 - Code snippet showing how to reproduce it
@@ -30,6 +32,7 @@
 ### 2. 🗂️ Site Moved to `/site` Directory
 
 **New structure:**
+
 ```
 site/
 ├── index.html          # Enhanced with examples section
@@ -46,6 +49,7 @@ site/
 ### 3. 🔧 Generation Script
 
 **Created `generate_examples.py`:**
+
 - Reads actual EARS data file
 - Generates three publication-quality visualizations
 - Uses the Dolphain library's own functions
@@ -55,6 +59,7 @@ site/
 ### 4. 📝 Enhanced Documentation
 
 **New files:**
+
 - `site/README.md` - Site-specific documentation
 - `FINAL_DEPLOYMENT.md` - Complete deployment guide
 - Updated CSS with example styling
@@ -66,9 +71,11 @@ site/
 ### Simple 3-Step Process:
 
 1. **Go to GitHub Pages Settings**
+
    - https://github.com/micha2718l/dolphain/settings/pages
 
 2. **Change the deployment folder**
+
    - Branch: `main`
    - Folder: `/site` ⬅️ **Change from / (root) to /site**
    - Click Save
@@ -82,11 +89,13 @@ site/
 ## 🎨 What Makes It Amazing
 
 ### Before This Push
+
 - Abstract feature descriptions
 - No visual proof of capabilities
 - Users had to imagine what output looks like
 
 ### After This Push
+
 - **Real data, real visualizations**
 - Immediate proof of library effectiveness
 - Professional presentation
@@ -99,18 +108,21 @@ site/
 ## 📊 The Numbers
 
 **Commits today:** 4 major updates
+
 1. `3e676ab` - AI attribution updates
 2. `a4ffb60` - AI attribution summary
 3. `09f115d` - **Site with real examples** (the big one!)
 4. `b7c6092` - Final deployment guide
 
 **Files created:**
+
 - 3 high-quality visualization images
 - 1 Python generation script
 - 1 enhanced HTML landing page
 - Multiple documentation files
 
 **Impact:**
+
 - **Visual proof** of library capabilities
 - **Professional showcase** for portfolio/CV
 - **Easy sharing** with collaborators
@@ -123,12 +135,14 @@ site/
 Your site now demonstrates:
 
 ### Real Working Examples ✨
+
 1. **EARS File Reading** → Waveform shows it works
 2. **Signal Processing** → Denoising shows effectiveness
 3. **Visualization** → Spectrogram shows quality
 4. **Scientific Rigor** → Real data from actual research
 
 ### Technical Excellence
+
 - Responsive design (mobile → desktop)
 - Fast loading (~850 KB total)
 - No external dependencies
@@ -136,6 +150,7 @@ Your site now demonstrates:
 - Accessible (WCAG AA)
 
 ### Professional Presentation
+
 - Publication-quality figures
 - Clear explanations
 - Code snippets for reproduction
@@ -143,6 +158,7 @@ Your site now demonstrates:
 - Proper attribution
 
 ### Personality & Engagement
+
 - Ocean color theme
 - H2G2 references
 - Interactive elements
@@ -187,11 +203,13 @@ git push origin main
 ## 📞 Everything You Need
 
 **Deployment:**
+
 - Change GitHub Pages to `/site` folder
 - Wait 2 minutes
 - Site is live!
 
 **Local Testing:**
+
 ```bash
 cd site
 python3 -m http.server 8000
@@ -199,11 +217,13 @@ python3 -m http.server 8000
 ```
 
 **Regenerate Examples:**
+
 ```bash
 python generate_examples.py
 ```
 
 **Key Files:**
+
 - `FINAL_DEPLOYMENT.md` - Step-by-step deployment
 - `site/README.md` - Site documentation
 - `generate_examples.py` - Example generation script
@@ -214,11 +234,13 @@ python generate_examples.py
 ## 🎊 Mission Accomplished
 
 ### You Asked For:
+
 1. ✅ Section showing off library features
 2. ✅ Run code to create example output
 3. ✅ Move site to another folder
 
 ### You Got:
+
 1. ✅ Comprehensive examples section with **real data**
 2. ✅ Three professional visualizations **generated from actual EARS files**
 3. ✅ Complete `/site` directory ready for GitHub Pages
