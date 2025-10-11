@@ -1,6 +1,25 @@
 # Next Steps – October 2025 Roadmap
 
-The Dolphain library is stable; we’re now building higher-level analyses for dolphin communication. Use this guide to pick up the next piece of work quickly.
+The## 🚀 How to Get Moving
+
+1. **Read the continuation guide:**
+   ```bash
+   # Open CONTINUATION_GUIDE.md for complete instructions
+   code CONTINUATION_GUIDE.md
+   ```
+
+2. **Load the notebook:**
+   ```bash
+   cd /Users/mjhaas/code/dolphain
+   source .venv/bin/activate  # if needed
+   jupyter notebook examples/dolphin_communication_analysis.ipynb
+   ```
+
+3. **Review current work:** Check which cells have execution counts and what variables are in memory.
+
+4. **Choose your next task:** See CONTINUATION_GUIDE.md for detailed implementation plans.
+
+Time required: 15–30 minutes to get oriented; 2-4 hours for whistle detection implementation.rary is stable; we’re now building higher-level analyses for dolphin communication. Use this guide to pick up the next piece of work quickly.
 
 ---
 
@@ -56,32 +75,26 @@ Time required: 15–30 minutes for a parameter experiment; longer for whistle pr
 
 ## 📊 Quick Experiment Templates
 
-### Chunk Summary Logging
-
+### Create Reports Directory
 ```python
-chunk_stats = []
-for start, end, chunk in iterate_chunks(data, sample_rate, chunk_duration=5.0):
-    times, _, amps = detect_clicks(chunk, sample_rate, threshold_factor=6.0)
-    chunk_stats.append({
-        "start_s": start / sample_rate,
-        "click_rate_per_s": len(times) / 5.0,
-        "median_amp": np.median(amps) if len(amps) else np.nan,
-    })
+from pathlib import Path
 
-chunk_df = pd.DataFrame(chunk_stats)
-chunk_df.to_csv("reports/chunk_scan_threshold6.csv", index=False)
+reports_dir = Path("reports")
+reports_dir.mkdir(exist_ok=True)
+print(f"Created {reports_dir}")
 ```
 
-### Whistle Detection Skeleton
-
+### Save Analysis Results
 ```python
-from scipy.signal import butter, filtfilt
+import pandas as pd
 
-def detect_whistles(signal_array, fs, band=(2000, 20000), min_duration=0.1):
-    b, a = butter(4, np.array(band) / (fs / 2), btype="bandpass")
-    filtered = filtfilt(b, a, signal_array)
-    # TODO: generate spectrogram, extract ridges, build contour metadata
-    raise NotImplementedError
+# Save DataFrame
+df.to_csv("reports/analysis_results.csv", index=False)
+
+# Save plot
+import matplotlib.pyplot as plt
+fig.savefig("reports/analysis_plot.png", dpi=150, bbox_inches='tight')
+plt.close(fig)
 ```
 
 ---

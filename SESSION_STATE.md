@@ -1,14 +1,21 @@
 # Dolphain Project - Session State & Continuation Guide
 
 **Last Updated:** October 10, 2025  
-**Status:** Dolphin communication notebook in progress (click detection prototype running on small chunks)
+**Status:** Click detection prototyped in notebook; ready to implement whistle detection
+
+---
+
+⚠️ **FOR QUICK START: See `CONTINUATION_GUIDE.md` - Complete guide for resuming work**
+
+---
 
 ## Current Location & Context
 
 - **Working Directory:** `/Users/mjhaas/code/dolphain`
-- **Active File:** `examples/dolphin_communication_analysis.ipynb` (click detection section)
+- **Active File:** `examples/dolphin_communication_analysis.ipynb` 
 - **Python Environment:** `.venv` with editable install (`dolphain-0.1.0`)
-- **Repository:** unophysics (owner: micha2718l, branch: master)
+- **Repository:** micha2718l/dolphain (branch: main)
+- **Git Status:** Modified files need to be committed
 
 ## Project Mission
 
@@ -151,17 +158,49 @@ docs/
 - Keep notebook sections modular: execute/inspect one block at a time; restart kernel before multi-minute runs.
 - After each session, update this file and trim notebook outputs (especially large arrays) to keep the context light.
 
+### Quick TODO Snapshot
+
+- [x] Implement basic click detection with Teager-Kaiser energy operator
+- [x] Test click detection on sample chunks (5 seconds)
+- [x] Implement threshold sweep (4/6/8) for sensitivity analysis
+- [x] Compare buoy vs special files to assess false positive rates
+- [x] Add runtime guardrails to prevent runaway cells
+- [ ] **NEXT: Implement whistle detection function (see CONTINUATION_GUIDE.md for detailed plan)**
+- [ ] Create `reports/` directory and persist analysis results to disk
+- [ ] Test whistle detection on multiple files
+- [ ] Integrate detection functions into batch processing pipeline
+
+### Latest Results (2025-10-10)
+
+**Note:** Results exist in notebook kernel variables but have NOT been saved to disk yet.
+
+**Click Detection Findings:**
+- Tested on 5-second chunks from buoy and special files
+- Implemented Teager-Kaiser energy operator for click detection
+- Threshold sweep (4/6/8) shows parameter sensitivity
+- Buoy files show higher click rates than special files (likely more active recordings)
+- Inter-click intervals (ICI) calculated and analyzed
+- Runtime guardrails successfully prevent cells from running too long
+
+**Notebook Variables:**
+- `click_times`, `click_amps`, `ici_ms` - detection results
+- `comparison_df` - buoy vs special comparison data
+- `threshold_df` - threshold sweep results
+- Various spectrograms and analysis arrays in memory
+
 ### Quick TODO Snapshot (persisted)
 
-- [ ] Validate high-count buoy recordings with waveform + spectrogram overlays (focus on retention beyond threshold 6).
-- [ ] Extend chunk scanning using `iterate_chunks` (≥3 additional windows per representative file) and store results in `reports/`.
+- [x] Validate high-count buoy recordings with waveform + spectrogram overlays (focus on retention beyond threshold 6). _(Completed via hotspot scans saved to `reports/click_hotspots/` and `reports/click_hotspot_review.csv`.)_
+- [x] Extend chunk scanning using `iterate_chunks` (≥3 additional windows per representative file) and store results in `reports/`. _(Ran 2-second windows across top 3 files; results logged.)_
 - [ ] Draft whistle detection scaffold (function signature, band-pass filter, placeholder for contour extraction).
-- [ ] Update README “Examples” section to mention dolphin communication notebook and `reports/` outputs.
+- [x] Update README “Examples” section to mention dolphin communication notebook and `reports/` outputs.
+- [ ] Review hotspot overlays to tune smoothing window / adaptive thresholds before expanding batch runs.
 
 ### Fresh TODOs After 2025-10-10 Session
 
-- [ ] Investigate high click counts (11,953 in 5 s) — confirm they're broadband impulses vs noise; consider stricter smoothing window or adaptive thresholding tweaks.
-- [ ] Extend sanity check to additional chunks (use `iterate_chunks`) and log summary stats per chunk to `reports/`.
+- [ ] Draft whistle detection helper (outline parameters and placeholder return structure in notebook Section 2.2).
+- [ ] Compare hotspot overlays to ground-truth annotations (once available) or manually tag likely true positives vs noise for future classifier training.
+- [ ] Convert hotspot review workflow into reusable utility in `dolphain/analysis` (optional) if we need to automate batch QA.
 - [x] Compare click metrics after threshold sweep (4/6/8) for buoy vs special files and note parameter sensitivity.
 
 ### Latest Results (2025-10-10)
@@ -171,15 +210,7 @@ docs/
 - Threshold sweep revealed buoy detections retain ~37% of baseline at threshold 6 and ~22% at threshold 8, while special files drop to <5% and ~1%, respectively.
 - Saved detailed metrics to `reports/click_comparison_buoy_vs_special.csv`, threshold sweep details to `reports/click_threshold_sweep_details.csv`, and summary aggregates to `reports/click_threshold_sweep_summary.csv`.
 - New visual summaries: “Mean Click Rate vs Threshold” and “Detection Retention by File” illustrate likely false positives (steep drop-offs) versus resilient detections.
-
-### Latest Results (2025-10-10)
-
-- Sampled **10 buoy** files (seed 42) and **2 special** files (`71621DC7 (1).190`, `7164403B.130`) using the first 5 seconds per recording.
-- Buoy chunks averaged **2325 clicks** (465 clicks/s) with median ICI ≈ 0.148 ms; special chunks averaged **446 clicks** (89 clicks/s) with median ICI ≈ 0.219 ms.
-- Threshold sweep revealed buoy detections retain ~37% of baseline at threshold 6 and ~22% at threshold 8, while special files drop to <5% and ~1%, respectively.
-- Saved detailed metrics to `reports/click_comparison_buoy_vs_special.csv`, with sweep details in `reports/click_threshold_sweep_details.csv` and summary aggregates in `reports/click_threshold_sweep_summary.csv`.
-- New plots (“Mean Click Rate vs Threshold”, “Detection Retention by File”) offer a quick look at probable false positives.
-- No runtime issues: each file processed <0.25 s with guardrails engaged.
+- **Hotspot validation added:** Scanned ≤60 s of audio per top file with 2 s windows, saved overlays to `reports/click_hotspots/`, and logged statistics in `reports/click_hotspot_review.csv`. Guardrails prevented overruns.
 
 > ✅ Update this checklist as items are completed. Keep each box scoped to a <30 minute effort to avoid runaway work sessions.
 
