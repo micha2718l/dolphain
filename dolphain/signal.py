@@ -7,8 +7,10 @@ capabilities for underwater acoustic recordings.
 
 import numpy as np
 import pywt
+from scipy import signal as sp_signal
+from scipy.ndimage import maximum_filter
 
-__all__ = ["threshold", "thresh_wave_coeffs", "wavelet_denoise"]
+__all__ = ["threshold", "thresh_wave_coeffs", "wavelet_denoise", "detect_whistles"]
 
 
 def threshold(x_in, delta, hard=False):
@@ -160,3 +162,215 @@ def wavelet_denoise(
     if return_threshold:
         return denoised, thresh
     return denoised
+
+
+def detect_whistles(
+    data,
+    fs,
+    freq_range=(2000, 20000),
+    min_duration=0.1,
+    nperseg=2048,
+    noverlap=None,
+    power_threshold_percentile=85,
+    min_contour_points=5,
+):
+    """
+    Detect dolphin whistles in acoustic data.
+
+    Whistles are narrow-band frequency-modulated signals typically in the
+    2-20 kHz range. This function uses spectrogram-based ridge detection
+    to identify and extract whistle contours.
+
+    Parameters
+    ----------
+    data : array_like
+        Input acoustic data
+    fs : int
+        Sampling frequency in Hz
+    freq_range : tuple of float, optional
+        (min_freq, max_freq) in Hz for whistle detection (default: 2000-20000 Hz)
+    min_duration : float, optional
+        Minimum whistle duration in seconds (default: 0.1)
+    nperseg : int, optional
+        Length of each FFT segment for spectrogram (default: 2048)
+    noverlap : int, optional
+        Number of samples to overlap between segments. If None, uses 75% overlap
+    power_threshold_percentile : float, optional
+        Percentile threshold for detecting ridges in spectrogram (default: 85)
+    min_contour_points : int, optional
+        Minimum number of time points for a valid contour (default: 5)
+
+    Returns
+    -------
+    whistles : list of dict
+        List of detected whistles, where each whistle is a dictionary with:
+        - 'time': array of time points (seconds)
+        - 'frequency': array of frequency values (Hz)
+        - 'power': array of power values (dB)
+        - 'start_time': whistle start time (seconds)
+        - 'end_time': whistle end time (seconds)
+        - 'duration': whistle duration (seconds)
+        - 'min_freq': minimum frequency (Hz)
+        - 'max_freq': maximum frequency (Hz)
+        - 'mean_freq': mean frequency (Hz)
+
+    Examples
+    --------
+    >>> import dolphain
+    >>> # Read data
+    >>> data = dolphain.read_ears_file('sample.210')
+    >>> # Detect whistles
+    >>> whistles = dolphain.detect_whistles(data['data'], data['fs'])
+    >>> print(f"Found {len(whistles)} whistles")
+    >>> # Get first whistle details
+    >>> if whistles:
+    ...     w = whistles[0]
+    ...     print(f"Duration: {w['duration']:.2f}s, Freq range: {w['min_freq']:.0f}-{w['max_freq']:.0f} Hz")
+
+    Notes
+    -----
+    The detection algorithm:
+    1. Band-pass filters data to whistle frequency range (2-20 kHz typical)
+    2. Computes high-resolution spectrogram
+    3. Identifies ridges (local frequency maxima) in the spectrogram
+    4. Extracts contours by tracking ridges across time
+    5. Filters by minimum duration and contour quality
+
+    Whistles are characterized by:
+    - Narrow-band frequency modulation
+    - Typical duration: 0.5-1.5 seconds
+    - Frequency range: 2-20 kHz for most dolphin species
+    - Signature whistles are unique identifiers for individuals
+
+    References
+    ----------
+    Janik, V. M., & Sayigh, L. S. (2013). Communication in bottlenose dolphins:
+    50 years of signature whistle research. Journal of Comparative Physiology A,
+    199(6), 479-489.
+    """
+    data = np.asarray(data)
+
+    # Set default overlap to 75%
+    if noverlap is None:
+        noverlap = int(0.75 * nperseg)
+
+    # Band-pass filter to whistle frequency range
+    nyquist = fs / 2.0
+    low = max(freq_range[0] / nyquist, 0.001)  # Avoid zero
+    high = min(freq_range[1] / nyquist, 0.999)  # Avoid Nyquist
+
+    # Design Butterworth band-pass filter
+    sos = sp_signal.butter(4, [low, high], btype="bandpass", output="sos")
+    filtered_data = sp_signal.sosfiltfilt(sos, data)
+
+    # Compute high-resolution spectrogram
+    f, t, Sxx = sp_signal.spectrogram(
+        filtered_data,
+        fs=fs,
+        nperseg=nperseg,
+        noverlap=noverlap,
+        window="hann",
+        scaling="density",
+    )
+
+    # Convert to dB
+    Sxx_dB = 10 * np.log10(Sxx + 1e-12)
+
+    # Find frequency indices within our range
+    freq_mask = (f >= freq_range[0]) & (f <= freq_range[1])
+    f_filtered = f[freq_mask]
+    Sxx_filtered = Sxx_dB[freq_mask, :]
+
+    if Sxx_filtered.size == 0:
+        return []
+
+    # Threshold based on power percentile
+    power_threshold = np.percentile(Sxx_filtered, power_threshold_percentile)
+
+    # Find ridges: local maxima in frequency direction at each time step
+    # Use maximum_filter to find local maxima
+    neighborhood_size = 3  # Look at neighboring frequencies
+    local_max = (
+        maximum_filter(Sxx_filtered, size=(neighborhood_size, 1)) == Sxx_filtered
+    )
+
+    # Apply power threshold
+    strong_points = Sxx_filtered > power_threshold
+    ridge_mask = local_max & strong_points
+
+    # Extract contours by connecting ridges across time
+    whistles = []
+
+    # For each time point, find the strongest ridge
+    for time_idx in range(ridge_mask.shape[1]):
+        freq_indices = np.where(ridge_mask[:, time_idx])[0]
+
+        if len(freq_indices) > 0:
+            # Get the strongest frequency component at this time
+            powers = Sxx_filtered[freq_indices, time_idx]
+            strongest_idx = freq_indices[np.argmax(powers)]
+
+            # Try to add to existing contour or start new one
+            added = False
+            for whistle in whistles:
+                if len(whistle["freq_indices"]) > 0:
+                    last_freq_idx = whistle["freq_indices"][-1]
+                    last_time_idx = whistle["time_indices"][-1]
+
+                    # Check if this point continues the contour
+                    # Allow frequency jumps within reasonable range and only consecutive time steps
+                    freq_diff = abs(strongest_idx - last_freq_idx)
+                    time_diff = time_idx - last_time_idx
+
+                    if (
+                        time_diff == 1 and freq_diff < 10
+                    ):  # Adjacent in time, close in frequency
+                        whistle["time_indices"].append(time_idx)
+                        whistle["freq_indices"].append(strongest_idx)
+                        added = True
+                        break
+
+            if not added:
+                # Start new contour
+                whistles.append(
+                    {"time_indices": [time_idx], "freq_indices": [strongest_idx]}
+                )
+
+    # Convert contours to whistle dictionaries and filter
+    filtered_whistles = []
+
+    for contour in whistles:
+        if len(contour["time_indices"]) < min_contour_points:
+            continue
+
+        time_indices = np.array(contour["time_indices"])
+        freq_indices = np.array(contour["freq_indices"])
+
+        # Get actual time and frequency values
+        times = t[time_indices]
+        freqs = f_filtered[freq_indices]
+        powers = Sxx_filtered[freq_indices, time_indices]
+
+        # Calculate duration
+        duration = times[-1] - times[0]
+
+        # Filter by minimum duration
+        if duration < min_duration:
+            continue
+
+        # Create whistle dictionary
+        whistle = {
+            "time": times,
+            "frequency": freqs,
+            "power": powers,
+            "start_time": times[0],
+            "end_time": times[-1],
+            "duration": duration,
+            "min_freq": freqs.min(),
+            "max_freq": freqs.max(),
+            "mean_freq": freqs.mean(),
+        }
+
+        filtered_whistles.append(whistle)
+
+    return filtered_whistles

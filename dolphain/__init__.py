@@ -10,7 +10,7 @@ __author__ = "Michael Haas"
 
 # Import all public functions from submodules
 from .io import read_ears_file, print_file_info
-from .signal import wavelet_denoise, threshold, thresh_wave_coeffs
+from .signal import wavelet_denoise, threshold, thresh_wave_coeffs, detect_whistles
 from .plotting import (
     plot_waveform,
     plot_spectrogram,
@@ -35,6 +35,7 @@ __all__ = [
     "wavelet_denoise",
     "threshold",
     "thresh_wave_coeffs",
+    "detect_whistles",
     # Plotting
     "plot_waveform",
     "plot_spectrogram",

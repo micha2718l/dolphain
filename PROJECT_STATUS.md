@@ -1,5 +1,22 @@
 data = dolphain.read_ears_file('file.210')
-dolphain.plot_overview(data, fmax=5000)
+dolphain.plot_overview(d## 📊 Current Insights from Experiments
+
+**Click Detection Progress (5 s chunks, threshold=4):*## 📁 Quick Links
+
+- **Start here:** `CONTINUATION_GUIDE.md` - Complete guide for resuming work
+- Core API overview – `README.md`
+- Batch how-to – `BATCH_PROCESSING.md`
+- Latest research notebook – `examples/dolphin_communication_analysis.ipynb`
+- Detailed state – `SESSION_STATE.md`rototyped Teager-Kaiser energy operator for click detection
+- Tested on buoy vs special file samples
+- Implemented threshold sweep (4/6/8) to assess parameter sensitivity
+- Results show buoy files have higher click rates than special files
+- Runtime guardrails successfully prevent runaway processing
+
+**Status:** Results exist in notebook kernel variables. Need to:
+1. Create `reports/` directory
+2. Persist results to CSV files
+3. Save visualization plots to disk)
 denoised = dolphain.wavelet_denoise(data['data'])
 #! Dolphain Project – Status & Roadmap
 
@@ -53,13 +70,12 @@ Persisted artifacts for reproducibility:
 
 ```
 dolphain/
-├── dolphain/                  # Core library modules
+├── dolphain/                  # Core library modules (stable)
 ├── examples/                  # Research & demo notebooks
 ├── tests/                     # Automated tests
 ├── data/
 │   ├── Buoy210_100300_100399/ # 100 buoy recordings (*.210)
 │   └── special/               # 2 comparative recordings (*.130, *.190)
-├── reports/                   # CSV outputs from recent experiments
 ├── docs/                      # README + batch documentation
 └── support files              # CLI, setup.py, requirements.txt, etc.
 ```
@@ -85,54 +101,66 @@ dolphain/
 
 ## 🧭 Next Steps (Prioritized)
 
-1. **Click Quality Refinement**
+1. **Whistle Detection Implementation**
 
-   - Investigate high-count buoy files to confirm genuine dolphin clicks (spectral slices, waveform overlays).
-   - Experiment with adaptive smoothing windows and alternative energy operators to reduce false positives without losing true clicks.
+   - Implement band-pass filter (2-20 kHz) function
+   - Generate high-resolution spectrograms
+   - Extract ridge/contour tracking
+   - Filter by duration (≥0.1 s)
+   - See `CONTINUATION_GUIDE.md` for detailed implementation plan
 
-2. **Chunk-Wise Trend Analysis**
+2. **Result Persistence**
 
-   - Use `iterate_chunks` to sample additional time windows per file, logging per-chunk statistics to the `reports/` directory for temporal stability checks.
+   - Create `reports/` directory structure
+   - Re-run notebook cells to generate comparison data
+   - Save CSVs and plots to disk for reproducibility
 
-3. **Whistle Detection Scaffold**
+3. **Click Quality Refinement**
 
-   - Implement the Section 2.2 plan: band-pass (2–20 kHz), spectrogram ridge tracking, contour extraction, and duration filtering.
-   - Prepare storage schema for whistle contour metadata (JSON/CSV).
+   - Validate detection results with manual inspection
+   - Tune smoothing windows and thresholds based on ground truth
+   - Document parameter choices and rationale
 
-4. **Batch Integrations**
-
-   - Wrap the click/whistle detectors into batch pipelines so full datasets (100+ files) can be processed with summary dashboards.
-
-5. **Documentation & Packaging**
-   - Promote new reports and guardrails in `README.md` (analysis section) and keep `docs/` aligned as whistle work lands.
-   - Evaluate packaging extras (e.g., optional dependency set for notebooks).
+4. **Batch Integration**
+   - Wrap detection functions into batch pipelines
+   - Process full 100-file dataset
+   - Generate summary statistics and dashboards
 
 ---
 
 ## 🧾 Reference Documents (Updated)
 
-| Document                  | Purpose                            | Current Action                                                                         |
-| ------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
-| `README.md`               | Core library overview & quickstart | Add link to dolphin communication notebook + reports directory (see commit checklist). |
-| `BATCH_PROCESSING.md`     | Batch framework how-to             | No changes required.                                                                   |
-| `BATCH_IMPLEMENTATION.md` | Architectural notes                | No changes required.                                                                   |
-| `SESSION_STATE.md`        | Day-to-day continuation log        | Updated with guardrails, click comparison, threshold sweep, and outstanding tasks.     |
-| `NEXT_STEPS.md`           | Actionable plan for users          | Updated (see separate document).                                                       |
+| Document                  | Purpose                            | Current Action                                                   |
+| ------------------------- | ---------------------------------- | ---------------------------------------------------------------- |
+| `CONTINUATION_GUIDE.md`   | Complete session restart guide     | **NEW** - Read this to resume work after any break               |
+| `SESSION_STATE.md`        | Day-to-day continuation log        | Updated with current status (results in notebook, not persisted) |
+| `PROJECT_STATUS.md`       | Current status                     | Updated to reflect actual state                                  |
+| `NEXT_STEPS.md`           | Actionable plan for users          | Updated with corrected next steps                                |
+| `README.md`               | Core library overview & quickstart | No changes needed                                                |
+| `BATCH_PROCESSING.md`     | Batch framework how-to             | No changes required                                              |
+| `BATCH_IMPLEMENTATION.md` | Architectural notes                | No changes required                                              |
 
 ---
 
 ## ✅ Validation & Quality Gates
 
-- **Unit Tests:** `pytest` suite green (manual confirmation last run prior to session; rerun before release).
-- **Notebook Cells:** Latest click detection, special-file comparison, and threshold sweep executed without errors (<8 s for entire sweep).
-- **Artifacts:** Reports persisted under `reports/` and referenced in documentation.
+- **Unit Tests:** `pytest` suite green (core library stable)
+- **Notebook Cells:** Click detection cells execute successfully (<8 s for threshold sweep)
+- **Artifacts:** Results exist in notebook variables; need to persist to `reports/` directory
+
+**Ready for next phase:** Whistle detection implementation
 
 ---
 
-## 📣 Ready for Contributions
+## 📣 Ready for Next Phase
 
-- Issues/PRs welcome for whistle detection, classifier prototypes, or visualization enhancements.
-- For new analyses, replicate the guardrail pattern (≤5 s chunks, bounded runtime, CSV/plot outputs).
+The Dolphain library is stable and documented. Research workspace includes:
+- ✅ Click detection prototype with guardrails
+- ✅ Threshold sensitivity analysis
+- ✅ Comparative studies framework
+- ⏳ Whistle detection (next to implement)
+
+See `CONTINUATION_GUIDE.md` for detailed instructions on continuing this work.
 
 ---
 
@@ -145,4 +173,4 @@ dolphain/
 
 ---
 
-**Bottom line:** The Dolphain library remains stable and documented, while the research workspace now includes reproducible click-detection experiments, special-file comparisons, and threshold analyses—setting the stage for whistle detection and richer behavioral insights.
+**Bottom line:** The Dolphain library is stable and documented. Research workspace includes click detection prototypes and guardrails. Next phase: implement whistle detection and persist results to disk.
