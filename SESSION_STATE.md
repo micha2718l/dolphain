@@ -1,12 +1,12 @@
 # Dolphain Project - Session State & Continuation Guide
 
-**Last Updated:** October 9, 2025  
-**Status:** Ready to create dolphin communication analysis notebook
+**Last Updated:** October 10, 2025  
+**Status:** Dolphin communication notebook in progress (click detection prototype running on small chunks)
 
 ## Current Location & Context
 
 - **Working Directory:** `/Users/mjhaas/code/dolphain`
-- **Active File:** `examples/batch_experiments.ipynb` (lines 38-44 selected)
+- **Active File:** `examples/dolphin_communication_analysis.ipynb` (click detection section)
 - **Python Environment:** `.venv` with editable install (`dolphain-0.1.0`)
 - **Repository:** unophysics (owner: micha2718l, branch: master)
 
@@ -110,194 +110,78 @@ docs/
 └── NEXT_STEPS.md                  # Action plan
 ```
 
-## NEXT IMMEDIATE TASK 🎯
+## ACTIVE ROADMAP 🎯
 
-### Create: `examples/dolphin_communication_analysis.ipynb`
+### Notebook Milestones (macro view)
 
-This is the **primary research notebook** - everything built so far supports this analysis.
+1. ✅ **Click detection prototype** (5 s chunk, Teager-Kaiser energy)
+2. ⏳ **Click post-processing** (filter false positives, cluster into trains)
+3. ⏳ **Whistle detection module** (band-pass + contour tracking)
+4. ⏳ **Feature extraction + summaries**
+5. ⏳ **Batch processing integration**
+6. ⏳ **Visualization + interpretation write-up**
 
-### Notebook Structure (7 Sections)
+### Focus for the Next Session (bite-sized)
 
-#### 1. Introduction & Background
+1. **Review click detection outputs**
 
-- Overview of dolphin communication research
-- Acoustic characteristics of clicks vs whistles
-- Research objectives for this analysis
-- EARS data specifications and limitations
-- Scientific context and citations
+   - Inspect amplitude & ICI distributions for realism
+   - Plot raw waveform snippets around sample clicks
+   - Adjust `threshold_factor` / smoothing window as needed
 
-#### 2. Signal Detection Module
+2. **Add safety rails before scaling up**
 
-**Goal:** Identify dolphin vocalizations in recordings
+   - Wrap detection in helper that enforces `max_chunk_duration`
+   - Add runtime guard (`max_runtime_s`) with early exit + log
+   - Prepare generator to iterate over chunks lazily (`yield from chunk_signal`)
 
-**Clicks Detection (High-Frequency):**
+3. **Prepare whistle detection scaffold**
 
-```python
-# Frequency range: 20-96 kHz (limited by Nyquist)
-# Method: High-pass filter + energy detector
-# Threshold: Adaptive based on background noise
-# Output: Click times, inter-click intervals (ICI)
-```
+   - Draft function signature & docstring
+   - Outline band-pass filtering and spectrogram params without executing heavy loops yet
 
-**Whistle Extraction (Mid-Frequency):**
+4. **Document decisions in notebook markdown**
+   - Note current parameter choices & rationale
+   - Record guard-rail strategy to prevent runaway cells
 
-```python
-# Frequency range: 2-20 kHz
-# Method: Band-pass filter + spectrogram analysis
-# Technique: Contour following algorithm
-# Output: Whistle start/end times, frequency contours
-```
+### Guard Rails & Context Hygiene 🧭
 
-**Implementation Approach:**
+- When running heavy analysis cells, **always operate on ≤5 s chunks** unless explicitly timed.
+- Use `with Timer(max_seconds=30)` (to be implemented) or manual `time.perf_counter()` checks to abort long loops.
+- Keep notebook sections modular: execute/inspect one block at a time; restart kernel before multi-minute runs.
+- After each session, update this file and trim notebook outputs (especially large arrays) to keep the context light.
 
-- Spectrogram analysis (STFT with appropriate window)
-- Adaptive thresholding for noise robustness
-- Peak detection in frequency domain
-- Temporal clustering for call sequences
+### Quick TODO Snapshot (persisted)
 
-#### 3. Feature Extraction
+- [ ] Validate high-count buoy recordings with waveform + spectrogram overlays (focus on retention beyond threshold 6).
+- [ ] Extend chunk scanning using `iterate_chunks` (≥3 additional windows per representative file) and store results in `reports/`.
+- [ ] Draft whistle detection scaffold (function signature, band-pass filter, placeholder for contour extraction).
+- [ ] Update README “Examples” section to mention dolphin communication notebook and `reports/` outputs.
 
-**Click Features:**
+### Fresh TODOs After 2025-10-10 Session
 
-- Inter-click intervals (ICI) - typical patterns vs hunting buzz
-- Click duration and amplitude
-- Peak frequency (if within 96 kHz range)
-- Click train characteristics
+- [ ] Investigate high click counts (11,953 in 5 s) — confirm they're broadband impulses vs noise; consider stricter smoothing window or adaptive thresholding tweaks.
+- [ ] Extend sanity check to additional chunks (use `iterate_chunks`) and log summary stats per chunk to `reports/`.
+- [x] Compare click metrics after threshold sweep (4/6/8) for buoy vs special files and note parameter sensitivity.
 
-**Whistle Features:**
+### Latest Results (2025-10-10)
 
-- Duration measurements
-- Frequency range (min/max)
-- Frequency modulation patterns (FM contours)
-- Harmonic structure
-- Contour shape descriptors (for signature identification)
+- Sampled **10 buoy** files (seed 42) and **2 special** files (`71621DC7 (1).190`, `7164403B.130`) using the first 5 seconds per recording.
+- Buoy chunks averaged **2325 clicks** (465 clicks/s) with median ICI ≈ 0.148 ms; special chunks averaged **446 clicks** (89 clicks/s) with median ICI ≈ 0.219 ms.
+- Threshold sweep revealed buoy detections retain ~37% of baseline at threshold 6 and ~22% at threshold 8, while special files drop to <5% and ~1%, respectively.
+- Saved detailed metrics to `reports/click_comparison_buoy_vs_special.csv`, threshold sweep details to `reports/click_threshold_sweep_details.csv`, and summary aggregates to `reports/click_threshold_sweep_summary.csv`.
+- New visual summaries: “Mean Click Rate vs Threshold” and “Detection Retention by File” illustrate likely false positives (steep drop-offs) versus resilient detections.
 
-**Output:** Feature DataFrame for statistical analysis
+### Latest Results (2025-10-10)
 
-#### 4. Classification Algorithms
+- Sampled **10 buoy** files (seed 42) and **2 special** files (`71621DC7 (1).190`, `7164403B.130`) using the first 5 seconds per recording.
+- Buoy chunks averaged **2325 clicks** (465 clicks/s) with median ICI ≈ 0.148 ms; special chunks averaged **446 clicks** (89 clicks/s) with median ICI ≈ 0.219 ms.
+- Threshold sweep revealed buoy detections retain ~37% of baseline at threshold 6 and ~22% at threshold 8, while special files drop to <5% and ~1%, respectively.
+- Saved detailed metrics to `reports/click_comparison_buoy_vs_special.csv`, with sweep details in `reports/click_threshold_sweep_details.csv` and summary aggregates in `reports/click_threshold_sweep_summary.csv`.
+- New plots (“Mean Click Rate vs Threshold”, “Detection Retention by File”) offer a quick look at probable false positives.
+- No runtime issues: each file processed <0.25 s with guardrails engaged.
 
-**Vocalization Type Classification:**
-
-- Click vs whistle discrimination (straightforward - frequency separation)
-- Click subtypes: Regular echolocation vs terminal buzz vs social clicks
-- Whistle subtypes: Signature vs non-signature patterns
-
-**Methods to Implement:**
-
-- Threshold-based classification (frequency, duration, ICI)
-- Clustering analysis (K-means, DBSCAN) for signature whistle grouping
-- Template matching for known signature whistle patterns
-- Statistical feature analysis
-
-**Signature Whistle Detection:**
-
-- Contour extraction and comparison
-- Dynamic Time Warping (DTW) for pattern matching
-- Build signature catalog from repeated patterns
-
-#### 5. Batch Analysis Framework
-
-**Goal:** Process multiple files systematically
-
-```python
-from dolphain.batch import BatchProcessor, BatchExperiment
-
-# Define detection pipeline
-def detect_dolphins(file_path):
-    data, sr = read_ears_file(file_path)
-    clicks = detect_clicks(data, sr)
-    whistles = detect_whistles(data, sr)
-    return {
-        'clicks': clicks,
-        'whistles': whistles,
-        'click_count': len(clicks),
-        'whistle_count': len(whistles)
-    }
-
-# Process all files
-processor = BatchProcessor()
-results = processor.process_files(file_list, detect_dolphins)
-```
-
-**Outputs:**
-
-- Detection statistics per file
-- Temporal distribution (when dolphins are present)
-- Aggregated feature distributions
-- Signature whistle catalog across files
-
-#### 6. Visualization Suite
-
-**Essential Plots:**
-
-1. **Spectrogram with Overlays:**
-
-   - Raw spectrogram (0-96 kHz)
-   - Detected clicks marked
-   - Whistle contours overlaid
-   - Color-coded by classification
-
-2. **Whistle Contour Gallery:**
-
-   - Individual whistle frequency vs time
-   - Grouped by similarity (potential signatures)
-   - Comparison plots for signature matching
-
-3. **Click Analysis:**
-
-   - Inter-click interval histogram
-   - Click train timing diagrams
-   - Amplitude distribution
-
-4. **Temporal Distribution:**
-
-   - Vocalization events over time
-   - Click rate vs whistle rate
-   - Activity patterns (if time metadata available)
-
-5. **Feature Space Visualization:**
-
-   - PCA/t-SNE of whistle features
-   - Clustering visualization
-   - Signature whistle grouping
-
-6. **Batch Results Dashboard:**
-   - Detection rate across files
-   - Feature distributions
-   - Statistical summaries
-
-#### 7. Language Analysis & Interpretation
-
-**Advanced Analysis:**
-
-1. **Sequence Pattern Detection:**
-
-   - Call type sequences (click-whistle patterns)
-   - Temporal associations
-   - Context-dependent usage
-
-2. **Signature Whistle Catalog:**
-
-   - Unique signature identification
-   - Individual tracking across recordings
-   - Social network analysis (if multiple individuals)
-
-3. **Communication Event Classification:**
-
-   - Echolocation events (hunting, navigation)
-   - Social communication events
-   - Contact calls vs signature whistles
-
-4. **Statistical Analysis:**
-   - Call rate statistics
-   - Feature correlations
-   - Temporal patterns
-
-**Interpretation Guidelines:**
-
-- Compare findings to published dolphin acoustic literature
-- Note limitations (96 kHz ceiling, single hydrophone)
-- Suggest future work (higher sampling rate, stereophonic recording)
+> ✅ Update this checklist as items are completed. Keep each box scoped to a <30 minute effort to avoid runaway work sessions.
 
 ## Technical Implementation Notes
 

@@ -1,329 +1,121 @@
-# Next Steps - Action Plan
+# Next Steps – October 2025 Roadmap
 
-## 🎯 Your Batch Processing Framework is Ready!
-
-### ✅ What's Complete
-
-1. **Full batch processing framework** (`dolphain/batch.py`)
-2. **100 data files ready** (`data/Buoy210_100300_100399/*.210`)
-3. **Example experiments notebook** (`examples/batch_experiments.ipynb`)
-4. **Comprehensive documentation** (BATCH_PROCESSING.md)
-5. **Tested and validated** (test_batch.py passed)
+The Dolphain library is stable; we’re now building higher-level analyses for dolphin communication. Use this guide to pick up the next piece of work quickly.
 
 ---
 
-## 🚀 Immediate Next Actions
+## ✅ What’s Already Solid
 
-### Option 1: Run the Example Experiments (Recommended First)
-
-```bash
-# Open Jupyter
-jupyter notebook examples/batch_experiments.ipynb
-```
-
-**What you'll see:**
-
-- 3 complete working experiments
-- File discovery and selection examples
-- Visualization code ready to use
-- Custom experiment template
-
-**Time required:** 10-15 minutes
+- **Library foundation:** `dolphain.io`, `signal`, `plotting`, and `batch` are production-ready with passing tests.
+- **Batch toolkit:** `BatchProcessor`, `ResultCollector`, and helper utilities are documented in `BATCH_PROCESSING.md` and validated via `test_batch.py`.
+- **Research notebook:** `examples/dolphin_communication_analysis.ipynb` now includes runtime guardrails, click detection on chunks, special-file comparisons, and threshold sweeps (4/6/8) with CSV outputs in `reports/`.
+- **Artifacts:** Click preview, buoy vs special comparison, and threshold sweep reports persist in the repo for reproducible analysis.
 
 ---
 
-### Option 2: Quick Test Run
+## 🎯 Focus Areas
+
+### 1. Click Detection Refinement
+
+- Inspect high-count buoy files with waveform + spectrogram overlays to validate detections.
+- Tweak smoothing windows and threshold factors (4/6/8 baseline) to reduce false positives without losing strong signals.
+- Extend chunk iteration with `iterate_chunks` to capture temporal variability and log per-chunk metrics to `reports/`.
+
+### 2. Whistle Detection Bootstrap
+
+- Implement the Section 2.2 plan: band-pass 2–20 kHz, high-resolution spectrogram, ridge/contour extraction, ≥0.1 s duration filter.
+- Define a lightweight data structure (DataFrame/JSON) for whistle contour metadata.
+- Add placeholder visualizations for extracted contours to confirm quality.
+
+### 3. Batch Integration
+
+- Wrap refined click/whistle detectors in `BatchProcessor` pipelines so the 100 buoy files (and future datasets) can be processed automatically.
+- Collect summary statistics (click rate, ICI, whistle counts) and persist to `reports/` for further analysis.
+
+### 4. Documentation & Packaging
+
+- Update `README.md` “Examples” section with links to the communication notebook and generated reports.
+- Keep `PROJECT_STATUS.md` and this roadmap in sync after each milestone.
+- Consider optional extras in `setup.py` for notebook-specific dependencies if new packages are introduced.
+
+---
+
+## 🚀 How to Get Moving
+
+1. **Load the notebook:**
+   ```bash
+   jupyter notebook examples/dolphin_communication_analysis.ipynb
+   ```
+2. **Review the “Threshold Sensitivity” section** (Cells 17–19) to get familiar with the new outputs.
+3. **Clone a chunk-analysis cell** and iterate on new parameter sets (e.g., different smoothing windows or frequency bands).
+4. **Capture results:** Save CSVs/plots to `reports/` and note key findings in `SESSION_STATE.md`.
+
+Time required: 15–30 minutes for a parameter experiment; longer for whistle prototyping.
+
+---
+
+## 📊 Quick Experiment Templates
+
+### Chunk Summary Logging
 
 ```python
-import dolphain
-import numpy as np
+chunk_stats = []
+for start, end, chunk in iterate_chunks(data, sample_rate, chunk_duration=5.0):
+    times, _, amps = detect_clicks(chunk, sample_rate, threshold_factor=6.0)
+    chunk_stats.append({
+        "start_s": start / sample_rate,
+        "click_rate_per_s": len(times) / 5.0,
+        "median_amp": np.median(amps) if len(amps) else np.nan,
+    })
 
-# Find your 100 files
-files = dolphain.find_data_files('data', '**/*.210')
-print(f"Found {len(files)} files")
-
-# Select a small subset
-subset = dolphain.select_random_files(files, n=5, seed=42)
-
-# Define simple pipeline
-def quick_stats(filepath):
-    data = dolphain.read_ears_file(filepath)
-    return {
-        'duration': data['duration'],
-        'rms': np.sqrt(np.mean(data['data']**2))
-    }
-
-# Process
-processor = dolphain.BatchProcessor(verbose=True)
-collector = processor.process_files(subset, quick_stats)
-collector.print_summary()
+chunk_df = pd.DataFrame(chunk_stats)
+chunk_df.to_csv("reports/chunk_scan_threshold6.csv", index=False)
 ```
 
-**Time required:** 2-3 minutes
-
----
-
-### Option 3: Run Full Experiment on All 100 Files
+### Whistle Detection Skeleton
 
 ```python
-import dolphain
-import numpy as np
+from scipy.signal import butter, filtfilt
 
-# Get all files
-files = dolphain.find_data_files('data', '**/*.210')
-print(f"Processing {len(files)} files...")
-
-# Your analysis pipeline
-def my_pipeline(filepath):
-    data = dolphain.read_ears_file(filepath)
-    acoustic = data['data']
-
-    # Original metrics
-    original_rms = np.sqrt(np.mean(acoustic**2))
-    original_peak = np.max(np.abs(acoustic))
-
-    # Denoise
-    denoised = dolphain.wavelet_denoise(acoustic)
-    denoised_rms = np.sqrt(np.mean(denoised**2))
-
-    return {
-        'duration': data['duration'],
-        'original_rms': original_rms,
-        'original_peak': original_peak,
-        'denoised_rms': denoised_rms,
-        'noise_reduction_pct': (1 - denoised_rms/original_rms) * 100
-    }
-
-# Process all files
-processor = dolphain.BatchProcessor(verbose=True)
-collector = processor.process_files(files, my_pipeline)
-
-# View results
-collector.print_summary()
-
-# Export to CSV
-import pandas as pd
-df = pd.DataFrame(collector.results)
-df.to_csv('full_experiment_results.csv', index=False)
-print(f"Results saved to full_experiment_results.csv")
-```
-
-**Time required:** ~20-30 minutes (100 files × 0.16s each ≈ 16s + analysis time)
-
----
-
-## 🔬 Research Questions You Can Answer Now
-
-### 1. Data Quality Assessment
-
-**Question:** What's the noise level distribution across all recordings?
-
-```python
-def quality_check(filepath):
-    data = dolphain.read_ears_file(filepath)
-    return {
-        'rms': np.sqrt(np.mean(data['data']**2)),
-        'snr_estimate': estimate_snr(data['data']),
-        'peak': np.max(np.abs(data['data']))
-    }
-```
-
-### 2. Optimal Wavelet Selection
-
-**Question:** Which wavelet performs best across all files?
-
-```python
-def compare_wavelets(filepath):
-    data = dolphain.read_ears_file(filepath)
-    results = {}
-    for wv in ['db4', 'db8', 'db20', 'sym8']:
-        denoised = dolphain.wavelet_denoise(data['data'], wavelet=wv)
-        results[f'{wv}_snr'] = calculate_snr(data['data'], denoised)
-    return results
-```
-
-### 3. Temporal Patterns
-
-**Question:** How do acoustic properties vary by time of day/recording?
-
-```python
-def temporal_analysis(filepath):
-    data = dolphain.read_ears_file(filepath)
-    return {
-        'hour': data['time_start'].hour,
-        'day': data['time_start'].day,
-        'rms': np.sqrt(np.mean(data['data']**2)),
-        'duration': data['duration']
-    }
+def detect_whistles(signal_array, fs, band=(2000, 20000), min_duration=0.1):
+    b, a = butter(4, np.array(band) / (fs / 2), btype="bandpass")
+    filtered = filtfilt(b, a, signal_array)
+    # TODO: generate spectrogram, extract ridges, build contour metadata
+    raise NotImplementedError
 ```
 
 ---
 
-## 📊 Visualization Ideas
+## � Maintenance Checklist
 
-After collecting results:
-
-```python
-import matplotlib.pyplot as plt
-import pandas as pd
-
-df = pd.DataFrame(collector.results)
-
-# Histogram of RMS values
-plt.figure(figsize=(10, 6))
-df['rms'].hist(bins=30)
-plt.xlabel('RMS')
-plt.ylabel('Count')
-plt.title('Distribution of RMS Across All Files')
-plt.savefig('rms_distribution.png')
-
-# Noise reduction effectiveness
-plt.figure(figsize=(10, 6))
-plt.scatter(df['original_rms'], df['noise_reduction_pct'])
-plt.xlabel('Original RMS')
-plt.ylabel('Noise Reduction %')
-plt.title('Denoising Effectiveness')
-plt.savefig('noise_reduction.png')
-```
+- [ ] Run `pytest` after major library changes.
+- [ ] Trim large notebook outputs before committing (keep figures but avoid raw arrays).
+- [ ] Update `SESSION_STATE.md` and `PROJECT_STATUS.md` after each focused work session.
+- [ ] Ensure new CSV/plot artifacts land under `reports/` with descriptive filenames.
 
 ---
 
-## 🎓 Learning Path
+## � Reference Map
 
-### Beginner
-
-1. ✅ Read `README.md` (Quick Start section)
-2. ✅ Run `test_batch.py`
-3. ✅ Open `examples/batch_experiments.ipynb`
-4. ✅ Modify Experiment 1 with your own metrics
-
-### Intermediate
-
-1. ✅ Read `BATCH_PROCESSING.md` fully
-2. ✅ Create custom pipeline for your research question
-3. ✅ Run on subset of 10-20 files
-4. ✅ Analyze results, iterate on pipeline
-
-### Advanced
-
-1. ✅ Process all 100 files with optimized pipeline
-2. ✅ Export results to DataFrame
-3. ✅ Create publication-quality visualizations
-4. ✅ Consider parallel processing for larger datasets
+| Goal                     | Resource                                                     |
+| ------------------------ | ------------------------------------------------------------ |
+| Core API usage           | `README.md`                                                  |
+| Batch framework          | `BATCH_PROCESSING.md`                                        |
+| Implementation internals | `BATCH_IMPLEMENTATION.md`                                    |
+| Daily continuity         | `SESSION_STATE.md`                                           |
+| Current status           | `PROJECT_STATUS.md`                                          |
+| Latest experiments       | `examples/dolphin_communication_analysis.ipynb` & `reports/` |
 
 ---
 
-## 🛠️ Troubleshooting
+## ✅ Definition of “Ready for Whistle Work”
 
-### Issue: Import Error
+- [ ] Click detection tuned with acceptable false-positive rate across buoy + special files.
+- [ ] Chunk-level statistics summarized for at least 5 representative recordings.
+- [ ] Documentation updated with findings and next questions.
 
-```python
-# Solution: Make sure you're in project directory
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path.cwd()))
-import dolphain
-```
-
-### Issue: File Not Found
-
-```python
-# Solution: Check your data directory
-files = dolphain.find_data_files('data', '**/*.210')
-if not files:
-    print("No files found. Check data directory path.")
-```
-
-### Issue: Slow Processing
-
-```python
-# Solution: Test on subset first
-subset = dolphain.select_random_files(files, n=5, seed=42)
-# Optimize your pipeline, then scale up
-```
+Once these boxes are checked, dive into whistle detection and begin cataloging contour metadata.
 
 ---
 
-## 📝 Documentation Quick Reference
-
-| Need                   | Read This                        | Time   |
-| ---------------------- | -------------------------------- | ------ |
-| Quick start            | README.md                        | 5 min  |
-| Batch processing       | BATCH_PROCESSING.md              | 15 min |
-| Working examples       | examples/batch_experiments.ipynb | 20 min |
-| Implementation details | BATCH_IMPLEMENTATION.md          | 10 min |
-| Project overview       | PROJECT_STATUS.md                | 5 min  |
-
----
-
-## 🎯 Recommended First Step
-
-**I recommend starting here:**
-
-```bash
-# 1. Open the batch experiments notebook
-jupyter notebook examples/batch_experiments.ipynb
-
-# 2. Run all cells to see examples
-# 3. Modify Experiment 1 to test your own metrics
-# 4. Scale up to more files when ready
-```
-
-This will give you:
-
-- Hands-on experience with the framework
-- Working code you can modify
-- Visual results to validate
-- Template for your own experiments
-
----
-
-## ✅ You're Ready When...
-
-- [ ] You've run `test_batch.py` successfully
-- [ ] You've opened `batch_experiments.ipynb`
-- [ ] You understand the pipeline function pattern
-- [ ] You know how to find and select files
-- [ ] You've seen the result collection work
-
-**Then:** Start defining your research-specific pipelines!
-
----
-
-## 💡 Pro Tips
-
-1. **Start small:** Test on 3-5 files before running on all 100
-2. **Use seeds:** `seed=42` makes results reproducible
-3. **Time it:** Use the `timer` context manager to optimize
-4. **Save results:** Export to CSV for later analysis
-5. **Visualize early:** Plot results as you go to catch issues
-
----
-
-## 🤔 Questions to Consider
-
-- What metrics matter for your research?
-- Which wavelet family works best for your data?
-- Are there temporal patterns to explore?
-- How much noise reduction is optimal?
-- What quality control metrics should you track?
-
----
-
-## 🚀 You're All Set!
-
-**Everything is working and tested.**
-
-**Your next command:**
-
-```bash
-jupyter notebook examples/batch_experiments.ipynb
-```
-
-**Or for a quick test:**
-
-```bash
-python test_batch.py
-```
-
-Good luck with your experiments! 🎉
+**Stay methodical:** small, reproducible experiments with saved artifacts keep the project nimble and ready for the next wave of ideas.
