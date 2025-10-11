@@ -3,12 +3,14 @@
 The## 🚀 How to Get Moving
 
 1. **Read the continuation guide:**
+
    ```bash
    # Open CONTINUATION_GUIDE.md for complete instructions
    code CONTINUATION_GUIDE.md
    ```
 
 2. **Load the notebook:**
+
    ```bash
    cd /Users/mjhaas/code/dolphain
    source .venv/bin/activate  # if needed
@@ -76,6 +78,7 @@ Time required: 15–30 minutes for a parameter experiment; longer for whistle pr
 ## 📊 Quick Experiment Templates
 
 ### Create Reports Directory
+
 ```python
 from pathlib import Path
 
@@ -85,6 +88,7 @@ print(f"Created {reports_dir}")
 ```
 
 ### Save Analysis Results
+
 ```python
 import pandas as pd
 

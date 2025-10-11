@@ -12,7 +12,7 @@
 ## Current Location & Context
 
 - **Working Directory:** `/Users/mjhaas/code/dolphain`
-- **Active File:** `examples/dolphin_communication_analysis.ipynb` 
+- **Active File:** `examples/dolphin_communication_analysis.ipynb`
 - **Python Environment:** `.venv` with editable install (`dolphain-0.1.0`)
 - **Repository:** micha2718l/dolphain (branch: main)
 - **Git Status:** Modified files need to be committed
@@ -175,6 +175,7 @@ docs/
 **Note:** Results exist in notebook kernel variables but have NOT been saved to disk yet.
 
 **Click Detection Findings:**
+
 - Tested on 5-second chunks from buoy and special files
 - Implemented Teager-Kaiser energy operator for click detection
 - Threshold sweep (4/6/8) shows parameter sensitivity
@@ -183,6 +184,7 @@ docs/
 - Runtime guardrails successfully prevent cells from running too long
 
 **Notebook Variables:**
+
 - `click_times`, `click_amps`, `ici_ms` - detection results
 - `comparison_df` - buoy vs special comparison data
 - `threshold_df` - threshold sweep results

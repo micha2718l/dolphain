@@ -19,7 +19,7 @@ This is marine biology research - we're trying to understand dolphin "language" 
 ### What You're Working With
 
 - **Location:** `/Users/mjhaas/code/dolphain`
-- **Data:** 100 EARS files in `data/Buoy210_100300_100399/` (*.210 format, 192 kHz sampling)
+- **Data:** 100 EARS files in `data/Buoy210_100300_100399/` (\*.210 format, 192 kHz sampling)
 - **Python Env:** `.venv` (already installed with `pip install -e .`)
 - **Active Notebook:** `examples/dolphin_communication_analysis.ipynb`
 - **Git:** Repository is `micha2718l/dolphain` on GitHub (branch: main)
@@ -51,6 +51,7 @@ dolphain/
 ## ✅ What's Already Complete
 
 ### 1. Core Library (100% Done - Don't Touch)
+
 - ✅ File I/O for EARS formats (.130, .190, .210)
 - ✅ Wavelet denoising (VisuShrink algorithm)
 - ✅ Plotting utilities (waveforms, spectrograms)
@@ -61,6 +62,7 @@ dolphain/
 **Documentation:** See `BATCH_PROCESSING.md`, `BATCH_IMPLEMENTATION.md`, `README.md`
 
 ### 2. Research Foundation (Done)
+
 - ✅ Dolphin acoustics research (from Wikipedia)
   - **Clicks:** >110 kHz, echolocation, brief pulses
   - **Whistles:** 2-20 kHz, communication, 0.5-1.5 sec duration
@@ -69,6 +71,7 @@ dolphain/
 - ✅ Scientific context documented in `SESSION_STATE.md` (lines 70-107)
 
 ### 3. Active Notebook Progress
+
 - ✅ Setup and imports
 - ✅ Click detection prototype (Teager-Kaiser energy operator)
 - ✅ Basic testing on small chunks (5 seconds)
@@ -116,16 +119,19 @@ jupyter notebook examples/dolphin_communication_analysis.ipynb
 Choose based on your goal:
 
 **Path A: Continue Where You Left Off (Whistle Detection)**
+
 - Jump to "Next Steps: Whistle Detection" section below
 - Estimated time: 2-4 hours for initial implementation
 
 **Path B: Review and Persist Existing Work**
+
 - Create `reports/` directory
 - Re-run cells that generate comparison/sweep data
 - Save CSVs and plots to disk
 - Estimated time: 30-60 minutes
 
 **Path C: Start Fresh with Clean Slate**
+
 - Restart notebook kernel
 - Execute cells one by one from top
 - Verify all results reproduce
@@ -136,11 +142,13 @@ Choose based on your goal:
 ## 🎯 Next Steps: Whistle Detection
 
 ### The Goal
+
 Detect and extract dolphin whistle contours (2-20 kHz, 0.5-1.5 sec duration).
 
 ### Implementation Plan (Chunked for Context Management)
 
 #### Chunk 1: Setup (15 minutes)
+
 ```python
 # Add to notebook - Section 2.2: Whistle Detection
 
@@ -148,13 +156,13 @@ from scipy.signal import butter, filtfilt, spectrogram
 import numpy as np
 import pandas as pd
 
-def detect_whistles(signal_array, fs, 
-                   band=(2000, 20000), 
+def detect_whistles(signal_array, fs,
+                   band=(2000, 20000),
                    min_duration=0.1,
                    threshold_factor=3.0):
     """
     Detect dolphin whistles in frequency band 2-20 kHz.
-    
+
     Parameters:
     -----------
     signal_array : ndarray
@@ -167,7 +175,7 @@ def detect_whistles(signal_array, fs,
         Minimum whistle duration (seconds)
     threshold_factor : float
         Threshold as multiple of median energy
-    
+
     Returns:
     --------
     whistles : list of dict
@@ -178,6 +186,7 @@ def detect_whistles(signal_array, fs,
 ```
 
 #### Chunk 2: Band-pass Filter (20 minutes)
+
 ```python
 # Inside detect_whistles function:
 
@@ -194,13 +203,14 @@ print(f"Filtered to {band[0]/1000}-{band[1]/1000} kHz range")
 **Test it:** Apply to 5-second chunk, plot filtered vs original waveform.
 
 #### Chunk 3: High-Res Spectrogram (30 minutes)
+
 ```python
 # 2. Generate spectrogram with good frequency resolution
 nperseg = 2048      # Longer window for better freq resolution
 noverlap = 1536     # 75% overlap for smooth contours
 
-f, t, Sxx = spectrogram(filtered, fs, 
-                        nperseg=nperseg, 
+f, t, Sxx = spectrogram(filtered, fs,
+                        nperseg=nperseg,
                         noverlap=noverlap)
 
 # Convert to dB
@@ -214,6 +224,7 @@ print(f"Freq resolution: {f[1]-f[0]:.1f} Hz")
 **Test it:** Plot spectrogram, verify you can see potential whistles visually.
 
 #### Chunk 4: Ridge Detection (1-2 hours)
+
 ```python
 # 3. Extract spectral ridges (simplified approach)
 # For each time bin, find the frequency bin with peak energy
@@ -226,7 +237,7 @@ for t_idx in range(Sxx.shape[1]):
     spectrum = Sxx_db[:, t_idx]
     peak_idx = np.argmax(spectrum)
     peak_value = spectrum[peak_idx]
-    
+
     if peak_value > threshold:
         contours.append({
             'time': t[t_idx],
@@ -241,6 +252,7 @@ contour_df = pd.DataFrame(contours)
 **Test it:** Plot detected points over spectrogram, verify they follow visible whistles.
 
 #### Chunk 5: Contour Grouping (1 hour)
+
 ```python
 # 4. Group consecutive points into whistle events
 # Points within 0.1s and 500 Hz are considered same whistle
@@ -251,12 +263,12 @@ if len(contour_df) > 0:
     contour_df['time_diff'] = contour_df['time'].diff()
     contour_df['new_whistle'] = contour_df['time_diff'] > 0.1
     contour_df['whistle_id'] = contour_df['new_whistle'].cumsum()
-    
+
     # Process each whistle
     for wid in contour_df['whistle_id'].unique():
         w = contour_df[contour_df['whistle_id'] == wid]
         duration = w['time'].max() - w['time'].min()
-        
+
         if duration >= min_duration:
             whistles.append({
                 'start_time': w['time'].min(),
@@ -346,7 +358,7 @@ for i, file_path in enumerate(tqdm(file_list[:10])):  # Start with 10 files
     # Process file
     result = process_file(file_path)
     results.append(result)
-    
+
     # Save checkpoint every 5 files
     if (i + 1) % 5 == 0:
         pd.DataFrame(results).to_csv(f"checkpoint_{i+1}.csv")
@@ -369,6 +381,7 @@ Keep this guide open and refer to it. Update it as you learn:
 ## 📊 Parameter Reference
 
 ### Click Detection (Already Implemented)
+
 ```python
 # In notebook - Section 2.1
 threshold_factor = 4.0      # Start conservative
@@ -377,6 +390,7 @@ min_spacing = 0.0001        # 0.1 ms minimum between clicks
 ```
 
 ### Whistle Detection (To Implement)
+
 ```python
 # Recommended starting values
 band = (2000, 20000)        # Hz - dolphin whistle range
@@ -387,6 +401,7 @@ noverlap = 1536            # 75% overlap
 ```
 
 ### Spectrogram Settings
+
 ```python
 # For clicks (high freq, good time resolution)
 nperseg = 256
@@ -405,6 +420,7 @@ fmax = 20000
 ## 🔄 Session Workflow
 
 ### Start of Session (10 minutes)
+
 1. ✅ Read this guide (or `SESSION_STATE.md` for detailed state)
 2. ✅ Check git status: `git status`
 3. ✅ Review what changed since last session
@@ -413,6 +429,7 @@ fmax = 20000
 6. ✅ Decide on 1-2 hour goal for this session
 
 ### During Session
+
 - ⏰ Set a timer for your planned work duration
 - 💾 Save results every 30 minutes
 - 📝 Add markdown cells explaining what you're doing
@@ -420,6 +437,7 @@ fmax = 20000
 - 📊 Create visualizations to validate results
 
 ### End of Session (15 minutes)
+
 1. 💾 Save all notebooks
 2. 📁 Ensure any new data/plots saved to `reports/`
 3. 📝 Update `SESSION_STATE.md` with:
@@ -441,33 +459,36 @@ fmax = 20000
 
 Know where to look for what:
 
-| Document | Purpose | When to Read |
-|----------|---------|--------------|
-| `CONTINUATION_GUIDE.md` (this file) | How to resume work | START OF EVERY SESSION |
-| `SESSION_STATE.md` | Detailed current state | For deeper context on research |
-| `PROJECT_STATUS.md` | High-level project status | To understand overall progress |
-| `NEXT_STEPS.md` | Prioritized action items | When choosing what to work on |
-| `README.md` | Core library usage | When using library functions |
-| `BATCH_PROCESSING.md` | Batch framework guide | When processing many files |
-| `BATCH_IMPLEMENTATION.md` | Technical implementation | When modifying batch system |
+| Document                            | Purpose                   | When to Read                   |
+| ----------------------------------- | ------------------------- | ------------------------------ |
+| `CONTINUATION_GUIDE.md` (this file) | How to resume work        | START OF EVERY SESSION         |
+| `SESSION_STATE.md`                  | Detailed current state    | For deeper context on research |
+| `PROJECT_STATUS.md`                 | High-level project status | To understand overall progress |
+| `NEXT_STEPS.md`                     | Prioritized action items  | When choosing what to work on  |
+| `README.md`                         | Core library usage        | When using library functions   |
+| `BATCH_PROCESSING.md`               | Batch framework guide     | When processing many files     |
+| `BATCH_IMPLEMENTATION.md`           | Technical implementation  | When modifying batch system    |
 
 ---
 
 ## 🎓 Lessons Learned (Update as You Go)
 
 ### What Works Well
+
 - ✅ Starting with 5-second chunks prevents runaway processing
 - ✅ Teager-Kaiser energy operator is effective for click detection
 - ✅ Threshold sweep (4/6/8) helps assess parameter sensitivity
 - ✅ Comparison between buoy and special files reveals false positive rates
 
 ### Gotchas
+
 - ⚠️ Don't reference `reports/` directory until it's actually created
 - ⚠️ Notebook variables persist between sessions (restart kernel for clean slate)
 - ⚠️ Large spectrograms can consume lots of memory (work in chunks)
 - ⚠️ EARS files are big-endian, 16-bit signed integers (library handles this)
 
 ### Parameters That Need Tuning
+
 - 🎚️ Click threshold_factor: 4 catches many, 6-8 more conservative
 - 🎚️ Whistle min_duration: 0.1s is lower bound, most are 0.5-1.5s
 - 🎚️ Smoothing window: 51 samples works, may need adaptation per file
@@ -477,11 +498,13 @@ Know where to look for what:
 ## 🚨 If You Get Stuck
 
 ### Context Window Getting Full?
+
 1. Restart this conversation
 2. Say: "Read CONTINUATION_GUIDE.md and help me continue"
 3. Provide specific question/goal
 
 ### Notebook Kernel Issues?
+
 ```bash
 # Restart kernel and re-run from top
 # Or start fresh
@@ -490,6 +513,7 @@ jupyter notebook --no-browser
 ```
 
 ### Git Conflicts?
+
 ```bash
 git status
 git stash  # Save your changes
@@ -499,6 +523,7 @@ git stash pop  # Reapply your changes
 ```
 
 ### Environment Issues?
+
 ```bash
 # Recreate virtual environment
 rm -rf .venv
@@ -525,18 +550,21 @@ You'll know you're making progress when:
 ## 🎯 Big Picture Goals
 
 **Short-term (Next 1-2 Sessions):**
+
 - [ ] Implement whistle detection function
 - [ ] Test on 5-10 files
 - [ ] Create visualizations of detected whistles
 - [ ] Save results to `reports/` directory
 
 **Medium-term (Next 5-10 Sessions):**
+
 - [ ] Refine detection parameters based on validation
 - [ ] Process full dataset (100 files) using batch framework
 - [ ] Build summary statistics and visualizations
 - [ ] Identify files with high whistle activity
 
 **Long-term (Future):**
+
 - [ ] Implement signature whistle matching
 - [ ] Classify whistle types
 - [ ] Temporal analysis (when do dolphins communicate?)
@@ -546,11 +574,12 @@ You'll know you're making progress when:
 
 ## 🐬 Remember
 
-You're not just writing code - you're helping understand how dolphins communicate! 
+You're not just writing code - you're helping understand how dolphins communicate!
 
 Every detected whistle is potentially a dolphin "name" or social signal. The patterns you find could reveal:
+
 - Individual identification
-- Social group structure  
+- Social group structure
 - Behavioral patterns
 - Communication complexity
 

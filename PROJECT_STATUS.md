@@ -1,7 +1,7 @@
 data = dolphain.read_ears_file('file.210')
 dolphain.plot_overview(d## 📊 Current Insights from Experiments
 
-**Click Detection Progress (5 s chunks, threshold=4):*## 📁 Quick Links
+\*_Click Detection Progress (5 s chunks, threshold=4):_## 📁 Quick Links
 
 - **Start here:** `CONTINUATION_GUIDE.md` - Complete guide for resuming work
 - Core API overview – `README.md`
@@ -14,11 +14,12 @@ dolphain.plot_overview(d## 📊 Current Insights from Experiments
 - Runtime guardrails successfully prevent runaway processing
 
 **Status:** Results exist in notebook kernel variables. Need to:
+
 1. Create `reports/` directory
 2. Persist results to CSV files
 3. Save visualization plots to disk)
-denoised = dolphain.wavelet_denoise(data['data'])
-#! Dolphain Project – Status & Roadmap
+   denoised = dolphain.wavelet_denoise(data['data'])
+   #! Dolphain Project – Status & Roadmap
 
 **Last Updated:** October 10, 2025 (Threshold sweep & special-file comparison)
 
@@ -155,6 +156,7 @@ dolphain/
 ## 📣 Ready for Next Phase
 
 The Dolphain library is stable and documented. Research workspace includes:
+
 - ✅ Click detection prototype with guardrails
 - ✅ Threshold sensitivity analysis
 - ✅ Comparative studies framework
