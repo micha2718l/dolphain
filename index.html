@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphain - Understanding Dolphin Communication</title>
+    <meta name="description" content="A Python toolkit for analyzing underwater acoustic recordings and decoding dolphin communication patterns.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ocean-deep: #0a1828;
+            --ocean-mid: #178ca4;
+            --ocean-light: #3ab0c8;
+            --foam: #e8f4f8;
+            --sand: #f5e6d3;
+            --coral: #ff6b6b;
+            --seaweed: #2d5f3f;
+            --dolphin-gray: #7c98ab;
+            --text-dark: #1a1a2e;
+            --text-light: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(180deg, var(--ocean-deep) 0%, var(--ocean-mid) 50%, var(--ocean-light) 100%);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Floating bubbles animation */
+        .bubble {
+            position: fixed;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: rise linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rise {
+            to {
+                bottom: 100vh;
+                opacity: 0;
+            }
+        }
+
+        /* Generate bubbles with JS, but add a few in CSS for fallback */
+        .bubble:nth-child(1) { left: 10%; width: 40px; height: 40px; animation-duration: 8s; animation-delay: 0s; }
+        .bubble:nth-child(2) { left: 30%; width: 60px; height: 60px; animation-duration: 12s; animation-delay: 2s; }
+        .bubble:nth-child(3) { left: 50%; width: 30px; height: 30px; animation-duration: 6s; animation-delay: 4s; }
+        .bubble:nth-child(4) { left: 70%; width: 50px; height: 50px; animation-duration: 10s; animation-delay: 1s; }
+        .bubble:nth-child(5) { left: 85%; width: 45px; height: 45px; animation-duration: 9s; animation-delay: 3s; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--foam);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--dolphin-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* The Douglas Adams quote */
+        .quote-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-left: 4px solid var(--coral);
+            padding: 1.5rem;
+            margin: 3rem auto;
+            max-width: 700px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--dolphin-gray);
+        }
+
+        /* Wave divider */
+        .wave-divider {
+            height: 60px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60"><path d="M0,30 Q300,0 600,30 T1200,30 L1200,60 L0,60 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat-x;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--foam);
+            font-weight: 300;
+            border-bottom: 2px solid var(--ocean-light);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: var(--foam);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--ocean-light);
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 1.5rem 0;
+        }
+
+        .code-block code {
+            color: var(--foam);
+        }
+
+        .highlight {
+            color: var(--coral);
+            font-weight: bold;
+        }
+
+        .science-fact {
+            background: linear-gradient(135deg, rgba(45, 95, 63, 0.3), rgba(23, 140, 164, 0.3));
+            border-left: 4px solid var(--seaweed);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .science-fact::before {
+            content: "🐬 Science Fact: ";
+            font-weight: bold;
+            color: var(--foam);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ocean-mid), var(--ocean-light));
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 1rem 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(135deg, var(--seaweed), var(--ocean-mid));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--coral);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--dolphin-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--dolphin-gray);
+        }
+
+        footer a {
+            color: var(--ocean-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--foam);
+        }
+
+        .emoji {
+            font-style: normal;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .feature-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Special 42 easter egg */
+        .forty-two {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .forty-two:hover {
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        .forty-two-tooltip {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 300px;
+            z-index: 1001;
+        }
+
+        .forty-two:hover + .forty-two-tooltip {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bubble background -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <div class="container">
+        <header>
+            <h1>🐬 Dolphain</h1>
+            <p class="tagline">"So long, and thanks for all the fish data"</p>
+            <p class="subtitle">
+                A Python toolkit for analyzing underwater acoustic recordings 
+                and understanding dolphin communication patterns
+            </p>
+        </header>
+
+        <div class="quote-box">
+            "For instance, on the planet Earth, man had always assumed that he was more 
+            intelligent than dolphins because he had achieved so much—the wheel, New York, 
+            wars and so on—whilst all the dolphins had ever done was muck about in the water 
+            having a good time. But conversely, the dolphins had always believed that they were 
+            far more intelligent than man—for precisely the same reasons."
+            <div class="quote-author">— Douglas Adams, The Hitchhiker's Guide to the Galaxy</div>
+        </div>
+
+        <section id="about">
+            <h2>What is Dolphain?</h2>
+            <p>
+                Dolphain is a scientifically rigorous Python package for analyzing underwater 
+                acoustic recordings from the <span class="highlight">Gulf of Mexico</span>. 
+                Our mission: decode dolphin communication patterns through clicks and whistles.
+            </p>
+            
+            <div class="science-fact">
+                Dolphins have individual "signature whistles" that function like names. 
+                They can remember these unique whistles for over 20 years, demonstrating 
+                long-term social memory comparable to humans.
+            </div>
+
+            <p>
+                We're working with EARS (Ecological Acoustic Recorder) data sampled at 
+                192 kHz, perfect for capturing the 2-20 kHz range where dolphins 
+                communicate with each other.
+            </p>
+        </section>
+
+        <div class="wave-divider">
+            <div class="wave"></div>
+        </div>
+
+        <section id="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📁</span>
+                    <h3>EARS File I/O</h3>
+                    <p>Read and process EARS binary format (.130, .190, .210) with full metadata extraction.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌊</span>
+                    <h3>Signal Processing</h3>
+                    <p>Wavelet-based denoising using VisuShrink thresholding for clean acoustic data.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Visualization</h3>
+                    <p>Beautiful spectrograms, waveforms, and comparative analysis plots.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Batch Processing</h3>
+                    <p>Process hundreds of files with progress tracking, timing, and error handling.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔍</span>
+                    <h3>Click Detection</h3>
+                    <p>Teager-Kaiser energy operator for detecting dolphin echolocation clicks.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎵</span>
+                    <h3>Whistle Analysis</h3>
+                    <p>Extract and analyze dolphin whistle contours (in development).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quickstart">
+            <h2>Quick Start</h2>
+            
+            <h3>Installation</h3>
+            <div class="code-block"><code># Clone the repository
+git clone https://github.com/micha2718l/dolphain.git
+cd dolphain
+
+# Create virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install in development mode
+pip install -e .</code></div>
+
+            <h3>Basic Usage</h3>
+            <div class="code-block"><code><span class="highlight">import</span> dolphain
+
+<span class="highlight"># Read an EARS file</span>
+data = dolphain.read_ears_file('data/recording.210')
+
+<span class="highlight"># Create a quick overview plot</span>
+dolphain.plot_overview(data, fmax=50000)
+
+<span class="highlight"># Denoise the signal</span>
+denoised = dolphain.wavelet_denoise(data['data'])
+
+<span class="highlight"># View the difference</span>
+dolphain.plot_denoising_comparison(
+    data['data'], 
+    denoised, 
+    data['sample_rate']
+)</code></div>
+
+            <div class="science-fact">
+                Dolphins use echolocation clicks at frequencies above 110 kHz (often >220 kHz) 
+                to navigate and hunt. These clicks can be as loud as 220 dB and can detect 
+                objects the size of a golf ball from 100 meters away.
+            </div>
+        </section>
+
+        <section id="science">
+            <h2>The Science of Dolphin Communication</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">2-20</span>
+                    <span class="stat-label">kHz Whistle Range</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">>220</span>
+                    <span class="stat-label">kHz Click Frequency</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Years Memory</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">10×</span>
+                    <span class="stat-label">Larger Acoustic Brain</span>
+                </div>
+            </div>
+
+            <h3>Two Types of Sounds</h3>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📍</span>
+                    <h3>Clicks (Echolocation)</h3>
+                    <p><strong>Purpose:</strong> Navigation and hunting</p>
+                    <p><strong>Frequency:</strong> >110 kHz, peaks >220 kHz</p>
+                    <p><strong>Duration:</strong> Microseconds to milliseconds</p>
+                    <p><strong>Pattern:</strong> Rapid trains ending in "terminal buzz" (200+ clicks/sec)</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Whistles (Communication)</h3>
+                    <p><strong>Purpose:</strong> Social interaction</p>
+                    <p><strong>Frequency:</strong> 2-20 kHz</p>
+                    <p><strong>Duration:</strong> 0.5-1.5 seconds</p>
+                    <p><strong>Types:</strong> Signature whistles (individual "names"), pulsed calls</p>
+                </div>
+            </div>
+
+            <div class="science-fact">
+                The acoustic processing area of a dolphin's brain is 10 times larger than 
+                the equivalent area in humans. Dolphins understand complex syntax, word order, 
+                and demonstrate self-awareness—capabilities shared by very few species.
+            </div>
+        </section>
+
+        <section id="research">
+            <h2>Current Research</h2>
+            
+            <p>
+                We're analyzing 100+ underwater recordings from the Gulf of Mexico, 
+                developing algorithms to automatically detect and classify dolphin vocalizations.
+            </p>
+
+            <h3>Achievements</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>✅ <strong>Core Library:</strong> Stable and production-ready</li>
+                <li>✅ <strong>Click Detection:</strong> Teager-Kaiser energy operator with threshold tuning</li>
+                <li>✅ <strong>Batch Framework:</strong> Process hundreds of files efficiently</li>
+                <li>✅ <strong>Runtime Guardrails:</strong> Safe, memory-efficient processing</li>
+                <li>⏳ <strong>Whistle Detection:</strong> In development</li>
+                <li>⏳ <strong>Signature Matching:</strong> Future work</li>
+            </ul>
+
+            <p style="margin-top: 2rem;">
+                <strong>Want to contribute?</strong> Check out our 
+                <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" 
+                   style="color: var(--coral); text-decoration: underline;">
+                    Continuation Guide
+                </a> for detailed instructions on where we are and where we're going.
+            </p>
+        </section>
+
+        <section id="getting-started">
+            <h2>Dive In</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Ready to help decode dolphin communication?
+            </p>
+            <div style="text-align: center;">
+                <a href="https://github.com/micha2718l/dolphain" class="cta-button">
+                    View on GitHub
+                </a>
+                <a href="https://github.com/micha2718l/dolphain/blob/main/README.md" class="cta-button secondary">
+                    Read the Docs
+                </a>
+                <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" class="cta-button secondary">
+                    Continue Research
+                </a>
+            </div>
+
+            <div class="science-fact" style="margin-top: 3rem;">
+                Dolphins have been observed teaching their young the specific whistles 
+                associated with their social group—demonstrating cultural transmission 
+                of vocal learning across generations. This is extremely rare in the animal kingdom.
+            </div>
+        </section>
+
+        <footer>
+            <p>
+                <strong>Dolphain</strong> – Understanding dolphin communication, one whistle at a time
+            </p>
+            <p style="margin-top: 1rem;">
+                Built with <span class="emoji">🌊</span> and <span class="emoji">🐬</span> 
+                | <a href="https://github.com/micha2718l/dolphain">GitHub</a>
+                | <a href="https://github.com/micha2718l/dolphain/blob/main/LICENSE">License</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; font-style: italic;">
+                "The Answer to the Ultimate Question of Life, the Universe, and Everything 
+                might just be hidden in the clicks and whistles we haven't decoded yet."
+            </p>
+        </footer>
+    </div>
+
+    <!-- The 42 Easter Egg -->
+    <div class="forty-two" title="Don't Panic!">42</div>
+    <div class="forty-two-tooltip">
+        The Answer to the Ultimate Question of Life, the Universe, and Everything.<br>
+        <em>Don't forget your towel!</em>
+    </div>
+
+    <script>
+        // Generate more bubbles dynamically
+        function createBubbles() {
+            const bubbleCount = 15;
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.width = (Math.random() * 40 + 20) + 'px';
+                bubble.style.height = bubble.style.width;
+                bubble.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                bubble.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(bubble);
+            }
+        }
+
+        createBubbles();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fun 42 click counter
+        let clickCount = 0;
+        document.querySelector('.forty-two').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 42) {
+                alert('🐬 Congratulations! You\'ve clicked 42 times. The dolphins approve! 🐬');
+                clickCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>
