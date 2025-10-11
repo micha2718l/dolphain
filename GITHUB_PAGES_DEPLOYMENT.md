@@ -29,6 +29,7 @@ Once deployed, the site will be available at:
 ### 3. Custom Domain (Optional)
 
 If you have a custom domain:
+
 1. In the **Custom domain** section, enter your domain
 2. Add the appropriate DNS records (GitHub will provide instructions)
 
