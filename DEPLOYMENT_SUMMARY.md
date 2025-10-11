@@ -280,6 +280,7 @@ Before deploying updates, verify:
 This landing page and associated documentation were created with significant assistance from **GitHub Copilot**, an AI pair programming assistant.
 
 **What the AI contributed:**
+
 - Landing page HTML structure and content
 - CSS styling (ocean theme, responsive design, animations)
 - JavaScript interactive elements (bubbles, easter eggs, smooth scrolling)
@@ -288,6 +289,7 @@ This landing page and associated documentation were created with significant ass
 - H2G2 references and personality elements
 
 **What Michael Haas contributed:**
+
 - All scientific research and data analysis
 - The Dolphain Python library core functionality
 - Research direction and methodology
