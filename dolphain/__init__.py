@@ -25,6 +25,14 @@ from .batch import (
     ResultCollector,
     timer,
 )
+from .experiments import (
+    BasicMetricsPipeline,
+    WhistleDetectionPipeline,
+    DenoisingComparisonPipeline,
+    SpectralAnalysisPipeline,
+    run_experiment,
+    compare_methods,
+)
 
 # Define public API
 __all__ = [
@@ -48,4 +56,11 @@ __all__ = [
     "BatchProcessor",
     "ResultCollector",
     "timer",
+    # Experiments
+    "BasicMetricsPipeline",
+    "WhistleDetectionPipeline",
+    "DenoisingComparisonPipeline",
+    "SpectralAnalysisPipeline",
+    "run_experiment",
+    "compare_methods",
 ]
