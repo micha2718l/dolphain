@@ -419,15 +419,46 @@
       // Load and display showcase data
       async function loadShowcase() {
         try {
-          const response = await fetch("showcase_data.json");
+          const response = await fetch("showcase/showcase_data.json");
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
           const data = await response.json();
 
           displaySummary(data.summary);
           displayFiles(data.files);
         } catch (error) {
           console.error("Error loading showcase:", error);
-          document.getElementById("showcase-container").innerHTML =
-            '<div class="loading">❌ Error loading showcase data</div>';
+          
+          // Check if this is a CORS error (file:// protocol)
+          const isCorsError = error.message.includes('fetch') || 
+                             window.location.protocol === 'file:';
+          
+          if (isCorsError) {
+            document.getElementById("showcase-container").innerHTML = `
+              <div class="loading" style="text-align: left; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                <h2 style="color: #ff00ff; margin-bottom: 20px;">⚠️ Local Server Required</h2>
+                <p style="color: #8892b0; margin-bottom: 15px;">
+                  The showcase needs to be served over HTTP to load audio files and data.
+                  Opening the HTML file directly (file://) won't work due to browser security.
+                </p>
+                <div style="background: rgba(0,212,255,0.1); border: 1px solid #00d4ff; border-radius: 10px; padding: 20px; margin: 20px 0;">
+                  <p style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">🚀 Quick Start:</p>
+                  <pre style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; overflow-x: auto; color: #fff;">cd site/showcase
+python -m http.server 8000</pre>
+                  <p style="color: #8892b0; margin-top: 10px;">Then visit: <a href="http://localhost:8000/showcase.html" style="color: #00d4ff;">http://localhost:8000/showcase.html</a></p>
+                </div>
+                <p style="color: #8892b0;">
+                  When deployed to a web server (like GitHub Pages), this will work automatically!
+                </p>
+              </div>
+            `;
+          } else {
+            document.getElementById("showcase-container").innerHTML =
+              '<div class="loading">❌ Error loading showcase data. Check console for details.</div>';
+          }
         }
       }
 
@@ -501,20 +532,20 @@
                         </div>
                     </div>
                     <audio id="audio-${file.rank}" controls>
-                        <source src="${file.audio_raw}" type="audio/wav">
+                        <source src="showcase/${file.audio_raw}" type="audio/wav">
                         Your browser does not support audio playback.
                     </audio>
                 </div>
 
                 <div class="visualizations">
-                    <img src="${
+                    <img src="showcase/${
                       file.spectrogram
                     }" alt="Spectrogram" class="viz-image" 
-                         onclick="openModal('${file.spectrogram}')">
-                    <img src="${
+                         onclick="openModal('showcase/${file.spectrogram}')">
+                    <img src="showcase/${
                       file.waveform
                     }" alt="Waveform" class="viz-image" 
-                         onclick="openModal('${file.waveform}')">
+                         onclick="openModal('showcase/${file.waveform}')">
                 </div>
 
                 <div class="stats-details">
@@ -562,11 +593,11 @@
         event.target.classList.add("active");
 
         // Find the file data
-        fetch("showcase_data.json")
+        fetch("showcase/showcase_data.json")
           .then((r) => r.json())
           .then((data) => {
             const file = data.files.find((f) => f.rank === rank);
-            audio.src = type === "raw" ? file.audio_raw : file.audio_denoised;
+            audio.src = type === "raw" ? `showcase/${file.audio_raw}` : `showcase/${file.audio_denoised}`;
             audio.load();
           });
       }
