@@ -1,17 +1,35 @@
 # GitHub Pages Configuration
 
-## Setup Instructions
+## 🚀 Automated Deployment with GitHub Actions
 
-To deploy the Dolphain landing page:
+The Dolphain site automatically deploys from the `/site` directory using GitHub Actions!
 
-1. Go to your repository settings: `https://github.com/micha2718l/dolphain/settings/pages`
-2. Under "Build and deployment":
-   - **Source**: Deploy from a branch
-   - **Branch**: `main`
-   - **Folder**: `/site` (NOT root `/`)
-3. Click "Save"
+### One-Time Setup (You Need To Do This!)
 
-GitHub Pages will automatically deploy from the `/site` directory.
+1. **Go to your repository settings**: https://github.com/micha2718l/dolphain/settings/pages
+
+2. **Under "Build and deployment"**:
+
+   - **Source**: Select **"GitHub Actions"** (NOT "Deploy from a branch")
+   - That's it! The workflow file will handle the rest.
+
+3. **Verify Permissions** (should be automatic, but check):
+   - Go to https://github.com/micha2718l/dolphain/settings/actions
+   - Under "Workflow permissions", ensure:
+     - ✅ "Read and write permissions" is selected, OR
+     - ✅ "Read repository contents and packages permissions" with Pages write access
+4. **Push this commit** to trigger the first deployment!
+
+### How It Works
+
+The workflow file at `.github/workflows/deploy-pages.yml` will:
+
+- ✅ Automatically trigger on pushes to `main` branch
+- ✅ Only run when files in `/site` directory change
+- ✅ Deploy the `/site` directory contents to GitHub Pages
+- ✅ Complete deployment in ~30-60 seconds
+
+No manual deployment needed! Just push and it goes live.
 
 ## Site Structure
 
@@ -65,7 +83,49 @@ All changes to the website should be made in the `/site` directory:
 - Edit `/site/js/script.js` for interactive features
 - Add images to `/site/images/`
 
-After committing and pushing changes, GitHub Pages will automatically rebuild (usually within 1-2 minutes).
+After committing and pushing changes:
+
+1. GitHub Actions workflow automatically triggers
+2. Deployment completes in ~30-60 seconds
+3. Site updates live at https://micha2718l.github.io/dolphain/
+
+You can watch the deployment progress at:
+https://github.com/micha2718l/dolphain/actions
+
+## Workflow Details
+
+The workflow (`.github/workflows/deploy-pages.yml`):
+
+- **Triggers on**: Push to `main` branch with changes in `/site/**`
+- **Can also**: Run manually from Actions tab
+- **Permissions**: Reads code, writes to Pages, uses id-token
+- **Concurrency**: Only one deployment at a time (no conflicts)
+- **Steps**:
+  1. Checkout repository
+  2. Setup GitHub Pages
+  3. Upload `/site` directory as artifact
+  4. Deploy artifact to GitHub Pages
+
+## Troubleshooting
+
+### First Deployment Not Working?
+
+1. Check that you selected "GitHub Actions" as source in Pages settings
+2. Go to Actions tab and check if workflow ran: https://github.com/micha2718l/dolphain/actions
+3. Check workflow permissions in repository settings
+
+### Site Not Updating After Push?
+
+1. Verify your changes were in the `/site/` directory
+2. Check Actions tab for workflow status
+3. Workflow only runs if `/site/**` files changed (by design - efficient!)
+
+### Manual Deployment Needed?
+
+1. Go to https://github.com/micha2718l/dolphain/actions
+2. Click on "Deploy Dolphain Site to GitHub Pages"
+3. Click "Run workflow" button
+4. Select `main` branch and run
 
 ## Files Removed
 
