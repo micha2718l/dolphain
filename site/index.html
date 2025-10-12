@@ -11,6 +11,26 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <!-- Mobile Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-logo">🐬 Dolphain</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#examples" class="nav-link">Examples</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#contribute" class="nav-link">Contribute</a></li>
+          <li><a href="#getting-started" class="nav-link">Get Started</a></li>
+          <li><a href="dolphin-composer.html" class="nav-link nav-special">🎵 Composer</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- Bubble background -->
     <div class="bubble"></div>
     <div class="bubble"></div>
@@ -360,24 +380,436 @@
         </ul>
 
         <p style="margin-top: 2rem">
-          <strong>Want to contribute?</strong> Check out our
+          <strong>Ready to contribute?</strong> Jump to our
           <a
-            href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+            href="#contribute"
             style="color: var(--coral); text-decoration: underline"
           >
-            Continuation Guide
+            Contribution Guide
           </a>
-          for detailed instructions on where we are and where we're going.
+          below to join the vibe coding revolution! 🚀
         </p>
       </section>
+
+      <div class="wave-divider">
+        <div class="wave"></div>
+      </div>
+
+      <!-- NEW: Comprehensive Contribution Section -->
+      <section id="contribute" class="contribute-section">
+        <h2>🌊 Join the Vibe Coding Revolution 🐬</h2>
+        
+        <div class="contribute-intro">
+          <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+            This entire project was built through <strong>"vibe coding"</strong> - 
+            a collaborative approach where human intuition meets AI capabilities. 
+            You don't need to be an expert. You just need curiosity, good vibes, 
+            and a willingness to explore! 🎨✨
+          </p>
+          <p style="font-size: 1.1rem;">
+            The more <strong>human brains + LLM brains</strong> we get working together, 
+            the better. Let's decode dolphin communication as a team! 🧠🤖🐬
+          </p>
+        </div>
+
+        <div class="contribute-philosophy">
+          <h3>🎯 Our Philosophy</h3>
+          <div class="philosophy-grid">
+            <div class="philosophy-item">
+              <div class="philosophy-icon">🤝</div>
+              <h4>Human + AI Collaboration</h4>
+              <p>Combine your creative vision with AI's technical execution. You guide, AI builds.</p>
+            </div>
+            <div class="philosophy-item">
+              <div class="philosophy-icon">📚</div>
+              <h4>Document Everything</h4>
+              <p>Keep notes, update docs, track decisions. Future you (and others) will thank you!</p>
+            </div>
+            <div class="philosophy-item">
+              <div class="philosophy-icon">🔄</div>
+              <h4>Plan for Context Loss</h4>
+              <p>Sessions end, windows close. Design your work to be resumable by anyone.</p>
+            </div>
+            <div class="philosophy-item">
+              <div class="philosophy-icon">🎨</div>
+              <h4>Vibe First, Perfect Later</h4>
+              <p>Get ideas flowing, iterate quickly, refine as you go. Progress > Perfection.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-guide">
+          <h3>🚀 Quick Start: Your First Contribution</h3>
+          
+          <div class="step-by-step">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Fork & Clone</h4>
+                <p>Create your own copy of the repository. You'll work here safely without affecting the main project.</p>
+                <pre><code>git clone https://github.com/YOUR-USERNAME/dolphain.git
+cd dolphain
+git remote add upstream https://github.com/micha2718l/dolphain.git</code></pre>
+                <p class="step-note">⚠️ <strong>Important:</strong> You cannot push directly to main. This is intentional! It keeps the project safe and encourages good collaboration practices.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Create a Branch</h4>
+                <p>Always work on a feature branch. Name it something descriptive.</p>
+                <pre><code>git checkout -b feature/whistle-detection
+# or
+git checkout -b docs/improve-readme
+# or
+git checkout -b fix/batch-processing-bug</code></pre>
+                <p class="step-note">💡 <strong>Tip:</strong> Use prefixes like feature/, docs/, fix/, experiment/ to keep things organized.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Set Up Your Environment</h4>
+                <p>Get Python and dependencies installed. Use the AI to help you!</p>
+                <pre><code># Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install in editable mode
+pip install -e .
+
+# Install dev dependencies if you're adding tests
+pip install pytest matplotlib numpy scipy</code></pre>
+                <p class="step-note">🤖 <strong>Pro Tip:</strong> Ask your AI assistant: "Help me set up the Dolphain development environment"</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Read the Context</h4>
+                <p>Before diving in, understand where we are. These docs are your map!</p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                  <li><a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" target="_blank">CONTINUATION_GUIDE.md</a> - Comprehensive overview & next steps</li>
+                  <li><a href="https://github.com/micha2718l/dolphain/blob/main/PROJECT_STATUS.md" target="_blank">PROJECT_STATUS.md</a> - Current state of the project</li>
+                  <li><a href="https://github.com/micha2718l/dolphain/blob/main/README.md" target="_blank">README.md</a> - Installation & basic usage</li>
+                  <li><a href="https://github.com/micha2718l/dolphain/blob/main/SESSION_STATE.md" target="_blank">SESSION_STATE.md</a> - Latest session notes</li>
+                </ul>
+                <p class="step-note">📖 <strong>Why?</strong> These docs minimize lost time when context windows clear or collaborators switch.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h4>Pick Your Adventure</h4>
+                <p>What sounds fun to you? Choose based on your interests!</p>
+                <div class="adventure-grid">
+                  <div class="adventure-card">
+                    <h5>🔬 Science Track</h5>
+                    <p>Work on signal processing, whistle detection, or click analysis</p>
+                    <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md#whistle-detection-implementation-guide" class="adventure-link">Start Here →</a>
+                  </div>
+                  <div class="adventure-card">
+                    <h5>📊 Data Track</h5>
+                    <p>Improve batch processing, add visualizations, optimize performance</p>
+                    <a href="https://github.com/micha2718l/dolphain/blob/main/BATCH_IMPLEMENTATION.md" class="adventure-link">Start Here →</a>
+                  </div>
+                  <div class="adventure-card">
+                    <h5>📚 Documentation Track</h5>
+                    <p>Improve docs, add tutorials, create examples, write guides</p>
+                    <a href="https://github.com/micha2718l/dolphain/issues" class="adventure-link">Browse Issues →</a>
+                  </div>
+                  <div class="adventure-card">
+                    <h5>🎨 Creative Track</h5>
+                    <p>Build tools like the Dolphin Composer, make visualizations, have fun!</p>
+                    <a href="https://github.com/micha2718l/dolphain/blob/main/DOLPHIN_COMPOSER.md" class="adventure-link">Get Inspired →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <h4>Vibe Code with Your AI</h4>
+                <p>Here's where the magic happens! Partner with an LLM to build.</p>
+                <div class="vibe-tips">
+                  <div class="vibe-tip">
+                    <strong>✨ Start with Vision:</strong> Tell your AI what you want to achieve. "I want to detect dolphin whistles in spectrograms."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>🔍 Ask for Context:</strong> "Read the CONTINUATION_GUIDE and tell me what's already implemented."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>📝 Document as You Go:</strong> "Create a SESSION_NOTES.md file tracking what we're doing."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>🧪 Test Early:</strong> "Write a test for this function before implementing it."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>🎯 Stay Focused:</strong> Break big goals into small tasks. Complete one before moving on.
+                  </div>
+                </div>
+                <p class="step-note">🌟 <strong>Remember:</strong> You're the creative director. The AI is your implementation partner.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">7</div>
+              <div class="step-content">
+                <h4>Commit Often, Document Always</h4>
+                <p>Make small, frequent commits with clear messages.</p>
+                <pre><code>git add dolphain/signal.py
+git commit -m "Add whistle detection using spectrogram peaks
+
+- Implement peak finding with scipy
+- Add frequency range filtering (2-20 kHz)
+- Include docstrings and type hints
+- Add basic unit tests"
+
+git push origin feature/whistle-detection</code></pre>
+                <p class="step-note">💎 <strong>Good commits:</strong> Explain WHAT and WHY, not just WHAT. Future readers will love you!</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">8</div>
+              <div class="step-content">
+                <h4>Update the Docs</h4>
+                <p>Before you finish, update relevant documentation.</p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                  <li>Add your feature to <code>README.md</code></li>
+                  <li>Update <code>PROJECT_STATUS.md</code> with what's complete</li>
+                  <li>Create or update <code>SESSION_STATE.md</code> with your progress</li>
+                  <li>If you finished a big feature, add a new doc file (like <code>WHISTLE_DETECTION.md</code>)</li>
+                </ul>
+                <p class="step-note">📚 <strong>Why?</strong> Documentation is a gift to the next contributor (who might be you in 3 months!).</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">9</div>
+              <div class="step-content">
+                <h4>Create a Pull Request</h4>
+                <p>Share your work! Go to GitHub and open a PR.</p>
+                <div class="pr-template">
+                  <p><strong>PR Template to use:</strong></p>
+                  <pre><code>## What This PR Does
+Brief description of the feature/fix
+
+## Changes Made
+- List of specific changes
+- Be clear and concise
+
+## Testing
+How you tested this (manual tests, unit tests, etc.)
+
+## Documentation Updated
+- [ ] README.md
+- [ ] PROJECT_STATUS.md  
+- [ ] Relevant guide docs
+- [ ] Inline code comments
+
+## Notes for Reviewer
+Anything special to know? Any decisions you made?
+
+## AI Collaboration Notes
+Which AI you used, what worked well, any challenges?</code></pre>
+                </div>
+                <p class="step-note">🎉 <strong>Celebrate:</strong> You just contributed to dolphin communication research!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-best-practices">
+          <h3>🏆 Best Practices for Vibe Coding</h3>
+          
+          <div class="best-practices-grid">
+            <div class="practice-card">
+              <h4>📝 Session Notes Are Sacred</h4>
+              <p>Start every session with: "Let's create a SESSION_NOTES.md to track what we do today." This helps when you resume later or hand off to another contributor.</p>
+              <details>
+                <summary>See Example Session Notes</summary>
+                <pre><code># Session Notes - 2025-10-11
+
+## Goal
+Implement basic whistle detection using spectrogram analysis
+
+## Context
+- Read CONTINUATION_GUIDE.md
+- Whistle detection is marked as "In Development"
+- Need to work in dolphain/signal.py
+
+## Progress
+- [x] Implemented spectrogram generation
+- [x] Added peak detection for whistle candidates
+- [x] Created unit tests
+- [ ] Need to add frequency filtering
+- [ ] Need to test on real EARS data
+
+## Next Steps
+1. Add frequency range filtering (2-20 kHz)
+2. Test on multiple EARS files
+3. Document the approach
+4. Update PROJECT_STATUS.md
+
+## AI Used: GitHub Copilot
+## Issues Encountered: None major
+## Time: ~2 hours</code></pre>
+              </details>
+            </div>
+
+            <div class="practice-card">
+              <h4>🎯 One Feature Per Branch</h4>
+              <p>Resist the temptation to fix "just one more thing." Keep branches focused. It makes reviews easier and reduces merge conflicts.</p>
+            </div>
+
+            <div class="practice-card">
+              <h4>🧪 Test Your Code</h4>
+              <p>Ask your AI to write tests! Even simple tests catch bugs and show future contributors how your code works.</p>
+              <pre><code>pytest tests/
+# Make sure existing tests still pass!</code></pre>
+            </div>
+
+            <div class="practice-card">
+              <h4>💬 Over-Communicate</h4>
+              <p>In PRs, commits, and docs - explain your thinking. What seemed obvious today will be mysterious in 6 months.</p>
+            </div>
+
+            <div class="practice-card">
+              <h4>🔄 Sync Regularly</h4>
+              <p>Pull changes from upstream often to avoid nasty merge conflicts.</p>
+              <pre><code>git fetch upstream
+git merge upstream/main
+# Fix any conflicts locally</code></pre>
+            </div>
+
+            <div class="practice-card">
+              <h4>🎨 Embrace Iteration</h4>
+              <p>First version doesn't need to be perfect. Get it working, get feedback, improve. That's the vibe coding way!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-resources">
+          <h3>📚 Essential Resources</h3>
+          <div class="resources-grid">
+            <div class="resource-card">
+              <h4>🗺️ Project Documentation</h4>
+              <ul>
+                <li><a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" target="_blank">Continuation Guide</a> - Start here!</li>
+                <li><a href="https://github.com/micha2718l/dolphain/blob/main/PROJECT_STATUS.md" target="_blank">Project Status</a> - What's done</li>
+                <li><a href="https://github.com/micha2718l/dolphain/blob/main/README.md" target="_blank">README</a> - Installation & usage</li>
+                <li><a href="https://github.com/micha2718l/dolphain/blob/main/DATA_ATTRIBUTION.md" target="_blank">Data Attribution</a> - Data sources</li>
+              </ul>
+            </div>
+            
+            <div class="resource-card">
+              <h4>🔬 Scientific Background</h4>
+              <ul>
+                <li><a href="http://ladcgemm.org/" target="_blank">LADC-GEMM</a> - Data source</li>
+                <li><a href="https://gulfresearchinitiative.org/" target="_blank">GoMRI</a> - Funding organization</li>
+                <li><a href="https://dosits.org/animals/sound-production/how-do-marine-mammals-produce-sounds/" target="_blank">Marine Mammal Sounds</a> - Educational resource</li>
+              </ul>
+            </div>
+            
+            <div class="resource-card">
+              <h4>💻 Technical Resources</h4>
+              <ul>
+                <li><a href="https://docs.scipy.org/doc/scipy/reference/signal.html" target="_blank">SciPy Signal Processing</a></li>
+                <li><a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Matplotlib Gallery</a></li>
+                <li><a href="https://numpy.org/doc/stable/" target="_blank">NumPy Documentation</a></li>
+              </ul>
+            </div>
+            
+            <div class="resource-card">
+              <h4>🤖 AI Collaboration</h4>
+              <ul>
+                <li><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a> - AI pair programmer</li>
+                <li>Claude, ChatGPT, or your preferred LLM</li>
+                <li>Cursor, Cody, or AI-enhanced IDEs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-faq">
+          <h3>❓ Common Questions</h3>
+          
+          <details class="faq-item">
+            <summary>I'm not a dolphin expert. Can I still contribute?</summary>
+            <p><strong>Absolutely!</strong> Some of the best contributions come from fresh perspectives. Focus on code quality, documentation, testing, or tooling. The scientific knowledge can be learned along the way!</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>I've never used AI to code before. Is that okay?</summary>
+            <p><strong>Perfect!</strong> This project is a great place to learn. Start small: ask your AI to explain existing code, help write tests, or improve documentation. Build confidence gradually!</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if I get stuck or context windows out?</summary>
+            <p><strong>That's expected!</strong> That's why we emphasize documentation. Check SESSION_STATE.md, ask the maintainer (Michael) for guidance, or create a GitHub issue explaining where you got stuck. The community is here to help!</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I know what to work on?</summary>
+            <p><strong>Check the issues!</strong> Look for "good first issue" or "help wanted" tags. Or read CONTINUATION_GUIDE.md and pick something that sounds interesting. When in doubt, ask in a GitHub issue!</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I just experiment without a clear goal?</summary>
+            <p><strong>Yes!</strong> Create an <code>experiment/your-idea</code> branch and explore. Document what you learn. Some of the best features started as experiments!</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if my PR doesn't get merged?</summary>
+            <p><strong>That's okay!</strong> You still learned something valuable. PRs might not merge because of timing, scope, or direction changes. Feedback helps everyone improve!</p>
+          </details>
+        </div>
+
+        <div class="contribute-cta">
+          <h3>Ready to Dive In? 🌊</h3>
+          <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+            The dolphins are waiting for you to help decode their language! 
+            Pick a path, grab your AI buddy, and let's vibe code together! 🐬✨
+          </p>
+          <div style="text-align: center;">
+            <a href="https://github.com/micha2718l/dolphain/fork" class="cta-button" style="background: linear-gradient(135deg, #2d5f3f, #178ca4);">
+              🍴 Fork the Repository
+            </a>
+            <a href="https://github.com/micha2718l/dolphain/issues" class="cta-button secondary">
+              📋 Browse Issues
+            </a>
+            <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" class="cta-button secondary">
+              📖 Read the Guide
+            </a>
+          </div>
+        </div>
+
+        <div class="science-fact" style="margin-top: 3rem;">
+          Fun fact: This entire contribution section was vibe coded! A human had the vision ("make contributing easy and encourage AI collaboration"), and an AI built it. That's exactly the approach we want you to use! 🎨🤖
+        </div>
+      </section>
+
+      <div class="wave-divider">
+        <div class="wave"></div>
+      </div>
 
       <section id="getting-started">
         <h2>Dive In</h2>
         <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem">
           Ready to help decode dolphin communication?
         </p>
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-          <a href="dolphin-composer.html" class="cta-button" style="background: linear-gradient(135deg, #ff6b6b, #ff8787);">
+        <div style="text-align: center; margin-bottom: 1.5rem">
+          <a
+            href="dolphin-composer.html"
+            class="cta-button"
+            style="background: linear-gradient(135deg, #ff6b6b, #ff8787)"
+          >
             🎵 Try the Dolphin Composer! 🐬
           </a>
         </div>
@@ -392,10 +824,10 @@
             Read the Docs
           </a>
           <a
-            href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+            href="#contribute"
             class="cta-button secondary"
           >
-            Continue Research
+            Start Contributing
           </a>
         </div>
 

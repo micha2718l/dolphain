@@ -11,6 +11,7 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 ## Features
 
 ### 🎨 Whistle Composer
+
 - **Interactive Drawing Canvas**: Draw whistle contours by clicking and dragging
 - **Real-time Synthesis**: Converts your drawings into dolphin-like whistles (2-20 kHz range)
 - **Adjustable Parameters**: Control duration and volume
@@ -18,6 +19,7 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 - **Educational Info**: Learn about dolphin signature whistles and communication
 
 ### ⚡ Click Sequencer
+
 - **16-Step Grid**: Create echolocation click patterns
 - **Adjustable Pitch**: Control click frequency (2-12 kHz range)
 - **Variable BPM**: Speed up or slow down your sequence
@@ -25,11 +27,13 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 - **Live Playback**: Real-time sequencing with visual feedback
 
 ### 📊 Stats Tracking
+
 - Track how many whistles and clicks you've played
 - Watch your composition stats grow
 - Gamification elements for engagement
 
 ### 🎉 Easter Eggs
+
 - Click the floating dolphin 42 times for a special surprise
 - H2G2 references scattered throughout
 - Special sound sequences for milestones
@@ -37,6 +41,7 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 ## Technical Implementation
 
 ### Technologies Used
+
 - **Web Audio API**: Real-time audio synthesis
 - **HTML5 Canvas**: Interactive drawing interface
 - **Vanilla JavaScript**: No frameworks needed
@@ -45,18 +50,21 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 ### Audio Synthesis Approach
 
 **Whistles:**
+
 - Converts canvas Y-coordinates to frequencies (2-20 kHz)
 - Uses oscillators with frequency envelopes
 - Smooth linear ramps between drawn points
 - Fade in/out envelopes for natural sound
 
 **Clicks:**
+
 - Short duration pulses (10ms)
 - Exponential decay envelopes
 - Adjustable pitch for different click types
 - Sequenced playback with precise timing
 
 ### Performance Optimizations
+
 - Efficient canvas redrawing
 - Optimized touch event handling
 - Minimal DOM manipulation
@@ -67,16 +75,19 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 ### What You Can Learn
 
 1. **Dolphin Communication**:
+
    - Whistles (2-20 kHz) for social communication
    - Signature whistles as individual identifiers
    - Clicks (>20 kHz) for echolocation
 
 2. **Sound Synthesis**:
+
    - Frequency modulation
    - Envelope shaping
    - Sequencing and timing
 
 3. **Web Audio API**:
+
    - Oscillator nodes
    - Gain nodes
    - Audio routing
@@ -90,18 +101,21 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 ## Usage Tips
 
 ### Creating Great Whistles
+
 1. Start slow - smooth curves sound better
 2. Try the presets first to understand typical patterns
 3. Experiment with duration to hear different effects
 4. Dolphins often use U-shaped or rising patterns
 
 ### Sequencing Clicks
+
 1. Start with simple patterns
 2. Hunting patterns have regular spacing
 3. Terminal buzzes are rapid-fire (all cells active)
 4. Adjust BPM to match natural dolphin speeds
 
 ### Best Practices
+
 - Use headphones for best audio experience
 - Try combining whistles and clicks
 - Experiment with parameters
@@ -110,6 +124,7 @@ Visit: [https://micha2718l.github.io/dolphain/dolphin-composer.html](https://mic
 ## Inspiration
 
 This project was inspired by:
+
 - Real dolphin communication research (LADC-GEMM, GoMRI data)
 - The Dolphain library's signal processing capabilities
 - Interactive music tools like synthesizers and drum machines
@@ -137,12 +152,15 @@ Rather than just showing spectrograms and waveforms, why not let users become do
 ## Attribution
 
 ### Data Inspiration
+
 The Dolphin Composer is inspired by real dolphin acoustic data from:
+
 - **LADC-GEMM** (Littoral Acoustic Demonstration Center - Gulf Ecological Monitoring and Modeling)
 - **GoMRI** (Gulf of Mexico Research Initiative)
 - Research by **Michael Haas** (University of New Orleans, Department of Physics)
 
 ### Development
+
 - **Created by**: GitHub Copilot (AI pair programmer)
 - **As part of**: The Dolphain Project
 - **During**: A hackathon-style creative session (October 2025)
@@ -151,18 +169,21 @@ The Dolphin Composer is inspired by real dolphin acoustic data from:
 ## Technical Notes
 
 ### Browser Compatibility
+
 - **Chrome/Edge**: Excellent support ✅
 - **Firefox**: Full support ✅
 - **Safari**: iOS may require user interaction to start Audio Context ⚠️
 - **Mobile**: Touch events fully supported 📱
 
 ### Known Limitations
+
 - Audio Context may require user gesture on some browsers
 - Mobile Safari has 10ms latency minimum
 - Very complex whistle patterns may have reduced temporal resolution
 - Click sequences limited to 16 steps
 
 ### Performance
+
 - Minimal CPU usage
 - Low memory footprint
 - No external dependencies
@@ -185,6 +206,7 @@ Part of the Dolphain project - check main repository for license details.
 ## Acknowledgments
 
 Special thanks to:
+
 - **Dolphins** - for being amazing communicators 🐬
 - **Marine biologists** - for studying these incredible animals
 - **Web Audio API developers** - for making browser-based synthesis possible
@@ -204,4 +226,4 @@ Special thanks to:
 
 **"So long, and thanks for all the fish!"** 🐬
 
-*Remember: Click the floating dolphin 42 times for a special surprise...*
+_Remember: Click the floating dolphin 42 times for a special surprise..._
