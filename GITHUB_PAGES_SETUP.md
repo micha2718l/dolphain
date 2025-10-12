@@ -59,6 +59,7 @@ open site/index.html
 ## Updating the Site
 
 All changes to the website should be made in the `/site` directory:
+
 - Edit `/site/index.html` for landing page changes
 - Edit `/site/css/style.css` for styling
 - Edit `/site/js/script.js` for interactive features
