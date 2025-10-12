@@ -148,6 +148,18 @@ class ResultCollector:
             self.timings[operation] = []
         self.timings[operation].append(elapsed)
 
+    @property
+    def successful(self) -> int:
+        """Number of successful results (backwards-compatible helper)."""
+
+        return len(self.results)
+
+    @property
+    def failed(self) -> int:
+        """Number of failed results (backwards-compatible helper)."""
+
+        return len(self.errors)
+
     def summarize(self) -> Dict[str, Any]:
         """
         Generate summary statistics.

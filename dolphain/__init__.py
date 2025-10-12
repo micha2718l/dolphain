@@ -33,6 +33,12 @@ from .experiments import (
     run_experiment,
     compare_methods,
 )
+from .branching import (
+    build_branch_tree,
+    categorize_energy,
+    categorize_frequency_span,
+    categorize_coverage,
+)
 
 # Define public API
 __all__ = [
@@ -63,4 +69,9 @@ __all__ = [
     "SpectralAnalysisPipeline",
     "run_experiment",
     "compare_methods",
+    # Branching showcase
+    "build_branch_tree",
+    "categorize_energy",
+    "categorize_frequency_span",
+    "categorize_coverage",
 ]
