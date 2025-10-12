@@ -1,204 +1,405 @@
-# Dolphain - Underwater Acoustic Data Analysis# Dolphain - Underwater Acoustic Data Analysis# EARS Data Reader
+# 🐬 Dolphain - Dolphin Acoustic Analysis Library# Dolphain - Underwater Acoustic Data Analysis# Dolphain - Underwater Acoustic Data Analysis# EARS Data Reader
 
-A Python package for reading and analyzing EARS (Ecological Acoustic Recorder) binary data files from underwater acoustic recordings in the Gulf of Mexico.
 
-## OverviewA Python package for reading and analyzing EARS (Ecological Acoustic Recorder) binary data files from underwater acoustic recordings in the Gulf of Mexico.A Python module for reading and analyzing EARS (Ecological Acoustic Recorder) binary data files from underwater acoustic recordings in the Gulf of Mexico.
 
-Dolphain provides a clean, efficient, and scientifically rigorous toolkit for underwater acoustic data analysis, with a focus on EARS format files and wavelet-based denoising techniques.
+A Python library for analyzing underwater acoustic data from EARS (Embedded Acoustic Recording System) files, with focus on dolphin vocalization detection and characterization.A Python package for reading and analyzing EARS (Ecological Acoustic Recorder) binary data files from underwater acoustic recordings in the Gulf of Mexico.
 
-## Project Structure## Overview## Overview
 
-````
 
-dolphain/
+## 📦 Quick Installation## OverviewA Python package for reading and analyzing EARS (Ecological Acoustic Recorder) binary data files from underwater acoustic recordings in the Gulf of Mexico.A Python module for reading and analyzing EARS (Ecological Acoustic Recorder) binary data files from underwater acoustic recordings in the Gulf of Mexico.
 
-├── dolphain/              # Main packageDolphain provides a clean, efficient, and scientifically rigorous toolkit for underwater acoustic data analysis, with a focus on EARS format files and wavelet-based denoising techniques.This module provides a clean, efficient, and scientifically proper way to read and visualize EARS binary data files (`.130`, `.190`, etc.) without requiring the original `unophysics` library.
 
-│   ├── __init__.py       # Package initialization
 
-│   ├── io.py             # File I/O functions
+```bashDolphain provides a clean, efficient, and scientifically rigorous toolkit for underwater acoustic data analysis, with a focus on EARS format files and wavelet-based denoising techniques.
 
-│   ├── signal.py         # Signal processing (wavelet denoising)
+git clone https://github.com/micha2718l/dolphain.git
 
-│   ├── plotting.py       # Visualization functions## Project Structure## Files
+cd dolphain## Project Structure## Overview## Overview
 
-│   └── batch.py          # Batch processing framework
-
-├── examples/              # Example Jupyter notebooks
-
-│   ├── ears_analysis_demo.ipynb
-
-│   ├── wavelet_demo.ipynb```- **`ears_reader.py`** - Main module with all reading and plotting functions
-
-│   └── batch_experiments.ipynb
-
-├── tests/                 # Test filesdolphain/- **`ears_analysis_demo.ipynb`** - Jupyter notebook demonstrating usage
-
-│   └── test_ears_reader.py
-
-├── ears_cli.py           # Command-line interface├── dolphain/              # Main package- **`dolphain.ipynb`** - Original development notebook (contains inline code)
-
-├── ears_reader.py        # Legacy module (for compatibility)
-
-├── README.md│   ├── __init__.py       # Package initialization
-
-├── BATCH_PROCESSING.md   # Batch processing guide
-
-└── requirements.txt│   ├── io.py             # File I/O functions## Installation
-
-````
-
-│ ├── signal.py # Signal processing (wavelet denoising)
-
-## Installation
-
-│ └── plotting.py # Visualization functions### Dependencies
-
-### Dependencies
-
-├── examples/ # Example Jupyter notebooks
-
-````bash
-
-pip install -r requirements.txt│   ├── ears_analysis_demo.ipynb```bash
-
-````
-
-│ └── wavelet_demo.ipynbpip install numpy matplotlib scipy
-
-Required packages:
-
-- `numpy` - Numerical array operations├── tests/ # Test files```
-
-- `matplotlib` - Plotting and visualization
-
-- `scipy` - Signal processing (spectrograms)│ └── test_ears_reader.py
-
-- `pywt` (PyWavelets) - Wavelet transforms for denoising
-
-├── ears_cli.py # Command-line interfaceThe module uses only standard scientific Python libraries:
-
-### Usage
-
-├── ears_reader.py # Legacy module (for compatibility)
-
-```python
-
-import dolphain├── README.md- `numpy` - Numerical array operations
-
-```
-
-└── requirements.txt- `matplotlib` - Plotting and visualization
-
-## Quick Start
-
-```- `scipy` - Signal processing (spectrograms)
-
-### 1. Basic File Reading
-
-- Standard library: `struct`, `datetime`, `pathlib`
-
-```````python
-
-import dolphain## Installation
-
-from pathlib import Path
-
-### Usage
-
-# Read a data file
-
-data = dolphain.read_ears_file('path/to/file.190')### Dependencies
-
-
-
-# Display file informationSimply import the module (ensure `ears_reader.py` is in your Python path or working directory):
-
-dolphain.print_file_info(data)
-
-``````bash
-
-
-
-### 2. Visualizationpip install -r requirements.txt```python
-
-
-
-```python```import ears_reader
-
-# Plot waveform
-
-dolphain.plot_waveform(data, xlim=(5, 10))```
-
-
-
-# Plot spectrogramRequired packages:
-
-dolphain.plot_spectrogram(data, fmax=5000)
-
-- `numpy` - Numerical array operations## Quick Start
-
-# Create comprehensive overview
-
-dolphain.plot_overview(data, fmax=5000, xlim_zoom=(5, 10))- `matplotlib` - Plotting and visualization
+pip install -e .
 
 ```````
 
-- `scipy` - Signal processing (spectrograms)```python
 
-### 3. Wavelet Denoising
 
-- `pywt` (PyWavelets) - Wavelet transforms for denoisingimport ears_reader
-
-````python
-
-# Denoise acoustic datafrom pathlib import Path
-
-acoustic_data = data['data']
-
-denoised = dolphain.wavelet_denoise(acoustic_data)### Usage
+## 🚀 5-Minute Quick Startdolphain/
 
 
 
-# Compare original and denoised# Read a data file
+### Analyze One File├── dolphain/              # Main packageDolphain provides a clean, efficient, and scientifically rigorous toolkit for underwater acoustic data analysis, with a focus on EARS format files and wavelet-based denoising techniques.This module provides a clean, efficient, and scientifically proper way to read and visualize EARS binary data files (`.130`, `.190`, etc.) without requiring the original `unophysics` library.
 
-dolphain.plot_denoising_comparison(data, fmax=5000)
+```python
 
-```pythonfile_path = Path('path/to/your/file.190')
+import dolphain│   ├── __init__.py       # Package initialization
 
-# Try different wavelets
 
-dolphain.plot_wavelet_comparison(import dolphaindata = ears_reader.read_ears_file(file_path)
 
-    data,
+# Read EARS file│   ├── io.py             # File I/O functions
 
-    wavelets=['db4', 'db8', 'db20', 'sym8'],```
+data = dolphain.read_ears_file('sample.210')
 
-    xlim=(5, 10)
+│   ├── signal.py         # Signal processing (wavelet denoising)
 
-)# Display file information
+# Denoise and detect whistles
 
-````
+clean = dolphain.wavelet_denoise(data['data'])│   ├── plotting.py       # Visualization functions## Project Structure## Files
 
-## Quick Startears_reader.print_file_info(data, file_path)
+whistles = dolphain.detect_whistles(clean, data['fs'])
+
+│   └── batch.py          # Batch processing framework
+
+print(f"Found {len(whistles)} whistles!")
+
+```├── examples/              # Example Jupyter notebooks
+
+
+
+### Find Interesting Files│   ├── ears_analysis_demo.ipynb
+
+```bash
+
+# Analyze 1000 random files (~20 minutes)│   ├── wavelet_demo.ipynb```- **`ears_reader.py`** - Main module with all reading and plotting functions
+
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 1000
+
+```│   └── batch_experiments.ipynb
+
+
+
+### Listen to a File├── tests/                 # Test filesdolphain/- **`ears_analysis_demo.ipynb`** - Jupyter notebook demonstrating usage
+
+```bash
+
+# Convert to WAV (raw + denoised versions)│   └── test_ears_reader.py
+
+python scripts/ears_to_wav.py filename.210
+
+```├── ears_cli.py           # Command-line interface├── dolphain/              # Main package- **`dolphain.ipynb`** - Original development notebook (contains inline code)
+
+
+
+## 📁 Project Organization├── ears_reader.py        # Legacy module (for compatibility)
+
+
+
+```├── README.md│   ├── __init__.py       # Package initialization
+
+dolphain/
+
+├── dolphain/              # 📦 Core library├── BATCH_PROCESSING.md   # Batch processing guide
+
+│   ├── io.py             #    EARS file reading
+
+│   ├── signal.py         #    Signal processing & whistle detection└── requirements.txt│   ├── io.py             # File I/O functions## Installation
+
+│   ├── plotting.py       #    Visualization utilities
+
+│   ├── batch.py          #    Batch processing framework````
+
+│   └── experiments.py    #    Pre-built analysis pipelines
+
+││ ├── signal.py # Signal processing (wavelet denoising)
+
+├── scripts/              # 🔧 Analysis tools
+
+│   ├── quick_find.py            # Fast file finder (1000 files in 20min)## Installation
+
+│   ├── find_interesting_files.py # 3-stage filtering (100K files)
+
+│   ├── batch_experiments.py     # Full experiment suite│ └── plotting.py # Visualization functions### Dependencies
+
+│   ├── visualize_random.py      # Create spectrograms
+
+│   ├── ears_to_wav.py           # Convert to audio### Dependencies
+
+│   └── explore_interesting.py   # Visualization reports
+
+│├── examples/ # Example Jupyter notebooks
+
+├── outputs/              # 📊 Generated files (not in git)
+
+│   ├── audio/           # WAV conversions````bash
+
+│   ├── plots/           # PNG visualizations
+
+│   ├── results/         # CSV/JSON datapip install -r requirements.txt│   ├── ears_analysis_demo.ipynb```bash
+
+│   └── ears_files_list.txt    # Master file list
+
+│````
+
+├── examples/             # 📓 Jupyter tutorials
+
+├── tests/               # 🧪 Unit tests│ └── wavelet_demo.ipynbpip install numpy matplotlib scipy
+
+├── docs/                # 📖 Documentation
+
+└── data/                # 🗂️ Sample filesRequired packages:
+
+```
+
+- `numpy` - Numerical array operations├── tests/ # Test files```
+
+## 🎯 Main Features
+
+- `matplotlib` - Plotting and visualization
+
+| Feature | Script | Time (1000 files) |
+
+|---------|--------|-------------------|- `scipy` - Signal processing (spectrograms)│ └── test_ears_reader.py
+
+| Find interesting files | `quick_find.py` | ~20 min |
+
+| Visualize files | `visualize_random.py` | ~2 min |- `pywt` (PyWavelets) - Wavelet transforms for denoising
+
+| Convert to audio | `ears_to_wav.py` | ~2 sec/file |
+
+| Full experiments | `batch_experiments.py` | ~30 min |├── ears_cli.py # Command-line interfaceThe module uses only standard scientific Python libraries:
+
+| Deep analysis | `find_interesting_files.py` | ~2 hours |
+
+### Usage
+
+## 📊 Common Tasks
+
+├── ears_reader.py # Legacy module (for compatibility)
+
+### 1. Find the Best Files
+
+```bash```python
+
+python scripts/quick_find.py \
+
+  --file-list outputs/ears_files_list.txt \import dolphain├── README.md- `numpy` - Numerical array operations
+
+  --n-files 1000
+
+```
+
+# Results in: outputs/results/quick_find_results/top_20_files.txt
+
+```└── requirements.txt- `matplotlib` - Plotting and visualization
+
+
+
+### 2. Visualize Files## Quick Start
+
+```bash
+
+# Random files from dataset```- `scipy` - Signal processing (spectrograms)
+
+python scripts/visualize_random.py \
+
+  --file-list outputs/ears_files_list.txt \### 1. Basic File Reading
+
+  --n-files 5
+
+- Standard library: `struct`, `datetime`, `pathlib`
+
+# Results in: outputs/plots/sanity_check_plots/
+
+``````````python
+
+
+
+### 3. Convert to Audioimport dolphain## Installation
+
+```bash
+
+# Just the filenamefrom pathlib import Path
+
+python scripts/ears_to_wav.py 72146FB7.171
+
+### Usage
+
+# Or full path
+
+python scripts/ears_to_wav.py /path/to/file.210# Read a data file
+
+
+
+# Results in: outputs/audio/data = dolphain.read_ears_file('path/to/file.190')### Dependencies
+
+```
+
+
 
 ### 4. Batch Processing
 
+```python# Display file informationSimply import the module (ensure `ears_reader.py` is in your Python path or working directory):
+
+from dolphain import WhistleDetectionPipeline, run_experiment
+
+dolphain.print_file_info(data)
+
+pipeline = WhistleDetectionPipeline(denoise=True)
+
+results = run_experiment(``````bash
+
+    name="My Analysis",
+
+    pipeline=pipeline,
+
+    data_dir="data/",
+
+    n_files=100### 2. Visualizationpip install -r requirements.txt```python
+
+)
+
+
+
+results.to_dataframe().to_csv('outputs/results/my_results.csv')
+
+``````python```import ears_reader
+
+
+
+## 📖 Documentation# Plot waveform
+
+
+
+| Document | Description |dolphain.plot_waveform(data, xlim=(5, 10))```
+
+|----------|-------------|
+
+| **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** | Command cheat sheet |
+
+| **[LARGE_SCALE_ANALYSIS.md](LARGE_SCALE_ANALYSIS.md)** | Complete pipeline walkthrough |
+
+| **[SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md)** | System design & workflows |# Plot spectrogramRequired packages:
+
+| **[TESTING_FRAMEWORK.md](TESTING_FRAMEWORK.md)** | Testing & experiment guide |
+
+| **[examples/](examples/)** | Jupyter notebook tutorials |dolphain.plot_spectrogram(data, fmax=5000)
+
+
+
+## 🧪 Testing- `numpy` - Numerical array operations## Quick Start
+
+
+
+```bash# Create comprehensive overview
+
+pytest tests/                    # All tests
+
+pytest tests/test_batch.py -v   # Specific filedolphain.plot_overview(data, fmax=5000, xlim_zoom=(5, 10))- `matplotlib` - Plotting and visualization
+
+pytest --cov=dolphain           # With coverage
+
+``````````
+
+
+
+## 💡 Tips- `scipy` - Signal processing (spectrograms)```python
+
+
+
+### Working with Large Datasets### 3. Wavelet Denoising
+
+```bash
+
+# Always use pre-generated file list (much faster!)- `pywt` (PyWavelets) - Wavelet transforms for denoisingimport ears_reader
+
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt
+
 ````python
 
-# Define analysis pipeline### Basic File Reading and Visualization# Create visualizations
+# Sample first to test
 
-def my_pipeline(filepath):
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 100# Denoise acoustic datafrom pathlib import Path
 
-    data = dolphain.read_ears_file(filepath)ears_reader.plot_waveform(data)
 
-    return {
 
-        'duration': data['duration'],```pythonears_reader.plot_spectrogram(data, fmax=5000)
+# Resume if interruptedacoustic_data = data['data']
 
-        'rms': np.sqrt(np.mean(data['data']**2))
+python scripts/find_interesting_files.py --file-list outputs/ears_files_list.txt --resume
 
-    }import dolphainears_reader.plot_overview(data, fmax=5000, xlim_zoom=(5, 10))
+```denoised = dolphain.wavelet_denoise(acoustic_data)### Usage
+
+
+
+### Output Organization
+
+All scripts automatically save to `outputs/`:
+
+- Audio files → `outputs/audio/`# Compare original and denoised# Read a data file
+
+- Plots → `outputs/plots/`
+
+- Results → `outputs/results/`dolphain.plot_denoising_comparison(data, fmax=5000)
+
+- Analysis runs → `outputs/analysis_runs/`
+
+```pythonfile_path = Path('path/to/your/file.190')
+
+### File List Format
+
+The `ears_files_list.txt` file contains one absolute path per line:# Try different wavelets
+
+```
+
+/Volumes/drive/Buoy200/71630000.200dolphain.plot_wavelet_comparison(import dolphaindata = ears_reader.read_ears_file(file_path)
+
+/Volumes/drive/Buoy200/71630001.200
+
+...    data,
+
+```
+
+    wavelets=['db4', 'db8', 'db20', 'sym8'],```
+
+## 🎓 Example Results
+
+    xlim=(5, 10)
+
+From 100 random files:
+
+- **70%** had dolphin whistles)# Display file information
+
+- **23.66** mean whistles per file
+
+- **84.5/100** top score````
+
+- **~1.4s** processing time per file
+
+## Quick Startears_reader.print_file_info(data, file_path)
+
+## 🛠️ Development
+
+### 4. Batch Processing
+
+```bash
+
+pip install -e ".[dev]"    # Install dev dependencies````python
+
+black dolphain/            # Format code
+
+flake8 dolphain/          # Lint# Define analysis pipeline### Basic File Reading and Visualization# Create visualizations
+
+pytest tests/             # Run tests
+
+```def my_pipeline(filepath):
+
+
+
+## 📞 Support    data = dolphain.read_ears_file(filepath)ears_reader.plot_waveform(data)
+
+
+
+- **Issues:** [GitHub Issues](https://github.com/micha2718l/dolphain/issues)    return {
+
+- **Docs:** See `docs/` folder
+
+- **Examples:** See `examples/` folder        'duration': data['duration'],```pythonears_reader.plot_spectrogram(data, fmax=5000)
+
+
+
+---        'rms': np.sqrt(np.mean(data['data']**2))
+
+
+
+Made with 🐬 for marine acoustic research    }import dolphainears_reader.plot_overview(data, fmax=5000, xlim_zoom=(5, 10))
+
 
 
 
