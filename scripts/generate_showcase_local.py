@@ -15,6 +15,11 @@ import matplotlib.pyplot as plt
 from scipy import signal as scipy_signal
 from scipy.io import wavfile
 import sys
+import warnings
+
+# Suppress matplotlib warnings
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', category=RuntimeWarning)
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -27,11 +32,12 @@ def create_spectrogram_image(audio_data, sample_rate, output_path, title=""):
     fig, ax = plt.subplots(figsize=(12, 4), facecolor='#0a0e27')
     ax.set_facecolor('#0a0e27')
     
+    # Optimized: Use larger nperseg and less overlap for faster generation
     f, t, Sxx = scipy_signal.spectrogram(
         audio_data, 
         fs=sample_rate,
-        nperseg=512,
-        noverlap=480,
+        nperseg=1024,  # Increased from 512
+        noverlap=512,   # Reduced overlap from 480
         window='hann'
     )
     
@@ -55,8 +61,9 @@ def create_spectrogram_image(audio_data, sample_rate, output_path, title=""):
     cbar.ax.tick_params(colors='white')
     
     plt.tight_layout()
-    plt.savefig(output_path, dpi=100, facecolor='#0a0e27', edgecolor='none')
+    plt.savefig(output_path, dpi=80, facecolor='#0a0e27', edgecolor='none')  # Reduced from dpi=100
     plt.close()
+    print(f"      Spectrogram saved ({output_path.stat().st_size // 1024} KB)")
 
 
 def create_waveform_with_whistles(audio_data, sample_rate, whistles, output_path):
@@ -91,8 +98,9 @@ def create_waveform_with_whistles(audio_data, sample_rate, whistles, output_path
     ax2.grid(True, alpha=0.2, color='white')
     
     plt.tight_layout()
-    plt.savefig(output_path, dpi=100, facecolor='#0a0e27', edgecolor='none')
+    plt.savefig(output_path, dpi=80, facecolor='#0a0e27', edgecolor='none')  # Reduced from dpi=100
     plt.close()
+    print(f"      Waveform saved ({output_path.stat().st_size // 1024} KB)")
 
 
 def calculate_statistics(whistles, audio_data, sample_rate):

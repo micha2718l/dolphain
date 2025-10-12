@@ -1,0 +1,102 @@
+{
+  "generated": "local_files",
+  "summary": {
+    "total_files": 3,
+    "total_whistles": 162,
+    "total_duration_s": 64.0,
+    "avg_whistles_per_file": 54.0,
+    "avg_coverage": 93.6,
+    "avg_freq_range_khz": 1.6,
+    "total_overlaps": 0,
+    "files_with_overlaps": 0
+  },
+  "files": [
+    {
+      "rank": 1,
+      "filename": "71811C7A.200",
+      "original_path": "temp_showcase_files/71811C7A.200",
+      "audio_raw": "audio/rank_01_71811C7A_raw.wav",
+      "audio_denoised": "audio/rank_01_71811C7A_denoised.wav",
+      "spectrogram": "images/rank_01_71811C7A_spectrogram.png",
+      "waveform": "images/rank_01_71811C7A_waveform.png",
+      "stats": {
+        "whistle_count": 47,
+        "duration": 21.33,
+        "coverage": 95.4,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.8,
+        "freq_mean_khz": 2.5,
+        "freq_range_khz": 1.8,
+        "whistle_duration_mean_s": 0.433,
+        "whistle_duration_std_s": 0.272,
+        "mean_gap_s": 0.021,
+        "gap_variability": 0.039,
+        "overlaps": 0,
+        "whistles_per_minute": 132.2
+      },
+      "metadata": {
+        "time_start": "2017-07-01 11:11:34.311906",
+        "duration": 21.333333333333332
+      },
+      "score": 47
+    },
+    {
+      "rank": 2,
+      "filename": "71822A8A.200",
+      "original_path": "temp_showcase_files/71822A8A.200",
+      "audio_raw": "audio/rank_02_71822A8A_raw.wav",
+      "audio_denoised": "audio/rank_02_71822A8A_denoised.wav",
+      "spectrogram": "images/rank_02_71822A8A_spectrogram.png",
+      "waveform": "images/rank_02_71822A8A_waveform.png",
+      "stats": {
+        "whistle_count": 61,
+        "duration": 21.33,
+        "coverage": 90.4,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.6,
+        "freq_mean_khz": 2.5,
+        "freq_range_khz": 1.5,
+        "whistle_duration_mean_s": 0.316,
+        "whistle_duration_std_s": 0.166,
+        "mean_gap_s": 0.034,
+        "gap_variability": 0.054,
+        "overlaps": 0,
+        "whistles_per_minute": 171.6
+      },
+      "metadata": {
+        "time_start": "2017-07-02 08:31:28.360813",
+        "duration": 21.333333333333332
+      },
+      "score": 61
+    },
+    {
+      "rank": 3,
+      "filename": "71822F97.200",
+      "original_path": "temp_showcase_files/71822F97.200",
+      "audio_raw": "audio/rank_03_71822F97_raw.wav",
+      "audio_denoised": "audio/rank_03_71822F97_denoised.wav",
+      "spectrogram": "images/rank_03_71822F97_spectrogram.png",
+      "waveform": "images/rank_03_71822F97_waveform.png",
+      "stats": {
+        "whistle_count": 54,
+        "duration": 21.33,
+        "coverage": 94.9,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.6,
+        "freq_mean_khz": 2.4,
+        "freq_range_khz": 1.5,
+        "whistle_duration_mean_s": 0.375,
+        "whistle_duration_std_s": 0.277,
+        "mean_gap_s": 0.02,
+        "gap_variability": 0.043,
+        "overlaps": 0,
+        "whistles_per_minute": 151.9
+      },
+      "metadata": {
+        "time_start": "2017-07-02 16:11:10.223844",
+        "duration": 21.333333333333332
+      },
+      "score": 54
+    }
+  ]
+}

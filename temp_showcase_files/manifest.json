@@ -1,0 +1,33 @@
+{
+  "original_checkpoint": "outputs/results/large_runENHANCED/checkpoint.json",
+  "files_requested": 25,
+  "files_copied": 25,
+  "output_directory": "temp_showcase_files",
+  "copied_files": [
+    "temp_showcase_files/7190A5ED.200",
+    "temp_showcase_files/72017DF9.201",
+    "temp_showcase_files/71887FF6.200",
+    "temp_showcase_files/71996C5A.201",
+    "temp_showcase_files/721896A3.201",
+    "temp_showcase_files/7212321E.201",
+    "temp_showcase_files/7184429A.200",
+    "temp_showcase_files/7220B70A.201",
+    "temp_showcase_files/71899E83.200",
+    "temp_showcase_files/7217894E.201",
+    "temp_showcase_files/7204DCCF.171",
+    "temp_showcase_files/71974816.201",
+    "temp_showcase_files/71811C7A.200",
+    "temp_showcase_files/71844662.200",
+    "temp_showcase_files/71877885.200",
+    "temp_showcase_files/71833D4F.200",
+    "temp_showcase_files/71632394.170",
+    "temp_showcase_files/7192CD2C.200",
+    "temp_showcase_files/7218958F.201",
+    "temp_showcase_files/71822A8A.200",
+    "temp_showcase_files/720075B9.201",
+    "temp_showcase_files/7212331F.201",
+    "temp_showcase_files/7211295C.201",
+    "temp_showcase_files/71866E54.200",
+    "temp_showcase_files/71822F97.200"
+  ]
+}
