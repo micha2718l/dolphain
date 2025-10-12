@@ -3,6 +3,7 @@
 ## Two-Step Process (For Disconnected Drive)
 
 ### Step 1: Copy Files (When Drive is Connected)
+
 ```bash
 # Copy top 25 files from your analysis to local temp directory
 python scripts/copy_top_files.py \
@@ -12,6 +13,7 @@ python scripts/copy_top_files.py \
 ```
 
 **What this does:**
+
 - Reads your analysis results
 - Copies the top 25 EARS files to `temp_showcase_files/`
 - Creates a manifest.json for tracking
@@ -22,6 +24,7 @@ python scripts/copy_top_files.py \
 ---
 
 ### Step 2: Generate Showcase (Anytime, Drive Not Needed)
+
 ```bash
 # Generate showcase from local files
 python scripts/generate_showcase_local.py \
@@ -31,6 +34,7 @@ python scripts/generate_showcase_local.py \
 ```
 
 **What this does:**
+
 - Processes local EARS files
 - Creates spectrograms and waveforms
 - Exports raw and denoised audio
@@ -56,6 +60,7 @@ python scripts/generate_showcase.py \
 ## Quick Reference
 
 ### Copy different numbers of files:
+
 ```bash
 # Top 10
 python scripts/copy_top_files.py --checkpoint results.json --top 10
@@ -65,6 +70,7 @@ python scripts/copy_top_files.py --checkpoint results.json --top 50
 ```
 
 ### Use different directories:
+
 ```bash
 # Custom temp location
 python scripts/copy_top_files.py \
@@ -78,6 +84,7 @@ python scripts/generate_showcase_local.py \
 ```
 
 ### View the showcase:
+
 ```bash
 # Open in browser
 open site/showcase.html
@@ -93,11 +100,13 @@ python -m http.server 8000
 ## Typical Workflow
 
 1. **Run large analysis** (takes hours):
+
    ```bash
    python scripts/quick_find.py --n-files 10000
    ```
 
 2. **When done, copy top files** (drive connected):
+
    ```bash
    python scripts/copy_top_files.py --checkpoint checkpoint.json --top 25
    ```
@@ -105,11 +114,13 @@ python -m http.server 8000
 3. **Disconnect drive if needed**
 
 4. **Generate showcase** (can do offline):
+
    ```bash
    python scripts/generate_showcase_local.py --input-dir temp_showcase_files
    ```
 
 5. **View results**:
+
    ```bash
    open site/showcase.html
    ```
@@ -127,7 +138,7 @@ python -m http.server 8000
 
 - Each EARS file: ~500 KB
 - Each raw WAV: ~16 MB
-- Each denoised WAV: ~16 MB  
+- Each denoised WAV: ~16 MB
 - Each spectrogram: ~200-300 KB
 - Each waveform: ~70-80 KB
 
@@ -138,14 +149,17 @@ python -m http.server 8000
 ## Troubleshooting
 
 ### "No such file or directory"
+
 - External drive not connected
 - Use two-step process instead
 
 ### "No EARS files found"
+
 - Check that files have .200, .201, etc. extensions
 - Verify input directory path
 
 ### Files hanging during processing
+
 - Normal for files with many whistles (can take 2-3 minutes each)
 - Script shows progress for each step
 
