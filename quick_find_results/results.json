@@ -1,0 +1,1007 @@
+{
+  "n_analyzed": 100,
+  "n_errors": 0,
+  "results": [
+    {
+      "n_whistles": 79,
+      "mean_whistle_duration": 0.22538396624472565,
+      "total_whistle_duration": 17.805333333333326,
+      "whistle_coverage_percent": 83.46249999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71811CD4.200",
+      "filename": "71811CD4.200",
+      "interestingness_score": 84.54
+    },
+    {
+      "n_whistles": 78,
+      "mean_whistle_duration": 0.22779487179487193,
+      "total_whistle_duration": 17.76800000000001,
+      "whistle_coverage_percent": 83.28750000000007,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7220AC0C.201",
+      "filename": "7220AC0C.201",
+      "interestingness_score": 83.99
+    },
+    {
+      "n_whistles": 79,
+      "mean_whistle_duration": 0.21319831223628688,
+      "total_whistle_duration": 16.842666666666663,
+      "whistle_coverage_percent": 78.94999999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71855C3E.200",
+      "filename": "71855C3E.200",
+      "interestingness_score": 83.19
+    },
+    {
+      "n_whistles": 76,
+      "mean_whistle_duration": 0.21761403508771932,
+      "total_whistle_duration": 16.538666666666668,
+      "whistle_coverage_percent": 77.525,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7179188D.170",
+      "filename": "7179188D.170",
+      "interestingness_score": 81.26
+    },
+    {
+      "n_whistles": 73,
+      "mean_whistle_duration": 0.23886757990867583,
+      "total_whistle_duration": 17.437333333333335,
+      "whistle_coverage_percent": 81.73750000000001,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7220AAB8.201",
+      "filename": "7220AAB8.201",
+      "interestingness_score": 81.02
+    },
+    {
+      "n_whistles": 68,
+      "mean_whistle_duration": 0.26572549019607833,
+      "total_whistle_duration": 18.069333333333326,
+      "whistle_coverage_percent": 84.69999999999996,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/719630FF.201",
+      "filename": "719630FF.201",
+      "interestingness_score": 79.41
+    },
+    {
+      "n_whistles": 70,
+      "mean_whistle_duration": 0.24739047619047616,
+      "total_whistle_duration": 17.31733333333333,
+      "whistle_coverage_percent": 81.17499999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/718996AE.200",
+      "filename": "718996AE.200",
+      "interestingness_score": 79.35
+    },
+    {
+      "n_whistles": 71,
+      "mean_whistle_duration": 0.23474178403755866,
+      "total_whistle_duration": 16.666666666666664,
+      "whistle_coverage_percent": 78.12499999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71822EAC.200",
+      "filename": "71822EAC.200",
+      "interestingness_score": 78.94
+    },
+    {
+      "n_whistles": 75,
+      "mean_whistle_duration": 0.19768888888888872,
+      "total_whistle_duration": 14.826666666666654,
+      "whistle_coverage_percent": 69.49999999999994,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/721894E8.201",
+      "filename": "721894E8.201",
+      "interestingness_score": 78.35
+    },
+    {
+      "n_whistles": 75,
+      "mean_whistle_duration": 0.19612444444444455,
+      "total_whistle_duration": 14.70933333333334,
+      "whistle_coverage_percent": 68.95000000000003,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71695DFB.200",
+      "filename": "71695DFB.200",
+      "interestingness_score": 78.19
+    },
+    {
+      "n_whistles": 68,
+      "mean_whistle_duration": 0.2516862745098038,
+      "total_whistle_duration": 17.114666666666658,
+      "whistle_coverage_percent": 80.22499999999995,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/718225FA.200",
+      "filename": "718225FA.200",
+      "interestingness_score": 78.07
+    },
+    {
+      "n_whistles": 66,
+      "mean_whistle_duration": 0.26654545454545464,
+      "total_whistle_duration": 17.592000000000006,
+      "whistle_coverage_percent": 82.46250000000003,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71866CDF.200",
+      "filename": "71866CDF.200",
+      "interestingness_score": 77.74
+    },
+    {
+      "n_whistles": 59,
+      "mean_whistle_duration": 0.3318870056497173,
+      "total_whistle_duration": 19.58133333333332,
+      "whistle_coverage_percent": 91.78749999999994,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7187946A.170",
+      "filename": "7187946A.170",
+      "interestingness_score": 77.04
+    },
+    {
+      "n_whistles": 69,
+      "mean_whistle_duration": 0.22539130434782603,
+      "total_whistle_duration": 15.551999999999996,
+      "whistle_coverage_percent": 72.89999999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/7190A95E.200",
+      "filename": "7190A95E.200",
+      "interestingness_score": 76.37
+    },
+    {
+      "n_whistles": 59,
+      "mean_whistle_duration": 0.3204971751412432,
+      "total_whistle_duration": 18.90933333333335,
+      "whistle_coverage_percent": 88.63750000000007,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7194343B.171",
+      "filename": "7194343B.171",
+      "interestingness_score": 76.09
+    },
+    {
+      "n_whistles": 56,
+      "mean_whistle_duration": 0.35252380952380946,
+      "total_whistle_duration": 19.74133333333333,
+      "whistle_coverage_percent": 92.53749999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/72007C13.201",
+      "filename": "72007C13.201",
+      "interestingness_score": 75.76
+    },
+    {
+      "n_whistles": 72,
+      "mean_whistle_duration": 0.1944444444444445,
+      "total_whistle_duration": 14.000000000000004,
+      "whistle_coverage_percent": 65.62500000000003,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71673FFE.200",
+      "filename": "71673FFE.200",
+      "interestingness_score": 75.69
+    },
+    {
+      "n_whistles": 53,
+      "mean_whistle_duration": 0.3877735849056604,
+      "total_whistle_duration": 20.552,
+      "whistle_coverage_percent": 96.33749999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/7192CB68.200",
+      "filename": "7192CB68.200",
+      "interestingness_score": 75.4
+    },
+    {
+      "n_whistles": 60,
+      "mean_whistle_duration": 0.2996444444444445,
+      "total_whistle_duration": 17.97866666666667,
+      "whistle_coverage_percent": 84.275,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7198565E.201",
+      "filename": "7198565E.201",
+      "interestingness_score": 75.28
+    },
+    {
+      "n_whistles": 53,
+      "mean_whistle_duration": 0.37106918238993714,
+      "total_whistle_duration": 19.666666666666668,
+      "whistle_coverage_percent": 92.18750000000001,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/719433FA.171",
+      "filename": "719433FA.171",
+      "interestingness_score": 74.16
+    },
+    {
+      "n_whistles": 43,
+      "mean_whistle_duration": 0.4734883720930233,
+      "total_whistle_duration": 20.360000000000003,
+      "whistle_coverage_percent": 95.43750000000001,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7219C21E.171",
+      "filename": "7219C21E.171",
+      "interestingness_score": 70.13
+    },
+    {
+      "n_whistles": 68,
+      "mean_whistle_duration": 0.15956862745098047,
+      "total_whistle_duration": 10.850666666666672,
+      "whistle_coverage_percent": 50.86250000000003,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/7165217F.200",
+      "filename": "7165217F.200",
+      "interestingness_score": 69.26
+    },
+    {
+      "n_whistles": 58,
+      "mean_whistle_duration": 0.2477701149425287,
+      "total_whistle_duration": 14.370666666666665,
+      "whistle_coverage_percent": 67.3625,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71675C53.170",
+      "filename": "71675C53.170",
+      "interestingness_score": 69.21
+    },
+    {
+      "n_whistles": 40,
+      "mean_whistle_duration": 0.4850666666666668,
+      "total_whistle_duration": 19.402666666666672,
+      "whistle_coverage_percent": 90.95000000000003,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71879DE1.170",
+      "filename": "71879DE1.170",
+      "interestingness_score": 67.29
+    },
+    {
+      "n_whistles": 28,
+      "mean_whistle_duration": 0.7393333333333333,
+      "total_whistle_duration": 20.70133333333333,
+      "whistle_coverage_percent": 97.0375,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7168737F.170",
+      "filename": "7168737F.170",
+      "interestingness_score": 63.11
+    },
+    {
+      "n_whistles": 28,
+      "mean_whistle_duration": 0.7364761904761907,
+      "total_whistle_duration": 20.62133333333334,
+      "whistle_coverage_percent": 96.66250000000002,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7204D5AA.171",
+      "filename": "7204D5AA.171",
+      "interestingness_score": 63.0
+    },
+    {
+      "n_whistles": 60,
+      "mean_whistle_duration": 0.15284444444444453,
+      "total_whistle_duration": 9.170666666666673,
+      "whistle_coverage_percent": 42.987500000000026,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7219A088.201",
+      "filename": "7219A088.201",
+      "interestingness_score": 62.9
+    },
+    {
+      "n_whistles": 25,
+      "mean_whistle_duration": 0.8290133333333333,
+      "total_whistle_duration": 20.72533333333333,
+      "whistle_coverage_percent": 97.14999999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/716865F3.170",
+      "filename": "716865F3.170",
+      "interestingness_score": 61.64
+    },
+    {
+      "n_whistles": 22,
+      "mean_whistle_duration": 0.957333333333333,
+      "total_whistle_duration": 21.061333333333327,
+      "whistle_coverage_percent": 98.72499999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7199847F.171",
+      "filename": "7199847F.171",
+      "interestingness_score": 60.62
+    },
+    {
+      "n_whistles": 56,
+      "mean_whistle_duration": 0.1575714285714285,
+      "total_whistle_duration": 8.823999999999996,
+      "whistle_coverage_percent": 41.36249999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/72189386.201",
+      "filename": "72189386.201",
+      "interestingness_score": 60.41
+    },
+    {
+      "n_whistles": 21,
+      "mean_whistle_duration": 1.0077460317460318,
+      "total_whistle_duration": 21.16266666666667,
+      "whistle_coverage_percent": 99.20000000000002,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7189BCAC.170",
+      "filename": "7189BCAC.170",
+      "interestingness_score": 60.26
+    },
+    {
+      "n_whistles": 19,
+      "mean_whistle_duration": 1.1183157894736842,
+      "total_whistle_duration": 21.247999999999998,
+      "whistle_coverage_percent": 99.6,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/719546CE.171",
+      "filename": "719546CE.171",
+      "interestingness_score": 59.38
+    },
+    {
+      "n_whistles": 20,
+      "mean_whistle_duration": 1.0388,
+      "total_whistle_duration": 20.776,
+      "whistle_coverage_percent": 97.3875,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/72070857.171",
+      "filename": "72070857.171",
+      "interestingness_score": 59.22
+    },
+    {
+      "n_whistles": 17,
+      "mean_whistle_duration": 1.2490980392156863,
+      "total_whistle_duration": 21.234666666666666,
+      "whistle_coverage_percent": 99.5375,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71846458.170",
+      "filename": "71846458.170",
+      "interestingness_score": 58.36
+    },
+    {
+      "n_whistles": 16,
+      "mean_whistle_duration": 1.3278333333333332,
+      "total_whistle_duration": 21.24533333333333,
+      "whistle_coverage_percent": 99.58749999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/72124EE3.171",
+      "filename": "72124EE3.171",
+      "interestingness_score": 57.88
+    },
+    {
+      "n_whistles": 16,
+      "mean_whistle_duration": 1.3243333333333334,
+      "total_whistle_duration": 21.189333333333334,
+      "whistle_coverage_percent": 99.325,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/72103762.171",
+      "filename": "72103762.171",
+      "interestingness_score": 57.8
+    },
+    {
+      "n_whistles": 16,
+      "mean_whistle_duration": 1.3113333333333335,
+      "total_whistle_duration": 20.981333333333335,
+      "whistle_coverage_percent": 98.35000000000001,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71846753.170",
+      "filename": "71846753.170",
+      "interestingness_score": 57.51
+    },
+    {
+      "n_whistles": 53,
+      "mean_whistle_duration": 0.14394968553459117,
+      "total_whistle_duration": 7.6293333333333315,
+      "whistle_coverage_percent": 35.76249999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71640A84.200",
+      "filename": "71640A84.200",
+      "interestingness_score": 57.23
+    },
+    {
+      "n_whistles": 51,
+      "mean_whistle_duration": 0.16209150326797384,
+      "total_whistle_duration": 8.266666666666666,
+      "whistle_coverage_percent": 38.74999999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71846586.170",
+      "filename": "71846586.170",
+      "interestingness_score": 57.12
+    },
+    {
+      "n_whistles": 48,
+      "mean_whistle_duration": 0.17977777777777756,
+      "total_whistle_duration": 8.629333333333323,
+      "whistle_coverage_percent": 40.44999999999995,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7180276F.170",
+      "filename": "7180276F.170",
+      "interestingness_score": 56.13
+    },
+    {
+      "n_whistles": 12,
+      "mean_whistle_duration": 1.7668888888888885,
+      "total_whistle_duration": 21.202666666666662,
+      "whistle_coverage_percent": 99.38749999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7190C888.170",
+      "filename": "7190C888.170",
+      "interestingness_score": 55.82
+    },
+    {
+      "n_whistles": 49,
+      "mean_whistle_duration": 0.14780952380952372,
+      "total_whistle_duration": 7.242666666666663,
+      "whistle_coverage_percent": 33.94999999999999,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7205C907.201",
+      "filename": "7205C907.201",
+      "interestingness_score": 54.68
+    },
+    {
+      "n_whistles": 47,
+      "mean_whistle_duration": 0.16056737588652473,
+      "total_whistle_duration": 7.5466666666666615,
+      "whistle_coverage_percent": 35.37499999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7204B2A8.201",
+      "filename": "7204B2A8.201",
+      "interestingness_score": 54.11
+    },
+    {
+      "n_whistles": 33,
+      "mean_whistle_duration": 0.13826262626262648,
+      "total_whistle_duration": 4.562666666666674,
+      "whistle_coverage_percent": 21.387500000000035,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7196315C.201",
+      "filename": "7196315C.201",
+      "interestingness_score": 42.92
+    },
+    {
+      "n_whistles": 31,
+      "mean_whistle_duration": 0.14425806451612883,
+      "total_whistle_duration": 4.471999999999993,
+      "whistle_coverage_percent": 20.96249999999997,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/71974125.201",
+      "filename": "71974125.201",
+      "interestingness_score": 41.79
+    },
+    {
+      "n_whistles": 21,
+      "mean_whistle_duration": 0.19517460317460325,
+      "total_whistle_duration": 4.098666666666668,
+      "whistle_coverage_percent": 19.212500000000006,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71643200.140",
+      "filename": "71643200.140",
+      "interestingness_score": 36.26
+    },
+    {
+      "n_whistles": 9,
+      "mean_whistle_duration": 2.365333333333333,
+      "total_whistle_duration": 21.287999999999997,
+      "whistle_coverage_percent": 99.78749999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy171/71910F4F.171",
+      "filename": "71910F4F.171",
+      "interestingness_score": 34.44
+    },
+    {
+      "n_whistles": 13,
+      "mean_whistle_duration": 0.11753846153846151,
+      "total_whistle_duration": 1.5279999999999996,
+      "whistle_coverage_percent": 7.162499999999998,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7176EFCC.170",
+      "filename": "7176EFCC.170",
+      "interestingness_score": 28.65
+    },
+    {
+      "n_whistles": 10,
+      "mean_whistle_duration": 0.1245333333333332,
+      "total_whistle_duration": 1.245333333333332,
+      "whistle_coverage_percent": 5.837499999999994,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/72156698.201",
+      "filename": "72156698.201",
+      "interestingness_score": 6.75
+    },
+    {
+      "n_whistles": 9,
+      "mean_whistle_duration": 0.11614814814814818,
+      "total_whistle_duration": 1.0453333333333337,
+      "whistle_coverage_percent": 4.900000000000001,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7206DAD8.201",
+      "filename": "7206DAD8.201",
+      "interestingness_score": 5.97
+    },
+    {
+      "n_whistles": 8,
+      "mean_whistle_duration": 0.12300000000000022,
+      "total_whistle_duration": 0.9840000000000018,
+      "whistle_coverage_percent": 4.612500000000008,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7215656B.201",
+      "filename": "7215656B.201",
+      "interestingness_score": 5.38
+    },
+    {
+      "n_whistles": 8,
+      "mean_whistle_duration": 0.11866666666666625,
+      "total_whistle_duration": 0.94933333333333,
+      "whistle_coverage_percent": 4.449999999999984,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7215643C.201",
+      "filename": "7215643C.201",
+      "interestingness_score": 5.33
+    },
+    {
+      "n_whistles": 7,
+      "mean_whistle_duration": 0.13599999999999998,
+      "total_whistle_duration": 0.952,
+      "whistle_coverage_percent": 4.4624999999999995,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7205CC2C.201",
+      "filename": "7205CC2C.201",
+      "interestingness_score": 4.84
+    },
+    {
+      "n_whistles": 7,
+      "mean_whistle_duration": 0.11885714285714284,
+      "total_whistle_duration": 0.8319999999999999,
+      "whistle_coverage_percent": 3.8999999999999995,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/7178EC01.150",
+      "filename": "7178EC01.150",
+      "interestingness_score": 4.67
+    },
+    {
+      "n_whistles": 7,
+      "mean_whistle_duration": 0.11847619047619082,
+      "total_whistle_duration": 0.8293333333333357,
+      "whistle_coverage_percent": 3.8875000000000113,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7204BAA1.201",
+      "filename": "7204BAA1.201",
+      "interestingness_score": 4.67
+    },
+    {
+      "n_whistles": 5,
+      "mean_whistle_duration": 0.11040000000000028,
+      "total_whistle_duration": 0.5520000000000014,
+      "whistle_coverage_percent": 2.5875000000000066,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71728AAC.200",
+      "filename": "71728AAC.200",
+      "interestingness_score": 3.28
+    },
+    {
+      "n_whistles": 4,
+      "mean_whistle_duration": 0.10399999999999932,
+      "total_whistle_duration": 0.41599999999999726,
+      "whistle_coverage_percent": 1.949999999999987,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/720294C6.151",
+      "filename": "720294C6.151",
+      "interestingness_score": 2.58
+    },
+    {
+      "n_whistles": 3,
+      "mean_whistle_duration": 0.12266666666666619,
+      "total_whistle_duration": 0.36799999999999855,
+      "whistle_coverage_percent": 1.7249999999999932,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71800790.200",
+      "filename": "71800790.200",
+      "interestingness_score": 2.02
+    },
+    {
+      "n_whistles": 3,
+      "mean_whistle_duration": 0.12177777777777798,
+      "total_whistle_duration": 0.36533333333333395,
+      "whistle_coverage_percent": 1.712500000000003,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/719631B0.151",
+      "filename": "719631B0.151",
+      "interestingness_score": 2.01
+    },
+    {
+      "n_whistles": 3,
+      "mean_whistle_duration": 0.11022222222222251,
+      "total_whistle_duration": 0.33066666666666755,
+      "whistle_coverage_percent": 1.5500000000000043,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71739635.200",
+      "filename": "71739635.200",
+      "interestingness_score": 1.97
+    },
+    {
+      "n_whistles": 3,
+      "mean_whistle_duration": 0.10222222222222237,
+      "total_whistle_duration": 0.3066666666666671,
+      "whistle_coverage_percent": 1.437500000000002,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/72007A62.151",
+      "filename": "72007A62.151",
+      "interestingness_score": 1.93
+    },
+    {
+      "n_whistles": 2,
+      "mean_whistle_duration": 0.1280000000000001,
+      "total_whistle_duration": 0.2560000000000002,
+      "whistle_coverage_percent": 1.200000000000001,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71708811.170",
+      "filename": "71708811.170",
+      "interestingness_score": 1.36
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.15200000000000102,
+      "total_whistle_duration": 0.15200000000000102,
+      "whistle_coverage_percent": 0.7125000000000048,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7176EFEF.140",
+      "filename": "7176EFEF.140",
+      "interestingness_score": 0.71
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.1306666666666665,
+      "total_whistle_duration": 0.1306666666666665,
+      "whistle_coverage_percent": 0.6124999999999992,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy170/7175DE26.170",
+      "filename": "7175DE26.170",
+      "interestingness_score": 0.68
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.12266666666666737,
+      "total_whistle_duration": 0.12266666666666737,
+      "whistle_coverage_percent": 0.5750000000000033,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/72070BC2.141",
+      "filename": "72070BC2.141",
+      "interestingness_score": 0.67
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.10666666666666558,
+      "total_whistle_duration": 0.10666666666666558,
+      "whistle_coverage_percent": 0.4999999999999949,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/7190A1C3.150",
+      "filename": "7190A1C3.150",
+      "interestingness_score": 0.65
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.10666666666666913,
+      "total_whistle_duration": 0.10666666666666913,
+      "whistle_coverage_percent": 0.5000000000000115,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/71976273.141",
+      "filename": "71976273.141",
+      "interestingness_score": 0.65
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.10133333333333283,
+      "total_whistle_duration": 0.10133333333333283,
+      "whistle_coverage_percent": 0.47499999999999765,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/7204DAA6.141",
+      "filename": "7204DAA6.141",
+      "interestingness_score": 0.64
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.10133333333333461,
+      "total_whistle_duration": 0.10133333333333461,
+      "whistle_coverage_percent": 0.475000000000006,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/7207E015.151",
+      "filename": "7207E015.151",
+      "interestingness_score": 0.64
+    },
+    {
+      "n_whistles": 1,
+      "mean_whistle_duration": 0.10133333333333283,
+      "total_whistle_duration": 0.10133333333333283,
+      "whistle_coverage_percent": 0.47499999999999765,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/7204D318.141",
+      "filename": "7204D318.141",
+      "interestingness_score": 0.64
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/72188D2E.151",
+      "filename": "72188D2E.151",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/7179F74F.150",
+      "filename": "7179F74F.150",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/7220B04D.151",
+      "filename": "7220B04D.151",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/717811E1.140",
+      "filename": "717811E1.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/71833289.150",
+      "filename": "71833289.150",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71719728.140",
+      "filename": "71719728.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7171A211.140",
+      "filename": "7171A211.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/718578B5.140",
+      "filename": "718578B5.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/720908AF.151",
+      "filename": "720908AF.151",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/719213B2.141",
+      "filename": "719213B2.141",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71653ECD.140",
+      "filename": "71653ECD.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7176EED5.140",
+      "filename": "7176EED5.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/71955058.141",
+      "filename": "71955058.141",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71791DF2.140",
+      "filename": "71791DF2.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/7220B046.151",
+      "filename": "7220B046.151",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/719411E5.151",
+      "filename": "719411E5.151",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71847042.140",
+      "filename": "71847042.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7176E68B.140",
+      "filename": "7176E68B.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/71706BF4.150",
+      "filename": "71706BF4.150",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/718032FA.140",
+      "filename": "718032FA.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/7206F4EB.141",
+      "filename": "7206F4EB.141",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/7175C14E.150",
+      "filename": "7175C14E.150",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/71717A42.150",
+      "filename": "71717A42.150",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7188A2CE.140",
+      "filename": "7188A2CE.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/71930C56.151",
+      "filename": "71930C56.151",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/716212F4.140",
+      "filename": "716212F4.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy141/72070E39.141",
+      "filename": "72070E39.141",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71792297.140",
+      "filename": "71792297.140",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy150/71800477.150",
+      "filename": "71800477.150",
+      "interestingness_score": 0.0
+    },
+    {
+      "n_whistles": 0,
+      "mean_whistle_duration": 0.0,
+      "total_whistle_duration": 0.0,
+      "whistle_coverage_percent": 0.0,
+      "recording_duration": 21.333333333333332,
+      "file": "/Volumes/ladcuno8tb0/2017_South/Buoy151/7206CF76.151",
+      "filename": "7206CF76.151",
+      "interestingness_score": 0.0
+    }
+  ],
+  "errors": []
+}

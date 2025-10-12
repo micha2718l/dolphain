@@ -1,0 +1,44 @@
+{
+  "processed_dirs": [
+    "$RECYCLE.BIN",
+    ".",
+    "2017_South",
+    "$RECYCLE.BIN/S-1-5-21-340504528-3605579822-3084113914-1001"
+  ],
+  "catalog": {
+    ".": {
+      "total_files": 0,
+      "ears_files": 0,
+      "other_files": 0,
+      "subdirs": 4,
+      "ears_by_ext": {},
+      "size_bytes": 0
+    },
+    "$RECYCLE.BIN": {
+      "total_files": 0,
+      "ears_files": 0,
+      "other_files": 0,
+      "subdirs": 1,
+      "ears_by_ext": {},
+      "size_bytes": 0
+    },
+    "$RECYCLE.BIN/S-1-5-21-340504528-3605579822-3084113914-1001": {
+      "total_files": 1,
+      "ears_files": 0,
+      "other_files": 1,
+      "subdirs": 0,
+      "ears_by_ext": {},
+      "size_bytes": 129
+    },
+    "2017_South": {
+      "total_files": 0,
+      "ears_files": 0,
+      "other_files": 0,
+      "subdirs": 4,
+      "ears_by_ext": {},
+      "size_bytes": 0
+    }
+  },
+  "last_update": "2025-10-12T00:12:22.940513",
+  "total_dirs_processed": 4
+}
