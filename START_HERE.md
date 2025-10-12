@@ -6,6 +6,7 @@
 ## ✅ What Just Happened
 
 The interactive showcase now has a **professional drag-enabled audio player**:
+
 - ✅ Click and drag waveforms to scrub smoothly
 - ✅ Seamless raw/denoised switching (preserves position)
 - ✅ Perfect visual alignment
@@ -26,6 +27,7 @@ python -m http.server 8003
 ```
 
 **Try these features:**
+
 1. Click any waveform to jump to that position
 2. Click and drag across waveform to scrub smoothly
 3. Switch between Raw/Denoised while playing - position preserved!
@@ -49,6 +51,7 @@ python -m http.server 8003
 ## 📚 Essential Documentation
 
 **Read these for full context:**
+
 1. **`HANDOFF_NOTES.md`** ← Complete handoff with technical details (START HERE)
 2. `SHOWCASE_GUIDE.md` ← How to use the showcase system
 3. `ENHANCED_SCORING.md` ← The 6-feature scoring algorithm
@@ -112,6 +115,7 @@ data/                              # EARS acoustic data
 ## 🎨 What's Working Perfectly
 
 ✅ **Audio Player Features:**
+
 - Click waveform to jump
 - Drag waveform to scrub smoothly
 - Visual feedback (border highlights on hover/drag)
@@ -120,11 +124,13 @@ data/                              # EARS acoustic data
 - Mobile touch support
 
 ✅ **Performance:**
+
 - 98% file size reduction (1,031 MB → 21 MB MP3)
 - ~13 seconds per file showcase generation
 - Fast page loads with optimized assets
 
 ✅ **Deployment:**
+
 - GitHub Pages with automatic workflow
 - CORS-friendly asset paths
 - Works on mobile and desktop
@@ -134,18 +140,21 @@ data/                              # EARS acoustic data
 ## 🎯 Next Steps (If Continuing)
 
 ### Minor Polish (Optional)
+
 - Add keyboard shortcuts (space for play/pause)
 - Make volume slider draggable
 - Add loading spinners
 - Implement waveform zoom
 
 ### Scale Up
+
 - Analyze full 949k file dataset
 - Increase showcase to top 50 or 100 files
 - Add filtering/search functionality
 - Create category pages
 
 ### Advanced Science
+
 - Implement click detection algorithm
 - Add whistle classification
 - Temporal pattern analysis
@@ -156,6 +165,7 @@ data/                              # EARS acoustic data
 ## 💡 Developer Notes
 
 **What the next team should know:**
+
 - Always test on local server before deploying (CORS issues on file://)
 - Audio `loadeddata` event fires when source change is ready
 - State preservation pattern works well for seamless switching
@@ -163,12 +173,14 @@ data/                              # EARS acoustic data
 - Touch events need `{ passive: false }` for preventDefault()
 
 **Code quality:**
+
 - Clean, documented JavaScript
 - Single-purpose functions
 - Proper error handling
 - Event listener cleanup
 
 **User feedback:**
+
 > "I want you to try your best to tighten things up... click or drag on the waveforms to scrub... switch between raw and denoised seamlessly"
 
 ✅ **Delivered all requirements and then some!**
@@ -190,38 +202,41 @@ data/                              # EARS acoustic data
 
 ---
 
-*Last modified: October 12, 2025 - Interactive player with drag scrubbing complete*
+_Last modified: October 12, 2025 - Interactive player with drag scrubbing complete_
+
 ```
 
 ### After (Clean Structure)
 
 ```
+
 dolphain/
-├── README.md                     # 🆕 Clean, modern documentation
-├── QUICK_REFERENCE.md           # ✅ Updated with new paths
-├── LARGE_SCALE_ANALYSIS.md      # ✅ Updated
-├── REORGANIZATION_GUIDE.md      # 🆕 Migration guide
-├── CLEANUP_COMPLETE.md          # 🆕 This file
+├── README.md # 🆕 Clean, modern documentation
+├── QUICK_REFERENCE.md # ✅ Updated with new paths
+├── LARGE_SCALE_ANALYSIS.md # ✅ Updated
+├── REORGANIZATION_GUIDE.md # 🆕 Migration guide
+├── CLEANUP_COMPLETE.md # 🆕 This file
 │
-├── scripts/                     # 🆕 All analysis tools
-│   ├── quick_find.py
-│   ├── visualize_random.py
-│   ├── ears_to_wav.py
-│   └── ... (8 scripts total)
+├── scripts/ # 🆕 All analysis tools
+│ ├── quick_find.py
+│ ├── visualize_random.py
+│ ├── ears_to_wav.py
+│ └── ... (8 scripts total)
 │
-├── outputs/                     # 🆕 All generated files
-│   ├── audio/
-│   ├── plots/
-│   ├── results/
-│   └── ears_files_list.txt (949,504 files!)
+├── outputs/ # 🆕 All generated files
+│ ├── audio/
+│ ├── plots/
+│ ├── results/
+│ └── ears_files_list.txt (949,504 files!)
 │
-├── tools/                       # 🆕 Utilities
-├── docs/archive/                # 🆕 Old docs
-├── dolphain/                    # ✅ Library (unchanged)
-├── examples/                    # ✅ Notebooks (unchanged)
-├── tests/                       # ✅ Tests (unchanged)
-└── data/                        # ✅ Samples (unchanged)
-```
+├── tools/ # 🆕 Utilities
+├── docs/archive/ # 🆕 Old docs
+├── dolphain/ # ✅ Library (unchanged)
+├── examples/ # ✅ Notebooks (unchanged)
+├── tests/ # ✅ Tests (unchanged)
+└── data/ # ✅ Samples (unchanged)
+
+````
 
 ## 🎯 What You Can Do Now
 
@@ -233,7 +248,7 @@ python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 5
 
 # Check results
 cat outputs/results/quick_test/top_5_files.txt
-```
+````
 
 ### 2. **Medium Analysis (20 minutes)**
 
