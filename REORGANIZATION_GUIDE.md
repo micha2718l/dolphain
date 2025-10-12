@@ -6,16 +6,17 @@ The project has been reorganized for clarity. Here's the new structure:
 
 ### Directory Changes
 
-| Old Location | New Location | What's There |
-|--------------|--------------|--------------|
-| Root directory | `scripts/` | All analysis scripts |
-| Root directory | `outputs/` | All generated files |
-| Root directory | `tools/` | Utility scripts |
-| Root directory | `docs/archive/` | Old documentation |
+| Old Location   | New Location    | What's There         |
+| -------------- | --------------- | -------------------- |
+| Root directory | `scripts/`      | All analysis scripts |
+| Root directory | `outputs/`      | All generated files  |
+| Root directory | `tools/`        | Utility scripts      |
+| Root directory | `docs/archive/` | Old documentation    |
 
 ### Script Locations
 
 All analysis scripts moved to `scripts/`:
+
 ```
 scripts/
 ├── quick_find.py                # Fast file finder
@@ -29,6 +30,7 @@ scripts/
 ```
 
 All utilities moved to `tools/`:
+
 ```
 tools/
 ├── check_links.py
@@ -39,6 +41,7 @@ tools/
 ### Output Locations
 
 All outputs go to `outputs/`:
+
 ```
 outputs/
 ├── audio/              # *.wav files
@@ -52,6 +55,7 @@ outputs/
 ### Running Scripts
 
 **From project root:**
+
 ```bash
 # All scripts work from root directory
 python scripts/quick_find.py --help
@@ -64,6 +68,7 @@ python scripts/ears_to_wav.py filename.210
 ### Documentation
 
 Active docs are in root:
+
 - `README.md` - Main documentation (NEWLY UPDATED)
 - `QUICK_REFERENCE.md` - Command cheat sheet
 - `LARGE_SCALE_ANALYSIS.md` - Pipeline guide
@@ -71,6 +76,7 @@ Active docs are in root:
 - `TESTING_FRAMEWORK.md` - Testing guide
 
 Old docs archived to `docs/archive/`:
+
 - All `*_COMPLETE.md`, `*_SUMMARY.md`, `*_RESULTS.md`
 - All `*_GUIDE.md`, `*_NOTES.md`, `*_STEPS.md`
 - Old README with duplicate content
@@ -93,11 +99,13 @@ ls outputs/
 ## Git Status
 
 The `.gitignore` has been updated to exclude outputs:
+
 ```bash
 git status  # Should show clean structure
 ```
 
 To commit the reorganization:
+
 ```bash
 git add .
 git commit -m "Reorganize project structure: scripts/, outputs/, tools/, docs/archive/"

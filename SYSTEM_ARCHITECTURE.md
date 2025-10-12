@@ -136,25 +136,33 @@
 ## Key Features at Every Stage
 
 ### 💾 Persistence
+
 Every script saves progress automatically:
+
 - Pause anytime (Ctrl+C)
 - Resume with `--resume`
 - No lost work
 
 ### ⚡ Smart Filtering
+
 Multi-stage pipeline reduces computation:
+
 - Stage 1: 100,000 → 20,000 (80% filtered)
-- Stage 2: 20,000 → 2,000 (90% filtered)  
+- Stage 2: 20,000 → 2,000 (90% filtered)
 - Stage 3: 2,000 → deep analysis
 
 ### 🎯 Flexible Sampling
+
 Don't need to process everything:
+
 - `--quick`: 10% sample
 - `--sample 0.01`: 1% sample
 - `--n-files 1000`: Exactly 1000 files
 
 ### 📊 Multiple Outputs
+
 Choose your format:
+
 - JSON (programmatic)
 - CSV (Excel/pandas)
 - TXT (human-readable)
@@ -169,7 +177,7 @@ Files Processed    Quick Path    Thorough Path
       1,000          20 min         2 hours
      10,000         3 hours        20 hours
     100,000           N/A          8 days*
-    
+
     *Use quick mode (10% sample) → 1 day
 ```
 
@@ -196,17 +204,20 @@ Visualizations    ~500 KB      500 MB           5 GB
 ## Recommended Hardware
 
 **Minimum:**
+
 - 2 CPU cores
 - 4 GB RAM
 - 10 GB free disk space
 
 **Recommended:**
+
 - 4+ CPU cores
-- 8+ GB RAM  
+- 8+ GB RAM
 - 100+ GB free disk space
 - USB 3.0+ or Thunderbolt for external drive
 
 **Optimal:**
+
 - 8+ CPU cores
 - 16+ GB RAM
 - SSD for results storage

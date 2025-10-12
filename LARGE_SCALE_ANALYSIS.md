@@ -23,6 +23,7 @@ python crawl_data_drive.py
 ```
 
 **Features:**
+
 - Crawls entire drive recursively
 - Counts files by directory and type
 - Identifies all EARS files (any 3-digit extension)
@@ -31,6 +32,7 @@ python crawl_data_drive.py
 - Saves every 60 seconds automatically
 
 **Output:**
+
 - `crawl_progress.json` - Resume checkpoint
 - `data_drive_catalog.json` - Full catalog
 - `data_drive_report.txt` - Human-readable summary
@@ -55,12 +57,14 @@ python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --resume
 ```
 
 **Stage 1: Quick Scan** (FAST - ~0.5s per file)
+
 - Basic spectral analysis
 - Whistle-band power calculation
 - Signal quality metrics
 - Filters out ~80% of low-quality files
 
 **Stage 2: Whistle Detection** (MEDIUM - ~1s per file)
+
 - Full denoising
 - Whistle detection and characterization
 - SNR calculation
@@ -68,6 +72,7 @@ python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --resume
 - Takes top 10% to Stage 3
 
 **Stage 3: Deep Analysis** (DETAILED - ~2s per file)
+
 - Comprehensive spectral analysis
 - Temporal segmentation
 - Multi-band power distribution
@@ -75,11 +80,13 @@ python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --resume
 - Final ranking
 
 **Output:**
+
 - `interesting_files_analysis/progress.json` - Resume checkpoint
 - `interesting_files_analysis/interesting_files.json` - Full results
 - `interesting_files_analysis/interesting_files_report.txt` - Summary
 
 **Runtime Examples:**
+
 - 1,000 files: ~10 minutes (quick mode)
 - 10,000 files: ~2 hours (quick mode)
 - 100,000 files: ~20 hours (quick mode)
@@ -105,12 +112,14 @@ python batch_experiments.py --data-dir /path/to/data --resume
 ```
 
 **Experiments:**
+
 1. **Basic Metrics** - RMS, peak, dynamic range, zero-crossing rate
 2. **Whistle Detection** - Find and characterize all vocalizations
 3. **Spectral Analysis** - Frequency distribution across bands
 4. **Quality Assessment** - SNR, noise levels, signal statistics
 
 **Output:**
+
 - `batch_experiments_results/checkpoints/` - Resume checkpoints for each experiment
 - `batch_experiments_results/results/*.csv` - Result tables
 - `batch_experiments_results/summary_report.txt` - Overall summary
@@ -132,6 +141,7 @@ python explore_interesting.py --results interesting_files_analysis/interesting_f
 ```
 
 **Generates:**
+
 - **Comparison plot** - Overview of top files
 - **Detailed plots** for each top file:
   - Raw and denoised waveforms
@@ -141,6 +151,7 @@ python explore_interesting.py --results interesting_files_analysis/interesting_f
 - **Markdown report** with rankings and recommendations
 
 **Output:**
+
 - `interesting_files_analysis/visualizations/top_files_comparison.png`
 - `interesting_files_analysis/visualizations/rank01_*.png` (etc.)
 - `interesting_files_analysis/visualizations/detailed_report.md`
@@ -175,25 +186,30 @@ python explore_interesting.py --results interesting_files_analysis/interesting_f
 ## Key Features
 
 ### ✅ Persistent Progress
+
 **Every script saves progress automatically:**
+
 - Pause anytime with Ctrl+C
 - Resume with `--resume` flag
 - No work is lost
 - Can stop/start across days
 
 ### ✅ Efficient Processing
+
 - Multi-stage filtering reduces computation
 - Quick scan eliminates bad files early
 - Sample modes for testing (`--quick`, `--sample`)
 - Intelligent caching and checkpointing
 
 ### ✅ Comprehensive Analysis
+
 - 5+ different experiment types
 - Multiple quality metrics
 - Whistle detection and characterization
 - Spectral and temporal analysis
 
 ### ✅ Production-Ready Output
+
 - CSV files for further analysis
 - JSON for programmatic access
 - Publication-quality visualizations
@@ -205,13 +221,13 @@ python explore_interesting.py --results interesting_files_analysis/interesting_f
 
 Files are scored 0-100 based on:
 
-| Component | Max Points | Criteria |
-|-----------|------------|----------|
-| Whistle Activity | 40 | Number of whistles detected (0.5 pts each, capped at 40) |
-| Signal Quality (SNR) | 20 | SNR above 5 dB (2 pts per dB, capped at 20) |
-| Whistle Coverage | 15 | % of time with whistles (0.15 pts per %, capped at 15) |
-| Whistle Band Power | 15 | % power in 5-25 kHz (0.15 pts per %, capped at 15) |
-| Spectral Diversity | 10 | Bandwidth above 5 kHz (1 pt per kHz, capped at 10) |
+| Component            | Max Points | Criteria                                                 |
+| -------------------- | ---------- | -------------------------------------------------------- |
+| Whistle Activity     | 40         | Number of whistles detected (0.5 pts each, capped at 40) |
+| Signal Quality (SNR) | 20         | SNR above 5 dB (2 pts per dB, capped at 20)              |
+| Whistle Coverage     | 15         | % of time with whistles (0.15 pts per %, capped at 15)   |
+| Whistle Band Power   | 15         | % power in 5-25 kHz (0.15 pts per %, capped at 15)       |
+| Spectral Diversity   | 10         | Bandwidth above 5 kHz (1 pt per kHz, capped at 10)       |
 
 **Top scores (>80):** Exceptional files - lots of clear whistles, high quality
 **Good scores (60-80):** Strong candidates - clear activity, good quality
@@ -223,6 +239,7 @@ Files are scored 0-100 based on:
 ## Performance Tips
 
 ### For Quick Testing
+
 ```bash
 # Sample 10% of files
 python find_interesting_files.py --data-dir /path/to/data --quick
@@ -232,6 +249,7 @@ python find_interesting_files.py --data-dir /path/to/data --sample-rate 0.01
 ```
 
 ### For Large Datasets
+
 ```bash
 # Run overnight, it will save progress automatically
 nohup python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ > analysis.log 2>&1 &
@@ -244,7 +262,9 @@ python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --resume
 ```
 
 ### Parallel Processing (future enhancement)
+
 Currently processes files sequentially. Could add multiprocessing:
+
 ```python
 # Future: --parallel 4 flag to use 4 CPU cores
 ```
@@ -254,18 +274,22 @@ Currently processes files sequentially. Could add multiprocessing:
 ## Troubleshooting
 
 **"No files found"**
+
 - Check drive is mounted: `ls /Volumes/ladcuno8tb0/`
 - Check for EARS files: `find /Volumes/ladcuno8tb0/ -name "*.210" | head`
 
 **"Out of memory"**
+
 - Use `--quick` mode or smaller `--sample-rate`
 - Process in batches by subdirectory
 
 **"Progress not saving"**
+
 - Check disk space
 - Check write permissions in current directory
 
 **Slow performance**
+
 - External drives are slower than internal SSDs
 - USB 2.0 is much slower than USB 3.0 or Thunderbolt
 - Network drives can be very slow
