@@ -15,12 +15,14 @@ This update transforms the Dolphain landing page into a **contribution-friendly 
 ### 1. 📱 Mobile-First Navigation
 
 #### New Sticky Navigation Bar
+
 - **Fixed position** navigation that stays visible while scrolling
 - **Responsive hamburger menu** for mobile devices
 - **Smooth scroll** to all major sections
 - **Special highlight** for the Dolphin Composer link
 
 #### Navigation Features
+
 - Glass-morphism design with backdrop blur
 - Active state animations for mobile toggle
 - Auto-closes when clicking links or outside menu
@@ -28,6 +30,7 @@ This update transforms the Dolphain landing page into a **contribution-friendly 
 - Works perfectly on phones, tablets, and desktops
 
 #### Mobile Breakpoint
+
 - Desktop: Full horizontal menu (768px+)
 - Mobile: Slide-in menu from right (<768px)
 - Touch-friendly tap targets (minimum 44px)
@@ -35,7 +38,9 @@ This update transforms the Dolphain landing page into a **contribution-friendly 
 ### 2. 🚀 Comprehensive Contribution Section
 
 #### Philosophy Grid
+
 Four core principles of vibe coding:
+
 - **Human + AI Collaboration**: Combine vision with execution
 - **Document Everything**: Track decisions for future contributors
 - **Plan for Context Loss**: Design resumable work
@@ -44,21 +49,25 @@ Four core principles of vibe coding:
 #### 9-Step Quick Start Guide
 
 **Step 1: Fork & Clone**
+
 - Clear instructions for creating personal copy
 - Explicit note: "You cannot push directly to main" (by design!)
 - Upstream remote setup
 
 **Step 2: Create a Branch**
+
 - Feature branch naming conventions
 - Examples: `feature/`, `docs/`, `fix/`, `experiment/`
 - Why branching matters
 
 **Step 3: Set Up Environment**
+
 - Python virtual environment setup
 - Editable install instructions
 - AI prompt suggestion for setup help
 
 **Step 4: Read the Context**
+
 - Links to all essential docs:
   - CONTINUATION_GUIDE.md (comprehensive overview)
   - PROJECT_STATUS.md (current state)
@@ -68,6 +77,7 @@ Four core principles of vibe coding:
 
 **Step 5: Pick Your Adventure**
 Four contribution tracks:
+
 - 🔬 **Science Track**: Signal processing, whistle/click detection
 - 📊 **Data Track**: Batch processing, visualizations, optimization
 - 📚 **Documentation Track**: Improve docs, add tutorials, create guides
@@ -75,6 +85,7 @@ Four contribution tracks:
 
 **Step 6: Vibe Code with Your AI**
 Five practical tips:
+
 - ✨ Start with vision (tell AI your goal)
 - 🔍 Ask for context (read existing code/docs)
 - 📝 Document as you go (session notes)
@@ -82,12 +93,14 @@ Five practical tips:
 - 🎯 Stay focused (complete one task before next)
 
 **Step 7: Commit Often, Document Always**
+
 - Small, frequent commits
 - Clear commit messages (WHAT + WHY)
 - Example commit with multi-line description
 
 **Step 8: Update the Docs**
 Checklist:
+
 - [ ] README.md (feature documentation)
 - [ ] PROJECT_STATUS.md (completion status)
 - [ ] SESSION_STATE.md (progress notes)
@@ -95,6 +108,7 @@ Checklist:
 
 **Step 9: Create a Pull Request**
 Complete PR template provided:
+
 - What This PR Does
 - Changes Made
 - Testing approach
@@ -105,6 +119,7 @@ Complete PR template provided:
 #### Best Practices Grid
 
 Six cards with expandable details:
+
 1. **Session Notes Are Sacred**: Example template included
 2. **One Feature Per Branch**: Focus and simplicity
 3. **Test Your Code**: Ask AI to write tests
@@ -115,6 +130,7 @@ Six cards with expandable details:
 #### Essential Resources Grid
 
 Four categories:
+
 - 🗺️ **Project Documentation**: Internal docs
 - 🔬 **Scientific Background**: LADC-GEMM, GoMRI, marine biology
 - 💻 **Technical Resources**: SciPy, Matplotlib, NumPy
@@ -123,6 +139,7 @@ Four categories:
 #### FAQ Section
 
 Six common questions answered:
+
 - "I'm not a dolphin expert. Can I still contribute?"
 - "I've never used AI to code before. Is that okay?"
 - "What if I get stuck or context windows out?"
@@ -133,6 +150,7 @@ Six common questions answered:
 #### Call to Action
 
 Three prominent buttons:
+
 - 🍴 Fork the Repository
 - 📋 Browse Issues
 - 📖 Read the Guide
@@ -140,6 +158,7 @@ Three prominent buttons:
 ### 3. 🎨 Design Enhancements
 
 #### Color Palette (Existing)
+
 - Ocean Deep: `#0a1828`
 - Ocean Mid: `#178ca4`
 - Ocean Light: `#3ab0c8`
@@ -150,30 +169,35 @@ Three prominent buttons:
 #### New UI Components
 
 **Philosophy Items**
+
 - Large icons (3rem)
 - Hover lift effect
 - Glass-morphism background
 - Centered content
 
 **Step Cards**
+
 - Numbered circles (60px, gradient background)
 - Left border accent (ocean-light)
 - Code blocks with syntax highlighting
 - Warning/tip notes with colored borders
 
 **Adventure Cards**
+
 - Gradient backgrounds
 - Hover effects (lift + glow)
 - Clear calls-to-action
 - Track-specific color accents
 
 **Practice Cards**
+
 - Expandable details elements
 - Hover border color change
 - Example code blocks
 - Best practice summaries
 
 **FAQ Items**
+
 - `<details>` elements for progressive disclosure
 - Styled summaries with hover states
 - Left-border emphasis on answers
@@ -182,11 +206,13 @@ Three prominent buttons:
 #### Responsive Behavior
 
 **Desktop (>768px)**
+
 - Multi-column grids (2-4 columns)
 - Full horizontal navigation
 - Side-by-side step numbers and content
 
 **Mobile (<768px)**
+
 - Single column layouts
 - Hamburger menu navigation
 - Stacked step numbers above content
@@ -194,6 +220,7 @@ Three prominent buttons:
 - Optimized font sizes
 
 #### Animations
+
 - Navigation slide-in (300ms ease)
 - Hover lifts and glows
 - Smooth scroll behavior
@@ -216,7 +243,11 @@ Three prominent buttons:
       <li><a href="#features" class="nav-link">Features</a></li>
       <li><a href="#contribute" class="nav-link">Contribute</a></li>
       <li><a href="#getting-started" class="nav-link">Get Started</a></li>
-      <li><a href="dolphin-composer.html" class="nav-link nav-special">🎵 Composer</a></li>
+      <li>
+        <a href="dolphin-composer.html" class="nav-link nav-special"
+          >🎵 Composer</a
+        >
+      </li>
     </ul>
   </div>
 </nav>
@@ -224,19 +255,19 @@ Three prominent buttons:
 <section id="contribute" class="contribute-section">
   <!-- Philosophy -->
   <div class="contribute-philosophy">...</div>
-  
+
   <!-- Step-by-step guide -->
   <div class="contribute-guide">...</div>
-  
+
   <!-- Best practices -->
   <div class="contribute-best-practices">...</div>
-  
+
   <!-- Resources -->
   <div class="contribute-resources">...</div>
-  
+
   <!-- FAQ -->
   <div class="contribute-faq">...</div>
-  
+
   <!-- CTA -->
   <div class="contribute-cta">...</div>
 </section>
@@ -245,22 +276,26 @@ Three prominent buttons:
 ### CSS Architecture
 
 **Variables**
+
 - Centralized color palette
 - Consistent spacing
 - Reusable values
 
 **Mobile-First Approach**
+
 - Base styles for mobile
 - `@media` queries for desktop enhancements
 - Flexible grids with `auto-fit`
 
 **Component-Based**
+
 - `.contribute-section` namespace
 - `.step`, `.practice-card`, `.adventure-card` components
 - Consistent hover states
 - Predictable spacing
 
 **Accessibility**
+
 - Proper contrast ratios
 - Focus states for keyboard navigation
 - Semantic HTML elements
@@ -269,37 +304,40 @@ Three prominent buttons:
 ### JavaScript Features
 
 **Mobile Navigation**
+
 ```javascript
 function setupMobileNav() {
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
-  
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+
   // Toggle on button click
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
+  navToggle.addEventListener("click", () => {
+    navToggle.classList.toggle("active");
+    navMenu.classList.toggle("active");
   });
-  
+
   // Close on link click
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
       // Close menu
     });
   });
-  
+
   // Close on outside click
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     // Close if not clicking nav
   });
 }
 ```
 
 **Smooth Scrolling**
+
 - Native CSS `scroll-behavior: smooth`
 - JavaScript fallback for older browsers
 - Proper scroll padding for fixed navbar
 
 **Event Listeners**
+
 - DOMContentLoaded for initialization
 - Click handlers for navigation
 - Outside-click detection for menu
@@ -310,12 +348,14 @@ function setupMobileNav() {
 
 ### 1. Lowering the Barrier to Entry
 
-**Before**: 
+**Before**:
+
 - No clear entry point for contributors
 - Had to hunt through GitHub for how to help
 - Unclear what the contribution process looked like
 
 **After**:
+
 - Prominent "Contribute" section in navigation
 - Step-by-step guide from fork to PR
 - Multiple entry points (science, data, docs, creative)
@@ -324,17 +364,20 @@ function setupMobileNav() {
 ### 2. Embracing AI Collaboration
 
 **Philosophy**:
+
 - Humans provide vision and direction
 - AI handles implementation and details
 - Together they accomplish more than alone
 
 **Practical Tips**:
+
 - How to prompt AI effectively
 - When to ask for context
 - Importance of documentation
 - Testing approaches
 
 **Transparency**:
+
 - "AI Collaboration Notes" section in PR template
 - Recognition that this is an AI-friendly project
 - Encouragement to share AI workflows
@@ -342,17 +385,20 @@ function setupMobileNav() {
 ### 3. Planning for Sustainability
 
 **Context Loss Prevention**:
+
 - Documentation requirements
 - Session notes templates
 - Regular git syncs
 - Clear project state tracking
 
 **Resumable Work**:
+
 - Any contributor can pick up where another left off
 - Future self can understand past decisions
 - Maintainer can review PRs effectively
 
 **Best Practices Built In**:
+
 - Feature branches (can't push to main)
 - Small, focused PRs
 - Testing requirements
@@ -361,11 +407,13 @@ function setupMobileNav() {
 ### 4. Mobile-First Accessibility
 
 **Statistics**:
+
 - 60%+ of web traffic is mobile
 - Contributors might browse on phones
 - Quick reference on tablets during coding
 
 **Implementation**:
+
 - Fixed navigation always accessible
 - Touch-friendly targets (44px minimum)
 - Readable text sizes without zoom
@@ -374,18 +422,21 @@ function setupMobileNav() {
 ### 5. Community Building
 
 **Welcoming Tone**:
+
 - "Join the Vibe Coding Revolution" 🌊
 - "Don't Panic!" references
 - Fun emojis throughout
 - Celebration of experimentation
 
 **Diverse Paths**:
+
 - Science track for researchers
 - Data track for engineers
 - Documentation track for writers
 - Creative track for experimenters
 
 **Support Systems**:
+
 - FAQ addressing common concerns
 - Explicit permission to experiment
 - Acknowledgment that stuck is normal
@@ -396,33 +447,39 @@ function setupMobileNav() {
 ## Files Modified
 
 ### `/site/index.html`
+
 - Added `<nav>` element at top
 - Added `#contribute` section (850+ lines)
 - Updated internal links to point to `#contribute`
 - Enhanced mobile meta viewport
 
 **Changes**:
+
 - +950 lines
 - New sections: navigation, contribution guide
 - Updated CTAs
 
 ### `/site/css/style.css`
+
 - Added navigation styles (150 lines)
 - Added contribution section styles (400+ lines)
 - Enhanced responsive breakpoints
 - Added smooth scrolling properties
 
 **Changes**:
+
 - +580 lines
 - New components: navbar, philosophy-grid, step-by-step, practice-cards, etc.
 - Mobile-first media queries
 
 ### `/site/js/script.js`
+
 - Added `setupMobileNav()` function
 - Enhanced initialization order
 - Improved event handling
 
 **Changes**:
+
 - +35 lines
 - New: Mobile menu toggle logic
 - Enhanced: Click-outside handling
@@ -432,6 +489,7 @@ function setupMobileNav() {
 ## Testing Checklist
 
 ### Desktop Testing
+
 - [ ] Navigation visible and functional
 - [ ] All links work (smooth scroll)
 - [ ] Hover states work on all interactive elements
@@ -441,6 +499,7 @@ function setupMobileNav() {
 - [ ] CTA buttons work
 
 ### Mobile Testing (<768px)
+
 - [ ] Hamburger menu appears
 - [ ] Menu slides in from right
 - [ ] Menu closes on link click
@@ -451,6 +510,7 @@ function setupMobileNav() {
 - [ ] Code blocks don't overflow
 
 ### Cross-Browser
+
 - [ ] Chrome/Edge (Chromium)
 - [ ] Firefox
 - [ ] Safari (macOS)
@@ -458,6 +518,7 @@ function setupMobileNav() {
 - [ ] Samsung Internet (Android)
 
 ### Accessibility
+
 - [ ] Keyboard navigation works
 - [ ] Focus states visible
 - [ ] Screen reader compatible
@@ -466,6 +527,7 @@ function setupMobileNav() {
 - [ ] Color contrast meets WCAG AA
 
 ### Performance
+
 - [ ] Page loads in <2 seconds
 - [ ] No layout shifts
 - [ ] Smooth animations
@@ -479,12 +541,14 @@ function setupMobileNav() {
 ### For New Contributors
 
 1. **Browse on Phone**
+
    - Click hamburger menu
    - Tap "Contribute"
    - Read philosophy and quick start
    - Bookmark for later
 
 2. **During Development**
+
    - Keep contribution guide open on second monitor/tablet
    - Reference step-by-step as you work
    - Copy/paste code examples
@@ -498,12 +562,14 @@ function setupMobileNav() {
 ### For Maintainers
 
 1. **Review PRs**
+
    - Check if documentation updated
    - Look for "AI Collaboration Notes"
    - Verify tests included
    - Confirm branch naming convention
 
 2. **Onboard Contributors**
+
    - Point them to `#contribute` section
    - Suggest relevant track (science/data/docs/creative)
    - Encourage session notes
@@ -520,26 +586,31 @@ function setupMobileNav() {
 ### Potential Additions
 
 1. **Interactive Tutorial**
+
    - Step-through wizard
    - Embedded code editor
    - Live preview of changes
 
 2. **Contributor Showcase**
+
    - Wall of contributors
    - Featured PRs
    - Monthly highlights
 
 3. **Progress Tracking**
+
    - Personal contribution stats
    - Achievement badges
    - Leaderboard (optional)
 
 4. **AI Assistant Integration**
+
    - Chat widget for questions
    - Context-aware suggestions
    - Documentation search
 
 5. **Video Guides**
+
    - Screen recordings of setup
    - Walkthrough of first contribution
    - Advanced workflows
@@ -554,18 +625,21 @@ function setupMobileNav() {
 ## Metrics to Track
 
 ### Engagement
+
 - Time spent on contribute section
 - Click-through rate to GitHub
 - Fork rate after viewing
 - PR submission rate
 
 ### Technical
+
 - Page load time
 - Mobile vs desktop traffic
 - Navigation interaction rate
 - Details element expansion rate
 
 ### Community
+
 - Number of first-time contributors
 - PR merge rate
 - Issue resolution time
@@ -576,6 +650,7 @@ function setupMobileNav() {
 ## Success Criteria
 
 ### Short Term (1 month)
+
 - ✅ Page deployed with no errors
 - ✅ Mobile navigation working
 - ✅ All links functional
@@ -583,12 +658,14 @@ function setupMobileNav() {
 - ⏳ 10+ forks in first month
 
 ### Medium Term (3 months)
+
 - ⏳ 20+ PRs from new contributors
 - ⏳ Positive feedback on contribution process
 - ⏳ Guide referenced in multiple PRs
 - ⏳ Community forming (issues, discussions)
 
 ### Long Term (6+ months)
+
 - ⏳ Self-sustaining contribution flow
 - ⏳ Contributors helping other contributors
 - ⏳ Guide becomes model for other projects
@@ -623,6 +700,7 @@ This enhancement embodies the **vibe coding philosophy**:
 ## Call to Action
 
 **If you're reading this**:
+
 1. You're probably a contributor (or considering it)
 2. Visit the enhanced landing page
 3. Try the mobile navigation
@@ -634,8 +712,8 @@ This enhancement embodies the **vibe coding philosophy**:
 
 ---
 
-*"Don't Panic!" - Douglas Adams*
+_"Don't Panic!" - Douglas Adams_
 
-*Built with joy, designed for collaboration, implemented with AI assistance.*
+_Built with joy, designed for collaboration, implemented with AI assistance._
 
-*October 11, 2025*
+_October 11, 2025_
