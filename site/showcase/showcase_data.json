@@ -1,11 +1,11 @@
 {
   "generated": "unknown",
   "summary": {
-    "total_files": 5,
-    "total_whistles": 230,
-    "total_duration_s": 106.6,
-    "avg_whistles_per_file": 46.0,
-    "avg_coverage": 94.2,
+    "total_files": 7,
+    "total_whistles": 360,
+    "total_duration_s": 149.3,
+    "avg_whistles_per_file": 51.4,
+    "avg_coverage": 93.6,
     "avg_freq_range_khz": 1.5,
     "total_overlaps": 0,
     "files_with_overlaps": 0
@@ -42,12 +42,41 @@
     },
     {
       "rank": 2,
+      "filename": "72017DF9.201",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/72017DF9.201",
+      "audio_raw": "audio/rank_02_72017DF9_raw.wav",
+      "audio_denoised": "audio/rank_02_72017DF9_denoised.wav",
+      "spectrogram": "images/rank_02_72017DF9_spectrogram.png",
+      "waveform": "images/rank_02_72017DF9_waveform.png",
+      "stats": {
+        "whistle_count": 53,
+        "duration": 21.33,
+        "coverage": 93.4,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.7,
+        "freq_mean_khz": 2.4,
+        "freq_range_khz": 1.6,
+        "whistle_duration_mean_s": 0.376,
+        "whistle_duration_std_s": 0.272,
+        "mean_gap_s": 0.027,
+        "gap_variability": 0.044,
+        "overlaps": 0,
+        "whistles_per_minute": 149.1
+      },
+      "metadata": {
+        "time_start": "2017-07-20 18:02:13.154437",
+        "duration": 21.333333333333332
+      },
+      "score": 55.36
+    },
+    {
+      "rank": 3,
       "filename": "71996C5A.201",
       "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/71996C5A.201",
-      "audio_raw": "audio/rank_02_71996C5A_raw.wav",
-      "audio_denoised": "audio/rank_02_71996C5A_denoised.wav",
-      "spectrogram": "images/rank_02_71996C5A_spectrogram.png",
-      "waveform": "images/rank_02_71996C5A_waveform.png",
+      "audio_raw": "audio/rank_03_71996C5A_raw.wav",
+      "audio_denoised": "audio/rank_03_71996C5A_denoised.wav",
+      "spectrogram": "images/rank_03_71996C5A_spectrogram.png",
+      "waveform": "images/rank_03_71996C5A_waveform.png",
       "stats": {
         "whistle_count": 44,
         "duration": 21.33,
@@ -70,13 +99,13 @@
       "score": 55.12
     },
     {
-      "rank": 3,
+      "rank": 4,
       "filename": "721896A3.201",
       "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/721896A3.201",
-      "audio_raw": "audio/rank_03_721896A3_raw.wav",
-      "audio_denoised": "audio/rank_03_721896A3_denoised.wav",
-      "spectrogram": "images/rank_03_721896A3_spectrogram.png",
-      "waveform": "images/rank_03_721896A3_waveform.png",
+      "audio_raw": "audio/rank_04_721896A3_raw.wav",
+      "audio_denoised": "audio/rank_04_721896A3_denoised.wav",
+      "spectrogram": "images/rank_04_721896A3_spectrogram.png",
+      "waveform": "images/rank_04_721896A3_waveform.png",
       "stats": {
         "whistle_count": 56,
         "duration": 21.33,
@@ -99,13 +128,42 @@
       "score": 55.11
     },
     {
-      "rank": 4,
+      "rank": 5,
+      "filename": "7184429A.200",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY200/7184429A.200",
+      "audio_raw": "audio/rank_05_7184429A_raw.wav",
+      "audio_denoised": "audio/rank_05_7184429A_denoised.wav",
+      "spectrogram": "images/rank_05_7184429A_spectrogram.png",
+      "waveform": "images/rank_05_7184429A_waveform.png",
+      "stats": {
+        "whistle_count": 52,
+        "duration": 21.33,
+        "coverage": 93.1,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.4,
+        "freq_mean_khz": 2.5,
+        "freq_range_khz": 1.3,
+        "whistle_duration_mean_s": 0.382,
+        "whistle_duration_std_s": 0.26,
+        "mean_gap_s": 0.025,
+        "gap_variability": 0.037,
+        "overlaps": 0,
+        "whistles_per_minute": 146.2
+      },
+      "metadata": {
+        "time_start": "2017-07-03 21:01:31.511750",
+        "duration": 21.333333333333332
+      },
+      "score": 55.04
+    },
+    {
+      "rank": 6,
       "filename": "7220B70A.201",
       "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7220B70A.201",
-      "audio_raw": "audio/rank_04_7220B70A_raw.wav",
-      "audio_denoised": "audio/rank_04_7220B70A_denoised.wav",
-      "spectrogram": "images/rank_04_7220B70A_spectrogram.png",
-      "waveform": "images/rank_04_7220B70A_waveform.png",
+      "audio_raw": "audio/rank_06_7220B70A_raw.wav",
+      "audio_denoised": "audio/rank_06_7220B70A_denoised.wav",
+      "spectrogram": "images/rank_06_7220B70A_spectrogram.png",
+      "waveform": "images/rank_06_7220B70A_waveform.png",
       "stats": {
         "whistle_count": 46,
         "duration": 21.33,
@@ -128,33 +186,33 @@
       "score": 54.97
     },
     {
-      "rank": 5,
-      "filename": "71844662.200",
-      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71844662.200",
-      "audio_raw": "audio/rank_05_71844662_raw.wav",
-      "audio_denoised": "audio/rank_05_71844662_denoised.wav",
-      "spectrogram": "images/rank_05_71844662_spectrogram.png",
-      "waveform": "images/rank_05_71844662_waveform.png",
+      "rank": 7,
+      "filename": "71899E83.200",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71899E83.200",
+      "audio_raw": "audio/rank_07_71899E83_raw.wav",
+      "audio_denoised": "audio/rank_07_71899E83_denoised.wav",
+      "spectrogram": "images/rank_07_71899E83_spectrogram.png",
+      "waveform": "images/rank_07_71899E83_waveform.png",
       "stats": {
-        "whistle_count": 30,
+        "whistle_count": 55,
         "duration": 21.33,
-        "coverage": 96.3,
+        "coverage": 93.6,
         "freq_min_khz": 2.1,
-        "freq_max_khz": 3.6,
+        "freq_max_khz": 3.7,
         "freq_mean_khz": 2.5,
-        "freq_range_khz": 1.5,
-        "whistle_duration_mean_s": 0.684,
-        "whistle_duration_std_s": 0.809,
-        "mean_gap_s": 0.027,
-        "gap_variability": 0.043,
+        "freq_range_khz": 1.6,
+        "whistle_duration_mean_s": 0.363,
+        "whistle_duration_std_s": 0.235,
+        "mean_gap_s": 0.025,
+        "gap_variability": 0.039,
         "overlaps": 0,
-        "whistles_per_minute": 84.4
+        "whistles_per_minute": 154.7
       },
       "metadata": {
-        "time_start": "2017-07-04 02:45:40.578062",
+        "time_start": "2017-07-09 16:26:44.607125",
         "duration": 21.333333333333332
       },
-      "score": 54.4
+      "score": 54.97
     }
   ]
 }
