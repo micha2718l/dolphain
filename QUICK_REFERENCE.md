@@ -9,20 +9,20 @@ A complete pipeline to analyze **hundreds of thousands** of EARS files and autom
 **For fast results on 1000 random files:**
 
 ```bash
-python quick_find.py /Volumes/ladcuno8tb0/
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 1000
 ```
 
 This will:
-- ✅ Sample 1000 files randomly
+- ✅ Sample 1000 files randomly from pre-generated list
 - ✅ Run whistle detection on each
 - ✅ Score them by interestingness
 - ✅ Give you top 20 files in ~15-20 minutes
 
-**Output:** `quick_find_results/top_20_files.txt`
+**Output:** `outputs/results/quick_find_results/top_20_files.txt`
 
 ---
 
-## 📋 All Available Tools
+## 📋 All Available Tools (in `scripts/`)
 
 ### 1. **`quick_find.py`** ⭐ START HERE
 **Purpose:** Fast way to find interesting files  
@@ -30,7 +30,11 @@ This will:
 **Best for:** Quick exploration, testing, getting immediate results
 
 ```bash
-python quick_find.py /Volumes/ladcuno8tb0/ --n-files 1000
+# Using pre-generated file list (RECOMMENDED - much faster!)
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 1000
+
+# Or scan directory (slow on external drives)
+python scripts/quick_find.py --data-dir /Volumes/ladcuno8tb0/ --n-files 1000
 ```
 
 ---
@@ -41,12 +45,12 @@ python quick_find.py /Volumes/ladcuno8tb0/ --n-files 1000
 **Best for:** Understanding your data structure, getting file counts
 
 ```bash
-python crawl_data_drive.py
+python scripts/crawl_data_drive.py
 # Pause with Ctrl+C, resume with:
-python crawl_data_drive.py --resume
+python scripts/crawl_data_drive.py --resume
 ```
 
-**This is already running for you!**
+**Already done! File list at:** `outputs/ears_files_list.txt` (949,504 files)
 
 ---
 
@@ -56,14 +60,14 @@ python crawl_data_drive.py --resume
 **Best for:** When you want the BEST files from tens of thousands
 
 ```bash
-# Quick mode (10% sample)
-python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --quick
+# Using file list (RECOMMENDED)
+python scripts/find_interesting_files.py --file-list outputs/ears_files_list.txt --quick
 
 # Full analysis
-python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/
+python scripts/find_interesting_files.py --file-list outputs/ears_files_list.txt
 
 # Resume if interrupted
-python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --resume
+python scripts/find_interesting_files.py --file-list outputs/ears_files_list.txt --resume
 ```
 
 ---
@@ -74,7 +78,7 @@ python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --resume
 **Best for:** Detailed analysis of interesting files you've already identified
 
 ```bash
-python batch_experiments.py --data-dir /path/to/selected/files
+python scripts/batch_experiments.py --data-dir /path/to/selected/files
 ```
 
 ---
@@ -84,8 +88,32 @@ python batch_experiments.py --data-dir /path/to/selected/files
 **Best for:** Final presentation, sharing results, visual inspection
 
 ```bash
-python explore_interesting.py --results interesting_files_analysis/interesting_files.json --top 20
+python scripts/explore_interesting.py --results outputs/results/interesting_files_analysis/interesting_files.json --top 20
 ```
+
+---
+
+### 6. **`visualize_random.py`** ⭐ SANITY CHECK
+**Purpose:** Quick visual inspection of random files  
+**Best for:** Verifying data quality, spot-checking results
+
+```bash
+python scripts/visualize_random.py --file-list outputs/ears_files_list.txt --n-files 8
+```
+
+**Output:** `outputs/plots/sanity_check_plots/sample_*.png`
+
+---
+
+### 7. **`ears_to_wav.py`** 🔊 AUDIO CONVERSION
+**Purpose:** Convert EARS files to WAV for listening  
+**Best for:** Hearing what the dolphins sound like!
+
+```bash
+python scripts/ears_to_wav.py /path/to/file.210
+```
+
+**Output:** `outputs/audio/FILENAME_raw.wav`, `outputs/audio/FILENAME_denoised.wav`
 
 ---
 
@@ -96,13 +124,16 @@ python explore_interesting.py --results interesting_files_analysis/interesting_f
 
 ```bash
 # 1. Quick find on 1000 files (~20 min)
-python quick_find.py /Volumes/ladcuno8tb0/ --n-files 1000
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 1000
 
 # 2. Check results
-cat quick_find_results/top_20_files.txt
+cat outputs/results/quick_find_results/top_20_files.txt
 
-# 3. Copy top files somewhere for detailed work
-# Then you're done!
+# 3. Convert to audio to listen
+python scripts/ears_to_wav.py /Volumes/ladcuno8tb0/Buoy171/72146FB7.171
+
+# 4. Visualize a few
+python scripts/visualize_random.py --file-list outputs/ears_files_list.txt --n-files 5
 ```
 
 ---
@@ -111,17 +142,14 @@ cat quick_find_results/top_20_files.txt
 **Goal:** Find the absolute best files from entire dataset
 
 ```bash
-# 1. Let the catalog finish (already running)
-python crawl_data_drive.py --resume
+# 1. Start overnight analysis (quick mode = 10% sample)
+nohup python scripts/find_interesting_files.py --file-list outputs/ears_files_list.txt --quick > analysis.log 2>&1 &
 
-# 2. Start overnight analysis (quick mode = 10% sample)
-nohup python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/ --quick > analysis.log 2>&1 &
-
-# 3. Check progress periodically
+# 2. Check progress periodically
 tail -f analysis.log
 
-# 4. Next day: visualize results
-python explore_interesting.py --results interesting_files_analysis/interesting_files.json --top 20
+# 3. Next day: visualize results
+python scripts/explore_interesting.py --results outputs/results/interesting_files_analysis/interesting_files.json --top 20
 ```
 
 ---
@@ -130,17 +158,14 @@ python explore_interesting.py --results interesting_files_analysis/interesting_f
 **Goal:** Process everything, create comprehensive dataset
 
 ```bash
-# Day 1: Catalog
-python crawl_data_drive.py
+# Day 1-2: Find interesting files (full dataset, not quick)
+python scripts/find_interesting_files.py --file-list outputs/ears_files_list.txt
 
-# Day 2-3: Find interesting files (full, not quick)
-python find_interesting_files.py --data-dir /Volumes/ladcuno8tb0/
+# Day 3: Batch experiments on top 1000
+python scripts/batch_experiments.py --data-dir /path/to/top/1000/files
 
-# Day 4: Batch experiments on top 1000
-python batch_experiments.py --data-dir /path/to/top/1000/files
-
-# Day 5: Create visualizations
-python explore_interesting.py --results interesting_files_analysis/interesting_files.json --top 50
+# Day 4: Create visualizations
+python scripts/explore_interesting.py --results outputs/results/interesting_files_analysis/interesting_files.json --top 50
 ```
 
 ---
@@ -202,6 +227,7 @@ find /Volumes/ladcuno8tb0/ -name "*.[0-9][0-9][0-9]" | head -10
 - External drives are slower than internal
 - USB 2.0 is much slower than USB 3.0
 - Try smaller samples first: `--n-files 100`
+- **Use pre-generated file list!** Much faster than directory scanning
 
 **"Out of memory"**
 - Use sampling: `--quick` or `--sample 0.1`
@@ -210,7 +236,7 @@ find /Volumes/ladcuno8tb0/ -name "*.[0-9][0-9][0-9]" | head -10
 **"Want to run in background"**
 ```bash
 # Use nohup to run overnight
-nohup python quick_find.py /Volumes/ladcuno8tb0/ > analysis.log 2>&1 &
+nohup python scripts/quick_find.py --file-list outputs/ears_files_list.txt > analysis.log 2>&1 &
 
 # Check progress
 tail -f analysis.log
@@ -226,26 +252,35 @@ ps aux | grep python
 After running everything, you'll have:
 
 ```
-dolphain/
-├── quick_find_results/          # From quick_find.py
-│   ├── top_20_files.txt        # ⭐ Top files list
-│   ├── all_results.csv
-│   └── results.json
-│
-├── data_drive_catalog.json      # From crawl_data_drive.py
-├── data_drive_report.txt        # ⭐ Drive summary
-│
-├── interesting_files_analysis/  # From find_interesting_files.py
-│   ├── interesting_files_report.txt  # ⭐ Top files
-│   ├── interesting_files.json
-│   └── visualizations/
-│       ├── top_files_comparison.png  # ⭐ Overview plot
-│       ├── rank01_*.png              # ⭐ Detailed plots
+outputs/
+├── results/
+│   ├── quick_find_results/          # From quick_find.py
+│   │   ├── top_20_files.txt        # ⭐ Top files list
+│   │   ├── all_results.csv
+│   │   └── results.json
+│   │
+│   └── interesting_files_analysis/  # From find_interesting_files.py
+│       ├── interesting_files_report.txt  # ⭐ Top files
+│       ├── interesting_files.json
 │       └── detailed_report.md        # ⭐ Recommendations
 │
-└── batch_experiments_results/   # From batch_experiments.py
-    ├── results/*.csv
-    └── summary_report.txt       # ⭐ Experiment summary
+├── plots/
+│   ├── sanity_check_plots/          # From visualize_random.py
+│   │   └── sample_*.png
+│   └── visualizations/              # From explore_interesting.py
+│       ├── top_files_comparison.png  # ⭐ Overview plot
+│       └── rank01_*.png              # ⭐ Detailed plots
+│
+├── audio/                           # From ears_to_wav.py
+│   ├── *_raw.wav
+│   └── *_denoised.wav
+│
+├── analysis_runs/                   # From batch_experiments.py
+│   ├── results/*.csv
+│   └── summary_report.txt       # ⭐ Experiment summary
+│
+├── ears_files_list.txt              # Master file list (949K files)
+└── crawl_progress.json              # Catalog checkpoint
 ```
 
 **Files marked ⭐ are the ones to check first!**
@@ -294,12 +329,24 @@ dolphain/
 
 **Start here:**
 ```bash
-python quick_find.py /Volumes/ladcuno8tb0/ --n-files 1000
+python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 1000
 ```
 
 **Check results in ~20 minutes:**
 ```bash
-cat quick_find_results/top_20_files.txt
+cat outputs/results/quick_find_results/top_20_files.txt
+```
+
+**Listen to a file:**
+```bash
+python scripts/ears_to_wav.py /Volumes/ladcuno8tb0/Buoy171/72146FB7.171
+open outputs/audio/72146FB7_denoised.wav
+```
+
+**Visualize random files:**
+```bash
+python scripts/visualize_random.py --file-list outputs/ears_files_list.txt --n-files 5
+open outputs/plots/sanity_check_plots/
 ```
 
 **That's it!** 🎉

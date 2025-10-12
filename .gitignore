@@ -37,6 +37,9 @@ htmlcov/
 *.tmp
 reports/
 
+# Generated outputs (can be large!)
+outputs/
+
 # OS-specific files
 .DS_Store
 Thumbs.db
