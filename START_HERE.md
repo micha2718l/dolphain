@@ -18,7 +18,20 @@ The interactive showcase now has a **professional drag-enabled audio player**:
 
 ---
 
-## 🎯 Test It Right Now
+## � Hackathon Playground (New!)
+
+Need a brain break? We now ship a **Dolphin Branch Explorer** that turns the top showcase clips into a branching adventure. Generate fresh data with:
+
+```bash
+source .venv/bin/activate
+python scripts/generate_branching_showcase.py
+```
+
+Then open `site/branch_explorer/index.html` (or serve the whole `site/` folder) to explore pods by energy, harmony, and coverage. It's perfect for hackathon demos and future storytelling experiments.
+
+---
+
+## �🎯 Test It Right Now
 
 ```bash
 cd /Users/mjhaas/code/dolphain/site
