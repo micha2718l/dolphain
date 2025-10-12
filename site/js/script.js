@@ -3,30 +3,30 @@
 
 // Mobile Navigation Toggle
 function setupMobileNav() {
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  const navLinks = document.querySelectorAll(".nav-link");
 
   if (navToggle && navMenu) {
     // Toggle menu on button click
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("active");
+      navMenu.classList.toggle("active");
     });
 
     // Close menu when a link is clicked
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navToggle.classList.remove("active");
+        navMenu.classList.remove("active");
       });
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+        navToggle.classList.remove("active");
+        navMenu.classList.remove("active");
       }
     });
   }

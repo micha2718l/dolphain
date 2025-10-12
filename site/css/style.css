@@ -671,7 +671,11 @@ code {
 }
 
 .contribute-intro {
-  background: linear-gradient(135deg, rgba(45, 95, 63, 0.3), rgba(23, 140, 164, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(45, 95, 63, 0.3),
+    rgba(23, 140, 164, 0.3)
+  );
   padding: 2rem;
   border-radius: 12px;
   border-left: 4px solid var(--seaweed);
@@ -768,7 +772,7 @@ code {
 }
 
 .step-content code {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 0.9rem;
   color: var(--ocean-light);
 }
@@ -790,7 +794,11 @@ code {
 }
 
 .adventure-card {
-  background: linear-gradient(135deg, rgba(10, 24, 40, 0.6), rgba(23, 140, 164, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(10, 24, 40, 0.6),
+    rgba(23, 140, 164, 0.3)
+  );
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid rgba(58, 176, 200, 0.3);
@@ -963,7 +971,11 @@ code {
 }
 
 .contribute-cta {
-  background: linear-gradient(135deg, rgba(45, 95, 63, 0.4), rgba(23, 140, 164, 0.4));
+  background: linear-gradient(
+    135deg,
+    rgba(45, 95, 63, 0.4),
+    rgba(23, 140, 164, 0.4)
+  );
   padding: 3rem;
   border-radius: 12px;
   text-align: center;
