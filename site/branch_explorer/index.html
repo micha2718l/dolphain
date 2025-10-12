@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dolphin Branch Explorer 🌿 | Dolphain Hackathon Play</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <meta
+      name="description"
+      content="Follow branching dolphin pods by energy, harmony, and flow. A hackathon playground for the dolphain project."
+    />
+  </head>
+  <body>
+    <header>
+      <h1>🐬 Dolphin Branch Explorer</h1>
+      <p>
+        Pick a starting vibe and let the pods guide you. We bucket the most interesting
+        showcase clips into a branching tree of energy, harmony, and flow so you can
+        drift through the gulf like a sonic choose-your-own-adventure.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge">Branching storytelling engine</span>
+        <span class="hero-badge">Powered by showcase stats</span>
+        <span class="hero-badge">Interactive radial tree</span>
+        <span class="hero-badge">Instant audio players</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="explorer-grid" aria-label="Dolphin Branch Explorer">
+        <div id="tree-container">
+          <svg id="branch-tree" aria-hidden="true"></svg>
+        </div>
+        <aside id="detail-panel">
+          <h2><span class="title">Dolphin Branch Explorer</span></h2>
+          <div class="detail-meta"></div>
+          <p class="detail-description">
+            Choose a node in the tree to surface a pod's highlights.
+          </p>
+          <div class="stats-grid"></div>
+          <div class="audio-stack"></div>
+          <div class="media-links"></div>
+        </aside>
+      </section>
+
+      <section class="footer-note">
+        <h3>How the branches work 🌿</h3>
+        <p>
+          Each node groups clips using real metrics from the core showcase data. We branch first by
+          <strong>energy</strong> (whistles per minute), then by <strong>harmonic spread</strong>
+          (frequency range), and finally by <strong>temporal flow</strong> (coverage). Leaves represent
+          individual recordings with instant raw vs denoised playback.
+        </p>
+        <p>
+          Want to remix it? Regenerate <code>branching_data.json</code> after tweaking the heuristics in
+          <code>dolphain/branching.py</code> or add new branch dimensions. This playground is perfect for
+          future hackathon experiments—think seasonal themes, AI narration, or branching quests for marine biologists.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      Crafted for the Dolphain hackathon sprint · Data sourced from EARS buoys in the Gulf of Mexico · Share the vibes! 🐬
+    </footer>
+
+    <script src="branching.js"></script>
+  </body>
+</html>
