@@ -73,29 +73,35 @@
 ## 📖 How to Use This Index
 
 ### If you're brand new:
+
 1. Read `START_HERE.md` first
 2. Then read `HANDOFF_NOTES.md` for full context
 3. Then `README.md` for API details
 
 ### If you want to generate a showcase:
+
 1. Read `SHOWCASE_GUIDE.md`
 2. Use commands from `SHOWCASE_COMMANDS.md`
 3. Troubleshoot with `SHOWCASE_FIXES.md`
 
 ### If you want to understand the scoring:
+
 1. Read `ENHANCED_SCORING.md`
 2. See examples in `SHOWCASE_GUIDE.md`
 
 ### If you're setting up development:
+
 1. Read `DEVELOPMENT_INSTALL.md`
 2. Follow `README.md` installation steps
 3. Try examples in `examples/` directory
 
 ### If you're deploying:
+
 1. Read `GITHUB_PAGES_DEPLOYMENT.md`
 2. Follow workflow in `HANDOFF_NOTES.md`
 
 ### If you need quick commands:
+
 1. Check `CHEATSHEET.md`
 2. Or `QUICK_REFERENCE.md`
 3. Or command sections in `HANDOFF_NOTES.md`
@@ -125,16 +131,19 @@ Key Files by Size:
 ## ⚠️ Important Notes
 
 ### Current Status (October 12, 2025)
+
 - **Production Ready:** Interactive showcase with drag-enabled player
 - **Just Updated:** `site/showcase.html`, `START_HERE.md`, `README.md`
 - **New Files:** `HANDOFF_NOTES.md`, `DOCUMENTATION_CLEANUP.md`, `DOC_INDEX.md` (this file)
 
 ### Outdated Files (Historical Value Only)
+
 - `SESSION_STATE.md` - From October 10, superseded by HANDOFF_NOTES.md
 - Various "COMPLETE" files - Document completed phases
 - Some older guides may have outdated commands
 
 ### Most Reliable Sources
+
 1. `HANDOFF_NOTES.md` - Most recent complete context
 2. `README.md` - Clean, current API docs
 3. `SHOWCASE_GUIDE.md` - Current showcase workflow
@@ -164,4 +173,4 @@ Key Files by Size:
 
 ---
 
-*Created: October 12, 2025 - Documentation cleanup session*
+_Created: October 12, 2025 - Documentation cleanup session_
