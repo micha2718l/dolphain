@@ -1,0 +1,29 @@
+TOP 20 MOST INTERESTING FILES
+================================================================================
+
+Rank   Score    Whistles   Coverage   File
+--------------------------------------------------------------------------------
+1      77.5     58         95.2     % 71974E0F.201
+2      70.7     44         95.6     % 7219A28F.201
+3      33.5     7          99.9     % 71802C9F.170
+4      27.5     11         6.6      % 7212361C.201
+5      1.3      2          1.0      % 7190AF16.150
+6      0.0      0          0.0      % 7177FB46.140
+7      0.0      0          0.0      % 7195237C.151
+8      0.0      0          0.0      % 716102D6.140
+9      0.0      0          0.0      % 7175C19E.150
+10     0.0      0          0.0      % 7179152B.140
+
+
+Full file paths:
+--------------------------------------------------------------------------------
+1. /Volumes/ladcuno8tb0/2017_South/BUOY201/71974E0F.201
+2. /Volumes/ladcuno8tb0/2017_South/BUOY201/7219A28F.201
+3. /Volumes/ladcuno8tb0/2017_West/Buoy170/71802C9F.170
+4. /Volumes/ladcuno8tb0/2017_South/BUOY201/7212361C.201
+5. /Volumes/ladcuno8tb0/2017_South/Buoy150/7190AF16.150
+6. /Volumes/ladcuno8tb0/2017_West/Buoy140/7177FB46.140
+7. /Volumes/ladcuno8tb0/2017_South/Buoy151/7195237C.151
+8. /Volumes/ladcuno8tb0/2017_West/Buoy140/716102D6.140
+9. /Volumes/ladcuno8tb0/2017_South/Buoy150/7175C19E.150
+10. /Volumes/ladcuno8tb0/2017_West/Buoy140/7179152B.140

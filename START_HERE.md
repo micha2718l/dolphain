@@ -7,6 +7,7 @@ Your dolphain project has been **completely reorganized** from a messy root dire
 ## 📊 Before → After
 
 ### Before (Messy Root)
+
 ```
 dolphain/
 ├── 21 documentation files scattered around
@@ -20,6 +21,7 @@ dolphain/
 ```
 
 ### After (Clean Structure)
+
 ```
 dolphain/
 ├── README.md                     # 🆕 Clean, modern documentation
@@ -51,6 +53,7 @@ dolphain/
 ## 🎯 What You Can Do Now
 
 ### 1. **Quick Test (5 minutes)**
+
 ```bash
 # Test with 5 files
 python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 5
@@ -60,6 +63,7 @@ cat outputs/results/quick_test/top_5_files.txt
 ```
 
 ### 2. **Medium Analysis (20 minutes)**
+
 ```bash
 # Analyze 1000 random files
 python scripts/quick_find.py --file-list outputs/ears_files_list.txt --n-files 1000
@@ -69,6 +73,7 @@ cat outputs/results/quick_find_results/top_20_files.txt
 ```
 
 ### 3. **Listen to Files (2 seconds per file)**
+
 ```bash
 # Convert to WAV
 python scripts/ears_to_wav.py /Volumes/ladcuno8tb0/Buoy171/72146FB7.171
@@ -78,6 +83,7 @@ open outputs/audio/72146FB7_denoised.wav
 ```
 
 ### 4. **Visualize Files (2 minutes)**
+
 ```bash
 # Create spectrograms for 5 random files
 python scripts/visualize_random.py --file-list outputs/ears_files_list.txt --n-files 5
@@ -87,6 +93,7 @@ open outputs/plots/sanity_check_plots/
 ```
 
 ### 5. **Large-Scale Analysis (overnight)**
+
 ```bash
 # Find the BEST files from entire dataset
 nohup python scripts/find_interesting_files.py \
@@ -101,6 +108,7 @@ tail -f analysis.log
 ## 📈 Results So Far
 
 From your test with 100 random files:
+
 - ✅ **70%** had dolphin whistles
 - ✅ **23.66** mean whistles per file
 - ✅ **84.5/100** top score
@@ -130,13 +138,13 @@ open outputs/audio/*.wav
 
 ## 📖 Documentation
 
-| File | Purpose |
-|------|---------|
-| **README.md** | Main documentation - start here |
-| **QUICK_REFERENCE.md** | Command cheat sheet |
-| **LARGE_SCALE_ANALYSIS.md** | Complete pipeline guide |
-| **REORGANIZATION_GUIDE.md** | What changed in reorganization |
-| **TESTING_FRAMEWORK.md** | Experiment framework guide |
+| File                        | Purpose                         |
+| --------------------------- | ------------------------------- |
+| **README.md**               | Main documentation - start here |
+| **QUICK_REFERENCE.md**      | Command cheat sheet             |
+| **LARGE_SCALE_ANALYSIS.md** | Complete pipeline guide         |
+| **REORGANIZATION_GUIDE.md** | What changed in reorganization  |
+| **TESTING_FRAMEWORK.md**    | Experiment framework guide      |
 
 ## 🔧 Verified Working
 
@@ -144,7 +152,7 @@ open outputs/audio/*.wav
 ✅ Scripts run: `python scripts/quick_find.py --help`  
 ✅ Quick test: 5 files analyzed successfully  
 ✅ Outputs go to: `outputs/` directory  
-✅ Git ignores: `outputs/` (except structure)  
+✅ Git ignores: `outputs/` (except structure)
 
 ## 📝 To Commit Changes
 
@@ -173,6 +181,7 @@ git push
 ## 🎓 Learn More
 
 See the **QUICK_REFERENCE.md** for:
+
 - All available tools
 - Common workflows
 - Time estimates
