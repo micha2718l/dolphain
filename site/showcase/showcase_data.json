@@ -1,0 +1,160 @@
+{
+  "generated": "unknown",
+  "summary": {
+    "total_files": 5,
+    "total_whistles": 230,
+    "total_duration_s": 106.6,
+    "avg_whistles_per_file": 46.0,
+    "avg_coverage": 94.2,
+    "avg_freq_range_khz": 1.5,
+    "total_overlaps": 0,
+    "files_with_overlaps": 0
+  },
+  "files": [
+    {
+      "rank": 1,
+      "filename": "7190A5ED.200",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY200/7190A5ED.200",
+      "audio_raw": "audio/rank_01_7190A5ED_raw.wav",
+      "audio_denoised": "audio/rank_01_7190A5ED_denoised.wav",
+      "spectrogram": "images/rank_01_7190A5ED_spectrogram.png",
+      "waveform": "images/rank_01_7190A5ED_waveform.png",
+      "stats": {
+        "whistle_count": 54,
+        "duration": 21.33,
+        "coverage": 93.6,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.6,
+        "freq_mean_khz": 2.4,
+        "freq_range_khz": 1.5,
+        "whistle_duration_mean_s": 0.37,
+        "whistle_duration_std_s": 0.285,
+        "mean_gap_s": 0.025,
+        "gap_variability": 0.044,
+        "overlaps": 0,
+        "whistles_per_minute": 151.9
+      },
+      "metadata": {
+        "time_start": "2017-07-10 03:41:32.133594",
+        "duration": 21.333333333333332
+      },
+      "score": 55.53
+    },
+    {
+      "rank": 2,
+      "filename": "71996C5A.201",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/71996C5A.201",
+      "audio_raw": "audio/rank_02_71996C5A_raw.wav",
+      "audio_denoised": "audio/rank_02_71996C5A_denoised.wav",
+      "spectrogram": "images/rank_02_71996C5A_spectrogram.png",
+      "waveform": "images/rank_02_71996C5A_waveform.png",
+      "stats": {
+        "whistle_count": 44,
+        "duration": 21.33,
+        "coverage": 94.6,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.3,
+        "freq_mean_khz": 2.4,
+        "freq_range_khz": 1.2,
+        "whistle_duration_mean_s": 0.459,
+        "whistle_duration_std_s": 0.335,
+        "mean_gap_s": 0.025,
+        "gap_variability": 0.057,
+        "overlaps": 0,
+        "whistles_per_minute": 123.8
+      },
+      "metadata": {
+        "time_start": "2017-07-19 15:18:25.943375",
+        "duration": 21.333333333333332
+      },
+      "score": 55.12
+    },
+    {
+      "rank": 3,
+      "filename": "721896A3.201",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/721896A3.201",
+      "audio_raw": "audio/rank_03_721896A3_raw.wav",
+      "audio_denoised": "audio/rank_03_721896A3_denoised.wav",
+      "spectrogram": "images/rank_03_721896A3_spectrogram.png",
+      "waveform": "images/rank_03_721896A3_waveform.png",
+      "stats": {
+        "whistle_count": 56,
+        "duration": 21.33,
+        "coverage": 91.5,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.8,
+        "freq_mean_khz": 2.5,
+        "freq_range_khz": 1.7,
+        "whistle_duration_mean_s": 0.348,
+        "whistle_duration_std_s": 0.233,
+        "mean_gap_s": 0.033,
+        "gap_variability": 0.05,
+        "overlaps": 0,
+        "whistles_per_minute": 157.5
+      },
+      "metadata": {
+        "time_start": "2017-08-07 11:46:54.256219",
+        "duration": 21.333333333333332
+      },
+      "score": 55.11
+    },
+    {
+      "rank": 4,
+      "filename": "7220B70A.201",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/7220B70A.201",
+      "audio_raw": "audio/rank_04_7220B70A_raw.wav",
+      "audio_denoised": "audio/rank_04_7220B70A_denoised.wav",
+      "spectrogram": "images/rank_04_7220B70A_spectrogram.png",
+      "waveform": "images/rank_04_7220B70A_waveform.png",
+      "stats": {
+        "whistle_count": 46,
+        "duration": 21.33,
+        "coverage": 95.2,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.8,
+        "freq_mean_khz": 2.5,
+        "freq_range_khz": 1.7,
+        "whistle_duration_mean_s": 0.442,
+        "whistle_duration_std_s": 0.354,
+        "mean_gap_s": 0.022,
+        "gap_variability": 0.036,
+        "overlaps": 0,
+        "whistles_per_minute": 129.4
+      },
+      "metadata": {
+        "time_start": "2017-08-09 12:56:00.509781",
+        "duration": 21.333333333333332
+      },
+      "score": 54.97
+    },
+    {
+      "rank": 5,
+      "filename": "71844662.200",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY200/71844662.200",
+      "audio_raw": "audio/rank_05_71844662_raw.wav",
+      "audio_denoised": "audio/rank_05_71844662_denoised.wav",
+      "spectrogram": "images/rank_05_71844662_spectrogram.png",
+      "waveform": "images/rank_05_71844662_waveform.png",
+      "stats": {
+        "whistle_count": 30,
+        "duration": 21.33,
+        "coverage": 96.3,
+        "freq_min_khz": 2.1,
+        "freq_max_khz": 3.6,
+        "freq_mean_khz": 2.5,
+        "freq_range_khz": 1.5,
+        "whistle_duration_mean_s": 0.684,
+        "whistle_duration_std_s": 0.809,
+        "mean_gap_s": 0.027,
+        "gap_variability": 0.043,
+        "overlaps": 0,
+        "whistles_per_minute": 84.4
+      },
+      "metadata": {
+        "time_start": "2017-07-04 02:45:40.578062",
+        "duration": 21.333333333333332
+      },
+      "score": 54.4
+    }
+  ]
+}
