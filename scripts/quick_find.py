@@ -12,7 +12,7 @@ Usage:
 
     # Resume if interrupted
     python quick_find.py --file-list ears_files_list.txt --n-files 1000 --resume
-    
+
     # Find unique/exceptional signals
     python quick_find.py --file-list ears_files_list.txt --n-files 1000 --mode unique
 """
@@ -369,28 +369,34 @@ def detect_click_trains(
 def detect_unique_features(data, fs):
     """
     Detect unique and exceptional acoustic features.
-    
+
     Returns dict with metrics about rare/exceptional characteristics.
     """
     nperseg = 8192
     noverlap = int(0.75 * nperseg)
-    
+
     f, t, Sxx = sp_signal.spectrogram(
-        data, fs=fs, nperseg=nperseg, noverlap=noverlap,
-        window='hann', scaling='density'
+        data,
+        fs=fs,
+        nperseg=nperseg,
+        noverlap=noverlap,
+        window="hann",
+        scaling="density",
     )
-    
+
     Sxx_dB = 10 * np.log10(Sxx + 1e-12)
-    
+
     features = {}
-    
+
     # 1. Multi-band frequency activity
     bands = {
-        'ultra_low': (0, 2000), 'low': (2000, 10000),
-        'mid': (10000, 40000), 'high': (40000, 80000),
-        'ultra_high': (80000, 125000),
+        "ultra_low": (0, 2000),
+        "low": (2000, 10000),
+        "mid": (10000, 40000),
+        "high": (40000, 80000),
+        "ultra_high": (80000, 125000),
     }
-    
+
     active_bands = 0
     for f_low, f_high in bands.values():
         mask = (f >= f_low) & (f < f_high)
@@ -399,24 +405,24 @@ def detect_unique_features(data, fs):
             noise_floor = np.percentile(Sxx_dB[mask, :], 20)
             if band_energy > noise_floor + 10:
                 active_bands += 1
-    
-    features['active_bands'] = active_bands
-    
+
+    features["active_bands"] = active_bands
+
     # 2. Spectral entropy (frequency diversity)
     freq_power = np.sum(Sxx, axis=1)
     freq_power_norm = freq_power / np.sum(freq_power)
-    features['spectral_entropy'] = float(entropy(freq_power_norm))
-    
+    features["spectral_entropy"] = float(entropy(freq_power_norm))
+
     # 3. Peak frequency range
     threshold = np.percentile(Sxx_dB, 95)
     strong_freqs = f[np.any(Sxx_dB > threshold, axis=1)]
     if len(strong_freqs) > 0:
-        features['freq_range'] = float(strong_freqs.max() - strong_freqs.min())
-        features['max_freq'] = float(strong_freqs.max())
+        features["freq_range"] = float(strong_freqs.max() - strong_freqs.min())
+        features["max_freq"] = float(strong_freqs.max())
     else:
-        features['freq_range'] = 0.0
-        features['max_freq'] = 0.0
-    
+        features["freq_range"] = 0.0
+        features["max_freq"] = 0.0
+
     # 4. Simultaneous signals
     max_simultaneous = 0
     for time_idx in range(len(t)):
@@ -424,39 +430,41 @@ def detect_unique_features(data, fs):
         threshold_col = np.percentile(col, 95)
         peaks, _ = sp_signal.find_peaks(col, height=threshold_col, distance=50)
         max_simultaneous = max(max_simultaneous, len(peaks))
-    
-    features['max_simultaneous'] = max_simultaneous
-    
+
+    features["max_simultaneous"] = max_simultaneous
+
     # 5. Ultra-fast sweeps
     fast_sweeps = 0
     chirps = []
     threshold = np.percentile(Sxx_dB, 95)
-    
+
     for time_idx in range(len(t)):
         col = Sxx_dB[:, time_idx]
         peaks, _ = sp_signal.find_peaks(col, height=threshold, distance=50)
-        
+
         extended = set()
         for chirp in chirps:
-            if chirp['end_idx'] == time_idx - 1 and len(peaks) > 0:
-                last_freq = chirp['freq_indices'][-1]
+            if chirp["end_idx"] == time_idx - 1 and len(peaks) > 0:
+                last_freq = chirp["freq_indices"][-1]
                 closest = peaks[np.argmin(np.abs(peaks - last_freq))]
                 if abs(closest - last_freq) < 15:
-                    chirp['freq_indices'].append(closest)
-                    chirp['end_idx'] = time_idx
+                    chirp["freq_indices"].append(closest)
+                    chirp["end_idx"] = time_idx
                     extended.add(closest)
-        
+
         for peak in peaks:
             if peak not in extended:
-                chirps.append({'freq_indices': [peak], 'end_idx': time_idx, 'start_idx': time_idx})
-    
+                chirps.append(
+                    {"freq_indices": [peak], "end_idx": time_idx, "start_idx": time_idx}
+                )
+
     for chirp in chirps:
-        if len(chirp['freq_indices']) >= 3:
-            freq_indices = np.array(chirp['freq_indices'])
+        if len(chirp["freq_indices"]) >= 3:
+            freq_indices = np.array(chirp["freq_indices"])
             freqs = f[freq_indices]
-            time_indices = list(range(chirp['start_idx'], chirp['end_idx'] + 1))
-            times = t[time_indices[:len(freqs)]]
-            
+            time_indices = list(range(chirp["start_idx"], chirp["end_idx"] + 1))
+            times = t[time_indices[: len(freqs)]]
+
             if len(times) >= 2:
                 duration = times[-1] - times[0]
                 freq_change = abs(freqs[-1] - freqs[0])
@@ -464,15 +472,17 @@ def detect_unique_features(data, fs):
                     sweep_rate = freq_change / duration
                     if sweep_rate > 10000:  # >10 kHz/sec
                         fast_sweeps += 1
-    
-    features['fast_sweeps'] = fast_sweeps
-    
+
+    features["fast_sweeps"] = fast_sweeps
+
     # 6. Harmonics
     harmonics = 0
     for time_idx in range(0, len(t), 5):
         col = Sxx_dB[:, time_idx]
-        peaks, _ = sp_signal.find_peaks(col, height=np.percentile(col, 90), distance=20, prominence=5)
-        
+        peaks, _ = sp_signal.find_peaks(
+            col, height=np.percentile(col, 90), distance=20, prominence=5
+        )
+
         if len(peaks) >= 2:
             peak_freqs = f[peaks]
             for i in range(len(peak_freqs)):
@@ -481,81 +491,85 @@ def detect_unique_features(data, fs):
                     if 1.8 < ratio < 2.2 or 2.8 < ratio < 3.2:
                         harmonics += 1
                         break
-    
-    features['harmonics'] = harmonics
-    
+
+    features["harmonics"] = harmonics
+
     # 7. Unusual click patterns
     nyquist = fs / 2.0
-    sos = sp_signal.butter(6, [20000/nyquist, 0.999], btype='bandpass', output='sos')
+    sos = sp_signal.butter(6, [20000 / nyquist, 0.999], btype="bandpass", output="sos")
     filtered = sp_signal.sosfiltfilt(sos, data)
     analytic = sp_signal.hilbert(filtered)
     envelope = np.abs(analytic)
-    
+
     threshold = np.percentile(envelope, 99)
-    peaks, _ = sp_signal.find_peaks(envelope, height=threshold, distance=int(fs*0.001))
-    
+    peaks, _ = sp_signal.find_peaks(
+        envelope, height=threshold, distance=int(fs * 0.001)
+    )
+
     if len(peaks) >= 5:
         peak_times = peaks / fs
         icis = np.diff(peak_times)
-        features['burst_clicks'] = int(np.sum(icis < 0.005))
-        
+        features["burst_clicks"] = int(np.sum(icis < 0.005))
+
         if len(icis) > 2:
             cv = np.std(icis) / np.mean(icis) if np.mean(icis) > 0 else 999
-            features['click_regularity'] = cv < 0.3 or cv > 0.8  # Very regular or very irregular
+            features["click_regularity"] = (
+                cv < 0.3 or cv > 0.8
+            )  # Very regular or very irregular
     else:
-        features['burst_clicks'] = 0
-        features['click_regularity'] = False
-    
+        features["burst_clicks"] = 0
+        features["click_regularity"] = False
+
     return features
 
 
 def calculate_uniqueness_score(features):
     """Calculate uniqueness score (0-100) for exceptional features."""
     score = 0.0
-    
+
     # Multi-band activity (0-15 pts)
-    score += min(15, features.get('active_bands', 0) * 3)
-    
+    score += min(15, features.get("active_bands", 0) * 3)
+
     # Spectral diversity (0-10 pts)
-    score += min(10, (features.get('spectral_entropy', 0) / 5.0) * 10)
-    
+    score += min(10, (features.get("spectral_entropy", 0) / 5.0) * 10)
+
     # Frequency range (0-10 pts)
-    score += min(10, (features.get('freq_range', 0) / 50000) * 10)
-    
+    score += min(10, (features.get("freq_range", 0) / 50000) * 10)
+
     # Extreme frequencies (0-5 pts)
-    if features.get('max_freq', 0) > 100000:
+    if features.get("max_freq", 0) > 100000:
         score += 5
-    elif features.get('max_freq', 0) > 80000:
+    elif features.get("max_freq", 0) > 80000:
         score += 3
-    
+
     # Simultaneous signals (0-10 pts)
-    max_sim = features.get('max_simultaneous', 0)
+    max_sim = features.get("max_simultaneous", 0)
     if max_sim >= 4:
         score += 10
     elif max_sim >= 3:
         score += 7
     elif max_sim >= 2:
         score += 4
-    
+
     # Harmonics (0-10 pts)
-    score += min(10, features.get('harmonics', 0) * 0.5)
-    
+    score += min(10, features.get("harmonics", 0) * 0.5)
+
     # Fast sweeps (0-10 pts)
-    n_fast = features.get('fast_sweeps', 0)
+    n_fast = features.get("fast_sweeps", 0)
     if n_fast >= 5:
         score += 10
     elif n_fast >= 3:
         score += 7
     elif n_fast >= 1:
         score += 4
-    
+
     # Burst clicks (0-8 pts)
-    score += min(8, features.get('burst_clicks', 0) * 0.2)
-    
+    score += min(8, features.get("burst_clicks", 0) * 0.2)
+
     # Unusual regularity (0-5 pts)
-    if features.get('click_regularity', False):
+    if features.get("click_regularity", False):
         score += 5
-    
+
     return min(100, score)
 
 
@@ -787,21 +801,27 @@ def quick_find(
                 # Unique signal detection mode
                 unique_features = detect_unique_features(signal_clean, data_dict["fs"])
                 uniqueness_score = calculate_uniqueness_score(unique_features)
-                
+
                 result = {
                     "file": str(file_path),
                     "filename": file_path.name,
                     "recording_duration": data_dict["duration"],
-                    "interestingness_score": round(uniqueness_score, 2),  # Use interestingness_score for compatibility
-                    "uniqueness_score": round(uniqueness_score, 2),  # Also keep for reference
-                    "active_bands": unique_features.get('active_bands', 0),
-                    "spectral_entropy": round(unique_features.get('spectral_entropy', 0), 2),
-                    "freq_range": round(unique_features.get('freq_range', 0), 1),
-                    "max_freq": round(unique_features.get('max_freq', 0), 1),
-                    "max_simultaneous": unique_features.get('max_simultaneous', 0),
-                    "fast_sweeps": unique_features.get('fast_sweeps', 0),
-                    "harmonics": unique_features.get('harmonics', 0),
-                    "burst_clicks": unique_features.get('burst_clicks', 0),
+                    "interestingness_score": round(
+                        uniqueness_score, 2
+                    ),  # Use interestingness_score for compatibility
+                    "uniqueness_score": round(
+                        uniqueness_score, 2
+                    ),  # Also keep for reference
+                    "active_bands": unique_features.get("active_bands", 0),
+                    "spectral_entropy": round(
+                        unique_features.get("spectral_entropy", 0), 2
+                    ),
+                    "freq_range": round(unique_features.get("freq_range", 0), 1),
+                    "max_freq": round(unique_features.get("max_freq", 0), 1),
+                    "max_simultaneous": unique_features.get("max_simultaneous", 0),
+                    "fast_sweeps": unique_features.get("fast_sweeps", 0),
+                    "harmonics": unique_features.get("harmonics", 0),
+                    "burst_clicks": unique_features.get("burst_clicks", 0),
                     # Add placeholder fields that showcase might expect
                     "n_chirps": 0,  # Not detected in unique mode
                     "n_click_trains": 0,  # Not detected in unique mode
@@ -880,7 +900,7 @@ def quick_find(
                     result, chirps, click_trains, signal_clean, data_dict["fs"]
                 )
                 result["interestingness_score"] = round(score, 2)
-            
+
             results.append(result)
 
         except Exception as e:
@@ -908,10 +928,12 @@ def quick_find(
 
                 if mode == "unique":
                     # Stats for unique mode
-                    n_high = sum(1 for r in results if r.get("uniqueness_score", 0) > 70)
+                    n_high = sum(
+                        1 for r in results if r.get("uniqueness_score", 0) > 70
+                    )
                     n_harmonics = sum(1 for r in results if r.get("harmonics", 0) > 0)
                     n_fast = sum(1 for r in results if r.get("fast_sweeps", 0) > 0)
-                    
+
                     print(
                         f"  ⏳ Progress: {overall_index + 1}/{total_files} ({(overall_index + 1)/total_files*100:.1f}%) "
                         f"| {rate:.1f} files/s | ETA: {remaining_time/60:.1f}m"
@@ -962,8 +984,10 @@ def quick_find(
     # Save full results
     import json
 
-    detection_targets = ["unique_features"] if mode == "unique" else ["chirps", "click_trains"]
-    
+    detection_targets = (
+        ["unique_features"] if mode == "unique" else ["chirps", "click_trains"]
+    )
+
     with open(output_dir / "results.json", "w") as f:
         json.dump(
             {
@@ -980,14 +1004,16 @@ def quick_find(
 
     # Save top files list
     top_20 = results[:20]
-    
+
     if mode == "unique":
         header_title = "TOP 20 MOST UNIQUE FILES - EXCEPTIONAL FEATURES"
         header_cols = f"{'Rank':<6} {'Score':<8} {'Bands':<7} {'Harmonics':<10} {'Sweeps':<8} {'File'}\n"
     else:
         header_title = "TOP 20 MOST INTERESTING FILES - CHIRPS & CLICK TRAINS"
-        header_cols = f"{'Rank':<6} {'Score':<8} {'Chirps':<8} {'Clicks':<8} {'CT':<6} {'File'}\n"
-    
+        header_cols = (
+            f"{'Rank':<6} {'Score':<8} {'Chirps':<8} {'Clicks':<8} {'CT':<6} {'File'}\n"
+        )
+
     with open(output_dir / "top_20_files.txt", "w") as f:
         f.write(header_title + "\n")
         f.write("=" * 100 + "\n\n")
@@ -997,7 +1023,7 @@ def quick_find(
         for i, result in enumerate(top_20, 1):
             score = result["interestingness_score"]
             filename = result["filename"]
-            
+
             if mode == "unique":
                 bands = result.get("active_bands", 0)
                 harmonics = result.get("harmonics", 0)
@@ -1040,16 +1066,24 @@ def quick_find(
         n_with_harmonics = sum(1 for r in results if r.get("harmonics", 0) > 0)
         n_with_fast_sweeps = sum(1 for r in results if r.get("fast_sweeps", 0) > 0)
         n_multi_band = sum(1 for r in results if r.get("active_bands", 0) >= 4)
-        
-        print(f"High uniqueness (>70): {n_high_score} ({n_high_score/len(results)*100:.1f}%)")
-        print(f"Files with harmonics: {n_with_harmonics} ({n_with_harmonics/len(results)*100:.1f}%)")
-        print(f"Files with fast sweeps: {n_with_fast_sweeps} ({n_with_fast_sweeps/len(results)*100:.1f}%)")
-        print(f"Files with 4+ bands: {n_multi_band} ({n_multi_band/len(results)*100:.1f}%)")
-        
+
+        print(
+            f"High uniqueness (>70): {n_high_score} ({n_high_score/len(results)*100:.1f}%)"
+        )
+        print(
+            f"Files with harmonics: {n_with_harmonics} ({n_with_harmonics/len(results)*100:.1f}%)"
+        )
+        print(
+            f"Files with fast sweeps: {n_with_fast_sweeps} ({n_with_fast_sweeps/len(results)*100:.1f}%)"
+        )
+        print(
+            f"Files with 4+ bands: {n_multi_band} ({n_multi_band/len(results)*100:.1f}%)"
+        )
+
         avg_score = np.mean([r.get("interestingness_score", 0) for r in results])
         print(f"Average uniqueness score: {avg_score:.1f}")
         print()
-        
+
         print("TOP 5 MOST UNIQUE FILES:")
         for i, result in enumerate(results[:5], 1):
             score = result["interestingness_score"]
@@ -1070,7 +1104,9 @@ def quick_find(
             if r.get("n_chirps", 0) > 0 and r.get("n_click_trains", 0) > 0
         )
 
-        print(f"Files with chirps: {n_with_chirps} ({n_with_chirps/len(results)*100:.1f}%)")
+        print(
+            f"Files with chirps: {n_with_chirps} ({n_with_chirps/len(results)*100:.1f}%)"
+        )
         print(
             f"Files with click trains: {n_with_clicks} ({n_with_clicks/len(results)*100:.1f}%)"
         )
