@@ -2,6 +2,8 @@ README.md
 setup.py
 dolphain/__init__.py
 dolphain/batch.py
+dolphain/branching.py
+dolphain/experiments.py
 dolphain/io.py
 dolphain/plotting.py
 dolphain/signal.py
@@ -11,4 +13,6 @@ dolphain.egg-info/dependency_links.txt
 dolphain.egg-info/entry_points.txt
 dolphain.egg-info/requires.txt
 dolphain.egg-info/top_level.txt
+tests/test_batch.py
+tests/test_branching_showcase.py
 tests/test_ears_reader.py
