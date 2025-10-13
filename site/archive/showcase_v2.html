@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphin Communication Showcase</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2f4a 100%);
+            color: #ffffff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .file-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .file-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .file-title {
+            font-size: 1.5em;
+            color: #00d4ff;
+        }
+        
+        /* Audio mode tabs */
+        .audio-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .audio-tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .audio-tab.active {
+            background: rgba(0, 212, 255, 0.3);
+            border-color: #00d4ff;
+        }
+        
+        .audio-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Visualizations */
+        .viz-container {
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .viz-image {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .playback-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.8);
+            pointer-events: none;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+        }
+        
+        .hover-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            display: none;
+        }
+        
+        /* Audio player controls */
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #00d4ff;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-btn:hover {
+            background: #00b8e6;
+        }
+        
+        .time {
+            color: #00d4ff;
+            font-family: monospace;
+        }
+        
+        .timeline {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .timeline-progress {
+            height: 100%;
+            background: #00d4ff;
+            border-radius: 3px;
+            width: 0%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐬 Dolphin Communication Showcase</h1>
+        <div id="files-container"></div>
+    </div>
+    
+    <script>
+        // Store player state for each file
+        const players = {};
+        
+        class AudioPlayer {
+            constructor(rank, fileData) {
+                this.rank = rank;
+                this.fileData = fileData;
+                this.currentMode = 'denoised'; // Start with denoised
+                this.audioElement = null;
+                this.isPlaying = false;
+                this.isSeeking = false; // Track when we're actively seeking
+                
+                // DOM elements (will be set after rendering)
+                this.elements = {};
+            }
+            
+            init() {
+                // Create audio element
+                this.audioElement = new Audio();
+                this.audioElement.preload = 'metadata';
+                this.audioElement.autoplay = false; // Explicitly disable autoplay
+                console.log(`Rank ${this.rank}: Initializing player, isPlaying: ${this.isPlaying}`);
+                this.setMode(this.currentMode);
+                
+                // Event listeners
+                this.audioElement.addEventListener('loadedmetadata', () => this.onMetadataLoaded());
+                this.audioElement.addEventListener('timeupdate', () => this.onTimeUpdate());
+                this.audioElement.addEventListener('ended', () => this.onEnded());
+                this.audioElement.addEventListener('play', () => {
+                    console.log(`Rank ${this.rank}: Audio started playing`);
+                    this.isPlaying = true;
+                });
+                this.audioElement.addEventListener('pause', () => {
+                    if (!this.isSeeking) {
+                        console.log(`Rank ${this.rank}: Audio paused`);
+                        this.isPlaying = false;
+                    }
+                });
+            }
+            
+            setMode(mode) {
+                console.log(`Rank ${this.rank}: setMode(${mode}), current mode: ${this.currentMode}`);
+                this.currentMode = mode;
+                const audioSrc = mode === 'raw' ? this.fileData.audio_raw : this.fileData.audio_denoised;
+                const specSrc = mode === 'raw' ? this.fileData.spectrogram_raw : this.fileData.spectrogram_denoised;
+                const wavSrc = mode === 'raw' ? this.fileData.waveform_raw : this.fileData.waveform_denoised;
+                
+                console.log(`Rank ${this.rank}: Switching audio to ${audioSrc}`);
+                
+                // Store current time and playing state
+                const currentTime = this.audioElement ? this.audioElement.currentTime : 0;
+                const wasPlaying = this.isPlaying;
+                
+                // Set seeking flag to prevent pause events during mode switch
+                this.isSeeking = true;
+                
+                // Pause audio during switch
+                if (this.audioElement && this.isPlaying) {
+                    this.audioElement.pause();
+                }
+                
+                // Update audio source
+                this.audioElement.src = `showcase/${audioSrc}`;
+                
+                // Update images immediately (only if elements are populated)
+                if (this.elements.spectrogram) {
+                    this.elements.spectrogram.src = `showcase/${specSrc}`;
+                    this.elements.waveform.src = `showcase/${wavSrc}`;
+                }
+                
+                // Update tabs (only if card exists in DOM)
+                const tabs = document.querySelectorAll(`#card-${this.rank} .audio-tab`);
+                if (tabs.length > 0) {
+                    tabs.forEach(tab => {
+                        tab.classList.toggle('active', tab.dataset.mode === mode);
+                    });
+                }
+                
+                // Load the new audio and restore state when ready
+                this.audioElement.load();
+                
+                // Restore position when metadata loads
+                if (currentTime > 0) {
+                    this.audioElement.addEventListener('loadedmetadata', () => {
+                        console.log(`Rank ${this.rank}: Restoring position to ${currentTime.toFixed(2)}s, wasPlaying: ${wasPlaying}`);
+                        this.audioElement.currentTime = currentTime;
+                        setTimeout(() => {
+                            this.isSeeking = false;
+                        }, 100);
+                        if (wasPlaying) {
+                            this.audioElement.play().catch(e => console.log('Autoplay prevented:', e));
+                        }
+                    }, { once: true });
+                } else {
+                    setTimeout(() => {
+                        this.isSeeking = false;
+                    }, 100);
+                }
+            }
+            
+            togglePlay() {
+                if (this.isPlaying) {
+                    this.audioElement.pause();
+                } else {
+                    this.audioElement.play();
+                }
+            }
+            
+            seekTo(percent) {
+                if (!this.audioElement.duration || isNaN(this.audioElement.duration) || this.audioElement.duration === 0) {
+                    console.log(`Rank ${this.rank}: Duration not ready, waiting...`);
+                    // Wait for metadata to load, then seek
+                    this.audioElement.addEventListener('loadedmetadata', () => {
+                        console.log(`Rank ${this.rank}: Metadata loaded, retrying seek`);
+                        this.seekTo(percent);
+                    }, { once: true });
+                    return;
+                }
+                
+                this.isSeeking = true;
+                const targetTime = percent * this.audioElement.duration;
+                const currentTime = this.audioElement.currentTime;
+                console.log(`Rank ${this.rank}: Seeking from ${currentTime.toFixed(2)}s to ${targetTime.toFixed(2)}s (${(percent * 100).toFixed(1)}%), isPlaying: ${this.isPlaying}, readyState: ${this.audioElement.readyState}`);
+                
+                // Store the target time so we can verify the seek completed correctly
+                this.targetSeekTime = targetTime;
+                this.seekRetryCount = 0; // Reset retry counter
+                
+                // Set currentTime
+                this.audioElement.currentTime = targetTime;
+                
+                // Wait for the seeked event to verify the seek completed
+                const seekedHandler = () => {
+                    const actualTime = this.audioElement.currentTime;
+                    console.log(`Rank ${this.rank}: Seeked event fired, currentTime: ${actualTime.toFixed(2)}s, target: ${this.targetSeekTime.toFixed(2)}s, readyState: ${this.audioElement.readyState}`);
+                    
+                    // Check if we're at the wrong position
+                    if (Math.abs(actualTime - this.targetSeekTime) > 0.5) {
+                        this.seekRetryCount = (this.seekRetryCount || 0) + 1;
+                        
+                        // Give up after 3 retries
+                        if (this.seekRetryCount > 3) {
+                            console.error(`Rank ${this.rank}: Seek failed after 3 retries. Audio src: ${this.audioElement.src}, readyState: ${this.audioElement.readyState}`);
+                            this.isSeeking = false;
+                            // If not playing, try to play from current position
+                            if (!this.isPlaying) {
+                                this.audioElement.play().catch(e => console.log('Autoplay prevented:', e));
+                            }
+                            return;
+                        }
+                        
+                        console.log(`Rank ${this.rank}: Seek failed (retry ${this.seekRetryCount}/3), actual: ${actualTime.toFixed(2)}s, target: ${this.targetSeekTime.toFixed(2)}s`);
+                        this.audioElement.currentTime = this.targetSeekTime;
+                        // Wait again for seeked
+                        this.audioElement.addEventListener('seeked', seekedHandler, { once: true });
+                        return;
+                    }
+                    
+                    // Seek successful
+                    this.isSeeking = false;
+                    // If not playing, start playback
+                    if (!this.isPlaying) {
+                        this.audioElement.play().catch(e => console.log('Autoplay prevented:', e));
+                    }
+                };
+                this.audioElement.addEventListener('seeked', seekedHandler, { once: true });
+            }
+            
+            onMetadataLoaded() {
+                this.elements.duration.textContent = this.formatTime(this.audioElement.duration);
+            }
+            
+            onTimeUpdate() {
+                const percent = (this.audioElement.currentTime / this.audioElement.duration) * 100;
+                
+                // Update timeline
+                this.elements.timeline.style.width = `${percent}%`;
+                this.elements.currentTime.textContent = this.formatTime(this.audioElement.currentTime);
+                
+                // Update playback lines on visualizations
+                this.elements.specPlayback.style.left = `${percent}%`;
+                this.elements.wavePlayback.style.left = `${percent}%`;
+            }
+            
+            onEnded() {
+                this.isPlaying = false;
+                this.elements.playBtn.textContent = '▶';
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        // Load and display files
+        fetch('showcase/showcase_data.json')
+            .then(r => r.json())
+            .then(data => {
+                const container = document.getElementById('files-container');
+                
+                data.files.forEach(file => {
+                    const card = document.createElement('div');
+                    card.className = 'file-card';
+                    card.id = `card-${file.rank}`;
+                    
+                    card.innerHTML = `
+                        <div class="file-header">
+                            <div class="file-title">Rank ${file.rank}: ${file.filename}</div>
+                            <div style="color: #00d4ff;">Score: ${file.score.toFixed(1)}</div>
+                        </div>
+                        
+                        <div class="audio-tabs">
+                            <div class="audio-tab active" data-mode="denoised" onclick="players[${file.rank}].setMode('denoised')">
+                                ✨ Denoised
+                            </div>
+                            <div class="audio-tab" data-mode="raw" onclick="players[${file.rank}].setMode('raw')">
+                                🎵 Raw
+                            </div>
+                        </div>
+                        
+                        <div class="viz-container" id="spec-${file.rank}">
+                            <img class="viz-image" src="showcase/${file.spectrogram_denoised}" alt="Spectrogram">
+                            <div class="hover-line" id="spec-hover-${file.rank}"></div>
+                            <div class="playback-line" id="spec-playback-${file.rank}"></div>
+                        </div>
+                        
+                        <div class="viz-container" id="wave-${file.rank}">
+                            <img class="viz-image" src="showcase/${file.waveform_denoised}" alt="Waveform">
+                            <div class="hover-line" id="wave-hover-${file.rank}"></div>
+                            <div class="playback-line" id="wave-playback-${file.rank}"></div>
+                        </div>
+                        
+                        <div class="player-controls">
+                            <button class="play-btn" id="play-${file.rank}">▶</button>
+                            <span class="time" id="current-${file.rank}">0:00</span>
+                            <div class="timeline" id="timeline-container-${file.rank}" onclick="handleTimelineClick(event, ${file.rank})">
+                                <div class="timeline-progress" id="timeline-${file.rank}"></div>
+                            </div>
+                            <span class="time" id="duration-${file.rank}">0:00</span>
+                        </div>
+                        
+                        <div style="margin-top: 15px; display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div>🎺 Chirps: <strong>${file.stats.chirp_count}</strong></div>
+                            <div>🔊 Clicks: <strong>${file.stats.total_clicks}</strong></div>
+                            <div>⏱️ Duration: <strong>${file.stats.duration.toFixed(1)}s</strong></div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                    
+                    // Create player
+                    const player = new AudioPlayer(file.rank, file);
+                    players[file.rank] = player;
+                    
+                    // Store DOM element references
+                    player.elements = {
+                        playBtn: document.getElementById(`play-${file.rank}`),
+                        currentTime: document.getElementById(`current-${file.rank}`),
+                        duration: document.getElementById(`duration-${file.rank}`),
+                        timeline: document.getElementById(`timeline-${file.rank}`),
+                        spectrogram: card.querySelector(`#spec-${file.rank} img`),
+                        waveform: card.querySelector(`#wave-${file.rank} img`),
+                        specPlayback: document.getElementById(`spec-playback-${file.rank}`),
+                        wavePlayback: document.getElementById(`wave-playback-${file.rank}`),
+                        specHover: document.getElementById(`spec-hover-${file.rank}`),
+                        waveHover: document.getElementById(`wave-hover-${file.rank}`)
+                    };
+                    
+                    // Initialize player
+                    player.init();
+                    
+                    // Setup viz scrubbing
+                    setupVizScrubbing(file.rank, 'spec');
+                    setupVizScrubbing(file.rank, 'wave');
+                    
+                    // Add play button click handler
+                    player.elements.playBtn.addEventListener('click', () => {
+                        player.togglePlay();
+                    });
+                    
+                    // Update play button on play/pause
+                    player.audioElement.addEventListener('play', () => {
+                        player.elements.playBtn.textContent = '⏸';
+                    });
+                    player.audioElement.addEventListener('pause', () => {
+                        player.elements.playBtn.textContent = '▶';
+                    });
+                });
+            })
+            .catch(err => {
+                document.getElementById('files-container').innerHTML = `
+                    <div style="color: red; padding: 20px; text-align: center;">
+                        Error loading showcase data: ${err.message}
+                    </div>
+                `;
+            });
+        
+        function setupVizScrubbing(rank, type) {
+            const container = document.getElementById(`${type}-${rank}`);
+            const hoverLine = document.getElementById(`${type}-hover-${rank}`);
+            
+            container.addEventListener('mouseenter', () => {
+                hoverLine.style.display = 'block';
+            });
+            
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const percent = ((e.clientX - rect.left) / rect.width) * 100;
+                hoverLine.style.left = `${percent}%`;
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                hoverLine.style.display = 'none';
+            });
+            
+            container.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                players[rank].seekTo(percent);
+            });
+        }
+        
+        function handleTimelineClick(event, rank) {
+            const timeline = event.currentTarget;
+            const rect = timeline.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            players[rank].seekTo(percent);
+        }
+    </script>
+</body>
+</html>

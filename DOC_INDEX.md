@@ -14,6 +14,10 @@
 
 ## 🎨 Showcase System
 
+- **`SHOWCASE_CLEANUP_COMPLETE.md`** - ✅ Latest cleanup summary (Oct 12, 2025)
+- **`SHOWCASE_CLEANUP.md`** - Detailed cleanup process and improvements
+- **`AUDIO_PLAYER_FIX.md`** - Bug fixes and technical implementation details
+- **`SHOWCASE_QUICK_REF.md`** - Quick reference for daily showcase use
 - **`SHOWCASE_GUIDE.md`** - Complete showcase generation guide
 - **`SHOWCASE_COMMANDS.md`** - Quick command reference
 - **`SHOWCASE_FIXES.md`** - Troubleshooting and fixes applied
