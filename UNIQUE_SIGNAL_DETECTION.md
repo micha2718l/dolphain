@@ -1,4 +1,4 @@
-# 🌟 Unique Signal Detection Experiment
+# 🌟 Unique Signal Detection Mode
 
 **Date:** October 13, 2025  
 **Branch:** `feature/unique-signal-detection`  
@@ -8,7 +8,232 @@
 
 ## 🎯 What This Detects
 
-This script goes beyond basic chirp/click detection to find **truly unique** recordings with exceptional characteristics:
+This mode is integrated into `quick_find.py` and goes beyond basic chirp/click detection to find **truly unique** recordings with exceptional characteristics:
+
+### 1. **Ultra-Fast Frequency Sweeps** 🚀
+- Sweeps faster than 10 kHz/second
+- Exceptionally rapid vocalizations
+
+### 2. **Extreme Frequency Ranges** 🎚️
+- Signals spanning >50 kHz range
+- Ultra-high frequencies (>100 kHz)
+- Wide bandwidth vocalizations
+
+### 3. **Multiple Simultaneous Vocalizations** 🎼
+- 2+ dolphins vocalizing at once
+- Overlapping signals at different frequencies
+- Social communication patterns
+
+### 4. **Unusual Click Patterns** 🥁
+- **Burst clicking:** Rapid clicks <5ms apart
+- **Rhythmic extremes:** Very regular or very irregular
+
+### 5. **Harmonic Structures** 🎹
+- Overtones (2x, 3x fundamental frequency)
+- Musical quality signals
+- Complex tonal vocalizations
+
+### 6. **High Spectral Diversity** 🌈
+- Activity across 5 frequency bands simultaneously
+- High spectral entropy
+- Rich, complex frequency content
+
+---
+
+## 🚀 How to Run
+
+### Basic Command
+
+```bash
+cd /Users/mjhaas/code/dolphain
+
+# Run unique signal detection
+python scripts/quick_find.py \
+  --file-list outputs/ears_files_list.txt \
+  --n-files 1000 \
+  --mode unique \
+  --output-dir experiments/unique_signals
+```
+
+### Standard Mode (for comparison)
+
+```bash
+# Standard chirp/click detection
+python scripts/quick_find.py \
+  --file-list outputs/ears_files_list.txt \
+  --n-files 1000 \
+  --mode standard \
+  --output-dir quick_find_results/standard_run
+```
+
+---
+
+## 📊 Scoring System (0-100)
+
+- **90-100:** Extremely rare, exceptional recordings ⭐⭐⭐⭐⭐
+- **70-90:** Very interesting, definitely review ⭐⭐⭐⭐
+- **50-70:** Notable features, worth checking ⭐⭐⭐
+- **30-50:** Some interesting aspects ⭐⭐
+- **0-30:** Typical recordings ⭐
+
+The algorithm rewards **quality over quantity** - finding gems rather than counting detections.
+
+---
+
+## 🎨 After It Completes
+
+Generate a showcase of the most unique files:
+
+```bash
+python scripts/refresh_showcase.py \
+  --results-dir experiments/unique_signals \
+  --top 15 \
+  --output site/showcase
+
+cd site
+python3 -m http.server 8000
+# Open: http://localhost:8000/showcase.html
+```
+
+---
+
+## 📊 Output Files
+
+Results saved to `experiments/unique_signals/`:
+
+### `results.json`
+Full detailed results with uniqueness metrics:
+```json
+{
+  "results": [
+    {
+      "filename": "file.123",
+      "uniqueness_score": 87.5,
+      "active_bands": 5,
+      "spectral_entropy": 4.2,
+      "freq_range": 68000.0,
+      "max_freq": 105000.0,
+      "max_simultaneous": 3,
+      "fast_sweeps": 4,
+      "harmonics": 12,
+      "burst_clicks": 25
+    }
+  ]
+}
+```
+
+---
+
+## 🏗️ Algorithm Features
+
+### Spectral Analysis
+```python
+# Frequency bands analyzed:
+ultra_low:   0-2 kHz     (rumbles, ambient)
+low:         2-10 kHz    (low whistles)
+mid:         10-40 kHz   (mid whistles, some clicks)
+high:        40-80 kHz   (high whistles, clicks)
+ultra_high:  80-125 kHz  (ultrasonic clicks)
+```
+
+### Scoring Breakdown (0-100)
+
+**Multi-band Activity (0-15 pts):**
+- 3 points per active frequency band (max 5 bands)
+
+**Spectral Diversity (0-10 pts):**
+- High entropy = diverse frequency content
+
+**Frequency Range (0-10 pts):**
+- >50 kHz span gets maximum points
+
+**Extreme Frequencies (0-5 pts):**
+- >100 kHz: 5 pts
+- >80 kHz: 3 pts
+
+**Simultaneous Signals (0-10 pts):**
+- 4+ overlapping: 10 pts
+- 3 overlapping: 7 pts
+- 2 overlapping: 4 pts
+
+**Harmonics (0-10 pts):**
+- 0.5 points per harmonic event detected
+
+**Ultra-Fast Sweeps (0-10 pts):**
+- 5+ sweeps: 10 pts
+- 3+ sweeps: 7 pts
+- 1+ sweeps: 4 pts
+
+**Burst Clicks (0-8 pts):**
+- 0.2 points per burst click (<5ms ICI)
+
+**Unusual Regularity (0-5 pts):**
+- Very regular OR very irregular click patterns
+
+---
+
+## 🎯 What Makes This Different
+
+### vs. Standard Mode
+**Standard:** Detects ANY chirps and clicks (quantity-focused)  
+**Unique:** Finds EXCEPTIONAL features (quality-focused)
+
+### Scoring Philosophy
+- High scores (>70): Truly exceptional, rare recordings
+- Medium scores (40-70): Interesting features, worth review
+- Low scores (<40): Typical recordings, less unique
+
+---
+
+## 📈 Expected Results
+
+Based on typical datasets:
+
+### Score Distribution
+- **90-100:** 0-2% (extremely rare)
+- **70-90:** 5-10% (very interesting)
+- **50-70:** 15-20% (interesting)
+- **30-50:** 30-40% (some aspects)
+- **0-30:** 40-50% (typical)
+
+### Feature Prevalence
+- **Fast sweeps (>10 kHz/sec):** ~10-15%
+- **Harmonics detected:** ~20-25%
+- **Simultaneous signals:** ~5-10%
+- **Burst clicking:** ~15-20%
+
+---
+
+## 💡 Tips for Best Results
+
+### File Selection
+- Use diverse time periods (day/night, seasons)
+- Include various locations
+- Mix calm and active periods
+
+### Analysis Strategy
+1. **Initial run:** 1000 files to understand distribution
+2. **Review top 50:** Verify algorithm performance
+3. **Adjust if needed:** Can tune thresholds in code
+4. **Large run:** 5000+ files for comprehensive search
+
+---
+
+## 🎉 Ready to Discover!
+
+This mode is designed to find the **most interesting, rare, and exceptional** dolphin vocalizations in your dataset.
+
+**Run it now:**
+```bash
+python scripts/quick_find.py \
+  --file-list outputs/ears_files_list.txt \
+  --n-files 1000 \
+  --mode unique \
+  --output-dir experiments/unique_signals
+```
+
+**Then enjoy discovering the most amazing sounds in your data!** 🐬🌟
+
 
 ### 1. **Ultra-Fast Frequency Sweeps** 🚀
 - Sweeps faster than 10 kHz/second
