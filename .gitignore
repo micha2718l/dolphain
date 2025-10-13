@@ -57,3 +57,4 @@ site/test_simple.html
 # Generated results directories (can be regenerated)
 test_*/
 temp_*/
+quick_find_results/
