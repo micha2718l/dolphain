@@ -22,7 +22,7 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 - Temporal patterns (autocorrelation)
 - Overlapping signals
 
-**Output:** Interactive web showcase of the most interesting recordings with professional audio players featuring drag scrubbing, waveform visualization, and seamless raw/denoised switching.
+**Output:** Interactive web showcase of the most interesting recordings with professional audio players featuring click-to-seek, waveform visualization, and raw/denoised audio switching.
 
 ---
 
@@ -31,17 +31,20 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 **Try it live:** https://micha2718l.github.io/dolphain/showcase.html
 
 Features:
-- 🎵 23 top-ranked recordings with custom audio players
-- 🖱️ Click and drag waveforms to scrub through audio
-- 🔄 Toggle between raw and denoised audio seamlessly
+- 🎵 Top-ranked recordings with professional audio players
+- 🖱️ Click spectrograms/waveforms to seek through audio
+- 🔄 Toggle between raw and denoised audio
 - 📊 Visual spectrograms and waveform plots
-- 📱 Mobile-friendly with touch support
+- ⏱️ Timeline scrubber with synchronized playback
+- 🎨 Dark theme with cyan accents
 
 **Quick local test:**
 ```bash
-cd site && python -m http.server 8003
-# Open: http://localhost:8003/showcase.html
+cd site && python3 -m http.server 8000
+# Open: http://localhost:8000/showcase.html
 ```
+
+**Note:** Currently features 2 test files. Regenerate with 10-20 files when external drive is available.
 
 ---
 
@@ -86,21 +89,24 @@ dolphain.plot_analysis(data['data'], clean, data['fs'], data['time'])
 ### Generate Interactive Showcase
 
 ```bash
-# Step 1: Copy top files (when drive is connected)
-python scripts/copy_top_files.py --checkpoint /path/to/checkpoint.pkl --top 25
+# Activate environment
+source .venv/bin/activate
 
-# Step 2: Generate showcase (works offline)
-python scripts/generate_showcase_local.py --output-dir site/showcase
+# Generate showcase from analysis results
+python scripts/generate_showcase.py \
+  --checkpoint quick_find_results/results.json \
+  --top 10 \
+  --output-dir site/showcase
 
-# Step 3: Optimize for web (converts to MP3)
-python scripts/convert_to_mp3.py --showcase-dir site/showcase
+# Test locally
+cd site && python3 -m http.server 8000
+# Open: http://localhost:8000/showcase.html
 
-# Step 4: Test locally
-cd site && python -m http.server 8003
-
-# Step 5: Deploy to GitHub Pages
+# Deploy to GitHub Pages
 git add site/showcase/ && git commit -m "Update showcase" && git push
 ```
+
+**Note:** Showcase generation requires EARS files on external drive. Performance: ~3.6s per file.
 
 ---
 
