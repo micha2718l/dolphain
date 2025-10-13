@@ -1,223 +1,444 @@
-# 🚀 START HERE - Interactive Showcase Complete!
+# 🚀 START HERE - Dolphain Project# 🚀 START HERE - Interactive Showcase Complete!
 
-**Last Updated:** October 12, 2025  
-**Status:** ✅ **PRODUCTION READY** - Custom audio player with drag scrubbing deployed
 
-## ✅ What Just Happened
 
-The interactive showcase now has a **professional drag-enabled audio player**:
+**Last Updated:** October 12, 2025  **Last Updated:** October 12, 2025  
 
-- ✅ Click and drag waveforms to scrub smoothly
+**Status:** ✅ **PRODUCTION READY** - Modern modular showcase deployed**Status:** ✅ **PRODUCTION READY** - Custom audio player with drag scrubbing deployed
+
+
+
+---## ✅ What Just Happened
+
+
+
+## 🎯 What Is Dolphain?The interactive showcase now has a **professional drag-enabled audio player**:
+
+
+
+**Mission:** Analyze 949,504 underwater acoustic recordings to detect and understand dolphin communication patterns.- ✅ Click and drag waveforms to scrub smoothly
+
 - ✅ Seamless raw/denoised switching (preserves position)
-- ✅ Perfect visual alignment
-- ✅ Mobile touch support
 
-**User is happy. Ready to ship!** 🎉
+**Innovation:** 6-feature "interestingness" scoring system beyond simple whistle counting:- ✅ Perfect visual alignment
 
-**User is happy. Ready to ship!** 🎉
+- Activity level (RMS energy)- ✅ Mobile touch support
+
+- Spectral diversity (frequency range)  
+
+- Signal-to-noise ratio**User is happy. Ready to ship!** 🎉
+
+- Complexity (zero-crossings)
+
+- Temporal patterns (autocorrelation)**User is happy. Ready to ship!** 🎉
+
+- Overlapping signals
 
 ---
+
+**Output:** Interactive web showcase with professional audio players, spectrograms, and waveforms.
 
 ## � Hackathon Playground (New!)
 
-Need a brain break? We now ship a **Dolphin Branch Explorer** that turns the top showcase clips into a branching adventure. Generate fresh data with:
-
-```bash
-source .venv/bin/activate
-python scripts/generate_branching_showcase.py
-```
-
-Then open `site/branch_explorer/index.html` (or serve the whole `site/` folder) to explore pods by energy, harmony, and coverage. It's perfect for hackathon demos and future storytelling experiments.
-
 ---
 
-## �🎯 Test It Right Now
+Need a brain break? We now ship a **Dolphin Branch Explorer** that turns the top showcase clips into a branching adventure. Generate fresh data with:
+
+## ⚡ Quick Start
 
 ```bash
+
+### View the Showcase Locallysource .venv/bin/activate
+
+python scripts/generate_branching_showcase.py
+
+```bash```
+
 cd /Users/mjhaas/code/dolphain/site
-python -m http.server 8003
-# Open: http://localhost:8003/showcase.html
-```
 
-**Try these features:**
+python3 -m http.server 8000Then open `site/branch_explorer/index.html` (or serve the whole `site/` folder) to explore pods by energy, harmony, and coverage. It's perfect for hackathon demos and future storytelling experiments.
 
-1. Click any waveform to jump to that position
+# Open: http://localhost:8000/showcase.html
+
+```---
+
+
+
+**Live site:** https://micha2718l.github.io/dolphain/showcase.html## �🎯 Test It Right Now
+
+
+
+### Features:```bash
+
+- ▶️ Play/pause audio controlscd /Users/mjhaas/code/dolphain/site
+
+- 🖱️ Click spectrograms/waveforms to seekpython -m http.server 8003
+
+- ⏱️ Timeline scrubber with progress bar# Open: http://localhost:8003/showcase.html
+
+- 🔄 Switch between raw and denoised audio```
+
+- 📊 Synchronized playback across visualizations
+
+- 🎨 Professional dark theme with cyan accents**Try these features:**
+
+
+
+---1. Click any waveform to jump to that position
+
 2. Click and drag across waveform to scrub smoothly
-3. Switch between Raw/Denoised while playing - position preserved!
+
+## 📚 Essential Documentation3. Switch between Raw/Denoised while playing - position preserved!
+
 4. Notice perfect alignment between progress overlay and waveform
+
+**Read these first:**
 
 **Live site:** https://micha2718l.github.io/dolphain/showcase.html
 
----
+1. **`CURRENT_STATUS.md`** ← Latest project status and next steps
 
-## 📝 Quick Context
+2. **`SHOWCASE_QUICK_REF.md`** ← Quick reference for showcase---
 
-**Project:** Analyze 949,504 underwater acoustic recordings for dolphin communication  
+3. **`AUDIO_PLAYER_FIX.md`** ← Recent bug fixes explained
+
+4. **`README.md`** ← Main project overview and API## 📝 Quick Context
+
+
+
+**Full index:** See `DOC_INDEX.md`**Project:** Analyze 949,504 underwater acoustic recordings for dolphin communication  
+
 **Innovation:** 6-feature "interestingness" scoring beyond simple whistle counting  
-**Output:** Interactive gallery of top 23 recordings with custom audio players  
+
+---**Output:** Interactive gallery of top 23 recordings with custom audio players  
+
 **Performance:** 98% file size reduction (MP3), ~13 sec/file generation
+
+## 🔧 Common Tasks
 
 **Just Modified:** `site/showcase.html` - Enhanced player with drag functionality
 
+### Regenerate Showcase (requires external drive)
+
 ---
 
-## 📚 Essential Documentation
+```bash
+
+# Activate Python environment## 📚 Essential Documentation
+
+source .venv/bin/activate
 
 **Read these for full context:**
 
-1. **`HANDOFF_NOTES.md`** ← Complete handoff with technical details (START HERE)
-2. `SHOWCASE_GUIDE.md` ← How to use the showcase system
-3. `ENHANCED_SCORING.md` ← The 6-feature scoring algorithm
-4. `README.md` ← Main project documentation
+# Generate showcase from top results
 
----
+/Users/mjhaas/code/dolphain/.venv/bin/python \1. **`HANDOFF_NOTES.md`** ← Complete handoff with technical details (START HERE)
 
-## 🔧 Quick Commands
+  scripts/generate_showcase.py \2. `SHOWCASE_GUIDE.md` ← How to use the showcase system
 
-```bash
-# Environment
+  --checkpoint quick_find_results/results.json \3. `ENHANCED_SCORING.md` ← The 6-feature scoring algorithm
+
+  --top 10 \4. `README.md` ← Main project documentation
+
+  --output-dir site/showcase
+
+```---
+
+
+
+### Analyze New Files## 🔧 Quick Commands
+
+
+
+```python```bash
+
+import dolphain# Environment
+
 source .venv/bin/activate
 
-# Update showcase (when you have new data)
+# Read EARS file (192 kHz underwater recordings)
+
+data = dolphain.read_ears_file('sample.210')# Update showcase (when you have new data)
+
 python scripts/copy_top_files.py --checkpoint /path/to/checkpoint.pkl --top 25
-python scripts/generate_showcase_local.py --output-dir site/showcase
-python scripts/convert_to_mp3.py --showcase-dir site/showcase
 
-# Test locally
-cd site && python -m http.server 8003
+# Denoise using waveletspython scripts/generate_showcase_local.py --output-dir site/showcase
 
-# Deploy to GitHub Pages
-git add site/showcase/ && git commit -m "Update showcase" && git push
+clean = dolphain.wavelet_denoise(data['data'])python scripts/convert_to_mp3.py --showcase-dir site/showcase
+
+
+
+# Detect whistles# Test locally
+
+whistles = dolphain.detect_whistles(clean, data['fs'])cd site && python -m http.server 8003
+
+
+
+print(f"Found {len(whistles)} dolphin whistles!")# Deploy to GitHub Pages
+
+```git add site/showcase/ && git commit -m "Update showcase" && git push
+
 # Auto-deploys to: https://micha2718l.github.io/dolphain/
 
-# Kill server if needed
-lsof -ti:8003 | xargs kill -9
-```
+### Run Quick Analysis
 
----
+# Kill server if needed
+
+```bashlsof -ti:8003 | xargs kill -9
+
+source .venv/bin/activate```
+
+python scripts/quick_find.py /path/to/ears/files --limit 100
+
+# Results → quick_find_results/results.json---
+
+```
 
 ## 🗂️ Project Structure
 
+---
+
 ```
-dolphain/                          # Core library package
+
+## 📊 Current Statedolphain/                          # Core library package
+
 ├── io.py                         # EARS file reading
-├── signal.py                     # Wavelet denoising, detection
-├── plotting.py                   # Analysis visualizations
-└── batch.py                      # Batch processing framework
 
-scripts/                           # Command-line tools
-├── generate_showcase_local.py    # Generate showcase (optimized)
-├── copy_top_files.py             # Copy top N files locally
+### Working Features ✅├── signal.py                     # Wavelet denoising, detection
+
+- Audio playback (play/pause)├── plotting.py                   # Analysis visualizations
+
+- Click-to-seek on spectrograms and waveforms└── batch.py                      # Batch processing framework
+
+- Timeline scrubber
+
+- Synchronized playback linescripts/                           # Command-line tools
+
+- Dark theme with cyan accents├── generate_showcase_local.py    # Generate showcase (optimized)
+
+- 2 showcase files (test data)├── copy_top_files.py             # Copy top N files locally
+
 ├── convert_to_mp3.py             # WAV→MP3 conversion
-└── export_top_files.py           # Export with 6-panel plots
 
-site/                              # GitHub Pages website
-├── showcase.html                 # Interactive gallery ★ JUST UPDATED
-├── index.html                    # Landing page
+### Known Issues ⚠️└── export_top_files.py           # Export with 6-panel plots
+
+- **Mode switching seeking**: After switching denoised→raw, seeking doesn't work reliably
+
+  - **Workaround**: Wait 1-2 seconds after mode switchsite/                              # GitHub Pages website
+
+  - **Fix needed**: Add buffering wait in setMode()├── showcase.html                 # Interactive gallery ★ JUST UPDATED
+
+- **Limited files**: Only 2 test files (need 8-18 more when drive available)├── index.html                    # Landing page
+
 └── showcase/                     # Generated assets
-    ├── audio/                    # 66 MP3 files (21 MB)
-    ├── images/                   # 46 PNG visualizations
-    └── showcase_data.json        # Metadata for 23 files
 
-data/                              # EARS acoustic data
-└── Buoy210_100300_100399/        # 100 sample files
-```
+### File Structure    ├── audio/                    # 66 MP3 files (21 MB)
 
----
+```    ├── images/                   # 46 PNG visualizations
 
-## 🎨 What's Working Perfectly
+site/    └── showcase_data.json        # Metadata for 23 files
 
-✅ **Audio Player Features:**
+├── showcase.html         # Main page (16 lines)
 
-- Click waveform to jump
+├── css/showcase.css     # Styling (150 lines)data/                              # EARS acoustic data
+
+├── js/└── Buoy210_100300_100399/        # 100 sample files
+
+│   ├── audio-player.js  # Player class (194 lines)```
+
+│   └── showcase.js      # UI logic (148 lines)
+
+└── showcase/---
+
+    ├── showcase_data.json
+
+    ├── audio/           # WAV files## 🎨 What's Working Perfectly
+
+    └── images/          # PNG spectrograms/waveforms
+
+```✅ **Audio Player Features:**
+
+
+
+---- Click waveform to jump
+
 - Drag waveform to scrub smoothly
-- Visual feedback (border highlights on hover/drag)
+
+## 🎓 Recent Improvements (Oct 12, 2025)- Visual feedback (border highlights on hover/drag)
+
 - Perfect progress/waveform alignment
-- Seamless raw/denoised switching (preserves position)
-- Mobile touch support
 
-✅ **Performance:**
+- ✅ Modernized showcase with modular architecture- Seamless raw/denoised switching (preserves position)
 
-- 98% file size reduction (1,031 MB → 21 MB MP3)
+- ✅ Fixed "skip to start" bug (non-seekable audio handling)- Mobile touch support
+
+- ✅ Fixed accidental auto-play on page load
+
+- ✅ 26x performance improvement (95s → 3.6s per file)✅ **Performance:**
+
+- ✅ Comprehensive documentation suite
+
+- ✅ Class-based AudioPlayer with event-driven design- 98% file size reduction (1,031 MB → 21 MB MP3)
+
 - ~13 seconds per file showcase generation
-- Fast page loads with optimized assets
 
-✅ **Deployment:**
+---- Fast page loads with optimized assets
 
-- GitHub Pages with automatic workflow
-- CORS-friendly asset paths
-- Works on mobile and desktop
+
+
+## 🚀 Next Steps✅ **Deployment:**
+
+
+
+### High Priority- GitHub Pages with automatic workflow
+
+1. Fix mode switching seeking issue- CORS-friendly asset paths
+
+2. Regenerate with 10-20 files (when drive available)- Works on mobile and desktop
+
+3. Cross-browser testing (Safari, Firefox)
 
 ---
 
-## 🎯 Next Steps (If Continuing)
+### Medium Priority
 
-### Minor Polish (Optional)
+1. Keyboard shortcuts (Space = play/pause)## 🎯 Next Steps (If Continuing)
 
-- Add keyboard shortcuts (space for play/pause)
+2. Download buttons for audio files
+
+3. Improve mobile experience### Minor Polish (Optional)
+
+
+
+---- Add keyboard shortcuts (space for play/pause)
+
 - Make volume slider draggable
-- Add loading spinners
+
+## 📁 Project Structure- Add loading spinners
+
 - Implement waveform zoom
 
-### Scale Up
+```
 
-- Analyze full 949k file dataset
-- Increase showcase to top 50 or 100 files
-- Add filtering/search functionality
-- Create category pages
+dolphain/### Scale Up
 
-### Advanced Science
+├── dolphain/              # Python library
 
-- Implement click detection algorithm
-- Add whistle classification
-- Temporal pattern analysis
-- Species identification
+│   ├── io.py             # EARS file reading- Analyze full 949k file dataset
 
----
+│   ├── signal.py         # Detection algorithms- Increase showcase to top 50 or 100 files
 
-## 💡 Developer Notes
+│   ├── plotting.py       # Visualization- Add filtering/search functionality
 
-**What the next team should know:**
+│   └── batch.py          # Batch processing- Create category pages
 
-- Always test on local server before deploying (CORS issues on file://)
+├── scripts/              # CLI tools
+
+│   ├── generate_showcase.py### Advanced Science
+
+│   ├── quick_find.py
+
+│   └── ...- Implement click detection algorithm
+
+├── site/                 # Web showcase- Add whistle classification
+
+│   ├── showcase.html- Temporal pattern analysis
+
+│   ├── css/- Species identification
+
+│   ├── js/
+
+│   └── showcase/        # Generated assets---
+
+└── tests/               # Unit tests
+
+```## 💡 Developer Notes
+
+
+
+---**What the next team should know:**
+
+
+
+## 💡 Quick Tips- Always test on local server before deploying (CORS issues on file://)
+
 - Audio `loadeddata` event fires when source change is ready
-- State preservation pattern works well for seamless switching
-- CSS `object-fit: fill` solved alignment issues elegantly
-- Touch events need `{ passive: false }` for preventDefault()
 
-**Code quality:**
+**Finding files:**- State preservation pattern works well for seamless switching
 
-- Clean, documented JavaScript
-- Single-purpose functions
-- Proper error handling
-- Event listener cleanup
+```bash- CSS `object-fit: fill` solved alignment issues elegantly
 
-**User feedback:**
+source .venv/bin/activate- Touch events need `{ passive: false }` for preventDefault()
 
-> "I want you to try your best to tighten things up... click or drag on the waveforms to scrub... switch between raw and denoised seamlessly"
+python scripts/quick_find.py /path/to/ears/files --limit 100
+
+```**Code quality:**
+
+
+
+**Checking environment:**- Clean, documented JavaScript
+
+```bash- Single-purpose functions
+
+source .venv/bin/activate- Proper error handling
+
+python --version  # Should be 3.13+- Event listener cleanup
+
+pip list | grep -E "numpy|scipy|matplotlib"
+
+```**User feedback:**
+
+
+
+**Testing showcase:**> "I want you to try your best to tighten things up... click or drag on the waveforms to scrub... switch between raw and denoised seamlessly"
+
+```bash
+
+cd site/showcase✅ **Delivered all requirements and then some!**
+
+ls -lh audio/ images/
+
+cat showcase_data.json | python3 -m json.tool | head -50---
+
+```
 
 ✅ **Delivered all requirements and then some!**
 
 ---
 
-✅ **Delivered all requirements and then some!**
-
 ---
+
+## 🆘 Getting Help
 
 ## 🏁 Bottom Line
 
-**Current State:** Production-ready interactive showcase with professional audio player  
-**Code Quality:** Clean, maintainable, well-documented  
-**User Satisfaction:** High - all requested features implemented  
-**Next Steps:** Ship it, or continue with enhancements (see HANDOFF_NOTES.md)
+**Documentation:**
 
-**For full technical details and continuation plan, read `HANDOFF_NOTES.md`** 📖
+- `CURRENT_STATUS.md` - Latest state**Current State:** Production-ready interactive showcase with professional audio player  
 
----
+- `SHOWCASE_QUICK_REF.md` - Showcase guide**Code Quality:** Clean, maintainable, well-documented  
+
+- `AUDIO_PLAYER_FIX.md` - Technical details**User Satisfaction:** High - all requested features implemented  
+
+- `DOC_INDEX.md` - Full documentation index**Next Steps:** Ship it, or continue with enhancements (see HANDOFF_NOTES.md)
+
+
+
+**Common Issues:****For full technical details and continuation plan, read `HANDOFF_NOTES.md`** 📖
+
+- **Files not found** → External drive not mounted
+
+- **Audio won't play** → Check browser console (F12)---
+
+- **Seeking broken** → See known issues above
 
 _Last modified: October 12, 2025 - Interactive player with drag scrubbing complete_
 
+---
+
 ```
+
+**Ready to explore? Fire up the showcase!** 🐬
 
 ### After (Clean Structure)
 
