@@ -183,13 +183,14 @@ def detect_chirps(data, fs, min_duration=0.3, freq_sweep_min=3000):
 
 
 def detect_click_trains(
-    data, fs, click_freq_range=(20000, 150000), min_clicks=10, max_ici=0.05
+    data, fs, click_freq_range=(20000, 150000), min_clicks=15, max_ici=0.05
 ):
     """
     Detect dolphin click trains in acoustic data.
 
     Click trains are sequences of rapid, broadband, HIGH-AMPLITUDE clicks
-    used by dolphins for echolocation. This is a conservative detector.
+    used by dolphins for echolocation. This is a VERY CONSERVATIVE detector
+    optimized to find only clear, strong spike trains with sharp peaks.
 
     Parameters
     ----------
@@ -200,7 +201,7 @@ def detect_click_trains(
     click_freq_range : tuple
         Frequency range for click detection in Hz (default: 20-150 kHz)
     min_clicks : int
-        Minimum number of clicks to constitute a train (default: 10, very selective)
+        Minimum number of clicks to constitute a train (default: 15, very selective)
     max_ici : float
         Maximum inter-click interval in seconds (default: 0.05s = 50ms)
 
@@ -228,39 +229,39 @@ def detect_click_trains(
     envelope = np.abs(analytic)
 
     # Minimal smoothing to preserve sharp click edges
-    kernel_size = int(fs * 0.0005)  # 0.5ms (was 1ms)
+    kernel_size = int(fs * 0.0005)  # 0.5ms - keep clicks sharp
     if kernel_size % 2 == 0:
         kernel_size += 1
     if kernel_size >= 3:
         envelope = sp_signal.medfilt(envelope, kernel_size=kernel_size)
 
-    # Much higher threshold - only very strong clicks (99th percentile!)
-    threshold_percentile = np.percentile(envelope, 99)
+    # VERY HIGH threshold - only the strongest clicks (99.5th percentile!)
+    threshold_percentile = np.percentile(envelope, 99.5)
 
     # Also require absolute threshold well above noise
     noise_level = np.percentile(envelope, 20)
-    min_click_amplitude = noise_level * 8  # Must be 8x noise level (was 5x)
+    min_click_amplitude = noise_level * 10  # Must be 10x noise level (increased from 8x)
     threshold = max(threshold_percentile, min_click_amplitude)
 
-    # Find peaks with stricter criteria
-    min_separation = int(fs * 0.002)  # At least 2ms between clicks (was 1ms)
+    # Find peaks with STRICTER criteria for sharp spike trains
+    min_separation = int(fs * 0.002)  # At least 2ms between clicks
 
-    # Require sharp, prominent peaks
+    # Require sharp, prominent peaks - INCREASED strictness
     peak_indices, properties = sp_signal.find_peaks(
         envelope,
         height=threshold,
         distance=min_separation,
-        prominence=threshold * 0.3,  # Must be prominent (30% of threshold)
+        prominence=threshold * 0.4,  # Must be very prominent (40% of threshold, was 30%)
         width=(
             1,
-            int(fs * 0.005),
-        ),  # Width between 1 sample and 5ms (reject wide bumps)
+            int(fs * 0.003),
+        ),  # Width between 1 sample and 3ms (was 5ms - tighter for sharper peaks)
     )
 
     if len(peak_indices) < min_clicks:
         return []
 
-    # Additional quality filter: check peak sharpness
+    # ENHANCED quality filter: check peak sharpness more strictly
     sharp_peaks = []
     for idx in peak_indices:
         # Check that peak is sharp (high amplitude, narrow width)
@@ -269,8 +270,8 @@ def detect_click_trains(
         local_region = envelope[start:end]
         peak_val = envelope[idx]
 
-        # Require peak to dominate local region
-        if peak_val > np.percentile(local_region, 90):
+        # Require peak to STRONGLY dominate local region (increased from 90th to 92nd percentile)
+        if peak_val > np.percentile(local_region, 92):
             sharp_peaks.append(idx)
 
     if len(sharp_peaks) < min_clicks:
@@ -290,19 +291,61 @@ def detect_click_trains(
             # Continue current train
             current_train.append(peak_times[i])
         else:
-            # Save current train if long enough
+            # Save current train if long enough AND regular enough
             if len(current_train) >= min_clicks:
                 train_data = np.array(current_train)
                 icis = np.diff(train_data)
+                
+                # NEW: Check for regularity - real spike trains have consistent spacing
+                mean_ici = np.mean(icis)
+                std_ici = np.std(icis)
+                
+                # Coefficient of variation - require relatively consistent ICIs
+                # CV < 0.5 means ICI std is less than 50% of mean (reasonably regular)
+                if mean_ici > 0:
+                    cv = std_ici / mean_ici
+                    if cv < 0.5:  # Only accept regular trains
+                        click_trains.append(
+                            {
+                                "start_time": train_data[0],
+                                "end_time": train_data[-1],
+                                "duration": train_data[-1] - train_data[0],
+                                "n_clicks": len(train_data),
+                                "mean_ici": mean_ici,
+                                "std_ici": std_ici,
+                                "regularity_cv": cv,  # Track regularity metric
+                                "click_rate": (
+                                    len(train_data) / (train_data[-1] - train_data[0])
+                                    if train_data[-1] > train_data[0]
+                                    else 0
+                                ),
+                                "click_times": train_data.tolist(),
+                            }
+                        )
 
+            # Start new train
+            current_train = [peak_times[i]]
+
+    # Don't forget the last train (with same regularity check)
+    if len(current_train) >= min_clicks:
+        train_data = np.array(current_train)
+        icis = np.diff(train_data)
+        
+        mean_ici = np.mean(icis)
+        std_ici = np.std(icis)
+        
+        if mean_ici > 0:
+            cv = std_ici / mean_ici
+            if cv < 0.5:  # Only accept regular trains
                 click_trains.append(
                     {
                         "start_time": train_data[0],
                         "end_time": train_data[-1],
                         "duration": train_data[-1] - train_data[0],
                         "n_clicks": len(train_data),
-                        "mean_ici": np.mean(icis),
-                        "std_ici": np.std(icis),
+                        "mean_ici": mean_ici,
+                        "std_ici": std_ici,
+                        "regularity_cv": cv,
                         "click_rate": (
                             len(train_data) / (train_data[-1] - train_data[0])
                             if train_data[-1] > train_data[0]
@@ -311,31 +354,6 @@ def detect_click_trains(
                         "click_times": train_data.tolist(),
                     }
                 )
-
-            # Start new train
-            current_train = [peak_times[i]]
-
-    # Don't forget the last train
-    if len(current_train) >= min_clicks:
-        train_data = np.array(current_train)
-        icis = np.diff(train_data)
-
-        click_trains.append(
-            {
-                "start_time": train_data[0],
-                "end_time": train_data[-1],
-                "duration": train_data[-1] - train_data[0],
-                "n_clicks": len(train_data),
-                "mean_ici": np.mean(icis),
-                "std_ici": np.std(icis),
-                "click_rate": (
-                    len(train_data) / (train_data[-1] - train_data[0])
-                    if train_data[-1] > train_data[0]
-                    else 0
-                ),
-                "click_times": train_data.tolist(),
-            }
-        )
 
     return click_trains
 
