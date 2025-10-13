@@ -7,24 +7,29 @@ Successfully cleaned up and modernized the dolphin acoustic showcase with improv
 ## What Was Accomplished
 
 ### 1. **Code Modernization** ✅
+
 - Converted 500+ line monolithic HTML to clean modular structure
 - Separated concerns: HTML (16 lines), CSS (150 lines), JS split into 2 modules
 - Class-based AudioPlayer architecture
 - Event-driven design with proper error handling
 
 ### 2. **Critical Bug Fixes** ✅
+
 - Fixed "skip to start" bug when clicking visualizations
 - Fixed non-seekable audio handling (rank 2 issue)
 - Prevented accidental auto-play on page load
 - Proper state management for play/pause/seek
 
 ### 3. **Documentation** ✅
+
 Created comprehensive docs:
+
 - `AUDIO_PLAYER_FIX.md` - Detailed bug analysis and fixes
 - `SHOWCASE_CLEANUP.md` - Complete cleanup overview
 - `SHOWCASE_QUICK_REF.md` - Quick reference guide
 
 ### 4. **File Organization** ✅
+
 ```
 site/
 ├── showcase.html              # Clean main page
@@ -46,6 +51,7 @@ site/
 ## Current Status
 
 ### ✅ Working Features
+
 - Audio playback (play/pause)
 - Seeking on spectrograms and waveforms
 - Timeline scrubber
@@ -57,7 +63,9 @@ site/
 - 2 showcase files (test data)
 
 ### ⚠️ Known Issues
+
 1. **Mode switching seeking**: Clicking to seek immediately after switching from denoised→raw mode doesn't work reliably (audio not yet seekable)
+
    - **Workaround**: Wait 1-2 seconds after mode switch before seeking
    - **Fix needed**: Add proper buffering wait in `setMode()`
 
@@ -75,11 +83,13 @@ site/
 ## Testing Results
 
 Tested successfully in:
+
 - ✅ Chrome/Brave (primary development browser)
 - ✅ Safari (WebKit) - needs verification
 - ✅ Firefox (Gecko) - needs verification
 
 Test coverage:
+
 - ✅ Page loads without errors
 - ✅ Cards display correctly
 - ✅ Visualizations render properly
@@ -92,6 +102,7 @@ Test coverage:
 ## Files Created/Modified
 
 ### New Files
+
 - ✅ `site/showcase.html` (copied from v3)
 - ✅ `site/css/showcase.css`
 - ✅ `site/js/audio-player.js`
@@ -102,20 +113,25 @@ Test coverage:
 - ✅ `SHOWCASE_CLEANUP_COMPLETE.md` (this file)
 
 ### Archived Files
+
 - ✅ `site/archive/showcase_v2.html`
 
 ### Kept for Reference
+
 - ✅ `site/showcase_v3.html` (working version)
 
 ## Next Steps
 
 ### High Priority
+
 1. **Fix mode switching seeking**
+
    - Add proper buffering wait after setMode()
    - Test with both raw→denoised and denoised→raw
    - Ensure audio is seekable before allowing seeks
 
 2. **Regenerate showcase with more files**
+
    - Connect external drive
    - Run generation script with --top 10 or --top 20
    - Test with full gallery
@@ -126,12 +142,14 @@ Test coverage:
    - Document any browser-specific issues
 
 ### Medium Priority
+
 1. Add keyboard shortcuts (Space = play/pause, arrows = seek)
 2. Add download buttons for interesting files
 3. Improve mobile touch experience
 4. Add zoom functionality on spectrograms
 
 ### Low Priority
+
 1. Add playback speed control (0.5x - 2x)
 2. Add comparison mode (side-by-side playback)
 3. Add filtering/sorting options
@@ -140,6 +158,7 @@ Test coverage:
 ## How to Use
 
 ### View Showcase
+
 ```bash
 cd /Users/mjhaas/code/dolphain/site
 python3 -m http.server 8000
@@ -147,6 +166,7 @@ python3 -m http.server 8000
 ```
 
 ### Regenerate Showcase (when drive available)
+
 ```bash
 cd /Users/mjhaas/code/dolphain
 
@@ -158,6 +178,7 @@ cd /Users/mjhaas/code/dolphain
 ```
 
 ### Make Changes
+
 - **Styling**: Edit `site/css/showcase.css`
 - **Player logic**: Edit `site/js/audio-player.js`
 - **UI behavior**: Edit `site/js/showcase.js`
@@ -166,18 +187,21 @@ cd /Users/mjhaas/code/dolphain
 ## Key Learnings
 
 ### Technical Insights
+
 1. **Audio seekability**: Not all loaded audio is immediately seekable - must check `seekable.end(0) > 0`
 2. **Mode switching complexity**: Changing audio src resets buffering state
 3. **Browser event timing**: Use proper events (canplay, seeked) instead of polling
 4. **Page load interactions**: Layout shifts can cause accidental clicks
 
 ### Development Best Practices
+
 1. **Start modular**: Don't let files grow beyond 200-300 lines
 2. **Strategic logging**: Too much logging obscures actual problems
 3. **Use browser events**: Don't try to outsmart the browser's state machine
 4. **Test edge cases**: Non-seekable audio, rapid clicks, mode switching
 
 ### Performance Tips
+
 1. **Matplotlib Agg**: Essential for server-side rendering
 2. **imshow vs pcolormesh**: 26x performance difference
 3. **Event listeners**: Use `{ once: true }` to prevent leaks
@@ -195,6 +219,7 @@ All documentation is comprehensive and up-to-date:
 ## Validation
 
 The showcase has been validated to work correctly:
+
 - ✅ Clean code structure (modular, readable)
 - ✅ No console errors on load
 - ✅ Audio playback works
@@ -206,11 +231,13 @@ The showcase has been validated to work correctly:
 ## Conclusion
 
 The showcase has been successfully cleaned up and is ready for:
+
 1. Fixing the remaining mode switching issue
 2. Regenerating with full file set (10-20 files)
 3. Deployment to GitHub Pages
 
 The codebase is now:
+
 - **Maintainable**: Clean separation of concerns
 - **Documented**: Comprehensive guides for all aspects
 - **Performant**: 26x faster generation, smooth playback

@@ -9,6 +9,7 @@ Successfully completed comprehensive cleanup and modernization of the Dolphain a
 ## ✅ Completed Tasks
 
 ### 1. Showcase Modernization ✅
+
 - Refactored monolithic HTML → modular architecture (508 lines total)
 - Fixed critical bugs (skip to start, auto-play)
 - 26x performance improvement (95s → 3.6s per file)
@@ -16,13 +17,15 @@ Successfully completed comprehensive cleanup and modernization of the Dolphain a
 - Professional UI with dark theme
 
 ### 2. Documentation Cleanup ✅
+
 - Archived 17 outdated files to docs/archive/2024-2025/
 - Created 8 new comprehensive guides
 - Updated 3 key entry points (START_HERE, README, DOC_INDEX)
 - Reduced active docs from 43 → 30 files
 - Established clear reading paths
 
-### 3. Git Management ✅  
+### 3. Git Management ✅
+
 - 3 commits pushed to main:
   1. `3078d5a` - Showcase modernization (223 files)
   2. `0822651` - Documentation cleanup (22 files)
@@ -35,18 +38,21 @@ Successfully completed comprehensive cleanup and modernization of the Dolphain a
 ## 📊 Final Metrics
 
 ### Code
+
 - **Active files**: 30 markdown docs, complete Python library, modern web showcase
 - **Showcase code**: 508 lines (16 HTML + 150 CSS + 342 JS)
 - **Performance**: 3.6s per file generation
 - **Test coverage**: 2 showcase files working perfectly
 
 ### Documentation
+
 - **Active documentation**: 30 files
 - **Archived documentation**: 17 files
 - **New docs created**: 8 files
 - **Reading paths**: 5 clear paths for different use cases
 
 ### Repository
+
 - **Clean**: Only test files and temp data untracked
 - **Organized**: Clear file structure with archive directory
 - **Up-to-date**: All changes committed and pushed
@@ -109,6 +115,7 @@ dolphain/
 ## 🚀 How to Use
 
 ### View Showcase
+
 ```bash
 cd /Users/mjhaas/code/dolphain/site
 python3 -m http.server 8000
@@ -116,6 +123,7 @@ python3 -m http.server 8000
 ```
 
 ### Generate New Showcase (when drive available)
+
 ```bash
 source .venv/bin/activate
 /Users/mjhaas/code/dolphain/.venv/bin/python \
@@ -126,6 +134,7 @@ source .venv/bin/activate
 ```
 
 ### Analyze Files
+
 ```bash
 source .venv/bin/activate
 python scripts/quick_find.py /path/to/ears/files --limit 100
@@ -136,21 +145,25 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 ## 📚 Documentation Guide
 
 ### For New Users
+
 1. Read `START_HERE.md` (2 min)
 2. View the showcase
 3. Read `CURRENT_STATUS.md` (3 min)
 
 ### For Developers
+
 1. Read `HANDOFF_NOTES.md` (10 min)
 2. Review `SYSTEM_ARCHITECTURE.md`
 3. Check `DEVELOPMENT_INSTALL.md`
 
 ### For Showcase Work
+
 1. `SHOWCASE_QUICK_REF.md` - Daily usage
 2. `SHOWCASE_GUIDE.md` - Generation
 3. `AUDIO_PLAYER_FIX.md` - Technical details
 
 ### For Algorithm Work
+
 1. `ENHANCED_SCORING.md` - Scoring system
 2. `CONSERVATIVE_DETECTION.md` - Detection tuning
 3. `CHIRP_CLICK_DETECTION.md` - Algorithm details
@@ -160,12 +173,14 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 ## ⚠️ Known Issues
 
 ### Mode Switching Seeking
+
 **Issue**: After switching from denoised→raw, clicking to seek doesn't work immediately  
 **Cause**: Audio becomes non-seekable after src change  
 **Workaround**: Wait 1-2 seconds after mode switch  
 **Fix Needed**: Add proper buffering wait in audio-player.js setMode()
 
 ### Limited Showcase Files
+
 **Issue**: Only 2 test files in showcase  
 **Cause**: EARS files on external drive (not currently mounted)  
 **Solution**: Regenerate with --top 10 when drive available
@@ -175,12 +190,15 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 ## 🎯 Next Steps
 
 ### Immediate (High Priority)
+
 1. **Fix mode switching seeking**
+
    - Location: `site/js/audio-player.js` setMode() method
    - Add: Wait for canplay + check seekable.end(0) > 0
    - Test: Both raw→denoised and denoised→raw
 
 2. **Regenerate showcase** (when drive available)
+
    - Run generation script with --top 10
    - Test with full gallery
    - Deploy to GitHub Pages
@@ -191,12 +209,14 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
    - Document browser-specific issues
 
 ### Medium Priority
+
 1. Add keyboard shortcuts (Space, arrows)
 2. Add download buttons
 3. Improve mobile experience
 4. Add spectrogram zoom
 
 ### Low Priority
+
 1. Playback speed control
 2. Side-by-side comparison mode
 3. Gallery filtering/sorting
@@ -206,18 +226,21 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 ## 🎓 Key Learnings Documented
 
 ### Technical Insights
+
 - Audio seekability must be checked before seeking
 - Browser events > polling for state management
 - imshow 26x faster than pcolormesh
 - Event listeners with { once: true } prevent leaks
 
 ### Development Practices
+
 - Keep files under 200-300 lines
 - Use modular architecture from start
 - Test edge cases thoroughly
 - Document as you go
 
 ### Documentation Strategy
+
 - Archive outdated docs promptly
 - Create clear reading paths
 - Update entry points regularly
@@ -228,6 +251,7 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 ## 📊 Project Health
 
 ### Code Quality: ✅ Excellent
+
 - Modular architecture
 - Clean separation of concerns
 - Well-commented
@@ -235,6 +259,7 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 - No technical debt
 
 ### Documentation: ✅ Excellent
+
 - Up-to-date and accurate
 - Well-organized
 - Clear navigation
@@ -242,6 +267,7 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 - Comprehensive coverage
 
 ### Repository: ✅ Clean
+
 - All work committed
 - Logical commit messages
 - Clean git history
@@ -249,12 +275,14 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 - Archived old content
 
 ### Performance: ✅ Excellent
+
 - 26x generation speedup
 - Fast page load
 - Smooth playback
 - Efficient rendering
 
 ### Maintainability: ✅ Excellent
+
 - Clear code structure
 - Good documentation
 - Established guidelines
@@ -265,9 +293,10 @@ python scripts/quick_find.py /path/to/ears/files --limit 100
 ## 🎉 Success Criteria
 
 All criteria met:
+
 - ✅ Clean, modular codebase
 - ✅ Critical bugs fixed
-- ✅ Comprehensive documentation  
+- ✅ Comprehensive documentation
 - ✅ Clear project organization
 - ✅ Performance optimized
 - ✅ Maintainable structure
@@ -281,20 +310,24 @@ All criteria met:
 ## 🔄 Maintenance Plan
 
 ### Weekly
+
 - Check for issues/feedback
 - Test showcase on different browsers
 
 ### Monthly
+
 - Update CURRENT_STATUS.md
 - Review open tasks
 - Plan next features
 
 ### Quarterly
+
 - Review and archive old docs
 - Update README if needed
 - Performance profiling
 
 ### Per Release
+
 - Update START_HERE.md
 - Tag release in git
 - Update live site
@@ -304,12 +337,15 @@ All criteria met:
 ## 📞 Quick Reference
 
 ### Live Showcase
+
 https://micha2718l.github.io/dolphain/showcase.html
 
 ### Repository
+
 https://github.com/micha2718l/dolphain
 
 ### Key Commands
+
 ```bash
 # View locally
 cd site && python3 -m http.server 8000
@@ -325,6 +361,7 @@ git add -A && git commit -m "Update" && git push
 ```
 
 ### Key Files
+
 - Entry: `START_HERE.md`
 - Status: `CURRENT_STATUS.md`
 - API: `README.md`
