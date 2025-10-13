@@ -44,3 +44,16 @@ outputs/
 .DS_Store
 Thumbs.db
 CLICK_CHIRP_*/
+
+# Test data and temporary files
+temp_showcase_files/
+test_conservative/
+test_conservative2/
+test_conservative3/
+test_special/
+test_checkpoint.json
+site/test_simple.html
+
+# Generated results directories (can be regenerated)
+test_*/
+temp_*/

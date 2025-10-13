@@ -96,11 +96,13 @@ def main():
             data = json.load(f)
 
         for file_info in data["files"]:
-            # Change .wav to .mp3
-            file_info["audio_raw"] = file_info["audio_raw"].replace(".wav", ".mp3")
-            file_info["audio_denoised"] = file_info["audio_denoised"].replace(
-                ".wav", ".mp3"
-            )
+            # Change .wav to .mp3 (handle both old and new formats)
+            if "audio_raw" in file_info:
+                file_info["audio_raw"] = file_info["audio_raw"].replace(".wav", ".mp3")
+            if "audio_denoised" in file_info:
+                file_info["audio_denoised"] = file_info["audio_denoised"].replace(
+                    ".wav", ".mp3"
+                )
 
         with open(data_file, "w") as f:
             json.dump(data, f, indent=2)
