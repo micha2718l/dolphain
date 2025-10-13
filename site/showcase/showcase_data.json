@@ -1,63 +1,88 @@
 {
   "generated": "unknown",
   "summary": {
-    "total_files": 2,
-    "total_chirps": 8,
-    "total_clicks": 270,
-    "total_duration_s": 42.7,
-    "avg_chirps_per_file": 4.0,
-    "avg_clicks_per_file": 135.0
+    "total_files": 3,
+    "total_chirps": 0,
+    "total_clicks": 190,
+    "total_duration_s": 64.0,
+    "avg_chirps_per_file": 0.0,
+    "avg_clicks_per_file": 63.3
   },
   "files": [
     {
       "rank": 1,
-      "filename": "71664B69.140",
-      "original_path": "temp_showcase_files/71664B69.140",
-      "audio_raw": "audio/rank_01_71664B69_raw.wav",
-      "audio_denoised": "audio/rank_01_71664B69.wav",
-      "spectrogram_denoised": "images/rank_01_71664B69_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_01_71664B69_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_01_71664B69_spectrogram_raw.png",
-      "waveform_raw": "images/rank_01_71664B69_waveform_raw.png",
+      "filename": "72009999.171",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/72009999.171",
+      "audio_raw": "audio/rank_01_72009999_raw.mp3",
+      "audio_denoised": "audio/rank_01_72009999.mp3",
+      "spectrogram_denoised": "images/rank_01_72009999_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_01_72009999_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_01_72009999_spectrogram_raw.png",
+      "waveform_raw": "images/rank_01_72009999_waveform_raw.png",
       "stats": {
-        "chirp_count": 5,
-        "click_train_count": 10,
-        "total_clicks": 150,
-        "duration": 21.33,
-        "chirp_coverage": 10.5,
-        "click_coverage": 25.3,
-        "mean_click_rate": 50.2
+        "chirp_count": 0,
+        "click_train_count": 6,
+        "total_clicks": 77,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0.0,
+        "click_coverage": 7.187939453124989,
+        "mean_click_rate": 54.449126224520626
       },
       "metadata": {
-        "time_start": "2017-06-16 02:19:55.039781",
+        "time_start": "2017-07-20 08:20:02.857094",
         "duration": 21.333333333333332
       },
-      "score": 85.0
+      "score": 28.7
     },
     {
       "rank": 2,
-      "filename": "7173BC06.170",
-      "original_path": "temp_showcase_files/7173BC06.170",
-      "audio_raw": "audio/rank_02_7173BC06_raw.wav",
-      "audio_denoised": "audio/rank_02_7173BC06.wav",
-      "spectrogram_denoised": "images/rank_02_7173BC06_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_02_7173BC06_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_02_7173BC06_spectrogram_raw.png",
-      "waveform_raw": "images/rank_02_7173BC06_waveform_raw.png",
+      "filename": "7211458C.171",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7211458C.171",
+      "audio_raw": "audio/rank_02_7211458C_raw.mp3",
+      "audio_denoised": "audio/rank_02_7211458C.mp3",
+      "spectrogram_denoised": "images/rank_02_7211458C_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_02_7211458C_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_02_7211458C_spectrogram_raw.png",
+      "waveform_raw": "images/rank_02_7211458C_waveform_raw.png",
       "stats": {
-        "chirp_count": 3,
-        "click_train_count": 8,
-        "total_clicks": 120,
-        "duration": 21.33,
-        "chirp_coverage": 8.2,
-        "click_coverage": 20.1,
-        "mean_click_rate": 45.5
+        "chirp_count": 0,
+        "click_train_count": 5,
+        "total_clicks": 66,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0.0,
+        "click_coverage": 6.777612304687499,
+        "mean_click_rate": 47.04132655444568
       },
       "metadata": {
-        "time_start": "2017-06-23 05:16:38.864625",
+        "time_start": "2017-07-31 05:09:56.351531",
         "duration": 21.333333333333332
       },
-      "score": 75.0
+      "score": 26.28
+    },
+    {
+      "rank": 3,
+      "filename": "72091EF5.171",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/72091EF5.171",
+      "audio_raw": "audio/rank_03_72091EF5_raw.mp3",
+      "audio_denoised": "audio/rank_03_72091EF5.mp3",
+      "spectrogram_denoised": "images/rank_03_72091EF5_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_03_72091EF5_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_03_72091EF5_spectrogram_raw.png",
+      "waveform_raw": "images/rank_03_72091EF5_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 4,
+        "total_clicks": 47,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0.0,
+        "click_coverage": 4.004956054687499,
+        "mean_click_rate": 56.508812245149116
+      },
+      "metadata": {
+        "time_start": "2017-07-28 18:37:41.963906",
+        "duration": 21.333333333333332
+      },
+      "score": 24.69
     }
   ]
 }

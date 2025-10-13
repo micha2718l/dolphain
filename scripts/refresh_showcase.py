@@ -168,8 +168,8 @@ def refresh_showcase(results_dir, top_n=15, output_dir="site/showcase"):
     print("=" * 80)
     print(f"Showcase directory: {output_dir}/")
     print(f"\nTo view:")
-    print(f"  cd {output_dir} && python -m http.server 8000")
-    print(f"  Then open: http://localhost:8000")
+    print(f"  cd site && python3 -m http.server 8000")
+    print(f"  Then open: http://localhost:8000/showcase.html")
     print("=" * 80)
 
     return True
@@ -234,8 +234,8 @@ def refresh_showcase(results_dir, top_n=15, output_dir="site/showcase"):
         )
 
     print(f"\nTo view:")
-    print(f"  cd {output_dir} && python -m http.server 8000")
-    print(f"  Then open: http://localhost:8000")
+    print(f"  cd site && python3 -m http.server 8000")
+    print(f"  Then open: http://localhost:8000/showcase.html")
 
     # Clean up temp directory if used
     if copy_files and Path("temp_showcase_files").exists():
