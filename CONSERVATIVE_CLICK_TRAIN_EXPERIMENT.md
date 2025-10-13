@@ -10,25 +10,29 @@
 ### Changes to `detect_click_trains()` in `scripts/quick_find.py`
 
 #### 1. **Higher Thresholds**
+
 - **Percentile:** 99th → **99.5th** percentile
 - **Noise ratio:** 8x → **10x** noise level
-- *Result:* Only detects the very strongest clicks
+- _Result:_ Only detects the very strongest clicks
 
 #### 2. **Sharper Peak Requirements**
+
 - **Prominence:** 30% → **40%** of threshold
 - **Width constraint:** 1-5ms → **1-3ms** (tighter for sharper peaks)
 - **Local dominance:** 90th → **92nd** percentile within 4ms window
-- *Result:* Rejects wider bumps, accepts only sharp spikes
+- _Result:_ Rejects wider bumps, accepts only sharp spikes
 
 #### 3. **More Clicks Required**
+
 - **Minimum clicks per train:** 10 → **15**
-- *Result:* Only detects longer, more sustained trains
+- _Result:_ Only detects longer, more sustained trains
 
 #### 4. **Regularity Check (NEW)**
+
 - **Coefficient of Variation (CV):** Must be < 0.5
   - CV = std_ici / mean_ici
   - CV < 0.5 means ICI std is less than 50% of mean
-- *Result:* Only accepts trains with consistent click spacing (real spike trains)
+- _Result:_ Only accepts trains with consistent click spacing (real spike trains)
 - **New field added:** `regularity_cv` in results for analysis
 
 ---
@@ -36,6 +40,7 @@
 ## 🔍 Expected Outcomes
 
 ### Before (Original Algorithm)
+
 - Min clicks: 10
 - Threshold: 99th percentile, 8x noise
 - Width: up to 5ms
@@ -43,8 +48,9 @@
 - **Expected:** More detections, some false positives
 
 ### After (Conservative Algorithm)
+
 - Min clicks: 15
-- Threshold: 99.5th percentile, 10x noise  
+- Threshold: 99.5th percentile, 10x noise
 - Width: up to 3ms (tighter)
 - Regularity: CV < 0.5 required
 - **Expected:** Fewer detections, higher precision, more genuine spike trains
@@ -75,6 +81,7 @@ python scripts/quick_find.py \
 Results will be saved to: `quick_find_results/conservative_clicks_experiment/`
 
 Files generated:
+
 - **`results.json`** - Full results with all detections
 - **`summary.json`** - Statistics summary
 - **`all_results.csv`** - Spreadsheet format
@@ -88,14 +95,17 @@ Files generated:
 After running, compare with previous results to answer:
 
 1. **Detection Rate:**
+
    - How many files had click trains detected?
    - How does this compare to previous runs?
 
 2. **Click Train Quality:**
+
    - What's the average `regularity_cv` value?
    - Are trains longer (more clicks per train)?
 
 3. **False Positive Rate:**
+
    - Do the top-scoring files look more convincing?
    - Are there fewer noise-triggered detections?
 
@@ -110,16 +120,19 @@ After running, compare with previous results to answer:
 Based on results:
 
 ### If Too Conservative (very few detections)
+
 - Reduce `regularity_cv` threshold from 0.5 to 0.6 or 0.7
 - Lower percentile from 99.5 back to 99.2
 - Reduce min_clicks from 15 to 12
 
 ### If Still Too Permissive (noise/false positives)
+
 - Increase `regularity_cv` threshold even more (0.4 or 0.3)
 - Add frequency domain check (clicks should be broadband)
 - Require minimum train duration
 
 ### If Just Right
+
 - Document the parameters
 - Run on larger sample (5000-10000 files)
 - Generate showcase with best examples
@@ -136,6 +149,7 @@ git checkout scripts/quick_find.py  # Revert to original
 ```
 
 Or manually change back:
+
 - `min_clicks=15` → `min_clicks=10`
 - `99.5` → `99`
 - `10` → `8` (noise multiplier)
@@ -189,6 +203,7 @@ CV = std / mean
 ### Real Dolphin Click Trains
 
 From literature:
+
 - **ICI (Inter-Click Interval):** 5-100ms, typically 20-50ms
 - **Regularity:** Usually quite regular (CV < 0.4 for echolocation)
 - **Duration:** Trains often 0.5-3 seconds

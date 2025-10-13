@@ -240,7 +240,9 @@ def detect_click_trains(
 
     # Also require absolute threshold well above noise
     noise_level = np.percentile(envelope, 20)
-    min_click_amplitude = noise_level * 10  # Must be 10x noise level (increased from 8x)
+    min_click_amplitude = (
+        noise_level * 10
+    )  # Must be 10x noise level (increased from 8x)
     threshold = max(threshold_percentile, min_click_amplitude)
 
     # Find peaks with STRICTER criteria for sharp spike trains
@@ -251,7 +253,8 @@ def detect_click_trains(
         envelope,
         height=threshold,
         distance=min_separation,
-        prominence=threshold * 0.4,  # Must be very prominent (40% of threshold, was 30%)
+        prominence=threshold
+        * 0.4,  # Must be very prominent (40% of threshold, was 30%)
         width=(
             1,
             int(fs * 0.003),
@@ -295,11 +298,11 @@ def detect_click_trains(
             if len(current_train) >= min_clicks:
                 train_data = np.array(current_train)
                 icis = np.diff(train_data)
-                
+
                 # NEW: Check for regularity - real spike trains have consistent spacing
                 mean_ici = np.mean(icis)
                 std_ici = np.std(icis)
-                
+
                 # Coefficient of variation - require relatively consistent ICIs
                 # CV < 0.5 means ICI std is less than 50% of mean (reasonably regular)
                 if mean_ici > 0:
@@ -330,10 +333,10 @@ def detect_click_trains(
     if len(current_train) >= min_clicks:
         train_data = np.array(current_train)
         icis = np.diff(train_data)
-        
+
         mean_ici = np.mean(icis)
         std_ici = np.std(icis)
-        
+
         if mean_ici > 0:
             cv = std_ici / mean_ici
             if cv < 0.5:  # Only accept regular trains
