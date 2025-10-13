@@ -23,6 +23,7 @@ python scripts/quick_find.py \
 ## 🎯 What It Finds
 
 Exceptional acoustic features:
+
 - 🚀 Ultra-fast frequency sweeps (>10 kHz/sec)
 - 🎚️ Extreme frequency ranges (>50 kHz span)
 - 🎼 Multiple simultaneous vocalizations
@@ -35,14 +36,16 @@ Exceptional acoustic features:
 ## 📊 Key Differences
 
 ### vs. Standard Mode
-| Feature | Standard Mode | Unique Mode |
-|---------|--------------|-------------|
-| **Focus** | Quantity (count detections) | Quality (exceptional features) |
-| **Scoring** | Chirps + clicks + SNR | Rarity + diversity + extremes |
-| **Use Case** | Find any vocalizations | Find gems in dataset |
-| **Output** | n_chirps, n_click_trains | uniqueness_score, feature metrics |
+
+| Feature      | Standard Mode               | Unique Mode                       |
+| ------------ | --------------------------- | --------------------------------- |
+| **Focus**    | Quantity (count detections) | Quality (exceptional features)    |
+| **Scoring**  | Chirps + clicks + SNR       | Rarity + diversity + extremes     |
+| **Use Case** | Find any vocalizations      | Find gems in dataset              |
+| **Output**   | n_chirps, n_click_trains    | uniqueness_score, feature metrics |
 
 ### Scoring
+
 - **Standard:** Interestingness (0-100) - how active is the file?
 - **Unique:** Uniqueness (0-100) - how rare/exceptional are the features?
 
@@ -51,6 +54,7 @@ Exceptional acoustic features:
 ## 📁 Output
 
 Saves to `experiments/unique_signals/` (gitignored):
+
 - `results.json` - Full results with all metrics
 - `top_20_files.txt` - Most unique files
 - `all_results.csv` - Spreadsheet format
@@ -77,6 +81,7 @@ cd site && python3 -m http.server 8000
 ## 📖 Full Documentation
 
 See `UNIQUE_SIGNAL_DETECTION.md` for:
+
 - Complete feature descriptions
 - Scoring breakdown
 - Expected results
