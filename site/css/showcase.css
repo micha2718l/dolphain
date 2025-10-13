@@ -1,0 +1,150 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a1628 0%, #1a2f4a 100%);
+    color: #ffffff;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container { max-width: 1200px; margin: 0 auto; }
+
+h1 {
+    text-align: center;
+    color: #00d4ff;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.file-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 2px solid rgba(0, 212, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+}
+
+.file-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.file-title {
+    font-size: 1.5em;
+    color: #00d4ff;
+}
+
+/* Audio mode tabs */
+.audio-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.audio-tab {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.audio-tab.active {
+    background: rgba(0, 212, 255, 0.3);
+    border-color: #00d4ff;
+}
+
+.audio-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Visualizations */
+.viz-container {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.viz-image {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+.playback-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background: rgba(255, 0, 0, 0.8);
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+}
+
+.hover-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    display: none;
+}
+
+/* Audio player controls */
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #00d4ff;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn:hover {
+    background: #00b8e6;
+}
+
+.time {
+    color: #00d4ff;
+    font-family: monospace;
+}
+
+.timeline {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.timeline-progress {
+    height: 100%;
+    background: #00d4ff;
+    border-radius: 3px;
+    width: 0%;
+}
