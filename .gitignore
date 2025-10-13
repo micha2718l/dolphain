@@ -43,3 +43,4 @@ outputs/
 # OS-specific files
 .DS_Store
 Thumbs.db
+CLICK_CHIRP_*/
