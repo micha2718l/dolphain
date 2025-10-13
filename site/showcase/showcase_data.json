@@ -1,10 +1,10 @@
 {
   "generated": "unknown",
   "summary": {
-    "total_files": 15,
+    "total_files": 25,
     "total_chirps": 0,
     "total_clicks": 0,
-    "total_duration_s": 320.0,
+    "total_duration_s": 533.3,
     "avg_chirps_per_file": 0.0,
     "avg_clicks_per_file": 0.0
   },
@@ -36,14 +36,139 @@
     },
     {
       "rank": 2,
+      "filename": "7178E22A.200",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY200/7178E22A.200",
+      "audio_raw": "audio/rank_02_7178E22A_raw.mp3",
+      "audio_denoised": "audio/rank_02_7178E22A.mp3",
+      "spectrogram_denoised": "images/rank_02_7178E22A_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_02_7178E22A_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_02_7178E22A_spectrogram_raw.png",
+      "waveform_raw": "images/rank_02_7178E22A_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-06-27 18:44:14.987687",
+        "duration": 21.333333333333332
+      },
+      "score": 72.0
+    },
+    {
+      "rank": 3,
+      "filename": "71620CE5.170",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy170/71620CE5.170",
+      "audio_raw": "audio/rank_03_71620CE5_raw.mp3",
+      "audio_denoised": "audio/rank_03_71620CE5.mp3",
+      "spectrogram_denoised": "images/rank_03_71620CE5_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_03_71620CE5_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_03_71620CE5_spectrogram_raw.png",
+      "waveform_raw": "images/rank_03_71620CE5_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-06-12 03:37:21.499125",
+        "duration": 21.333333333333332
+      },
+      "score": 72.0
+    },
+    {
+      "rank": 4,
+      "filename": "71653B21.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71653B21.140",
+      "audio_raw": "audio/rank_04_71653B21_raw.mp3",
+      "audio_denoised": "audio/rank_04_71653B21.mp3",
+      "spectrogram_denoised": "images/rank_04_71653B21_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_04_71653B21_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_04_71653B21_spectrogram_raw.png",
+      "waveform_raw": "images/rank_04_71653B21_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-06-15 01:38:04.302344",
+        "duration": 21.333333333333332
+      },
+      "score": 72.0
+    },
+    {
+      "rank": 5,
+      "filename": "72135DFB.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/72135DFB.141",
+      "audio_raw": "audio/rank_05_72135DFB_raw.mp3",
+      "audio_denoised": "audio/rank_05_72135DFB.mp3",
+      "spectrogram_denoised": "images/rank_05_72135DFB_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_05_72135DFB_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_05_72135DFB_spectrogram_raw.png",
+      "waveform_raw": "images/rank_05_72135DFB_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-08-01 18:07:06.375937",
+        "duration": 21.333333333333332
+      },
+      "score": 72.0
+    },
+    {
+      "rank": 6,
+      "filename": "7178053E.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7178053E.140",
+      "audio_raw": "audio/rank_06_7178053E_raw.mp3",
+      "audio_denoised": "audio/rank_06_7178053E.mp3",
+      "spectrogram_denoised": "images/rank_06_7178053E_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_06_7178053E_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_06_7178053E_spectrogram_raw.png",
+      "waveform_raw": "images/rank_06_7178053E_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-06-27 20:13:30.386094",
+        "duration": 21.333333333333332
+      },
+      "score": 72.0
+    },
+    {
+      "rank": 7,
       "filename": "7170870A.140",
       "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7170870A.140",
-      "audio_raw": "audio/rank_02_7170870A_raw.mp3",
-      "audio_denoised": "audio/rank_02_7170870A.mp3",
-      "spectrogram_denoised": "images/rank_02_7170870A_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_02_7170870A_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_02_7170870A_spectrogram_raw.png",
-      "waveform_raw": "images/rank_02_7170870A_waveform_raw.png",
+      "audio_raw": "audio/rank_07_7170870A_raw.mp3",
+      "audio_denoised": "audio/rank_07_7170870A.mp3",
+      "spectrogram_denoised": "images/rank_07_7170870A_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_07_7170870A_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_07_7170870A_spectrogram_raw.png",
+      "waveform_raw": "images/rank_07_7170870A_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -60,15 +185,15 @@
       "score": 69.0
     },
     {
-      "rank": 3,
+      "rank": 8,
       "filename": "718134D2.140",
       "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/718134D2.140",
-      "audio_raw": "audio/rank_03_718134D2_raw.mp3",
-      "audio_denoised": "audio/rank_03_718134D2.mp3",
-      "spectrogram_denoised": "images/rank_03_718134D2_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_03_718134D2_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_03_718134D2_spectrogram_raw.png",
-      "waveform_raw": "images/rank_03_718134D2_waveform_raw.png",
+      "audio_raw": "audio/rank_08_718134D2_raw.mp3",
+      "audio_denoised": "audio/rank_08_718134D2.mp3",
+      "spectrogram_denoised": "images/rank_08_718134D2_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_08_718134D2_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_08_718134D2_spectrogram_raw.png",
+      "waveform_raw": "images/rank_08_718134D2_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -85,140 +210,15 @@
       "score": 69.0
     },
     {
-      "rank": 4,
-      "filename": "72029215.201",
-      "original_path": "/Volumes/ladcuno8tb0/2017_South/BUOY201/72029215.201",
-      "audio_raw": "audio/rank_04_72029215_raw.mp3",
-      "audio_denoised": "audio/rank_04_72029215.mp3",
-      "spectrogram_denoised": "images/rank_04_72029215_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_04_72029215_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_04_72029215_spectrogram_raw.png",
-      "waveform_raw": "images/rank_04_72029215_waveform_raw.png",
-      "stats": {
-        "chirp_count": 0,
-        "click_train_count": 0,
-        "total_clicks": 0,
-        "duration": 21.333333333333332,
-        "chirp_coverage": 0,
-        "click_coverage": 0,
-        "mean_click_rate": 0
-      },
-      "metadata": {
-        "time_start": "2017-07-22 00:32:28.646312",
-        "duration": 21.333333333333332
-      },
-      "score": 68.52
-    },
-    {
-      "rank": 5,
-      "filename": "7194384C.171",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7194384C.171",
-      "audio_raw": "audio/rank_05_7194384C_raw.mp3",
-      "audio_denoised": "audio/rank_05_7194384C.mp3",
-      "spectrogram_denoised": "images/rank_05_7194384C_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_05_7194384C_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_05_7194384C_spectrogram_raw.png",
-      "waveform_raw": "images/rank_05_7194384C_waveform_raw.png",
-      "stats": {
-        "chirp_count": 0,
-        "click_train_count": 0,
-        "total_clicks": 0,
-        "duration": 21.333333333333332,
-        "chirp_coverage": 0,
-        "click_coverage": 0,
-        "mean_click_rate": 0
-      },
-      "metadata": {
-        "time_start": "2017-07-14 04:44:15.282563",
-        "duration": 21.333333333333332
-      },
-      "score": 68.07
-    },
-    {
-      "rank": 6,
-      "filename": "7219C2FE.171",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7219C2FE.171",
-      "audio_raw": "audio/rank_06_7219C2FE_raw.mp3",
-      "audio_denoised": "audio/rank_06_7219C2FE.mp3",
-      "spectrogram_denoised": "images/rank_06_7219C2FE_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_06_7219C2FE_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_06_7219C2FE_spectrogram_raw.png",
-      "waveform_raw": "images/rank_06_7219C2FE_waveform_raw.png",
-      "stats": {
-        "chirp_count": 0,
-        "click_train_count": 0,
-        "total_clicks": 0,
-        "duration": 21.333333333333332,
-        "chirp_coverage": 0,
-        "click_coverage": 0,
-        "mean_click_rate": 0
-      },
-      "metadata": {
-        "time_start": "2017-08-08 03:27:17.916000",
-        "duration": 21.333333333333332
-      },
-      "score": 66.0
-    },
-    {
-      "rank": 7,
-      "filename": "71998651.171",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/71998651.171",
-      "audio_raw": "audio/rank_07_71998651_raw.mp3",
-      "audio_denoised": "audio/rank_07_71998651.mp3",
-      "spectrogram_denoised": "images/rank_07_71998651_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_07_71998651_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_07_71998651_spectrogram_raw.png",
-      "waveform_raw": "images/rank_07_71998651_waveform_raw.png",
-      "stats": {
-        "chirp_count": 0,
-        "click_train_count": 0,
-        "total_clicks": 0,
-        "duration": 21.333333333333332,
-        "chirp_coverage": 0,
-        "click_coverage": 0,
-        "mean_click_rate": 0
-      },
-      "metadata": {
-        "time_start": "2017-07-19 03:05:10.328687",
-        "duration": 21.333333333333332
-      },
-      "score": 65.58
-    },
-    {
-      "rank": 8,
-      "filename": "71824B83.140",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71824B83.140",
-      "audio_raw": "audio/rank_08_71824B83_raw.mp3",
-      "audio_denoised": "audio/rank_08_71824B83.mp3",
-      "spectrogram_denoised": "images/rank_08_71824B83_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_08_71824B83_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_08_71824B83_spectrogram_raw.png",
-      "waveform_raw": "images/rank_08_71824B83_waveform_raw.png",
-      "stats": {
-        "chirp_count": 0,
-        "click_train_count": 0,
-        "total_clicks": 0,
-        "duration": 21.333333333333332,
-        "chirp_coverage": 0,
-        "click_coverage": 0,
-        "mean_click_rate": 0
-      },
-      "metadata": {
-        "time_start": "2017-07-02 06:49:07.227563",
-        "duration": 21.333333333333332
-      },
-      "score": 65.37
-    },
-    {
       "rank": 9,
-      "filename": "71965167.141",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/71965167.141",
-      "audio_raw": "audio/rank_09_71965167_raw.mp3",
-      "audio_denoised": "audio/rank_09_71965167.mp3",
-      "spectrogram_denoised": "images/rank_09_71965167_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_09_71965167_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_09_71965167_spectrogram_raw.png",
-      "waveform_raw": "images/rank_09_71965167_waveform_raw.png",
+      "filename": "719980D3.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/719980D3.141",
+      "audio_raw": "audio/rank_09_719980D3_raw.mp3",
+      "audio_denoised": "audio/rank_09_719980D3.mp3",
+      "spectrogram_denoised": "images/rank_09_719980D3_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_09_719980D3_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_09_719980D3_spectrogram_raw.png",
+      "waveform_raw": "images/rank_09_719980D3_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -229,21 +229,21 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-07-15 18:42:20.627719",
+        "time_start": "2017-07-18 18:38:28.062000",
         "duration": 21.333333333333332
       },
-      "score": 64.92
+      "score": 69.0
     },
     {
       "rank": 10,
-      "filename": "7183557E.140",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7183557E.140",
-      "audio_raw": "audio/rank_10_7183557E_raw.mp3",
-      "audio_denoised": "audio/rank_10_7183557E.mp3",
-      "spectrogram_denoised": "images/rank_10_7183557E_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_10_7183557E_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_10_7183557E_spectrogram_raw.png",
-      "waveform_raw": "images/rank_10_7183557E_waveform_raw.png",
+      "filename": "7196520C.171",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy171/7196520C.171",
+      "audio_raw": "audio/rank_10_7196520C_raw.mp3",
+      "audio_denoised": "audio/rank_10_7196520C.mp3",
+      "spectrogram_denoised": "images/rank_10_7196520C_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_10_7196520C_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_10_7196520C_spectrogram_raw.png",
+      "waveform_raw": "images/rank_10_7196520C_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -254,21 +254,21 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-07-02 21:57:29.847000",
+        "time_start": "2017-07-15 19:47:52.860781",
         "duration": 21.333333333333332
       },
-      "score": 64.28
+      "score": 69.0
     },
     {
       "rank": 11,
-      "filename": "71813ED2.140",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71813ED2.140",
-      "audio_raw": "audio/rank_11_71813ED2_raw.mp3",
-      "audio_denoised": "audio/rank_11_71813ED2.mp3",
-      "spectrogram_denoised": "images/rank_11_71813ED2_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_11_71813ED2_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_11_71813ED2_spectrogram_raw.png",
-      "waveform_raw": "images/rank_11_71813ED2_waveform_raw.png",
+      "filename": "7205EEEB.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/7205EEEB.141",
+      "audio_raw": "audio/rank_11_7205EEEB_raw.mp3",
+      "audio_denoised": "audio/rank_11_7205EEEB.mp3",
+      "spectrogram_denoised": "images/rank_11_7205EEEB_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_11_7205EEEB_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_11_7205EEEB_spectrogram_raw.png",
+      "waveform_raw": "images/rank_11_7205EEEB_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -279,21 +279,21 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-07-01 11:34:00.373938",
+        "time_start": "2017-07-25 17:38:42.079406",
         "duration": 21.333333333333332
       },
-      "score": 64.24
+      "score": 69.0
     },
     {
       "rank": 12,
-      "filename": "7174CD1D.140",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7174CD1D.140",
-      "audio_raw": "audio/rank_12_7174CD1D_raw.mp3",
-      "audio_denoised": "audio/rank_12_7174CD1D.mp3",
-      "spectrogram_denoised": "images/rank_12_7174CD1D_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_12_7174CD1D_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_12_7174CD1D_spectrogram_raw.png",
-      "waveform_raw": "images/rank_12_7174CD1D_waveform_raw.png",
+      "filename": "71822224.150",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/Buoy150/71822224.150",
+      "audio_raw": "audio/rank_12_71822224_raw.mp3",
+      "audio_denoised": "audio/rank_12_71822224.mp3",
+      "spectrogram_denoised": "images/rank_12_71822224_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_12_71822224_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_12_71822224_spectrogram_raw.png",
+      "waveform_raw": "images/rank_12_71822224_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -304,21 +304,21 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-06-24 07:04:54.473406",
+        "time_start": "2017-07-01 19:39:46.110906",
         "duration": 21.333333333333332
       },
-      "score": 64.12
+      "score": 69.0
     },
     {
       "rank": 13,
-      "filename": "72070DD4.141",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/72070DD4.141",
-      "audio_raw": "audio/rank_13_72070DD4_raw.mp3",
-      "audio_denoised": "audio/rank_13_72070DD4.mp3",
-      "spectrogram_denoised": "images/rank_13_72070DD4_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_13_72070DD4_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_13_72070DD4_spectrogram_raw.png",
-      "waveform_raw": "images/rank_13_72070DD4_waveform_raw.png",
+      "filename": "7176E9FD.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7176E9FD.140",
+      "audio_raw": "audio/rank_13_7176E9FD_raw.mp3",
+      "audio_denoised": "audio/rank_13_7176E9FD.mp3",
+      "spectrogram_denoised": "images/rank_13_7176E9FD_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_13_7176E9FD_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_13_7176E9FD_spectrogram_raw.png",
+      "waveform_raw": "images/rank_13_7176E9FD_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -329,21 +329,21 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-07-27 16:32:00.212750",
+        "time_start": "2017-06-26 02:52:58.768531",
         "duration": 21.333333333333332
       },
-      "score": 64.04
+      "score": 69.0
     },
     {
       "rank": 14,
-      "filename": "7173B9DC.140",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7173B9DC.140",
-      "audio_raw": "audio/rank_14_7173B9DC_raw.mp3",
-      "audio_denoised": "audio/rank_14_7173B9DC.mp3",
-      "spectrogram_denoised": "images/rank_14_7173B9DC_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_14_7173B9DC_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_14_7173B9DC_spectrogram_raw.png",
-      "waveform_raw": "images/rank_14_7173B9DC_waveform_raw.png",
+      "filename": "71717A23.150",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/Buoy150/71717A23.150",
+      "audio_raw": "audio/rank_14_71717A23_raw.mp3",
+      "audio_denoised": "audio/rank_14_71717A23.mp3",
+      "spectrogram_denoised": "images/rank_14_71717A23_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_14_71717A23_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_14_71717A23_spectrogram_raw.png",
+      "waveform_raw": "images/rank_14_71717A23_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -354,21 +354,21 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-06-23 01:52:30.277562",
+        "time_start": "2017-06-21 04:48:56.735594",
         "duration": 21.333333333333332
       },
-      "score": 64.03
+      "score": 69.0
     },
     {
       "rank": 15,
-      "filename": "7186907E.140",
-      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7186907E.140",
-      "audio_raw": "audio/rank_15_7186907E_raw.mp3",
-      "audio_denoised": "audio/rank_15_7186907E.mp3",
-      "spectrogram_denoised": "images/rank_15_7186907E_spectrogram_denoised.png",
-      "waveform_denoised": "images/rank_15_7186907E_waveform_denoised.png",
-      "spectrogram_raw": "images/rank_15_7186907E_spectrogram_raw.png",
-      "waveform_raw": "images/rank_15_7186907E_waveform_raw.png",
+      "filename": "7173BFA7.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7173BFA7.140",
+      "audio_raw": "audio/rank_15_7173BFA7_raw.mp3",
+      "audio_denoised": "audio/rank_15_7173BFA7.mp3",
+      "spectrogram_denoised": "images/rank_15_7173BFA7_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_15_7173BFA7_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_15_7173BFA7_spectrogram_raw.png",
+      "waveform_raw": "images/rank_15_7173BFA7_waveform_raw.png",
       "stats": {
         "chirp_count": 0,
         "click_train_count": 0,
@@ -379,10 +379,260 @@
         "mean_click_rate": 0
       },
       "metadata": {
-        "time_start": "2017-07-06 15:27:24.585875",
+        "time_start": "2017-06-23 10:39:45.262750",
         "duration": 21.333333333333332
       },
-      "score": 64.02
+      "score": 69.0
+    },
+    {
+      "rank": 16,
+      "filename": "719874A3.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/719874A3.141",
+      "audio_raw": "audio/rank_16_719874A3_raw.mp3",
+      "audio_denoised": "audio/rank_16_719874A3.mp3",
+      "spectrogram_denoised": "images/rank_16_719874A3_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_16_719874A3_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_16_719874A3_spectrogram_raw.png",
+      "waveform_raw": "images/rank_16_719874A3_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-07-18 00:09:13.004500",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 17,
+      "filename": "71921B1A.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/71921B1A.141",
+      "audio_raw": "audio/rank_17_71921B1A_raw.mp3",
+      "audio_denoised": "audio/rank_17_71921B1A.mp3",
+      "spectrogram_denoised": "images/rank_17_71921B1A_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_17_71921B1A_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_17_71921B1A_spectrogram_raw.png",
+      "waveform_raw": "images/rank_17_71921B1A_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-07-12 08:20:07.984156",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 18,
+      "filename": "72009238.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/72009238.141",
+      "audio_raw": "audio/rank_18_72009238_raw.mp3",
+      "audio_denoised": "audio/rank_18_72009238.mp3",
+      "spectrogram_denoised": "images/rank_18_72009238_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_18_72009238_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_18_72009238_spectrogram_raw.png",
+      "waveform_raw": "images/rank_18_72009238_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-07-19 21:01:38.340969",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 19,
+      "filename": "71620DA4.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/71620DA4.140",
+      "audio_raw": "audio/rank_19_71620DA4_raw.mp3",
+      "audio_denoised": "audio/rank_19_71620DA4.mp3",
+      "spectrogram_denoised": "images/rank_19_71620DA4_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_19_71620DA4_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_19_71620DA4_spectrogram_raw.png",
+      "waveform_raw": "images/rank_19_71620DA4_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-06-12 04:37:56.059844",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 20,
+      "filename": "7221BB9D.151",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/Buoy151/7221BB9D.151",
+      "audio_raw": "audio/rank_20_7221BB9D_raw.mp3",
+      "audio_denoised": "audio/rank_20_7221BB9D.mp3",
+      "spectrogram_denoised": "images/rank_20_7221BB9D_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_20_7221BB9D_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_20_7221BB9D_spectrogram_raw.png",
+      "waveform_raw": "images/rank_20_7221BB9D_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-08-09 19:44:43.068313",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 21,
+      "filename": "7190C54D.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7190C54D.140",
+      "audio_raw": "audio/rank_21_7190C54D_raw.mp3",
+      "audio_denoised": "audio/rank_21_7190C54D.mp3",
+      "spectrogram_denoised": "images/rank_21_7190C54D_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_21_7190C54D_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_21_7190C54D_spectrogram_raw.png",
+      "waveform_raw": "images/rank_21_7190C54D_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-07-09 23:33:48.497469",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 22,
+      "filename": "72114292.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/72114292.141",
+      "audio_raw": "audio/rank_22_72114292_raw.mp3",
+      "audio_denoised": "audio/rank_22_72114292.mp3",
+      "spectrogram_denoised": "images/rank_22_72114292_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_22_72114292_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_22_72114292_spectrogram_raw.png",
+      "waveform_raw": "images/rank_22_72114292_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-07-31 00:32:21.490188",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 23,
+      "filename": "721692C5.141",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy141/721692C5.141",
+      "audio_raw": "audio/rank_23_721692C5_raw.mp3",
+      "audio_denoised": "audio/rank_23_721692C5.mp3",
+      "spectrogram_denoised": "images/rank_23_721692C5_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_23_721692C5_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_23_721692C5_spectrogram_raw.png",
+      "waveform_raw": "images/rank_23_721692C5_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-08-05 02:11:43.637125",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 24,
+      "filename": "7171A2A1.140",
+      "original_path": "/Volumes/ladcuno8tb0/2017_West/Buoy140/7171A2A1.140",
+      "audio_raw": "audio/rank_24_7171A2A1_raw.mp3",
+      "audio_denoised": "audio/rank_24_7171A2A1.mp3",
+      "spectrogram_denoised": "images/rank_24_7171A2A1_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_24_7171A2A1_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_24_7171A2A1_spectrogram_raw.png",
+      "waveform_raw": "images/rank_24_7171A2A1_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-06-21 14:38:10.360844",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
+    },
+    {
+      "rank": 25,
+      "filename": "720290B4.151",
+      "original_path": "/Volumes/ladcuno8tb0/2017_South/Buoy151/720290B4.151",
+      "audio_raw": "audio/rank_25_720290B4_raw.mp3",
+      "audio_denoised": "audio/rank_25_720290B4.mp3",
+      "spectrogram_denoised": "images/rank_25_720290B4_spectrogram_denoised.png",
+      "waveform_denoised": "images/rank_25_720290B4_waveform_denoised.png",
+      "spectrogram_raw": "images/rank_25_720290B4_spectrogram_raw.png",
+      "waveform_raw": "images/rank_25_720290B4_waveform_raw.png",
+      "stats": {
+        "chirp_count": 0,
+        "click_train_count": 0,
+        "total_clicks": 0,
+        "duration": 21.333333333333332,
+        "chirp_coverage": 0,
+        "click_coverage": 0,
+        "mean_click_rate": 0
+      },
+      "metadata": {
+        "time_start": "2017-07-21 22:19:30.243500",
+        "duration": 21.333333333333332
+      },
+      "score": 69.0
     }
   ]
 }

@@ -249,8 +249,53 @@ h1 {
   font-size: clamp(1rem, 2.5vw, 1.1rem);
   color: var(--text-readable);
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   line-height: 1.6;
+}
+
+/* Header badges */
+.header-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.badge-science {
+  background: linear-gradient(135deg, #2d5f3f, #3d7f5f);
+  color: white;
+}
+
+.badge-ai {
+  background: linear-gradient(135deg, #7c98ab, #5a7a8f);
+  color: white;
+}
+
+.badge-data {
+  background: linear-gradient(135deg, #178ca4, #1fa8c0);
+  color: white;
+}
+
+.badge-open {
+  background: linear-gradient(135deg, #3ab0c8, #5dc4dc);
+  color: white;
 }
 
 /* Douglas Adams quote */
@@ -376,13 +421,103 @@ h3 {
   padding: 1.5rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(58, 176, 200, 0.5);
+}
+
+.highlight-card {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(58, 176, 200, 0.15));
+  border: 2px solid rgba(255, 107, 107, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6b6b, #3ab0c8, #ff6b6b);
+  background-size: 300% 300%;
+  border-radius: 8px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: gradientShift 6s ease infinite;
+}
+
+.highlight-card:hover::before {
+  opacity: 0.3;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.feature-tech {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.85rem;
+  color: var(--sand);
+  font-style: italic;
+}
+
+.feature-highlight-box {
+  background: linear-gradient(135deg, rgba(45, 95, 63, 0.3), rgba(23, 140, 164, 0.3));
+  border: 2px solid var(--ocean-light);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 3rem 0;
+  backdrop-filter: blur(10px);
+}
+
+.feature-highlight-box h3 {
+  color: var(--coral);
+  text-align: center;
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.detection-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.mode-card {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mode-card h4 {
+  color: var(--foam);
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.mode-card code {
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--ocean-light);
+  overflow-x: auto;
 }
 
 .feature-icon {
@@ -452,6 +587,31 @@ h3 {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+.update-banner {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(58, 176, 200, 0.2));
+  border: 2px solid var(--coral);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(5px);
+}
+
+.update-banner h3 {
+  color: var(--coral);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.update-banner ul li {
+  padding: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.update-banner strong {
+  color: var(--foam);
+}
+
 .cta-button {
   display: inline-block;
   background: linear-gradient(135deg, var(--ocean-mid), var(--ocean-light));
@@ -474,6 +634,45 @@ h3 {
 
 .cta-button.secondary {
   background: linear-gradient(135deg, var(--seaweed), var(--ocean-mid));
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.cta-card {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.cta-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(58, 176, 200, 0.5);
+}
+
+.cta-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--foam);
+}
+
+.cta-card p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: var(--text-readable);
+}
+
+.cta-card .cta-button {
+  margin: 0;
+  width: 100%;
+  max-width: 250px;
 }
 
 .stats-grid {
