@@ -40,6 +40,33 @@ fetch("showcase/showcase_data.json")
   .then((r) => r.json())
   .then((data) => {
     const container = document.getElementById("files-container");
+    
+    // Populate stats
+    const statsContainer = document.getElementById("showcase-stats");
+    if (statsContainer && data.files.length > 0) {
+      const totalChirps = data.files.reduce((sum, f) => sum + (f.chirps || 0), 0);
+      const totalClicks = data.files.reduce((sum, f) => sum + (f.clicks || 0), 0);
+      const avgScore = (data.files.reduce((sum, f) => sum + f.score, 0) / data.files.length).toFixed(1);
+      
+      statsContainer.innerHTML = `
+        <div class="stat-item">
+          <span class="stat-number">${data.files.length}</span>
+          <span class="stat-label">Recordings</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">${totalChirps}</span>
+          <span class="stat-label">Total Chirps</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">${totalClicks}</span>
+          <span class="stat-label">Total Clicks</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">${avgScore}</span>
+          <span class="stat-label">Avg Score</span>
+        </div>
+      `;
+    }
 
     data.files.forEach((file) => {
       const card = document.createElement("div");
@@ -48,12 +75,27 @@ fetch("showcase/showcase_data.json")
 
       card.innerHTML = `
                 <div class="file-header">
-                    <div class="file-title">Rank ${file.rank}: ${
-        file.filename
-      }</div>
-                    <div style="color: #00d4ff;">Score: ${file.score.toFixed(
-                      1
-                    )}</div>
+                    <div class="file-title">${file.filename}</div>
+                    <div class="file-rank">Rank #${file.rank}</div>
+                </div>
+                
+                <div class="file-metadata">
+                    <div class="metadata-item">
+                        <span class="metadata-label">Interestingness Score</span>
+                        <span class="metadata-value highlight">${file.score.toFixed(1)}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Chirps Detected</span>
+                        <span class="metadata-value">${file.chirps || 0}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Click Trains</span>
+                        <span class="metadata-value">${file.click_trains || 0}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Total Clicks</span>
+                        <span class="metadata-value">${file.clicks || 0}</span>
+                    </div>
                 </div>
                 
                 <div class="audio-tabs">

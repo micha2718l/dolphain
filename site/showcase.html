@@ -3,13 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dolphin Communication Showcase</title>
+    <title>Dolphin Communication Showcase | Dolphain</title>
+    <meta name="description" content="Explore the most interesting dolphin vocalizations from the Gulf of Mexico. Interactive audio playback synchronized with spectrograms and waveforms." />
     <link rel="stylesheet" href="css/showcase.css" />
   </head>
   <body>
+    <!-- Navigation -->
+    <nav class="showcase-nav">
+      <div class="nav-content">
+        <a href="index.html" class="nav-back">← Back to Dolphain</a>
+        <h1 class="nav-title">🐬 Dolphin Communication Showcase</h1>
+        <div class="nav-info">
+          <span class="info-badge">🔬 Real EARS Data</span>
+          <span class="info-badge">🎵 Interactive Audio</span>
+        </div>
+      </div>
+    </nav>
+
     <div class="container">
-      <h1>🐬 Dolphin Communication Showcase</h1>
-      <div id="files-container"></div>
+      <div class="showcase-header">
+        <p class="showcase-description">
+          Listen to the most interesting dolphin vocalizations from the Gulf of Mexico. 
+          Each recording has been analyzed for clicks, chirps, and unique acoustic features. 
+          Click on spectrograms to jump to specific moments in the audio.
+        </p>
+        <div class="showcase-stats" id="showcase-stats">
+          <!-- Will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <div id="files-container" class="files-container">
+        <!-- Will be populated by JavaScript -->
+      </div>
+
+      <footer class="showcase-footer">
+        <p>Data from <a href="http://ladcgemm.org/" target="_blank">LADC-GEMM</a> | 
+           Funded by <a href="https://gulfresearchinitiative.org/" target="_blank">GoMRI</a></p>
+        <p class="footer-note">All recordings are 30-second samples from EARS (Ecological Acoustic Recorders) in the Gulf of Mexico</p>
+      </footer>
     </div>
 
     <script src="js/audio-player.js"></script>
