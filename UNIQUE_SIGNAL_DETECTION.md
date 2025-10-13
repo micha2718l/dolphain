@@ -11,29 +11,35 @@
 This mode is integrated into `quick_find.py` and goes beyond basic chirp/click detection to find **truly unique** recordings with exceptional characteristics:
 
 ### 1. **Ultra-Fast Frequency Sweeps** 🚀
+
 - Sweeps faster than 10 kHz/second
 - Exceptionally rapid vocalizations
 
 ### 2. **Extreme Frequency Ranges** 🎚️
+
 - Signals spanning >50 kHz range
 - Ultra-high frequencies (>100 kHz)
 - Wide bandwidth vocalizations
 
 ### 3. **Multiple Simultaneous Vocalizations** 🎼
+
 - 2+ dolphins vocalizing at once
 - Overlapping signals at different frequencies
 - Social communication patterns
 
 ### 4. **Unusual Click Patterns** 🥁
+
 - **Burst clicking:** Rapid clicks <5ms apart
 - **Rhythmic extremes:** Very regular or very irregular
 
 ### 5. **Harmonic Structures** 🎹
+
 - Overtones (2x, 3x fundamental frequency)
 - Musical quality signals
 - Complex tonal vocalizations
 
 ### 6. **High Spectral Diversity** 🌈
+
 - Activity across 5 frequency bands simultaneously
 - High spectral entropy
 - Rich, complex frequency content
@@ -102,7 +108,9 @@ python3 -m http.server 8000
 Results saved to `experiments/unique_signals/`:
 
 ### `results.json`
+
 Full detailed results with uniqueness metrics:
+
 ```json
 {
   "results": [
@@ -127,6 +135,7 @@ Full detailed results with uniqueness metrics:
 ## 🏗️ Algorithm Features
 
 ### Spectral Analysis
+
 ```python
 # Frequency bands analyzed:
 ultra_low:   0-2 kHz     (rumbles, ambient)
@@ -139,35 +148,44 @@ ultra_high:  80-125 kHz  (ultrasonic clicks)
 ### Scoring Breakdown (0-100)
 
 **Multi-band Activity (0-15 pts):**
+
 - 3 points per active frequency band (max 5 bands)
 
 **Spectral Diversity (0-10 pts):**
+
 - High entropy = diverse frequency content
 
 **Frequency Range (0-10 pts):**
-- >50 kHz span gets maximum points
+
+- > 50 kHz span gets maximum points
 
 **Extreme Frequencies (0-5 pts):**
-- >100 kHz: 5 pts
-- >80 kHz: 3 pts
+
+- > 100 kHz: 5 pts
+- > 80 kHz: 3 pts
 
 **Simultaneous Signals (0-10 pts):**
+
 - 4+ overlapping: 10 pts
 - 3 overlapping: 7 pts
 - 2 overlapping: 4 pts
 
 **Harmonics (0-10 pts):**
+
 - 0.5 points per harmonic event detected
 
 **Ultra-Fast Sweeps (0-10 pts):**
+
 - 5+ sweeps: 10 pts
 - 3+ sweeps: 7 pts
 - 1+ sweeps: 4 pts
 
 **Burst Clicks (0-8 pts):**
+
 - 0.2 points per burst click (<5ms ICI)
 
 **Unusual Regularity (0-5 pts):**
+
 - Very regular OR very irregular click patterns
 
 ---
@@ -175,10 +193,12 @@ ultra_high:  80-125 kHz  (ultrasonic clicks)
 ## 🎯 What Makes This Different
 
 ### vs. Standard Mode
+
 **Standard:** Detects ANY chirps and clicks (quantity-focused)  
 **Unique:** Finds EXCEPTIONAL features (quality-focused)
 
 ### Scoring Philosophy
+
 - High scores (>70): Truly exceptional, rare recordings
 - Medium scores (40-70): Interesting features, worth review
 - Low scores (<40): Typical recordings, less unique
@@ -190,6 +210,7 @@ ultra_high:  80-125 kHz  (ultrasonic clicks)
 Based on typical datasets:
 
 ### Score Distribution
+
 - **90-100:** 0-2% (extremely rare)
 - **70-90:** 5-10% (very interesting)
 - **50-70:** 15-20% (interesting)
@@ -197,6 +218,7 @@ Based on typical datasets:
 - **0-30:** 40-50% (typical)
 
 ### Feature Prevalence
+
 - **Fast sweeps (>10 kHz/sec):** ~10-15%
 - **Harmonics detected:** ~20-25%
 - **Simultaneous signals:** ~5-10%
@@ -207,11 +229,13 @@ Based on typical datasets:
 ## 💡 Tips for Best Results
 
 ### File Selection
+
 - Use diverse time periods (day/night, seasons)
 - Include various locations
 - Mix calm and active periods
 
 ### Analysis Strategy
+
 1. **Initial run:** 1000 files to understand distribution
 2. **Review top 50:** Verify algorithm performance
 3. **Adjust if needed:** Can tune thresholds in code
@@ -224,6 +248,7 @@ Based on typical datasets:
 This mode is designed to find the **most interesting, rare, and exceptional** dolphin vocalizations in your dataset.
 
 **Run it now:**
+
 ```bash
 python scripts/quick_find.py \
   --file-list outputs/ears_files_list.txt \
@@ -234,35 +259,40 @@ python scripts/quick_find.py \
 
 **Then enjoy discovering the most amazing sounds in your data!** 🐬🌟
 
-
 ### 1. **Ultra-Fast Frequency Sweeps** 🚀
+
 - Sweeps faster than 10 kHz/second
 - Fastest sweeps >50 kHz/sec get maximum points
 - These are exceptionally rapid vocalizations
 
 ### 2. **Extreme Frequency Ranges** 🎚️
+
 - Signals spanning >50 kHz range
 - Ultra-high frequencies (>100 kHz)
 - Ultra-low frequencies (<2 kHz)
 - Wide bandwidth vocalizations
 
 ### 3. **Multiple Simultaneous Vocalizations** 🎼
+
 - 2+ dolphins vocalizing at once
 - Overlapping signals at different frequencies
 - Social communication patterns
 
 ### 4. **Unusual Click Patterns** 🥁
+
 - **Burst clicking:** Rapid clicks <5ms apart
 - **Bimodal patterns:** Two different click rates
 - **Acceleration/deceleration:** Speeding up or slowing down
 - **Syncopated rhythms:** Irregular but patterned
 
 ### 5. **Harmonic Structures** 🎹
+
 - Overtones (2x, 3x fundamental frequency)
 - Musical quality signals
 - Complex tonal vocalizations
 
 ### 6. **High Spectral Diversity** 🌈
+
 - Activity across 5 frequency bands simultaneously
 - High spectral entropy
 - Rich, complex frequency content
@@ -272,6 +302,7 @@ python scripts/quick_find.py \
 ## 🏗️ Algorithm Features
 
 ### Spectral Analysis
+
 ```python
 # Frequency bands analyzed:
 ultra_low:   0-2 kHz     (rumbles, ambient)
@@ -284,17 +315,20 @@ ultra_high:  80-125 kHz  (ultrasonic clicks)
 ### Scoring System (0-100)
 
 **Spectral Uniqueness (40 points):**
+
 - Multiple active bands: 15 pts (3 per band, max 5 bands)
 - Spectral diversity: 10 pts (high entropy)
 - Extreme frequency range: 10 pts (>50 kHz span)
 - Rare extreme frequencies: 5 pts (>100 kHz)
 
 **Special Features (30 points):**
+
 - Simultaneous vocalizations: 10 pts (4+ overlapping)
 - Harmonics: 10 pts (overtone structures)
 - Ultra-fast sweeps: 10 pts (>50 kHz/sec)
 
 **Click Pattern Uniqueness (30 points):**
+
 - Burst clicking: 8 pts (rapid fire)
 - Unusual patterns: 12 pts (bimodal, tempo changes)
 - Regularity extremes: 5 pts (very regular or very irregular)
@@ -342,7 +376,9 @@ python scripts/find_unique_signals.py \
 Results saved to `experiments/unique_signals/`:
 
 ### `results.json`
+
 Full detailed results for all files:
+
 ```json
 {
   "results": [
@@ -370,7 +406,9 @@ Full detailed results for all files:
 ```
 
 ### `summary.json`
+
 Statistics and overview:
+
 ```json
 {
   "total_files": 1000,
@@ -384,6 +422,7 @@ Statistics and overview:
 ```
 
 ### `checkpoint.json`
+
 Resume point (saved every 10 files)
 
 ---
@@ -410,14 +449,17 @@ python3 -m http.server 8000
 ## 🔬 What Makes This Different
 
 ### vs. Standard Quick Find
+
 **Standard:** Looks for ANY chirps and clicks (quantity-focused)  
 **Unique:** Looks for EXCEPTIONAL features (quality-focused)
 
 ### vs. Conservative Detection
+
 **Conservative:** Minimizes false positives, high precision  
 **Unique:** Finds rare gems, tolerates some noise for discovery
 
 ### Scoring Philosophy
+
 - High scores (>70): Truly exceptional, rare recordings
 - Medium scores (40-70): Interesting features, worth review
 - Low scores (<40): Typical recordings, less unique
@@ -429,6 +471,7 @@ python3 -m http.server 8000
 Based on typical datasets:
 
 ### Score Distribution
+
 - **90-100:** 0-2% (extremely rare, exceptional)
 - **70-90:** 5-10% (very interesting, definitely review)
 - **50-70:** 15-20% (interesting features)
@@ -436,6 +479,7 @@ Based on typical datasets:
 - **0-30:** 40-50% (typical recordings)
 
 ### Feature Prevalence
+
 - **Fast sweeps (>10 kHz/sec):** ~10-15% of files
 - **Harmonics detected:** ~20-25% of files
 - **Simultaneous signals:** ~5-10% of files
@@ -447,18 +491,21 @@ Based on typical datasets:
 ## 🎯 Use Cases
 
 ### Research Applications
+
 1. **Behavioral studies:** Find complex social communication
 2. **Acoustic ecology:** Identify unusual environmental interactions
 3. **Individual identification:** Unique vocal signatures
 4. **Species comparison:** Rare vocalization types
 
 ### Showcase Creation
+
 - Create compelling audio galleries
 - Demonstrate vocal diversity
 - Educational materials
 - Public outreach
 
 ### Quality Control
+
 - Find best examples for analysis
 - Identify recording artifacts vs. real signals
 - Validate detection algorithms
@@ -468,11 +515,13 @@ Based on typical datasets:
 ## 🔧 Technical Details
 
 ### Performance
+
 - **Speed:** ~1-2 files/second (similar to standard quick_find)
 - **Memory:** Moderate (processes one file at a time)
 - **Checkpoints:** Every 10 files (safe to interrupt)
 
 ### Dependencies
+
 ```python
 import numpy
 import scipy
@@ -480,6 +529,7 @@ import pywt  # PyWavelets (already in dolphain)
 ```
 
 ### Key Algorithms
+
 1. **High-resolution spectrogram:** 8192-point FFT, 75% overlap
 2. **Multi-band energy analysis:** 5 frequency bands
 3. **Spectral entropy:** Shannon entropy of frequency distribution
@@ -493,26 +543,31 @@ import pywt  # PyWavelets (already in dolphain)
 ### Why These Features Matter
 
 **Ultra-fast sweeps:**
+
 - Require precise vocal control
 - May indicate emotional state or urgency
 - Rare in typical recordings
 
 **Harmonics:**
+
 - Indicate complex vocal fold vibration
 - Musical quality suggests intentional production
 - May have communicative significance
 
 **Simultaneous vocalizations:**
+
 - Social interaction markers
 - Turn-taking or overlapping communication
 - Chorus effects in groups
 
 **Burst clicking:**
+
 - Associated with specific behaviors (feeding, navigation)
 - High information rate
 - Cognitively demanding production
 
 **Wide frequency ranges:**
+
 - Vocal versatility
 - Potentially multi-modal communication
 - Rare extreme frequencies suggest specialization
@@ -522,17 +577,20 @@ import pywt  # PyWavelets (already in dolphain)
 ## 💡 Tips for Best Results
 
 ### File Selection
+
 - Use diverse time periods (day/night, seasons)
 - Include various locations
 - Mix calm and active periods
 
 ### Analysis Strategy
+
 1. **Initial run:** 1000 files to understand distribution
 2. **Review top 50:** Verify algorithm performance
 3. **Adjust if needed:** Fine-tune thresholds
 4. **Large run:** 5000+ files for comprehensive search
 
 ### Interpretation
+
 - **Score >80:** Almost certainly exceptional
 - **Score 60-80:** Very likely interesting
 - **Score 40-60:** Worth checking, may have specific features
@@ -545,11 +603,13 @@ import pywt  # PyWavelets (already in dolphain)
 ### After Initial Run
 
 1. **Review results:**
+
    ```bash
    cat experiments/unique_signals/summary.json
    ```
 
 2. **Generate showcase:**
+
    ```bash
    python scripts/refresh_showcase.py \
      --results-dir experiments/unique_signals \
@@ -558,6 +618,7 @@ import pywt  # PyWavelets (already in dolphain)
    ```
 
 3. **Analyze patterns:**
+
    - What features are most common in high scorers?
    - Are there clusters of similar unique signals?
    - Any unexpected patterns?
@@ -602,6 +663,7 @@ scripts/find_unique_signals.py
 4. **Statistical analysis:** Check score distribution for outliers
 
 ### Expected High Scorers
+
 - Social groups (multiple individuals)
 - Active foraging (burst clicks + whistles)
 - Complex communication sequences
@@ -614,6 +676,7 @@ scripts/find_unique_signals.py
 This experiment is designed to find the **most interesting, rare, and exceptional** dolphin vocalizations in your dataset.
 
 **Run it now:**
+
 ```bash
 python scripts/find_unique_signals.py \
   --file-list outputs/ears_files_list.txt \
