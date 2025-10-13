@@ -40,30 +40,45 @@ def create_spectrogram_image(audio_data, sample_rate, output_path, title=""):
 
     # Convert to dB
     Sxx_dB = 10 * np.log10(Sxx + 1e-10)
-    
+
     # Use imshow for MUCH faster rendering than pcolormesh
     im = ax.imshow(
         Sxx_dB,
-        aspect='auto',
-        origin='lower',
+        aspect="auto",
+        origin="lower",
         cmap="viridis",
         vmin=-80,
         vmax=-20,
         extent=[t[0], t[-1], f[0] / 1000, f[-1] / 1000],
-        interpolation='bilinear'
+        interpolation="bilinear",
     )
 
     # Minimal labels - no ticks, just title
     ax.set_ylim([0, 50])
-    ax.axis('off')  # Remove all axes
+    ax.axis("off")  # Remove all axes
 
     if title:
-        ax.text(0.5, 0.98, title, transform=ax.transAxes, 
-                color='white', fontsize=11, ha='center', va='top')
+        ax.text(
+            0.5,
+            0.98,
+            title,
+            transform=ax.transAxes,
+            color="white",
+            fontsize=11,
+            ha="center",
+            va="top",
+        )
 
     plt.tight_layout(pad=0)
     plt.subplots_adjust(left=0, right=1, top=0.95, bottom=0)
-    plt.savefig(output_path, dpi=80, facecolor="#0a0e27", edgecolor="none", bbox_inches='tight', pad_inches=0.05)
+    plt.savefig(
+        output_path,
+        dpi=80,
+        facecolor="#0a0e27",
+        edgecolor="none",
+        bbox_inches="tight",
+        pad_inches=0.05,
+    )
     plt.close()
 
 
@@ -73,18 +88,25 @@ def create_waveform_image(audio_data, sample_rate, output_path):
     ax.set_facecolor("#0a0e27")
 
     time = np.arange(len(audio_data)) / sample_rate
-    
+
     # Plot waveform
     ax.plot(time, audio_data, color="#00d4ff", linewidth=0.5, alpha=0.8)
     ax.set_xlim([0, time[-1]])
     ax.set_ylim([audio_data.min() * 1.1, audio_data.max() * 1.1])
-    
+
     # Remove axes for clean look
-    ax.axis('off')
+    ax.axis("off")
 
     plt.tight_layout(pad=0)
     plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-    plt.savefig(output_path, dpi=80, facecolor="#0a0e27", edgecolor="none", bbox_inches='tight', pad_inches=0.05)
+    plt.savefig(
+        output_path,
+        dpi=80,
+        facecolor="#0a0e27",
+        edgecolor="none",
+        bbox_inches="tight",
+        pad_inches=0.05,
+    )
     plt.close()
 
 
@@ -213,7 +235,7 @@ def process_file(file_path, rank, output_dir, result_data=None):
     except FileNotFoundError:
         print(f"   ⚠️  File not found, skipping...")
         return None
-    
+
     audio_data = ears_data["data"]
     sample_rate = ears_data["fs"]
     metadata = {
@@ -255,7 +277,7 @@ def process_file(file_path, rank, output_dir, result_data=None):
     # Save raw audio
     raw_wav = audio_dir / f"{base_name}_raw.wav"
     wavfile.write(raw_wav, sample_rate, audio_data.astype(np.float32))
-    
+
     # Save denoised audio
     denoised_wav = audio_dir / f"{base_name}.wav"
     wavfile.write(denoised_wav, sample_rate, denoised.astype(np.float32))
@@ -272,18 +294,22 @@ def process_file(file_path, rank, output_dir, result_data=None):
         title_base = f"Rank {rank} - {n_chirps} chirps, {n_clicks} clicks"
     else:
         title_base = f"Rank {rank}"
-    
+
     # Create DENOISED visualizations
     spec_denoised_path = images_dir / f"{base_name}_spectrogram_denoised.png"
-    create_spectrogram_image(denoised, sample_rate, spec_denoised_path, f"{title_base} (Denoised)")
-    
+    create_spectrogram_image(
+        denoised, sample_rate, spec_denoised_path, f"{title_base} (Denoised)"
+    )
+
     waveform_denoised_path = images_dir / f"{base_name}_waveform_denoised.png"
     create_waveform_image(denoised, sample_rate, waveform_denoised_path)
-    
+
     # Create RAW visualizations
     spec_raw_path = images_dir / f"{base_name}_spectrogram_raw.png"
-    create_spectrogram_image(audio_data, sample_rate, spec_raw_path, f"{title_base} (Raw)")
-    
+    create_spectrogram_image(
+        audio_data, sample_rate, spec_raw_path, f"{title_base} (Raw)"
+    )
+
     waveform_raw_path = images_dir / f"{base_name}_waveform_raw.png"
     create_waveform_image(audio_data, sample_rate, waveform_raw_path)
 
@@ -312,7 +338,7 @@ def create_summary_stats(all_files_data):
         total_chirps = sum(f["stats"]["chirp_count"] for f in all_files_data)
         total_clicks = sum(f["stats"]["total_clicks"] for f in all_files_data)
         total_duration = sum(f["stats"]["duration"] for f in all_files_data)
-        
+
         return {
             "total_files": len(all_files_data),
             "total_chirps": total_chirps,
@@ -400,6 +426,7 @@ def main():
         except Exception as e:
             print(f"❌ Error processing {file_info['file']}: {e}")
             import traceback
+
             traceback.print_exc()
             continue
 

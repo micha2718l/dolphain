@@ -5,6 +5,7 @@
 The `quick_find.py` script has been **completely reworked** to focus on detecting two key acoustic features:
 
 1. **🎵 Chirp Signals** - Frequency sweeps visible in spectrograms
+
    - Can come from various sources (fish, equipment, biological, etc.)
    - Characterized by continuous frequency modulation (sweeps up or down)
    - Detected by tracking frequency ridges across time in spectrogram
@@ -18,16 +19,17 @@ The `quick_find.py` script has been **completely reworked** to focus on detectin
 ## Key Changes from Previous Version
 
 ### Previous Version (Whistle-Based)
+
 - Focused on detecting dolphin whistles (2-20 kHz)
 - Scored based on whistle count, duration, diversity, FM rate, patterns, overlaps
 - Good for finding communication sounds
 
 ### New Version (Chirp & Click Train)
+
 - **Chirps**: Tracks frequency sweeps of any source
   - Minimum sweep of 500 Hz required
   - Minimum duration 50 ms
   - Scored on sweep range, rate, and diversity
-  
 - **Click Trains**: Detects rapid high-frequency clicks
   - 10-150 kHz frequency range (adjusted to sampling rate)
   - Minimum 5 clicks per train
@@ -37,6 +39,7 @@ The `quick_find.py` script has been **completely reworked** to focus on detectin
 ## Detection Algorithms
 
 ### Chirp Detection
+
 ```
 1. Compute high-resolution spectrogram
 2. Apply power threshold (80th percentile)
@@ -47,6 +50,7 @@ The `quick_find.py` script has been **completely reworked** to focus on detectin
 ```
 
 ### Click Train Detection
+
 ```
 1. Band-pass filter to click frequency range (10-150 kHz)
 2. Compute Hilbert envelope
@@ -58,24 +62,28 @@ The `quick_find.py` script has been **completely reworked** to focus on detectin
 ## Scoring System (0-100 points)
 
 ### Chirp Scoring (40 points)
+
 - **Basic count** (15 pts): More chirps = higher score
-- **Quality** (15 pts): 
+- **Quality** (15 pts):
   - Large frequency sweeps (up to 10 pts)
   - Fast sweep rates (up to 5 pts)
 - **Diversity** (10 pts): Variety in start frequencies
 
 ### Click Train Scoring (40 points)
+
 - **Train count** (10 pts): Number of detected trains
 - **Click count** (10 pts): Total clicks across all trains
 - **Regularity** (10 pts): Consistent inter-click intervals
 - **Rate quality** (10 pts): Optimal rate 20-200 clicks/sec
 
 ### Signal Quality (20 points)
+
 - SNR in high-frequency bands (5-50 kHz signal vs 0.5-2 kHz noise)
 
 ## Usage
 
 ### Basic Usage
+
 ```bash
 # Activate virtual environment
 source .venv/bin/activate
@@ -102,6 +110,7 @@ The script creates these files in `quick_find_results/` (or custom `--output-dir
 ### Output Columns
 
 CSV contains these columns:
+
 - `file` - Full path to EARS file
 - `filename` - Just the filename
 - `recording_duration` - Total recording length (seconds)
@@ -120,6 +129,7 @@ CSV contains these columns:
 ## Progress Display
 
 During processing, you'll see:
+
 ```
 ⏳ Progress: 50/1000 (5.0%) | 2.3 files/s | ETA: 6.9m
    Chirps: 45% | Clicks: 32% | Both: 12 | Checkpoint saved ✓
@@ -132,6 +142,7 @@ During processing, you'll see:
 ## Backup
 
 The old whistle-based version has been backed up to:
+
 ```
 scripts/quick_find_whistles_backup.py
 ```
@@ -143,20 +154,23 @@ You can restore it if needed.
 After running `quick_find.py`:
 
 1. **Review results**:
+
    ```bash
    cat quick_find_results/top_20_files.txt
    ```
 
 2. **Open CSV in spreadsheet** to sort/filter by specific features:
+
    ```bash
    open quick_find_results/all_results.csv
    ```
 
 3. **Visualize top files**:
+
    ```bash
    # Get the top file path
    TOP_FILE=$(head -n 13 quick_find_results/top_20_files.txt | tail -n 1 | cut -d' ' -f2-)
-   
+
    # Convert and plot
    python scripts/ears_to_wav.py "$TOP_FILE" --plot
    ```
@@ -166,9 +180,10 @@ After running `quick_find.py`:
 You can adjust detection parameters by editing the function calls in `quick_find.py`:
 
 ### Chirp Parameters
+
 ```python
 chirps = detect_chirps(
-    signal_clean, 
+    signal_clean,
     data_dict["fs"],
     nperseg=2048,           # FFT window size (larger = better freq resolution)
     min_duration=0.05,      # Minimum chirp duration (seconds)
@@ -177,6 +192,7 @@ chirps = detect_chirps(
 ```
 
 ### Click Train Parameters
+
 ```python
 click_trains = detect_click_trains(
     signal_clean,
@@ -196,7 +212,6 @@ click_trains = detect_click_trains(
   - Equipment/vessel sounds
   - Other interesting acoustic events
   - Potential dolphin vocalizations
-  
 - **Click Trains**: Specifically targets:
   - Dolphin echolocation
   - High-quality acoustic environment

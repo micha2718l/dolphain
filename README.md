@@ -15,6 +15,7 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 **Mission:** Analyze 949,504 underwater acoustic recordings to detect and understand dolphin communication patterns.
 
 **Innovation:** 6-feature "interestingness" scoring system that goes beyond simple whistle counting:
+
 - Activity level (RMS energy)
 - Spectral diversity (frequency range)
 - Signal-to-noise ratio
@@ -31,6 +32,7 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 **Try it live:** https://micha2718l.github.io/dolphain/showcase.html
 
 Features:
+
 - 🎵 Top-ranked recordings with professional audio players
 - 🖱️ Click spectrograms/waveforms to seek through audio
 - 🔄 Toggle between raw and denoised audio
@@ -39,6 +41,7 @@ Features:
 - 🎨 Dark theme with cyan accents
 
 **Quick local test:**
+
 ```bash
 cd site && python3 -m http.server 8000
 # Open: http://localhost:8000/showcase.html
@@ -57,6 +60,7 @@ pip install -e .
 ```
 
 **Requirements:**
+
 - Python 3.8+
 - NumPy, SciPy, Matplotlib
 - PyWavelets (for denoising)
@@ -151,6 +155,7 @@ dolphain/
 ## 🔬 Core Features
 
 ### 1. EARS File Reading
+
 ```python
 data = dolphain.read_ears_file('recording.210')
 # Returns: {
@@ -161,6 +166,7 @@ data = dolphain.read_ears_file('recording.210')
 ```
 
 ### 2. Wavelet Denoising
+
 ```python
 # Remove background noise while preserving dolphin calls
 clean = dolphain.wavelet_denoise(
@@ -172,6 +178,7 @@ clean = dolphain.wavelet_denoise(
 ```
 
 ### 3. Whistle Detection
+
 ```python
 # Detect dolphin whistles (2-20 kHz narrow-band FM signals)
 whistles = dolphain.detect_whistles(
@@ -183,6 +190,7 @@ whistles = dolphain.detect_whistles(
 ```
 
 ### 4. Analysis Plotting
+
 ```python
 # Create comprehensive 6-panel visualization:
 # - Raw signal
@@ -195,6 +203,7 @@ dolphain.plot_analysis(data['data'], clean, data['fs'], data['time'])
 ```
 
 ### 5. Batch Processing
+
 ```python
 from dolphain.batch import BatchProcessor
 
@@ -216,6 +225,7 @@ results = processor.process_batch(
 ## 🎓 Scientific Background
 
 ### EARS Data Format
+
 - **Sampling Rate:** 192 kHz (captures up to 96 kHz by Nyquist theorem)
 - **Bit Depth:** 16-bit signed integers, big-endian
 - **Source:** Gulf of Mexico underwater acoustic monitoring buoys
@@ -224,6 +234,7 @@ results = processor.process_batch(
 ### Dolphin Acoustics
 
 **Whistles (Communication):**
+
 - Frequency: 2-20 kHz (narrow-band FM signals)
 - Duration: 0.5-1.5 seconds typical
 - Function: Social communication, individual identification
@@ -231,12 +242,14 @@ results = processor.process_batch(
 - Notable: Dolphins remember signature whistles for 20+ years
 
 **Clicks (Echolocation):**
+
 - Frequency: >110 kHz, often >220 kHz at peak
 - Purpose: Navigation, prey detection, object recognition
 - Duration: Microseconds to milliseconds
 - Pattern: Rapid click trains ending in "terminal buzz" (200+ clicks/sec)
 
 ### Denoising Technique
+
 - **Method:** Wavelet decomposition using Daubechies 20 (db20) wavelet
 - **Why:** Wavelets preserve transient signals while removing stationary noise
 - **Threshold:** Adaptive based on noise floor estimation
@@ -299,6 +312,7 @@ lsof -ti:8003 | xargs kill -9  # Kill local server
 ## 🤝 Contributing
 
 This is a research project focused on dolphin acoustic analysis. Contributions welcome for:
+
 - Additional detection algorithms (click detection, call classification)
 - Performance optimizations
 - Visualization enhancements
@@ -330,4 +344,4 @@ MIT License - See LICENSE file for details
 **Status:** ✅ Production-ready interactive showcase with professional audio player  
 **Last Updated:** October 12, 2025
 
-*For technical details and continuation, see `HANDOFF_NOTES.md`* 📖
+_For technical details and continuation, see `HANDOFF_NOTES.md`_ 📖
