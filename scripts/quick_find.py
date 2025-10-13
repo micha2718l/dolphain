@@ -792,7 +792,8 @@ def quick_find(
                     "file": str(file_path),
                     "filename": file_path.name,
                     "recording_duration": data_dict["duration"],
-                    "uniqueness_score": round(uniqueness_score, 2),
+                    "interestingness_score": round(uniqueness_score, 2),  # Use interestingness_score for compatibility
+                    "uniqueness_score": round(uniqueness_score, 2),  # Also keep for reference
                     "active_bands": unique_features.get('active_bands', 0),
                     "spectral_entropy": round(unique_features.get('spectral_entropy', 0), 2),
                     "freq_range": round(unique_features.get('freq_range', 0), 1),
@@ -801,6 +802,10 @@ def quick_find(
                     "fast_sweeps": unique_features.get('fast_sweeps', 0),
                     "harmonics": unique_features.get('harmonics', 0),
                     "burst_clicks": unique_features.get('burst_clicks', 0),
+                    # Add placeholder fields that showcase might expect
+                    "n_chirps": 0,  # Not detected in unique mode
+                    "n_click_trains": 0,  # Not detected in unique mode
+                    "total_clicks": 0,  # Not detected in unique mode
                 }
             else:
                 # Standard chirp/click detection mode
@@ -957,12 +962,15 @@ def quick_find(
     # Save full results
     import json
 
+    detection_targets = ["unique_features"] if mode == "unique" else ["chirps", "click_trains"]
+    
     with open(output_dir / "results.json", "w") as f:
         json.dump(
             {
                 "n_analyzed": len(results),
                 "n_errors": len(errors),
-                "detection_targets": ["chirps", "click_trains"],
+                "detection_targets": detection_targets,
+                "detection_mode": mode,
                 "results": results,
                 "errors": errors,
             },
@@ -972,24 +980,38 @@ def quick_find(
 
     # Save top files list
     top_20 = results[:20]
+    
+    if mode == "unique":
+        header_title = "TOP 20 MOST UNIQUE FILES - EXCEPTIONAL FEATURES"
+        header_cols = f"{'Rank':<6} {'Score':<8} {'Bands':<7} {'Harmonics':<10} {'Sweeps':<8} {'File'}\n"
+    else:
+        header_title = "TOP 20 MOST INTERESTING FILES - CHIRPS & CLICK TRAINS"
+        header_cols = f"{'Rank':<6} {'Score':<8} {'Chirps':<8} {'Clicks':<8} {'CT':<6} {'File'}\n"
+    
     with open(output_dir / "top_20_files.txt", "w") as f:
-        f.write("TOP 20 MOST INTERESTING FILES - CHIRPS & CLICK TRAINS\n")
+        f.write(header_title + "\n")
         f.write("=" * 100 + "\n\n")
-        f.write(
-            f"{'Rank':<6} {'Score':<8} {'Chirps':<8} {'Clicks':<8} {'CT':<6} {'File'}\n"
-        )
+        f.write(header_cols)
         f.write("-" * 100 + "\n")
 
         for i, result in enumerate(top_20, 1):
             score = result["interestingness_score"]
-            chirps = result.get("n_chirps", 0)
-            clicks = result.get("total_clicks", 0)
-            ct = result.get("n_click_trains", 0)
             filename = result["filename"]
-
-            f.write(
-                f"{i:<6} {score:<8.1f} {chirps:<8} {clicks:<8} {ct:<6} {filename}\n"
-            )
+            
+            if mode == "unique":
+                bands = result.get("active_bands", 0)
+                harmonics = result.get("harmonics", 0)
+                sweeps = result.get("fast_sweeps", 0)
+                f.write(
+                    f"{i:<6} {score:<8.1f} {bands:<7} {harmonics:<10} {sweeps:<8} {filename}\n"
+                )
+            else:
+                chirps = result.get("n_chirps", 0)
+                clicks = result.get("total_clicks", 0)
+                ct = result.get("n_click_trains", 0)
+                f.write(
+                    f"{i:<6} {score:<8.1f} {chirps:<8} {clicks:<8} {ct:<6} {filename}\n"
+                )
 
         f.write("\n\nFull file paths:\n")
         f.write("-" * 100 + "\n")
@@ -1012,39 +1034,67 @@ def quick_find(
     print("=" * 80)
     print(f"Files analyzed: {len(results)}")
 
-    n_with_chirps = sum(1 for r in results if r.get("n_chirps", 0) > 0)
-    n_with_clicks = sum(1 for r in results if r.get("n_click_trains", 0) > 0)
-    n_with_both = sum(
-        1
-        for r in results
-        if r.get("n_chirps", 0) > 0 and r.get("n_click_trains", 0) > 0
-    )
-
-    print(f"Files with chirps: {n_with_chirps} ({n_with_chirps/len(results)*100:.1f}%)")
-    print(
-        f"Files with click trains: {n_with_clicks} ({n_with_clicks/len(results)*100:.1f}%)"
-    )
-    print(f"Files with both: {n_with_both} ({n_with_both/len(results)*100:.1f}%)")
-
-    total_chirps = sum(r.get("n_chirps", 0) for r in results)
-    total_click_trains = sum(r.get("n_click_trains", 0) for r in results)
-    total_clicks = sum(r.get("total_clicks", 0) for r in results)
-
-    print(f"Total chirps detected: {total_chirps}")
-    print(f"Total click trains detected: {total_click_trains}")
-    print(f"Total clicks detected: {total_clicks}")
-    print()
-
-    print("TOP 5 FILES:")
-    for i, result in enumerate(results[:5], 1):
-        score = result["interestingness_score"]
-        chirps = result.get("n_chirps", 0)
-        clicks = result.get("total_clicks", 0)
-        ct = result.get("n_click_trains", 0)
-        print(
-            f"  {i}. Score: {score:.1f} | Chirps: {chirps} | Click trains: {ct} ({clicks} clicks)"
+    if mode == "unique":
+        # Summary for unique mode
+        n_high_score = sum(1 for r in results if r.get("interestingness_score", 0) > 70)
+        n_with_harmonics = sum(1 for r in results if r.get("harmonics", 0) > 0)
+        n_with_fast_sweeps = sum(1 for r in results if r.get("fast_sweeps", 0) > 0)
+        n_multi_band = sum(1 for r in results if r.get("active_bands", 0) >= 4)
+        
+        print(f"High uniqueness (>70): {n_high_score} ({n_high_score/len(results)*100:.1f}%)")
+        print(f"Files with harmonics: {n_with_harmonics} ({n_with_harmonics/len(results)*100:.1f}%)")
+        print(f"Files with fast sweeps: {n_with_fast_sweeps} ({n_with_fast_sweeps/len(results)*100:.1f}%)")
+        print(f"Files with 4+ bands: {n_multi_band} ({n_multi_band/len(results)*100:.1f}%)")
+        
+        avg_score = np.mean([r.get("interestingness_score", 0) for r in results])
+        print(f"Average uniqueness score: {avg_score:.1f}")
+        print()
+        
+        print("TOP 5 MOST UNIQUE FILES:")
+        for i, result in enumerate(results[:5], 1):
+            score = result["interestingness_score"]
+            bands = result.get("active_bands", 0)
+            harmonics = result.get("harmonics", 0)
+            sweeps = result.get("fast_sweeps", 0)
+            print(
+                f"  {i}. Score: {score:.1f} | Bands: {bands} | Harmonics: {harmonics} | Fast sweeps: {sweeps}"
+            )
+            print(f"     {result['filename']}")
+    else:
+        # Summary for standard mode
+        n_with_chirps = sum(1 for r in results if r.get("n_chirps", 0) > 0)
+        n_with_clicks = sum(1 for r in results if r.get("n_click_trains", 0) > 0)
+        n_with_both = sum(
+            1
+            for r in results
+            if r.get("n_chirps", 0) > 0 and r.get("n_click_trains", 0) > 0
         )
-        print(f"     {result['filename']}")
+
+        print(f"Files with chirps: {n_with_chirps} ({n_with_chirps/len(results)*100:.1f}%)")
+        print(
+            f"Files with click trains: {n_with_clicks} ({n_with_clicks/len(results)*100:.1f}%)"
+        )
+        print(f"Files with both: {n_with_both} ({n_with_both/len(results)*100:.1f}%)")
+
+        total_chirps = sum(r.get("n_chirps", 0) for r in results)
+        total_click_trains = sum(r.get("n_click_trains", 0) for r in results)
+        total_clicks = sum(r.get("total_clicks", 0) for r in results)
+
+        print(f"Total chirps detected: {total_chirps}")
+        print(f"Total click trains detected: {total_click_trains}")
+        print(f"Total clicks detected: {total_clicks}")
+        print()
+
+        print("TOP 5 FILES:")
+        for i, result in enumerate(results[:5], 1):
+            score = result["interestingness_score"]
+            chirps = result.get("n_chirps", 0)
+            clicks = result.get("total_clicks", 0)
+            ct = result.get("n_click_trains", 0)
+            print(
+                f"  {i}. Score: {score:.1f} | Chirps: {chirps} | Click trains: {ct} ({clicks} clicks)"
+            )
+            print(f"     {result['filename']}")
 
     print("\n" + "=" * 80)
     print("✅ QUICK FIND COMPLETE!")
