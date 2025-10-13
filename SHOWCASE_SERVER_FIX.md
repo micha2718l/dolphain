@@ -48,6 +48,7 @@ site/
 Updated `scripts/refresh_showcase.py` to give **correct instructions**:
 
 ### Before (Wrong)
+
 ```bash
 cd site/showcase && python -m http.server 8000
 # Then open: http://localhost:8000
@@ -56,12 +57,14 @@ cd site/showcase && python -m http.server 8000
 This would try to serve from inside the showcase directory, making the HTML file unreachable.
 
 ### After (Correct)
+
 ```bash
 cd site && python3 -m http.server 8000
 # Then open: http://localhost:8000/showcase.html
 ```
 
 Now the server runs from `site/` where:
+
 - `showcase.html` is accessible at `/showcase.html`
 - `showcase/showcase_data.json` is accessible at `/showcase/showcase_data.json`
 - All relative paths work correctly
@@ -83,6 +86,7 @@ python3 -m http.server 8000
 http://localhost:8000/showcase.html
 
 **Alternative showcases (if generated):**
+
 - http://localhost:8000/showcase_conservative/showcase.html
 - http://localhost:8000/showcase_v3.html
 - etc.
@@ -121,7 +125,7 @@ The key insight is that **all paths in `showcase.js` are relative to the HTML fi
 
 ```javascript
 // In showcase.js (loaded from site/showcase.html)
-fetch("showcase/showcase_data.json")  // ← Relative to HTML location
+fetch("showcase/showcase_data.json"); // ← Relative to HTML location
 
 // When server runs from site/:
 // HTML is at:     site/showcase.html
@@ -130,6 +134,7 @@ fetch("showcase/showcase_data.json")  // ← Relative to HTML location
 ```
 
 If we ran the server from `site/showcase/`:
+
 ```javascript
 // HTML would be at:     site/showcase/../showcase.html (messy)
 // Data would be at:     site/showcase/showcase_data.json
