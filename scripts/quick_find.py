@@ -5,12 +5,16 @@ Quick-start script for finding interesting files with chirps and click trains.
 This version focuses on detecting:
 1. Chirp signals - frequency sweeps visible in spectrograms (from various sources)
 2. Click trains - rapid high-frequency clicks from dolphins
+3. UNIQUE SIGNALS - exceptional and rare acoustic features (--mode unique)
 
 Usage:
     python quick_find.py --file-list ears_files_list.txt --n-files 100
 
     # Resume if interrupted
     python quick_find.py --file-list ears_files_list.txt --n-files 1000 --resume
+    
+    # Find unique/exceptional signals
+    python quick_find.py --file-list ears_files_list.txt --n-files 1000 --mode unique
 """
 
 import sys
@@ -20,6 +24,7 @@ import time
 import numpy as np
 from scipy import signal as sp_signal
 from scipy.ndimage import maximum_filter
+from scipy.stats import entropy
 
 sys.path.insert(0, str(Path(__file__).parent))
 import dolphain
@@ -361,6 +366,199 @@ def detect_click_trains(
     return click_trains
 
 
+def detect_unique_features(data, fs):
+    """
+    Detect unique and exceptional acoustic features.
+    
+    Returns dict with metrics about rare/exceptional characteristics.
+    """
+    nperseg = 8192
+    noverlap = int(0.75 * nperseg)
+    
+    f, t, Sxx = sp_signal.spectrogram(
+        data, fs=fs, nperseg=nperseg, noverlap=noverlap,
+        window='hann', scaling='density'
+    )
+    
+    Sxx_dB = 10 * np.log10(Sxx + 1e-12)
+    
+    features = {}
+    
+    # 1. Multi-band frequency activity
+    bands = {
+        'ultra_low': (0, 2000), 'low': (2000, 10000),
+        'mid': (10000, 40000), 'high': (40000, 80000),
+        'ultra_high': (80000, 125000),
+    }
+    
+    active_bands = 0
+    for f_low, f_high in bands.values():
+        mask = (f >= f_low) & (f < f_high)
+        if np.any(mask):
+            band_energy = np.mean(Sxx_dB[mask, :])
+            noise_floor = np.percentile(Sxx_dB[mask, :], 20)
+            if band_energy > noise_floor + 10:
+                active_bands += 1
+    
+    features['active_bands'] = active_bands
+    
+    # 2. Spectral entropy (frequency diversity)
+    freq_power = np.sum(Sxx, axis=1)
+    freq_power_norm = freq_power / np.sum(freq_power)
+    features['spectral_entropy'] = float(entropy(freq_power_norm))
+    
+    # 3. Peak frequency range
+    threshold = np.percentile(Sxx_dB, 95)
+    strong_freqs = f[np.any(Sxx_dB > threshold, axis=1)]
+    if len(strong_freqs) > 0:
+        features['freq_range'] = float(strong_freqs.max() - strong_freqs.min())
+        features['max_freq'] = float(strong_freqs.max())
+    else:
+        features['freq_range'] = 0.0
+        features['max_freq'] = 0.0
+    
+    # 4. Simultaneous signals
+    max_simultaneous = 0
+    for time_idx in range(len(t)):
+        col = Sxx_dB[:, time_idx]
+        threshold_col = np.percentile(col, 95)
+        peaks, _ = sp_signal.find_peaks(col, height=threshold_col, distance=50)
+        max_simultaneous = max(max_simultaneous, len(peaks))
+    
+    features['max_simultaneous'] = max_simultaneous
+    
+    # 5. Ultra-fast sweeps
+    fast_sweeps = 0
+    chirps = []
+    threshold = np.percentile(Sxx_dB, 95)
+    
+    for time_idx in range(len(t)):
+        col = Sxx_dB[:, time_idx]
+        peaks, _ = sp_signal.find_peaks(col, height=threshold, distance=50)
+        
+        extended = set()
+        for chirp in chirps:
+            if chirp['end_idx'] == time_idx - 1 and len(peaks) > 0:
+                last_freq = chirp['freq_indices'][-1]
+                closest = peaks[np.argmin(np.abs(peaks - last_freq))]
+                if abs(closest - last_freq) < 15:
+                    chirp['freq_indices'].append(closest)
+                    chirp['end_idx'] = time_idx
+                    extended.add(closest)
+        
+        for peak in peaks:
+            if peak not in extended:
+                chirps.append({'freq_indices': [peak], 'end_idx': time_idx, 'start_idx': time_idx})
+    
+    for chirp in chirps:
+        if len(chirp['freq_indices']) >= 3:
+            freq_indices = np.array(chirp['freq_indices'])
+            freqs = f[freq_indices]
+            time_indices = list(range(chirp['start_idx'], chirp['end_idx'] + 1))
+            times = t[time_indices[:len(freqs)]]
+            
+            if len(times) >= 2:
+                duration = times[-1] - times[0]
+                freq_change = abs(freqs[-1] - freqs[0])
+                if duration > 0:
+                    sweep_rate = freq_change / duration
+                    if sweep_rate > 10000:  # >10 kHz/sec
+                        fast_sweeps += 1
+    
+    features['fast_sweeps'] = fast_sweeps
+    
+    # 6. Harmonics
+    harmonics = 0
+    for time_idx in range(0, len(t), 5):
+        col = Sxx_dB[:, time_idx]
+        peaks, _ = sp_signal.find_peaks(col, height=np.percentile(col, 90), distance=20, prominence=5)
+        
+        if len(peaks) >= 2:
+            peak_freqs = f[peaks]
+            for i in range(len(peak_freqs)):
+                for j in range(i + 1, len(peak_freqs)):
+                    ratio = peak_freqs[j] / peak_freqs[i]
+                    if 1.8 < ratio < 2.2 or 2.8 < ratio < 3.2:
+                        harmonics += 1
+                        break
+    
+    features['harmonics'] = harmonics
+    
+    # 7. Unusual click patterns
+    nyquist = fs / 2.0
+    sos = sp_signal.butter(6, [20000/nyquist, 0.999], btype='bandpass', output='sos')
+    filtered = sp_signal.sosfiltfilt(sos, data)
+    analytic = sp_signal.hilbert(filtered)
+    envelope = np.abs(analytic)
+    
+    threshold = np.percentile(envelope, 99)
+    peaks, _ = sp_signal.find_peaks(envelope, height=threshold, distance=int(fs*0.001))
+    
+    if len(peaks) >= 5:
+        peak_times = peaks / fs
+        icis = np.diff(peak_times)
+        features['burst_clicks'] = int(np.sum(icis < 0.005))
+        
+        if len(icis) > 2:
+            cv = np.std(icis) / np.mean(icis) if np.mean(icis) > 0 else 999
+            features['click_regularity'] = cv < 0.3 or cv > 0.8  # Very regular or very irregular
+    else:
+        features['burst_clicks'] = 0
+        features['click_regularity'] = False
+    
+    return features
+
+
+def calculate_uniqueness_score(features):
+    """Calculate uniqueness score (0-100) for exceptional features."""
+    score = 0.0
+    
+    # Multi-band activity (0-15 pts)
+    score += min(15, features.get('active_bands', 0) * 3)
+    
+    # Spectral diversity (0-10 pts)
+    score += min(10, (features.get('spectral_entropy', 0) / 5.0) * 10)
+    
+    # Frequency range (0-10 pts)
+    score += min(10, (features.get('freq_range', 0) / 50000) * 10)
+    
+    # Extreme frequencies (0-5 pts)
+    if features.get('max_freq', 0) > 100000:
+        score += 5
+    elif features.get('max_freq', 0) > 80000:
+        score += 3
+    
+    # Simultaneous signals (0-10 pts)
+    max_sim = features.get('max_simultaneous', 0)
+    if max_sim >= 4:
+        score += 10
+    elif max_sim >= 3:
+        score += 7
+    elif max_sim >= 2:
+        score += 4
+    
+    # Harmonics (0-10 pts)
+    score += min(10, features.get('harmonics', 0) * 0.5)
+    
+    # Fast sweeps (0-10 pts)
+    n_fast = features.get('fast_sweeps', 0)
+    if n_fast >= 5:
+        score += 10
+    elif n_fast >= 3:
+        score += 7
+    elif n_fast >= 1:
+        score += 4
+    
+    # Burst clicks (0-8 pts)
+    score += min(8, features.get('burst_clicks', 0) * 0.2)
+    
+    # Unusual regularity (0-5 pts)
+    if features.get('click_regularity', False):
+        score += 5
+    
+    return min(100, score)
+
+
 def calculate_interestingness_score(result, chirps, click_trains, signal_clean, fs):
     """
     Calculate interestingness score based on chirps and click trains.
@@ -460,6 +658,7 @@ def quick_find(
     n_files: int = 1000,
     output_dir: Path = None,
     resume: bool = False,
+    mode: str = "standard",
 ):
     """
     Quick analysis to find files with interesting chirps and click trains.
@@ -470,19 +669,41 @@ def quick_find(
         n_files: Number of files to sample
         output_dir: Where to save results
         resume: Resume from checkpoint if interrupted
+        mode: 'standard' for chirps/clicks, 'unique' for exceptional features
     """
     output_dir = output_dir or Path("quick_find_results")
     output_dir.mkdir(exist_ok=True)
     checkpoint_file = output_dir / "checkpoint.json"
 
+    if mode == "unique":
+        title = "🌟 UNIQUE SIGNAL DETECTION"
+        subtitle = "Finding exceptional and rare acoustic features"
+        targets = [
+            "  🚀 Ultra-fast frequency sweeps (>10 kHz/sec)",
+            "  🎚️  Extreme frequency ranges & rare frequencies",
+            "  🎼 Multiple simultaneous vocalizations",
+            "  🥁 Unusual click patterns (bursts, rhythms)",
+            "  🎹 Harmonic structures",
+            "  🌈 High spectral diversity (5 frequency bands)",
+        ]
+    else:
+        title = "🐬 QUICK FIND - CHIRPS & CLICK TRAINS"
+        subtitle = ""
+        targets = [
+            "  🎵 Chirps: Frequency sweeps (from various sources)",
+            "  🔊 Click trains: Rapid high-frequency clicks (dolphin echolocation)",
+        ]
+
     print("=" * 80)
-    print("🐬 QUICK FIND - CHIRPS & CLICK TRAINS")
+    print(title)
     print("=" * 80)
+    if subtitle:
+        print(subtitle)
     print(f"Sample size: {n_files} files")
     print(f"Output: {output_dir}")
     print(f"Detection targets:")
-    print(f"  🎵 Chirps: Frequency sweeps (from various sources)")
-    print(f"  🔊 Click trains: Rapid high-frequency clicks (dolphin echolocation)")
+    for target in targets:
+        print(target)
     if resume and checkpoint_file.exists():
         print("📂 Resume mode: Will continue from checkpoint")
     print()
@@ -562,77 +783,99 @@ def quick_find(
                 hard_threshold=True,  # More aggressive: hard thresholding removes more noise
             )
 
-            # Detect chirps (very conservative parameters)
-            chirps = detect_chirps(
-                signal_clean,
-                data_dict["fs"],
-                min_duration=0.3,  # Longer minimum duration
-                freq_sweep_min=3000,  # Larger frequency sweep required
-            )
-
-            # Detect click trains (very conservative)
-            click_trains = detect_click_trains(
-                signal_clean,
-                data_dict["fs"],
-                click_freq_range=(
-                    20000,
-                    min(data_dict["fs"] // 2, 150000),
-                ),  # Higher frequency minimum
-                min_clicks=10,  # More clicks required (was 8)
-                max_ici=0.05,
-            )
-
-            # Calculate statistics
-            n_chirps = len(chirps)
-            n_click_trains = len(click_trains)
-            total_clicks = sum(ct["n_clicks"] for ct in click_trains)
-
-            # Coverage calculations
-            if n_chirps > 0:
-                chirp_duration = sum(c["duration"] for c in chirps)
-                chirp_coverage = chirp_duration / data_dict["duration"] * 100
-                mean_chirp_duration = chirp_duration / n_chirps
-                mean_sweep = np.mean([c["freq_sweep"] for c in chirps])
+            if mode == "unique":
+                # Unique signal detection mode
+                unique_features = detect_unique_features(signal_clean, data_dict["fs"])
+                uniqueness_score = calculate_uniqueness_score(unique_features)
+                
+                result = {
+                    "file": str(file_path),
+                    "filename": file_path.name,
+                    "recording_duration": data_dict["duration"],
+                    "uniqueness_score": round(uniqueness_score, 2),
+                    "active_bands": unique_features.get('active_bands', 0),
+                    "spectral_entropy": round(unique_features.get('spectral_entropy', 0), 2),
+                    "freq_range": round(unique_features.get('freq_range', 0), 1),
+                    "max_freq": round(unique_features.get('max_freq', 0), 1),
+                    "max_simultaneous": unique_features.get('max_simultaneous', 0),
+                    "fast_sweeps": unique_features.get('fast_sweeps', 0),
+                    "harmonics": unique_features.get('harmonics', 0),
+                    "burst_clicks": unique_features.get('burst_clicks', 0),
+                }
             else:
-                chirp_coverage = 0.0
-                mean_chirp_duration = 0.0
-                mean_sweep = 0.0
+                # Standard chirp/click detection mode
+                # Detect chirps (very conservative parameters)
+                chirps = detect_chirps(
+                    signal_clean,
+                    data_dict["fs"],
+                    min_duration=0.3,  # Longer minimum duration
+                    freq_sweep_min=3000,  # Larger frequency sweep required
+                )
 
-            if n_click_trains > 0:
-                ct_duration = sum(ct["duration"] for ct in click_trains)
-                ct_coverage = ct_duration / data_dict["duration"] * 100
-                mean_ct_duration = ct_duration / n_click_trains
-                mean_click_rate = np.mean([ct["click_rate"] for ct in click_trains])
-                mean_ici = np.mean([ct["mean_ici"] for ct in click_trains])
-            else:
-                ct_coverage = 0.0
-                mean_ct_duration = 0.0
-                mean_click_rate = 0.0
-                mean_ici = 0.0
+                # Detect click trains (very conservative)
+                click_trains = detect_click_trains(
+                    signal_clean,
+                    data_dict["fs"],
+                    click_freq_range=(
+                        20000,
+                        min(data_dict["fs"] // 2, 150000),
+                    ),  # Higher frequency minimum
+                    min_clicks=15,  # More clicks required
+                    max_ici=0.05,
+                )
 
-            result = {
-                "file": str(file_path),
-                "filename": file_path.name,
-                "recording_duration": data_dict["duration"],
-                # Chirp data
-                "n_chirps": n_chirps,
-                "chirp_coverage_percent": chirp_coverage,
-                "mean_chirp_duration": mean_chirp_duration,
-                "mean_freq_sweep": mean_sweep,
-                # Click train data
-                "n_click_trains": n_click_trains,
-                "total_clicks": total_clicks,
-                "click_train_coverage_percent": ct_coverage,
-                "mean_click_train_duration": mean_ct_duration,
-                "mean_click_rate": mean_click_rate,
-                "mean_ici": mean_ici,
-            }
+                # Calculate statistics
+                n_chirps = len(chirps)
+                n_click_trains = len(click_trains)
+                total_clicks = sum(ct["n_clicks"] for ct in click_trains)
 
-            # Calculate interestingness score
-            score = calculate_interestingness_score(
-                result, chirps, click_trains, signal_clean, data_dict["fs"]
-            )
-            result["interestingness_score"] = round(score, 2)
+                # Coverage calculations
+                if n_chirps > 0:
+                    chirp_duration = sum(c["duration"] for c in chirps)
+                    chirp_coverage = chirp_duration / data_dict["duration"] * 100
+                    mean_chirp_duration = chirp_duration / n_chirps
+                    mean_sweep = np.mean([c["freq_sweep"] for c in chirps])
+                else:
+                    chirp_coverage = 0.0
+                    mean_chirp_duration = 0.0
+                    mean_sweep = 0.0
+
+                if n_click_trains > 0:
+                    ct_duration = sum(ct["duration"] for ct in click_trains)
+                    ct_coverage = ct_duration / data_dict["duration"] * 100
+                    mean_ct_duration = ct_duration / n_click_trains
+                    mean_click_rate = np.mean([ct["click_rate"] for ct in click_trains])
+                    mean_ici = np.mean([ct["mean_ici"] for ct in click_trains])
+                else:
+                    ct_coverage = 0.0
+                    mean_ct_duration = 0.0
+                    mean_click_rate = 0.0
+                    mean_ici = 0.0
+
+                result = {
+                    "file": str(file_path),
+                    "filename": file_path.name,
+                    "recording_duration": data_dict["duration"],
+                    # Chirp data
+                    "n_chirps": n_chirps,
+                    "chirp_coverage_percent": chirp_coverage,
+                    "mean_chirp_duration": mean_chirp_duration,
+                    "mean_freq_sweep": mean_sweep,
+                    # Click train data
+                    "n_click_trains": n_click_trains,
+                    "total_clicks": total_clicks,
+                    "click_train_coverage_percent": ct_coverage,
+                    "mean_click_train_duration": mean_ct_duration,
+                    "mean_click_rate": mean_click_rate,
+                    "mean_ici": mean_ici,
+                }
+
+                # Calculate interestingness score
+                score = calculate_interestingness_score(
+                    result, chirps, click_trains, signal_clean, data_dict["fs"]
+                )
+                result["interestingness_score"] = round(score, 2)
+            
             results.append(result)
 
         except Exception as e:
@@ -658,27 +901,41 @@ def quick_find(
                 remaining_files = total_files - overall_index - 1
                 remaining_time = remaining_files / rate if rate > 0 else 0
 
-                # Calculate stats so far
-                n_with_chirps = sum(1 for r in results if r.get("n_chirps", 0) > 0)
-                n_with_clicks = sum(
-                    1 for r in results if r.get("n_click_trains", 0) > 0
-                )
-                n_with_both = sum(
-                    1
-                    for r in results
-                    if r.get("n_chirps", 0) > 0 and r.get("n_click_trains", 0) > 0
-                )
+                if mode == "unique":
+                    # Stats for unique mode
+                    n_high = sum(1 for r in results if r.get("uniqueness_score", 0) > 70)
+                    n_harmonics = sum(1 for r in results if r.get("harmonics", 0) > 0)
+                    n_fast = sum(1 for r in results if r.get("fast_sweeps", 0) > 0)
+                    
+                    print(
+                        f"  ⏳ Progress: {overall_index + 1}/{total_files} ({(overall_index + 1)/total_files*100:.1f}%) "
+                        f"| {rate:.1f} files/s | ETA: {remaining_time/60:.1f}m"
+                    )
+                    print(
+                        f"     High scores (>70): {n_high} | Harmonics: {n_harmonics} | Fast sweeps: {n_fast} | Checkpoint saved ✓"
+                    )
+                else:
+                    # Stats for standard mode
+                    n_with_chirps = sum(1 for r in results if r.get("n_chirps", 0) > 0)
+                    n_with_clicks = sum(
+                        1 for r in results if r.get("n_click_trains", 0) > 0
+                    )
+                    n_with_both = sum(
+                        1
+                        for r in results
+                        if r.get("n_chirps", 0) > 0 and r.get("n_click_trains", 0) > 0
+                    )
 
-                chirp_rate = (n_with_chirps / len(results) * 100) if results else 0
-                click_rate = (n_with_clicks / len(results) * 100) if results else 0
+                    chirp_rate = (n_with_chirps / len(results) * 100) if results else 0
+                    click_rate = (n_with_clicks / len(results) * 100) if results else 0
 
-                print(
-                    f"  ⏳ Progress: {overall_index + 1}/{total_files} ({(overall_index + 1)/total_files*100:.1f}%) "
-                    f"| {rate:.1f} files/s | ETA: {remaining_time/60:.1f}m"
-                )
-                print(
-                    f"     Chirps: {chirp_rate:.0f}% | Clicks: {click_rate:.0f}% | Both: {n_with_both} | Checkpoint saved ✓"
-                )
+                    print(
+                        f"  ⏳ Progress: {overall_index + 1}/{total_files} ({(overall_index + 1)/total_files*100:.1f}%) "
+                        f"| {rate:.1f} files/s | ETA: {remaining_time/60:.1f}m"
+                    )
+                    print(
+                        f"     Chirps: {chirp_rate:.0f}% | Clicks: {click_rate:.0f}% | Both: {n_with_both} | Checkpoint saved ✓"
+                    )
 
     # Clean up checkpoint on completion
     if checkpoint_file.exists():
@@ -811,15 +1068,19 @@ Examples:
   # Resume if interrupted (safe to Ctrl+C anytime!)
   python quick_find.py --file-list ears_files_list.txt --n-files 1000 --resume
   
+  # Find unique/exceptional signals
+  python quick_find.py --file-list ears_files_list.txt --n-files 1000 --mode unique \\
+      --output-dir experiments/unique_signals
+  
   # Scan directory (slow on external drives)
   python quick_find.py --data-dir /Volumes/ladcuno8tb0/ --n-files 500
   
   # Custom output location
   python quick_find.py --file-list ears_files_list.txt --output-dir my_results/
 
-Detection:
-  🎵 Chirps: Frequency sweeps seen in spectrograms
-  🔊 Click trains: Rapid high-frequency clicks from dolphins
+Detection Modes:
+  standard: Chirps (frequency sweeps) and click trains (echolocation)
+  unique:   Exceptional features (fast sweeps, harmonics, rare frequencies, etc.)
 
 Note: Checkpoints are saved every 10 files, so you can safely interrupt (Ctrl+C) 
       and resume later with --resume flag!
@@ -845,6 +1106,13 @@ Note: Checkpoints are saved every 10 files, so you can safely interrupt (Ctrl+C)
     )
     parser.add_argument(
         "--resume", action="store_true", help="Resume from checkpoint if interrupted"
+    )
+    parser.add_argument(
+        "--mode",
+        type=str,
+        choices=["standard", "unique"],
+        default="standard",
+        help="Detection mode: 'standard' for chirps/clicks, 'unique' for exceptional features (default: standard)",
     )
 
     args = parser.parse_args()
@@ -872,6 +1140,7 @@ Note: Checkpoints are saved every 10 files, so you can safely interrupt (Ctrl+C)
         n_files=args.n_files,
         output_dir=args.output_dir,
         resume=args.resume,
+        mode=args.mode,
     )
 
 
