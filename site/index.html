@@ -93,11 +93,23 @@
 
         <div class="update-banner">
           <h3>🎉 Latest Updates - October 2025</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li>✨ <strong>Unique Signal Detection:</strong> New multi-band spectral analysis mode finds exceptional acoustic features</li>
-            <li>🎯 <strong>Conservative Detection:</strong> Ultra-precise chirp and click train identification with minimal false positives</li>
-            <li>📊 <strong>Dual-Mode System:</strong> Choose standard detection or unique feature hunting based on research goals</li>
-            <li>🌐 <strong>Enhanced Showcase:</strong> Interactive audio gallery with synchronized visualization playback</li>
+          <ul style="list-style: none; padding: 0">
+            <li>
+              ✨ <strong>Unique Signal Detection:</strong> New multi-band
+              spectral analysis mode finds exceptional acoustic features
+            </li>
+            <li>
+              🎯 <strong>Conservative Detection:</strong> Ultra-precise chirp
+              and click train identification with minimal false positives
+            </li>
+            <li>
+              📊 <strong>Dual-Mode System:</strong> Choose standard detection or
+              unique feature hunting based on research goals
+            </li>
+            <li>
+              🌐 <strong>Enhanced Showcase:</strong> Interactive audio gallery
+              with synchronized visualization playback
+            </li>
           </ul>
         </div>
 
@@ -218,28 +230,44 @@
 
       <section id="features">
         <h2>Features</h2>
-        <p style="font-size: 1.1rem; text-align: center; margin-bottom: 2rem; color: var(--foam);">
-          Cutting-edge acoustic analysis tools powered by advanced signal processing
+        <p
+          style="
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--foam);
+          "
+        >
+          Cutting-edge acoustic analysis tools powered by advanced signal
+          processing
         </p>
         <div class="feature-grid">
           <div class="feature-card highlight-card">
             <span class="feature-icon">✨</span>
             <h3>Unique Signal Detection</h3>
             <p>
-              <strong>NEW!</strong> Multi-band spectral analysis identifies exceptional acoustic features: harmonics, fast frequency sweeps, simultaneous signals, and spectral complexity. Automatically scores and ranks the most unique recordings.
+              <strong>NEW!</strong> Multi-band spectral analysis identifies
+              exceptional acoustic features: harmonics, fast frequency sweeps,
+              simultaneous signals, and spectral complexity. Automatically
+              scores and ranks the most unique recordings.
             </p>
             <div class="feature-tech">
-              Multi-band FFT • Harmonic detection • Entropy analysis • Uniqueness scoring
+              Multi-band FFT • Harmonic detection • Entropy analysis •
+              Uniqueness scoring
             </div>
           </div>
           <div class="feature-card highlight-card">
             <span class="feature-icon">🎯</span>
             <h3>Conservative Click & Chirp Detection</h3>
             <p>
-              Ultra-precise detection of dolphin echolocation clicks and communication chirps. Uses 99.5th percentile thresholding, regularity analysis, and sharp peak detection to minimize false positives.
+              Ultra-precise detection of dolphin echolocation clicks and
+              communication chirps. Uses 99.5th percentile thresholding,
+              regularity analysis, and sharp peak detection to minimize false
+              positives.
             </p>
             <div class="feature-tech">
-              Teager-Kaiser operator • Click train analysis • Frequency sweep detection
+              Teager-Kaiser operator • Click train analysis • Frequency sweep
+              detection
             </div>
           </div>
           <div class="feature-card">
@@ -262,58 +290,73 @@
             <span class="feature-icon">📊</span>
             <h3>Visualization</h3>
             <p>
-              Beautiful spectrograms, waveforms, and comparative analysis plots with interactive audio players.
+              Beautiful spectrograms, waveforms, and comparative analysis plots
+              with interactive audio players.
             </p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">⚡</span>
             <h3>Batch Processing</h3>
             <p>
-              Process hundreds of files with progress tracking, checkpointing, and error handling.
+              Process hundreds of files with progress tracking, checkpointing,
+              and error handling.
             </p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">🔍</span>
             <h3>Automated Analysis Pipeline</h3>
             <p>
-              Choose from standard detection (chirps & clicks) or unique signal mode. Resumable processing with checkpoint system.
+              Choose from standard detection (chirps & clicks) or unique signal
+              mode. Resumable processing with checkpoint system.
             </p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">🎵</span>
             <h3>Interactive Showcase</h3>
             <p>
-              Web-based gallery with synchronized waveform/spectrogram playback and audio controls. Explore the most interesting recordings.
+              Web-based gallery with synchronized waveform/spectrogram playback
+              and audio controls. Explore the most interesting recordings.
             </p>
           </div>
           <div class="feature-card">
             <span class="feature-icon">🌿</span>
             <h3>Branch Explorer</h3>
             <p>
-              Follow curated pods by energy, harmony, and flow in our interactive
-              <a href="branch_explorer/" style="color: var(--coral); text-decoration: underline"
+              Follow curated pods by energy, harmony, and flow in our
+              interactive
+              <a
+                href="branch_explorer/"
+                style="color: var(--coral); text-decoration: underline"
                 >Branch Explorer</a
               >.
             </p>
           </div>
         </div>
-        
+
         <div class="feature-highlight-box">
           <h3>🚀 Latest Enhancement: Dual-Mode Detection System</h3>
           <div class="detection-modes">
             <div class="mode-card">
               <h4>📍 Standard Mode</h4>
-              <p>Conservative detection of chirps (frequency sweeps >3kHz, 0.3s+) and click trains (15+ clicks, ultra-regular spacing).</p>
+              <p>
+                Conservative detection of chirps (frequency sweeps >3kHz, 0.3s+)
+                and click trains (15+ clicks, ultra-regular spacing).
+              </p>
               <code>python scripts/quick_find.py --mode standard</code>
             </div>
             <div class="mode-card">
               <h4>✨ Unique Mode</h4>
-              <p>Hunt for exceptional features: multi-band activity, harmonic structures, ultra-fast sweeps, burst clicks, spectral complexity.</p>
+              <p>
+                Hunt for exceptional features: multi-band activity, harmonic
+                structures, ultra-fast sweeps, burst clicks, spectral
+                complexity.
+              </p>
               <code>python scripts/quick_find.py --mode unique</code>
             </div>
           </div>
-          <p style="margin-top: 1rem; text-align: center;">
-            Both modes output compatible results for the showcase generator. Choose based on your research goals!
+          <p style="margin-top: 1rem; text-align: center">
+            Both modes output compatible results for the showcase generator.
+            Choose based on your research goals!
           </p>
         </div>
       </section>
@@ -1130,40 +1173,73 @@ git merge upstream/main
         <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem">
           Ready to help decode dolphin communication?
         </p>
-        
+
         <div class="cta-grid">
           <div class="cta-card">
             <h3>🐬 Explore the Showcase</h3>
-            <p>Listen to the most interesting dolphin vocalizations from the Gulf of Mexico with interactive audio and synchronized spectrograms.</p>
-            <a href="showcase.html" class="cta-button" style="background: linear-gradient(135deg, #ff6b6b, #ff8787)">
+            <p>
+              Listen to the most interesting dolphin vocalizations from the Gulf
+              of Mexico with interactive audio and synchronized spectrograms.
+            </p>
+            <a
+              href="showcase.html"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #ff6b6b, #ff8787)"
+            >
               🎵 Open Showcase
             </a>
           </div>
-          
+
           <div class="cta-card">
             <h3>🎨 Try the Dolphin Composer</h3>
-            <p>Create your own dolphin-like sounds with our interactive synthesizer. Experiment with frequencies, patterns, and effects!</p>
-            <a href="dolphin-composer.html" class="cta-button" style="background: linear-gradient(135deg, #3ab0c8, #5dc4dc)">
+            <p>
+              Create your own dolphin-like sounds with our interactive
+              synthesizer. Experiment with frequencies, patterns, and effects!
+            </p>
+            <a
+              href="dolphin-composer.html"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #3ab0c8, #5dc4dc)"
+            >
               🎹 Launch Composer
             </a>
           </div>
-          
+
           <div class="cta-card">
             <h3>🌿 Explore Branch Patterns</h3>
-            <p>Navigate curated pods organized by energy, harmony, and flow in our interactive branch explorer.</p>
-            <a href="branch_explorer/" class="cta-button" style="background: linear-gradient(135deg, #2d5f3f, #3d7f5f)">
+            <p>
+              Navigate curated pods organized by energy, harmony, and flow in
+              our interactive branch explorer.
+            </p>
+            <a
+              href="branch_explorer/"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #2d5f3f, #3d7f5f)"
+            >
               🌳 Browse Branches
             </a>
           </div>
         </div>
-        
-        <div style="text-align: center; margin-top: 3rem;">
-          <h3 style="color: var(--sand); margin-bottom: 1.5rem;">For Developers & Researchers</h3>
-          <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+
+        <div style="text-align: center; margin-top: 3rem">
+          <h3 style="color: var(--sand); margin-bottom: 1.5rem">
+            For Developers & Researchers
+          </h3>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              gap: 1rem;
+            "
+          >
             <a href="https://github.com/micha2718l/dolphain" class="cta-button">
               📦 View on GitHub
             </a>
-            <a href="https://github.com/micha2718l/dolphain/blob/main/README.md" class="cta-button secondary">
+            <a
+              href="https://github.com/micha2718l/dolphain/blob/main/README.md"
+              class="cta-button secondary"
+            >
               📖 Read the Docs
             </a>
             <a href="#contribute" class="cta-button secondary">
