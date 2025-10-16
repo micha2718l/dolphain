@@ -359,41 +359,41 @@ body {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .nav-title {
     font-size: 1.5rem;
   }
-  
+
   .showcase-header {
     padding: 1.5rem;
   }
-  
+
   .showcase-stats {
     gap: 1rem;
   }
-  
+
   .stat-number {
     font-size: 1.5rem;
   }
-  
+
   .file-card {
     padding: 1.5rem;
   }
-  
+
   .file-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .file-metadata {
     grid-template-columns: 1fr;
   }
-  
+
   .container {
     padding: 1rem;
   }
-  
+
   .player-controls {
     flex-wrap: wrap;
   }

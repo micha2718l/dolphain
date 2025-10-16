@@ -142,12 +142,12 @@ body {
   .nav-menu {
     gap: 1rem;
   }
-  
+
   .nav-link {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
   }
-  
+
   .nav-special {
     padding: 0.4rem 0.8rem;
   }
@@ -456,14 +456,18 @@ h3 {
 }
 
 .highlight-card {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(58, 176, 200, 0.15));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.15),
+    rgba(58, 176, 200, 0.15)
+  );
   border: 2px solid rgba(255, 107, 107, 0.4);
   position: relative;
   overflow: hidden;
 }
 
 .highlight-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: -2px;
@@ -483,9 +487,15 @@ h3 {
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .feature-tech {
@@ -498,7 +508,11 @@ h3 {
 }
 
 .feature-highlight-box {
-  background: linear-gradient(135deg, rgba(45, 95, 63, 0.3), rgba(23, 140, 164, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(45, 95, 63, 0.3),
+    rgba(23, 140, 164, 0.3)
+  );
   border: 2px solid var(--ocean-light);
   border-radius: 12px;
   padding: 2rem;
@@ -612,7 +626,11 @@ h3 {
 }
 
 .update-banner {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(58, 176, 200, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.2),
+    rgba(58, 176, 200, 0.2)
+  );
   border: 2px solid var(--coral);
   border-radius: 12px;
   padding: 1.5rem;

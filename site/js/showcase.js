@@ -40,14 +40,22 @@ fetch("showcase/showcase_data.json")
   .then((r) => r.json())
   .then((data) => {
     const container = document.getElementById("files-container");
-    
+
     // Populate stats
     const statsContainer = document.getElementById("showcase-stats");
     if (statsContainer && data.files.length > 0) {
-      const totalChirps = data.files.reduce((sum, f) => sum + (f.chirps || 0), 0);
-      const totalClicks = data.files.reduce((sum, f) => sum + (f.clicks || 0), 0);
-      const avgScore = (data.files.reduce((sum, f) => sum + f.score, 0) / data.files.length).toFixed(1);
-      
+      const totalChirps = data.files.reduce(
+        (sum, f) => sum + (f.chirps || 0),
+        0
+      );
+      const totalClicks = data.files.reduce(
+        (sum, f) => sum + (f.clicks || 0),
+        0
+      );
+      const avgScore = (
+        data.files.reduce((sum, f) => sum + f.score, 0) / data.files.length
+      ).toFixed(1);
+
       statsContainer.innerHTML = `
         <div class="stat-item">
           <span class="stat-number">${data.files.length}</span>
@@ -82,7 +90,9 @@ fetch("showcase/showcase_data.json")
                 <div class="file-metadata">
                     <div class="metadata-item">
                         <span class="metadata-label">Interestingness Score</span>
-                        <span class="metadata-value highlight">${file.score.toFixed(1)}</span>
+                        <span class="metadata-value highlight">${file.score.toFixed(
+                          1
+                        )}</span>
                     </div>
                     <div class="metadata-item">
                         <span class="metadata-label">Chirps Detected</span>
@@ -90,7 +100,9 @@ fetch("showcase/showcase_data.json")
                     </div>
                     <div class="metadata-item">
                         <span class="metadata-label">Click Trains</span>
-                        <span class="metadata-value">${file.click_trains || 0}</span>
+                        <span class="metadata-value">${
+                          file.click_trains || 0
+                        }</span>
                     </div>
                     <div class="metadata-item">
                         <span class="metadata-label">Total Clicks</span>
