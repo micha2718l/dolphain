@@ -62,10 +62,4 @@ experiments/
 
 # Ignore large datasets and generated assets (keep `site/` in repo)
 data/
-temp_showcase_files/
 archive/
-quick_find_results/
-
-# Large audio assets (already keep site/; these prevent accidental commits)
-*.wav
-*.mp3
