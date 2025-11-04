@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -265,8 +266,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .empty-state {
@@ -305,15 +311,17 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>🐬 Dolphin Data Explorer</h1>
             <p class="subtitle">Browse and listen to the GoMRI-17 dataset from HuggingFace</p>
             <p style="margin-top: 10px; color: #888; font-size: 0.9em;">
-                <strong>Dataset:</strong> ColorSynth/GoMRI-17 | 
-                <strong>Source:</strong> 2017_South/BUOY200 | 
-                <a href="https://huggingface.co/datasets/ColorSynth/GoMRI-17" target="_blank" style="color: #667eea;">View on HuggingFace →</a>
+                <strong>Dataset:</strong> ColorSynth/GoMRI-17 |
+                <strong>Source:</strong> 2017_South/BUOY200 |
+                <a href="https://huggingface.co/datasets/ColorSynth/GoMRI-17" target="_blank"
+                    style="color: #667eea;">View on HuggingFace →</a>
             </p>
         </header>
 
@@ -365,4 +373,5 @@
 
     <script src="js/data-explorer.js"></script>
 </body>
+
 </html>

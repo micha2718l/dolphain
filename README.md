@@ -70,13 +70,32 @@ pip install -e .
 
 ## 🚀 Quick Start
 
-### Analyze One File
+### Super Easy - HuggingFace Integration 🎉
+
+```python
+import dolphain
+
+# Load a random file from HuggingFace - just one line!
+ears = dolphain.EARS()
+
+# Analyze it
+ears.plot('denoising', fmax=50000)
+whistles = ears.detect_whistles()
+print(f"Found {len(whistles)} whistles in {ears.filename}")
+```
+
+**New!** Seamlessly fetch and analyze files from HuggingFace without any setup. See [HUGGINGFACE_INTEGRATION.md](HUGGINGFACE_INTEGRATION.md) for full documentation.
+
+### Traditional - Local Files
 
 ```python
 import dolphain
 
 # Read EARS file (192 kHz underwater recordings)
 data = dolphain.read_ears_file('sample.210')
+
+# Or use the EARS class
+ears = dolphain.EARS('sample.210')
 
 # Denoise using wavelets (db20)
 clean = dolphain.wavelet_denoise(data['data'])
@@ -86,8 +105,8 @@ whistles = dolphain.detect_whistles(clean, data['fs'])
 
 print(f"Found {len(whistles)} dolphin whistles!")
 
-# Create 6-panel analysis plot
-dolphain.plot_analysis(data['data'], clean, data['fs'], data['time'])
+# Plot with the EARS class
+ears.plot('denoising', fmax=50000)
 ```
 
 ### Generate Interactive Showcase
