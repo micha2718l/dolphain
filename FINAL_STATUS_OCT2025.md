@@ -338,7 +338,7 @@ All criteria met:
 
 ### Live Showcase
 
-https://micha2718l.github.io/dolphain/showcase.html
+https://dolphain.mantilabs.ai/showcase.html
 
 ### Repository
 

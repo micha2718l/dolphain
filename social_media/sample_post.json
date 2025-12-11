@@ -1,8 +1,8 @@
 {
-    "tweet": "🐬 Decode dolphin language with Python! I built Dolphain, an open-source toolkit for bioacoustics analysis in the browser. \n\nTry the Studio: https://micha2718l.github.io/dolphain/portal/index.html\n\n#Python #OpenScience #MarineBiology",
-    "reddit": {
-        "subreddit": "test",
-        "title": "I built a browser-based tool to analyze dolphin sounds using Python and Pyodide",
-        "body": "Hi everyone,\n\nI've been working on an open-source project called Dolphain..."
-    }
+  "tweet": "🐬 Decode dolphin language with Python! I built Dolphain, an open-source toolkit for bioacoustics analysis in the browser. \n\nTry the Studio: https://dolphain.mantilabs.ai/portal/index.html\n\n#Python #OpenScience #MarineBiology",
+  "reddit": {
+    "subreddit": "test",
+    "title": "I built a browser-based tool to analyze dolphin sounds using Python and Pyodide",
+    "body": "Hi everyone,\n\nI've been working on an open-source project called Dolphain..."
+  }
 }

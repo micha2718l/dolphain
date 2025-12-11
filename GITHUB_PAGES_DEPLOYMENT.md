@@ -5,7 +5,7 @@ This repository includes a custom landing page (`index.html`) designed to be dep
 ## 🌊 Live Site
 
 Once deployed, the site will be available at:
-**https://micha2718l.github.io/dolphain/**
+**https://dolphain.mantilabs.ai/**
 
 ## 🚀 Quick Deployment Steps
 
@@ -24,7 +24,7 @@ Once deployed, the site will be available at:
 - GitHub will automatically build and deploy your site
 - This usually takes 1-2 minutes
 - You'll see a green checkmark when ready
-- Visit: https://micha2718l.github.io/dolphain/
+- Visit: https://dolphain.mantilabs.ai/
 
 ### 3. Custom Domain (Optional)
 

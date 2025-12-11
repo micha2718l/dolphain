@@ -379,7 +379,7 @@ python scripts/ears_to_wav.py /path/to/file.ears --plot
 
 ## 📞 Quick Reference Links
 
-**Live Showcase:** https://micha2718l.github.io/dolphain/showcase.html  
+**Live Showcase:** https://dolphain.mantilabs.ai/showcase.html  
 **Repository:** https://github.com/micha2718l/dolphain  
 **Local Showcase:** http://localhost:8000/showcase.html (when running server)
 

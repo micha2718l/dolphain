@@ -41,9 +41,9 @@ We have big plans to expand our understanding of dolphin communication:
 
 If you're just exploring, here are some fun things to try:
 
-1.  **The Studio**: Go to [Dolphain Studio](https://micha2718l.github.io/dolphain/portal/index.html) and try the "Denoising" example. See if you can tune the parameters to make the whistles clearer!
-2.  **Branch Explorer**: Check out the [Branch Explorer](https://micha2718l.github.io/dolphain/branch_explorer/) to see how our detection algorithms make decisions.
-3.  **Composer**: Use the [Dolphin Composer](https://micha2718l.github.io/dolphain/dolphin-composer.html) to arrange dolphin sounds into music (just for fun!).
+1.  **The Studio**: Go to [Dolphain Studio](https://dolphain.mantilabs.ai/portal/index.html) and try the "Denoising" example. See if you can tune the parameters to make the whistles clearer!
+2.  **Branch Explorer**: Check out the [Branch Explorer](https://dolphain.mantilabs.ai/branch_explorer/) to see how our detection algorithms make decisions.
+3.  **Composer**: Use the [Dolphin Composer](https://dolphain.mantilabs.ai/dolphin-composer.html) to arrange dolphin sounds into music (just for fun!).
 
 ## 🤝 How To Contribute
 

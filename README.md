@@ -1,10 +1,10 @@
+
 # 🐬 Dolphain - Dolphin Acoustic Analysis Library
 
-**Interactive Showcase:** https://micha2718l.github.io/dolphain/showcase.html 🎵
-**Web Portal:** https://micha2718l.github.io/dolphain/portal/index.html 💻
+**Interactive Showcase:** https://dolphain.mantilabs.ai/showcase.html 🎵
+**Web Portal:** https://dolphain.mantilabs.ai/portal/index.html 💻
 
 A Python library for analyzing underwater acoustic data from EARS (Embedded Acoustic Recording System) files, with focus on dolphin vocalization detection and characterization.
-
 ![Status](https://img.shields.io/badge/status-production-green)
 ![Python](https://img.shields.io/badge/python-3.8+-blue)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -30,14 +30,14 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 
 ## 🎨 Interactive Showcase & Portal
 
-**Web Portal (New!):** https://micha2718l.github.io/dolphain/portal/index.html
+**Web Portal (New!):** https://dolphain.mantilabs.ai/portal/index.html
 
 - 💻 Run Python code directly in your browser
 - 📡 Fetch data from HuggingFace instantly
 - 📊 Generate spectrograms and waveforms on the fly
 - 🚫 No installation required
 
-**Showcase:** https://micha2718l.github.io/dolphain/showcase.html
+**Showcase:** https://dolphain.mantilabs.ai/showcase.html
 
 Features:
 
@@ -67,8 +67,8 @@ Curious about where we're going? Check out our [ROADMAP.md](ROADMAP.md) to see o
 
 We believe in learning by doing.
 
-- **[Dolphain Studio](https://micha2718l.github.io/dolphain/portal/index.html)**: Run real Python analysis code in your browser. No installation required. Includes interactive examples for denoising and detection.
-- **[Showcase](https://micha2718l.github.io/dolphain/showcase/index.html)**: Listen to the best signals we've found so far.
+- **[Dolphain Studio](https://dolphain.mantilabs.ai/portal/index.html)**: Run real Python analysis code in your browser. No installation required. Includes interactive examples for denoising and detection.
+- **[Showcase](https://dolphain.mantilabs.ai/showcase/index.html)**: Listen to the best signals we've found so far.
 
 ## 🛠️ Installation
 
@@ -375,7 +375,7 @@ MIT License - See LICENSE file for details
 ## 📞 Contact
 
 **Repository:** https://github.com/micha2718l/dolphain  
-**Live Demo:** https://micha2718l.github.io/dolphain/showcase.html
+**Live Demo:** https://dolphain.mantilabs.ai/showcase.html
 
 ---
 

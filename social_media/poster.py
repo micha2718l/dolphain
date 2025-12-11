@@ -15,6 +15,7 @@ except ImportError:
     print("Missing dependencies. Please run: pip install tweepy praw requests")
     sys.exit(1)
 
+
 class SocialPoster:
     def __init__(self, config_path: str = "social_config.json"):
         self.config = self._load_config(config_path)
@@ -25,20 +26,20 @@ class SocialPoster:
         if not os.path.exists(path):
             print(f"Config file {path} not found.")
             return {}
-        with open(path, 'r') as f:
+        with open(path, "r") as f:
             return json.load(f)
 
     def _setup_twitter(self):
-        if 'twitter' not in self.config:
+        if "twitter" not in self.config:
             return None
-        
-        c = self.config['twitter']
+
+        c = self.config["twitter"]
         try:
             client = tweepy.Client(
-                consumer_key=c['api_key'],
-                consumer_secret=c['api_secret'],
-                access_token=c['access_token'],
-                access_token_secret=c['access_token_secret']
+                consumer_key=c["api_key"],
+                consumer_secret=c["api_secret"],
+                access_token=c["access_token"],
+                access_token_secret=c["access_token_secret"],
             )
             return client
         except Exception as e:
@@ -46,17 +47,17 @@ class SocialPoster:
             return None
 
     def _setup_reddit(self):
-        if 'reddit' not in self.config:
+        if "reddit" not in self.config:
             return None
-        
-        c = self.config['reddit']
+
+        c = self.config["reddit"]
         try:
             reddit = praw.Reddit(
-                client_id=c['client_id'],
-                client_secret=c['client_secret'],
-                user_agent=c['user_agent'],
-                username=c['username'],
-                password=c['password']
+                client_id=c["client_id"],
+                client_secret=c["client_secret"],
+                user_agent=c["user_agent"],
+                username=c["username"],
+                password=c["password"],
             )
             return reddit
         except Exception as e:
@@ -67,7 +68,7 @@ class SocialPoster:
         if not self.twitter_api:
             print("Twitter API not configured.")
             return
-        
+
         try:
             response = self.twitter_api.create_tweet(text=text)
             print(f"Tweet posted successfully! ID: {response.data['id']}")
@@ -86,26 +87,32 @@ class SocialPoster:
         except Exception as e:
             print(f"Error posting to Reddit: {e}")
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Automated Social Media Poster for Dolphain")
-    parser.add_argument("--platform", choices=['twitter', 'reddit', 'all'], required=True)
+    parser = argparse.ArgumentParser(
+        description="Automated Social Media Poster for Dolphain"
+    )
+    parser.add_argument(
+        "--platform", choices=["twitter", "reddit", "all"], required=True
+    )
     parser.add_argument("--content", help="Path to content file (JSON)", required=True)
     args = parser.parse_args()
 
     poster = SocialPoster()
 
     # Load content
-    with open(args.content, 'r') as f:
+    with open(args.content, "r") as f:
         content = json.load(f)
 
-    if args.platform in ['twitter', 'all']:
-        if 'tweet' in content:
-            poster.post_tweet(content['tweet'])
+    if args.platform in ["twitter", "all"]:
+        if "tweet" in content:
+            poster.post_tweet(content["tweet"])
 
-    if args.platform in ['reddit', 'all']:
-        if 'reddit' in content:
-            r = content['reddit']
-            poster.post_reddit(r['subreddit'], r['title'], r['body'])
+    if args.platform in ["reddit", "all"]:
+        if "reddit" in content:
+            r = content["reddit"]
+            poster.post_reddit(r["subreddit"], r["title"], r["body"])
+
 
 if __name__ == "__main__":
     main()

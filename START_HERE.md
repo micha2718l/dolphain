@@ -56,7 +56,7 @@ python3 -m http.server 8000Then open `site/branch_explorer/index.html` (or serve
 
 
 
-**Live site:** https://micha2718l.github.io/dolphain/showcase.html## �🎯 Test It Right Now
+**Live site:** https://dolphain.mantilabs.ai/showcase.html## 🎯 Test It Right Now
 
 
 
@@ -86,7 +86,7 @@ python3 -m http.server 8000Then open `site/branch_explorer/index.html` (or serve
 
 **Read these first:**
 
-**Live site:** https://micha2718l.github.io/dolphain/showcase.html
+**Live site:** https://dolphain.mantilabs.ai/showcase.html
 
 1. **`CURRENT_STATUS.md`** ← Latest project status and next steps
 
@@ -170,7 +170,7 @@ print(f"Found {len(whistles)} dolphin whistles!")# Deploy to GitHub Pages
 
 ```git add site/showcase/ && git commit -m "Update showcase" && git push
 
-# Auto-deploys to: https://micha2718l.github.io/dolphain/
+# Auto-deploys to: https://dolphain.mantilabs.ai/
 
 ### Run Quick Analysis
 
