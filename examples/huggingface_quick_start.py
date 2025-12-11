@@ -44,15 +44,16 @@ print()
 
 
 # ============================================================================
-# Method 3: Different Buoy
+# Method 3: Different Buoy (Example)
 # ============================================================================
 print("\n" + "=" * 70)
-print("Method 3: Load from a different buoy")
+print("Method 3: Load from a different buoy (if available)")
 print("=" * 70)
 
-# Get a file from BUOY210 instead of default BUOY200
-ears_buoy210 = dolphain.EARS(data_path="2017_South/BUOY210")
-print(ears_buoy210)
+# Note: Currently only BUOY200 is available in the sample dataset.
+# If BUOY210 were available, you would load it like this:
+# ears_buoy210 = dolphain.EARS(data_path="2017_South/BUOY210", file_extension=".210")
+print("Skipping BUOY210 load as it is not currently in the dataset.")
 print()
 
 
@@ -71,7 +72,7 @@ print()
 
 # Apply wavelet denoising
 print("Applying wavelet denoising...")
-denoised = ears.denoise(wavelet='db20')
+denoised = ears.denoise(wavelet="db20")
 print(f"✓ Denoised data shape: {denoised.shape}")
 print()
 
@@ -81,8 +82,10 @@ whistles = ears.detect_whistles(freq_range=(2000, 20000), min_duration=0.1)
 print(f"✓ Found {len(whistles)} whistles")
 if whistles:
     w = whistles[0]
-    print(f"  First whistle: {w['start_time']:.2f}s - {w['end_time']:.2f}s, "
-          f"{w['min_freq']:.0f}-{w['max_freq']:.0f} Hz")
+    print(
+        f"  First whistle: {w['start_time']:.2f}s - {w['end_time']:.2f}s, "
+        f"{w['min_freq']:.0f}-{w['max_freq']:.0f} Hz"
+    )
 print()
 
 
@@ -95,15 +98,15 @@ print("=" * 70)
 
 # Plot overview
 print("Generating overview plot...")
-ears.plot('overview', fmax=50000)
+ears.plot("overview", fmax=50000)
 
 # Plot with denoising comparison
 print("Generating denoising comparison...")
-ears.plot('denoising', wavelet='db20', fmax=50000, xlim=(0, 10))
+ears.plot("denoising", wavelet="db20", fmax=50000, xlim=(0, 10))
 
 # Plot spectrogram only
 print("Generating spectrogram...")
-ears.plot('spectrogram', fmax=25000, figsize=(16, 6))
+ears.plot("spectrogram", fmax=25000, figsize=(16, 6))
 
 print("\n✓ All visualizations complete!")
 
@@ -132,7 +135,8 @@ dolphain.plot_waveform(data, figsize=(16, 6))
 print("\n" + "=" * 70)
 print("💡 Pro Tips")
 print("=" * 70)
-print("""
+print(
+    """
 1. Keep temp files for inspection:
    ears = dolphain.EARS(cleanup=False)
    print(f"File saved at: {ears.metadata['temp_path']}")
@@ -151,7 +155,8 @@ print("""
        ears = dolphain.EARS()
        whistles = ears.detect_whistles()
        print(f"{ears.filename}: {len(whistles)} whistles")
-""")
+"""
+)
 
 print("=" * 70)
 print("🎉 Complete! Happy analyzing!")

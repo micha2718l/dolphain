@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphain Interactive Portal</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff00ff;
+            --bg: #0a0e27;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --border: rgba(0, 212, 255, 0.3);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: #fff;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: rgba(0,0,0,0.2);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .file-list-header {
+            padding: 15px;
+            font-weight: bold;
+            color: var(--primary);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .file-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .file-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .file-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: #fff;
+        }
+
+        .file-item.active {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            gap: 20px;
+            overflow: hidden;
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            min-width: 400px;
+        }
+
+        .editor-header {
+            padding: 10px 15px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .run-btn {
+            background: linear-gradient(45deg, var(--primary), #00aadd);
+            border: none;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .run-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .run-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .CodeMirror {
+            height: 100%;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+        }
+
+        .output-container {
+            flex: 1;
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            min-width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 1000px) {
+            .content-area {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            .editor-container, .output-container {
+                min-height: 400px;
+                min-width: 0;
+            }
+            .sidebar {
+                display: none; /* Hide sidebar on small screens for now */
+            }
+        }
+
+        .output-log {
+            font-family: monospace;
+            white-space: pre-wrap;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .plot-area {
+            text-align: center;
+        }
+        
+        .plot-area img {
+            max-width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .status-bar {
+            padding: 5px 20px;
+            font-size: 0.8em;
+            color: #666;
+            background: #050713;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 14, 39, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading" class="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text">Initializing Python Environment...</div>
+    </div>
+
+    <header>
+        <h1>🐬 Dolphain Portal</h1>
+        <div style="font-size: 0.9em; color: #888;">Powered by Pyodide (WASM)</div>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="file-list-header">
+                Available Files (GoMRI-17)
+            </div>
+            <div class="file-list" id="file-list">
+                <div style="padding: 20px; text-align: center; color: #666;">Loading files...</div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="editor-container">
+                <div class="editor-header">
+                    <span>Python Code</span>
+                    <button id="run-btn" class="run-btn" onclick="runCode()">▶ Run Code</button>
+                </div>
+                <textarea id="code-editor">
+import dolphain
+from dolphain.plotting import plot_overview
+import matplotlib.pyplot as plt
+
+# Load the selected file
+# Note: In this browser environment, we fetch directly
+print(f"Loading {selected_filename}...")
+ears = dolphain.EARS(filename=selected_filename)
+
+print(f"Loaded {ears.duration}s of audio")
+print(f"Sample rate: {ears.fs} Hz")
+
+# Create visualization
+plt.close('all') # Clear previous plots
+plt.figure(figsize=(10, 6)) # Widescreen aspect ratio
+# Use smaller FFT window and overlap to reduce memory usage in browser
+# Also downsample the data for plotting if it's too large
+import numpy as np
+from scipy import signal
+
+# Custom plotting to avoid memory issues with full resolution
+def safe_plot_overview(ears_data):
+    data = ears_data["data"]
+    fs = ears_data["fs"]
+    
+    # Downsample for waveform plot (10x)
+    step = 10
+    t = np.arange(0, len(data), step) / fs
+    
+    plt.subplot(2, 1, 1)
+    plt.plot(t, data[::step], linewidth=0.5)
+    plt.title(f"Waveform (Downsampled {step}x)")
+    plt.xlabel("Time [s]")
+    plt.ylabel("Amplitude")
+    plt.grid(True, alpha=0.3)
+    
+    # Compute spectrogram with coarser resolution
+    plt.subplot(2, 1, 2)
+    
+    # Downsample data for spectrogram to save memory
+    # High sample rates create massive spectrograms that crash the browser
+    target_fs = 24000 # Limit to 24kHz (12kHz Nyquist) for overview
+    if fs > target_fs:
+        q = int(fs / target_fs)
+        data_spec = data[::q]
+        fs_spec = fs / q
+    else:
+        data_spec = data
+        fs_spec = fs
+        
+    f, t_spec, Sxx = signal.spectrogram(data_spec, fs=fs_spec, nperseg=256, noverlap=128)
+    Sxx_dB = 10 * np.log10(np.abs(Sxx) + 1e-10)
+    
+    # Use imshow instead of pcolormesh for much better memory performance
+    plt.imshow(Sxx_dB, aspect='auto', origin='lower', cmap='nipy_spectral', 
+               extent=[t_spec[0], t_spec[-1], f[0], f[-1]])
+    plt.ylabel('Frequency [Hz]')
+    plt.xlabel('Time [s]')
+    plt.title('Spectrogram (Coarse)')
+    plt.colorbar(label='dB')
+    
+    plt.tight_layout()
+
+safe_plot_overview(ears.metadata)
+# plt.show() is not needed as we capture the figure automatically
+</textarea>
+            </div>
+
+            <div class="output-container">
+                <div class="output-log" id="output-log"></div>
+                <div class="plot-area" id="plot-area"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar" id="status-bar">Ready</div>
+
+    <script>
+        let pyodide = null;
+        let editor = null;
+        let selectedFilename = "7178E5DC.200"; // Default
+
+        // Initialize CodeMirror
+        editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "python",
+            theme: "monokai",
+            lineNumbers: true,
+            indentUnit: 4
+        });
+
+        async function log(msg) {
+            const logEl = document.getElementById("output-log");
+            logEl.textContent += msg + "\n";
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        async function setStatus(msg) {
+            document.getElementById("status-bar").textContent = msg;
+            document.getElementById("loading-text").textContent = msg;
+        }
+
+        async function initPyodide() {
+            try {
+                pyodide = await loadPyodide();
+                setStatus("Installing dependencies...");
+                
+                await pyodide.loadPackage("micropip");
+                await pyodide.loadPackage("ssl");
+                const micropip = pyodide.pyimport("micropip");
+                
+                // Install dependencies
+                await micropip.install(['numpy', 'scipy', 'matplotlib', 'huggingface_hub', 'pyodide-http', 'certifi', 'requests']);
+                
+                // Install our local wheel
+                // In a real deployment, this URL needs to be correct relative to index.html
+                await micropip.install("dolphain-0.1.0-py3-none-any.whl");
+                
+                // Patch requests and huggingface
+                await pyodide.runPythonAsync(`
+                    import pyodide_http
+                    pyodide_http.patch_all()
+                    import requests
+                    import huggingface_hub
+                    import os
+                    
+                    # Monkeypatch hf_hub_download to use requests (which works in pyodide)
+                    # instead of httpx (which fails with TCP errors)
+                    def custom_hf_hub_download(repo_id, filename, repo_type="dataset", local_dir=None, **kwargs):
+                        print(f"Downloading {filename} from {repo_id} via custom fetch...")
+                        url = f"https://huggingface.co/datasets/{repo_id}/resolve/main/{filename}"
+                        
+                        # Use requests (patched by pyodide-http)
+                        response = requests.get(url)
+                        response.raise_for_status()
+                        
+                        if local_dir is None:
+                            local_dir = "/tmp"
+                        
+                        # Ensure directory exists
+                        full_path = os.path.join(local_dir, filename)
+                        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+                        
+                        with open(full_path, "wb") as f:
+                            f.write(response.content)
+                            
+                        return full_path
+
+                    # Apply patch
+                    huggingface_hub.hf_hub_download = custom_hf_hub_download
+                    # Also patch the module where it might be imported from
+                    import huggingface_hub.file_download
+                    huggingface_hub.file_download.hf_hub_download = custom_hf_hub_download
+
+                    import matplotlib
+                    matplotlib.use('Agg') # Use non-interactive backend to prevent auto-plotting
+                    import matplotlib.pyplot as plt
+                    import dolphain
+                `);
+
+                document.getElementById("loading").style.display = "none";
+                setStatus("Ready");
+                
+                // Load file list
+                loadFileList();
+
+            } catch (err) {
+                console.error(err);
+                setStatus("Error initializing: " + err.message);
+            }
+        }
+
+        async function loadFileList() {
+            const listEl = document.getElementById("file-list");
+            listEl.innerHTML = '<div style="padding:10px; color:#888">Fetching from HuggingFace...</div>';
+            
+            try {
+                // We can use the HF API directly from JS to get the list
+                const response = await fetch("https://huggingface.co/api/datasets/ColorSynth/GoMRI-17/tree/main/2017_South/BUOY200");
+                const data = await response.json();
+                
+                listEl.innerHTML = "";
+                
+                // Filter for .200 files
+                const files = data.filter(f => f.path.endsWith(".200")).slice(0, 50); // Limit to 50 for now
+                
+                files.forEach(file => {
+                    const div = document.createElement("div");
+                    div.className = "file-item";
+                    const fname = file.path.split("/").pop();
+                    div.textContent = fname;
+                    if (fname === selectedFilename) div.classList.add("active");
+                    
+                    div.onclick = () => {
+                        document.querySelectorAll(".file-item").forEach(el => el.classList.remove("active"));
+                        div.classList.add("active");
+                        selectedFilename = fname;
+                        updateCodeContext();
+                    };
+                    
+                    listEl.appendChild(div);
+                });
+                
+            } catch (err) {
+                listEl.innerHTML = '<div style="color:red">Error loading files</div>';
+                console.error(err);
+            }
+        }
+
+        function updateCodeContext() {
+            // We inject the variable into the python scope, we don't necessarily need to change the text
+            // But let's flash the status
+            setStatus(`Selected ${selectedFilename}`);
+        }
+
+        async function runCode() {
+            if (!pyodide) return;
+            
+            const btn = document.getElementById("run-btn");
+            btn.disabled = true;
+            btn.textContent = "Running...";
+            
+            document.getElementById("output-log").textContent = "";
+            document.getElementById("plot-area").innerHTML = "";
+            
+            try {
+                // Set the selected filename in Python scope
+                pyodide.globals.set("selected_filename", selectedFilename);
+                
+                // Setup stdout capture
+                pyodide.setStdout({ batched: (msg) => log(msg) });
+                pyodide.setStderr({ batched: (msg) => log("ERR: " + msg) });
+
+                // Prepare plotting
+                await pyodide.runPythonAsync(`
+                    plt.clf()
+                `);
+
+                const code = editor.getValue();
+                await pyodide.runPythonAsync(code);
+                
+                // Handle plots
+                // We use a trick to get the plot as base64
+                await pyodide.runPythonAsync(`
+                    import io, base64
+                    buf = io.BytesIO()
+                    plt.savefig(buf, format='png', bbox_inches='tight', facecolor='#0a0e27', edgecolor='none')
+                    buf.seek(0)
+                    img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
+                `);
+                
+                const imgStr = pyodide.globals.get("img_str");
+                const img = document.createElement("img");
+                img.src = imgStr;
+                document.getElementById("plot-area").appendChild(img);
+
+            } catch (err) {
+                log("Error:\n" + err);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "▶ Run Code";
+            }
+        }
+
+        // Start
+        initPyodide();
+    </script>
+</body>
+</html>

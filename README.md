@@ -1,6 +1,7 @@
 # 🐬 Dolphain - Dolphin Acoustic Analysis Library
 
 **Interactive Showcase:** https://micha2718l.github.io/dolphain/showcase.html 🎵
+**Web Portal:** https://micha2718l.github.io/dolphain/portal/index.html 💻
 
 A Python library for analyzing underwater acoustic data from EARS (Embedded Acoustic Recording System) files, with focus on dolphin vocalization detection and characterization.
 
@@ -27,9 +28,15 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 
 ---
 
-## 🎨 Interactive Showcase
+## 🎨 Interactive Showcase & Portal
 
-**Try it live:** https://micha2718l.github.io/dolphain/showcase.html
+**Web Portal (New!):** https://micha2718l.github.io/dolphain/portal/index.html
+- 💻 Run Python code directly in your browser
+- 📡 Fetch data from HuggingFace instantly
+- 📊 Generate spectrograms and waveforms on the fly
+- 🚫 No installation required
+
+**Showcase:** https://micha2718l.github.io/dolphain/showcase.html
 
 Features:
 
