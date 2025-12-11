@@ -267,6 +267,84 @@
           transform: rotate(360deg);
         }
       }
+
+      /* New Controls */
+      .example-select {
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-family: inherit;
+        cursor: pointer;
+      }
+
+      .help-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .help-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: #0a1828;
+        border: 1px solid var(--primary);
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #888;
+      }
+
+      .modal h2 {
+        color: var(--primary);
+        margin-top: 0;
+      }
+      .modal h3 {
+        color: var(--secondary);
+        margin-top: 20px;
+      }
+      .modal code {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
     </style>
   </head>
   <body>
@@ -293,10 +371,24 @@
       <div class="content-area">
         <div class="editor-container">
           <div class="editor-header">
-            <span>Python Code</span>
-            <button id="run-btn" class="run-btn" onclick="runCode()">
-              ▶ Run Code
-            </button>
+            <div style="display: flex; gap: 10px; align-items: center">
+              <span>Python Code</span>
+              <select
+                id="example-selector"
+                class="example-select"
+                onchange="loadExample()"
+              >
+                <option value="default">Example: Basic Plot</option>
+                <option value="denoise">Example: Denoising</option>
+                <option value="clicks">Example: Click Detection</option>
+              </select>
+            </div>
+            <div style="display: flex; align-items: center">
+              <button class="help-btn" onclick="toggleHelp()">?</button>
+              <button id="run-btn" class="run-btn" onclick="runCode()">
+                ▶ Run Code
+              </button>
+            </div>
           </div>
           <textarea id="code-editor">
 import dolphain
@@ -392,6 +484,67 @@ safe_plot_overview(ears.metadata)
 
     <div class="status-bar" id="status-bar">Ready</div>
 
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="toggleHelp()">&times;</span>
+        <h2>Dolphain Studio Help</h2>
+        <p>
+          Welcome to the Dolphain Studio! This is a browser-based environment
+          for analyzing underwater acoustic data.
+        </p>
+
+        <h3>Getting Started</h3>
+        <ol>
+          <li>
+            <strong>Select a File:</strong> Choose a recording from the list on
+            the left.
+          </li>
+          <li>
+            <strong>Choose an Example:</strong> Use the dropdown menu above the
+            code editor to load different analysis scripts.
+          </li>
+          <li>
+            <strong>Run Code:</strong> Click "Run Code" to execute the Python
+            script and see the results.
+          </li>
+        </ol>
+
+        <h3>Available Libraries</h3>
+        <p>The environment includes:</p>
+        <ul>
+          <li>
+            <code>dolphain</code>: Our custom library for acoustic analysis.
+          </li>
+          <li><code>numpy</code>, <code>scipy</code>: For numerical processing.</li>
+          <li>
+            <code>matplotlib</code>: For plotting (pre-configured for dark
+            mode).
+          </li>
+        </ul>
+
+        <h3>Key Dolphain Functions</h3>
+        <ul>
+          <li>
+            <code>dolphain.EARS(filename)</code>: Load an EARS recording.
+          </li>
+          <li>
+            <code>dolphain.signal.wavelet_denoise(data)</code>: Clean noisy
+            signals.
+          </li>
+          <li>
+            <code>dolphain.plotting.plot_overview(data)</code>: Generate
+            standard plots.
+          </li>
+        </ul>
+
+        <p style="margin-top: 20px; font-size: 0.9em; color: #888">
+          Tip: You can edit the code freely! Try changing parameters or writing
+          your own analysis scripts.
+        </p>
+      </div>
+    </div>
+
     <script>
       let pyodide = null;
       let editor = null;
@@ -404,6 +557,172 @@ safe_plot_overview(ears.metadata)
         lineNumbers: true,
         indentUnit: 4,
       });
+
+      const EXAMPLES = {
+        default: `import dolphain
+from dolphain.plotting import plot_overview
+import matplotlib.pyplot as plt
+
+# Set dark theme for plots to match UI
+plt.style.use('dark_background')
+plt.rcParams['figure.facecolor'] = '#050713'
+plt.rcParams['axes.facecolor'] = '#050713'
+plt.rcParams['grid.color'] = '#333333'
+plt.rcParams['text.color'] = '#e0e0e0'
+plt.rcParams['axes.labelcolor'] = '#e0e0e0'
+plt.rcParams['xtick.color'] = '#e0e0e0'
+plt.rcParams['ytick.color'] = '#e0e0e0'
+
+# Load the selected file
+print(f"Loading {selected_filename}...")
+ears = dolphain.EARS(filename=selected_filename)
+
+print(f"Loaded {ears.duration}s of audio")
+print(f"Sample rate: {ears.fs} Hz")
+
+# Create visualization
+plt.close('all')
+plt.figure(figsize=(10, 7))
+import numpy as np
+from scipy import signal
+
+def safe_plot_overview(ears_data):
+    data = ears_data["data"]
+    fs = ears_data["fs"]
+    
+    # Downsample for waveform plot (10x)
+    step = 10
+    t = np.arange(0, len(data), step) / fs
+    
+    plt.subplot(2, 1, 1)
+    plt.plot(t, data[::step], linewidth=0.5, color='#00d4ff')
+    plt.title(f"Waveform (Downsampled {step}x)", color='#00d4ff')
+    plt.xlabel("Time [s]")
+    plt.ylabel("Amplitude")
+    plt.grid(True, alpha=0.2)
+    
+    # Compute spectrogram
+    plt.subplot(2, 1, 2)
+    target_fs = 24000
+    if fs > target_fs:
+        q = int(fs / target_fs)
+        data_spec = data[::q]
+        fs_spec = fs / q
+    else:
+        data_spec = data
+        fs_spec = fs
+        
+    f, t_spec, Sxx = signal.spectrogram(data_spec, fs=fs_spec, nperseg=256, noverlap=128)
+    Sxx_dB = 10 * np.log10(np.abs(Sxx) + 1e-10)
+    
+    plt.imshow(Sxx_dB, aspect='auto', origin='lower', cmap='inferno', 
+               extent=[t_spec[0], t_spec[-1], f[0], f[-1]])
+    plt.ylabel('Frequency [Hz]')
+    plt.xlabel('Time [s]')
+    plt.title('Spectrogram (Coarse)', color='#ff00ff')
+    plt.colorbar(label='dB')
+    
+    plt.tight_layout()
+
+safe_plot_overview(ears.metadata)`,
+        denoise: `import dolphain
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Set dark theme
+plt.style.use('dark_background')
+plt.rcParams['figure.facecolor'] = '#050713'
+plt.rcParams['axes.facecolor'] = '#050713'
+plt.rcParams['grid.color'] = '#333333'
+
+# Load data
+print(f"Loading {selected_filename}...")
+ears = dolphain.EARS(filename=selected_filename)
+data = ears.metadata["data"]
+fs = ears.metadata["fs"]
+
+# Denoise
+print("Applying wavelet denoising...")
+# This uses VisuShrink thresholding to remove noise
+denoised = dolphain.signal.wavelet_denoise(data)
+
+# Plot comparison
+plt.close('all')
+plt.figure(figsize=(10, 8))
+
+t = np.arange(len(data)) / fs
+# Zoom in on first 0.1s to see details
+limit = int(0.1 * fs) 
+
+plt.subplot(2, 1, 1)
+plt.plot(t[:limit], data[:limit], label='Raw', alpha=0.7, color='#00d4ff')
+plt.title("Raw Signal (Zoomed 0.1s)", color='#00d4ff')
+plt.grid(True, alpha=0.2)
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.plot(t[:limit], denoised[:limit], label='Denoised', color='#ff00ff')
+plt.title("Denoised Signal (Zoomed 0.1s)", color='#ff00ff')
+plt.grid(True, alpha=0.2)
+plt.legend()
+
+plt.tight_layout()`,
+        clicks: `import dolphain
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Set dark theme
+plt.style.use('dark_background')
+plt.rcParams['figure.facecolor'] = '#050713'
+plt.rcParams['axes.facecolor'] = '#050713'
+plt.rcParams['grid.color'] = '#333333'
+
+ears = dolphain.EARS(filename=selected_filename)
+data = ears.metadata["data"]
+fs = ears.metadata["fs"]
+
+# Simple energy detector
+window_size = 256
+# Calculate energy in windows
+energy = np.array([np.sum(data[i:i+window_size]**2) for i in range(0, len(data), window_size)])
+# Define threshold based on statistics
+threshold = np.mean(energy) + 3 * np.std(energy)
+
+# Find windows above threshold
+clicks = np.where(energy > threshold)[0] * window_size / fs
+
+print(f"Found {len(clicks)} potential high-energy events")
+
+plt.close('all')
+plt.figure(figsize=(10, 6))
+t = np.arange(len(data)) / fs
+
+# Plot waveform
+plt.plot(t, data, color='#00d4ff', alpha=0.5, linewidth=0.5)
+
+# Mark detections
+for c in clicks:
+    plt.axvline(x=c, color='#ff00ff', alpha=0.3)
+
+plt.title(f"Detected {len(clicks)} High-Energy Events (Clicks)", color='#e0e0e0')
+plt.xlabel("Time [s]")
+plt.ylabel("Amplitude")
+plt.grid(True, alpha=0.2)
+plt.tight_layout()`
+      };
+
+      function toggleHelp() {
+        const modal = document.getElementById("help-modal");
+        modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+      }
+
+      function loadExample() {
+        const selector = document.getElementById("example-selector");
+        const key = selector.value;
+        if (EXAMPLES[key]) {
+          editor.setValue(EXAMPLES[key]);
+        }
+      }
 
       async function log(msg) {
         const logEl = document.getElementById("output-log");

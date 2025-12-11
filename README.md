@@ -58,7 +58,19 @@ cd site && python3 -m http.server 8000
 
 ---
 
-## 📦 Quick Installation
+
+## 🗺️ Roadmap & Future
+
+Curious about where we're going? Check out our [ROADMAP.md](ROADMAP.md) to see our plans for advanced classification, cloud scaling, and community science.
+
+## 🎓 Learn & Explore
+
+We believe in learning by doing.
+*   **[Dolphain Studio](https://micha2718l.github.io/dolphain/portal/index.html)**: Run real Python analysis code in your browser. No installation required. Includes interactive examples for denoising and detection.
+*   **[Showcase](https://micha2718l.github.io/dolphain/showcase/index.html)**: Listen to the best signals we've found so far.
+
+## 🛠️ Installation
+
 
 ```bash
 git clone https://github.com/micha2718l/dolphain.git
