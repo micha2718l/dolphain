@@ -345,6 +345,28 @@
         border-radius: 3px;
         font-family: monospace;
       }
+
+      /* Back Button Style */
+      .back-home-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(10, 24, 40, 0.6);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+
+      .back-home-btn:hover {
+        background: rgba(0, 212, 255, 0.1);
+        color: #fff;
+        transform: translateX(-3px);
+      }
     </style>
   </head>
   <body>
@@ -355,7 +377,7 @@
 
     <header>
       <div style="display: flex; align-items: center; gap: 15px;">
-        <a href="../index.html" style="color: var(--primary); text-decoration: none; font-weight: bold; font-size: 1.2rem; border: 1px solid var(--border); padding: 5px 10px; border-radius: 5px; transition: all 0.2s;">← Home</a>
+        <a href="../index.html" class="back-home-btn">← Home</a>
         <h1>🐬 Dolphain Studio</h1>
       </div>
       <div style="font-size: 0.9em; color: #888">Powered by Pyodide (WASM)</div>

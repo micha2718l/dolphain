@@ -374,13 +374,36 @@
       footer a:hover {
         color: #f5e6d3;
       }
+
+      .back-home-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(10, 24, 40, 0.6);
+        border: 1px solid rgba(58, 176, 200, 0.3);
+        border-radius: 20px;
+        color: #3ab0c8;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      .back-home-btn:hover {
+        background: rgba(58, 176, 200, 0.2);
+        color: #e8f4f8;
+        transform: translateX(-3px);
+        border-color: #3ab0c8;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <header>
         <div style="position: absolute; top: 2rem; left: 2rem;">
-          <a href="index.html" style="color: #3ab0c8; text-decoration: none; font-weight: bold; font-size: 1.1rem; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(58, 176, 200, 0.3);">← Back to Home</a>
+          <a href="index.html" class="back-home-btn">← Back to Home</a>
         </div>
         <h1>🐬 Dolphin Composer 🎵</h1>
         <p class="tagline">

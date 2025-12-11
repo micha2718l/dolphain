@@ -309,6 +309,27 @@
             border-radius: 8px;
             margin-top: 15px;
         }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #667eea;
+            border-radius: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-home-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(-3px);
+        }
     </style>
 </head>
 
@@ -316,7 +337,7 @@
     <div class="container">
         <header>
             <div style="margin-bottom: 15px;">
-                <a href="index.html" style="color: #667eea; text-decoration: none; font-weight: bold; font-size: 1.1rem;">← Back to Home</a>
+                <a href="index.html" class="back-home-btn">← Back to Home</a>
             </div>
             <h1>🐬 Dolphin Data Explorer</h1>
             <p class="subtitle">Browse and listen to the GoMRI-17 dataset from HuggingFace</p>
