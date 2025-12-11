@@ -88,7 +88,7 @@ When installed with `-e`, Python creates a link from `.venv/lib/python3.x/site-p
 
 ### Testing Your Installation
 
-```python
+````python
 # In a notebook or Python script
 import dolphain
 
@@ -111,9 +111,10 @@ python3 setup.py bdist_wheel
 
 # Copy to portal directory
 cp dist/dolphain-*-py3-none-any.whl site/portal/dolphain-0.1.0-py3-none-any.whl
-```
+````
 
 ### 2. Run Local Server
+
 Because of CORS and WASM requirements, you must run a local web server.
 
 ```bash
@@ -122,14 +123,17 @@ python3 -m http.server 8000
 ```
 
 ### 3. Test
+
 Open `http://localhost:8000/portal/index.html` in your browser.
 
 **Note:** If you change Python code in `dolphain/`, you must rebuild the wheel and copy it again for the changes to appear in the portal. Changes to `index.html` or CSS appear instantly on refresh.
 
 # Test a function
-files = dolphain.find_data_files('data', '**/*.210')
+
+files = dolphain.find_data_files('data', '\*_/_.210')
 print(f'Found {len(files)} files')
-```
+
+````
 
 ### Troubleshooting
 
@@ -140,7 +144,7 @@ print(f'Found {len(files)} files')
 ```bash
 source .venv/bin/activate
 pip install -e .
-```
+````
 
 #### Issue: Changes to code not reflected
 

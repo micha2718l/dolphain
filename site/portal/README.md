@@ -9,11 +9,13 @@ Because this application uses Pyodide (WebAssembly) and loads local files (the `
 ### Quick Start
 
 1. Open a terminal in this directory:
+
    ```bash
    cd site/portal
    ```
 
 2. Start a simple Python web server:
+
    ```bash
    python3 -m http.server 8000
    ```

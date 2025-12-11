@@ -1,373 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dolphain - Understanding Dolphin Communication</title>
+    <meta
+      name="description"
+      content="A Python toolkit for analyzing underwater acoustic recordings and decoding dolphin communication patterns. Data from LADC-GEMM and GoMRI."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dolphain - Understanding Dolphin Communication</title>
-  <meta name="description"
-    content="A Python toolkit for analyzing underwater acoustic recordings and decoding dolphin communication patterns. Data from LADC-GEMM and GoMRI." />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-  <!-- Mobile Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">🐬 Dolphain</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="portal/index.html" class="nav-link nav-special">💻 Studio</a></li>
-        <li><a href="showcase.html" class="nav-link">Showcase</a></li>
-        <li><a href="#examples" class="nav-link">Examples</a></li>
-        <li><a href="#features" class="nav-link">Features</a></li>
-        
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link">Tools ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="dolphin-composer.html">🎵 Composer</a></li>
-            <li><a href="branch_explorer/">🌿 Branch Explorer</a></li>
-            <li><a href="data-explorer.html">📊 Data Explorer</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#getting-started" class="nav-link">Get Started</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Bubble background -->
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-
-  <div class="container">
-    <header>
-      <h1>🐬 Dolphain</h1>
-      <p class="tagline">"So long, and thanks for all the fish data"</p>
-      <p class="subtitle">
-        A Python toolkit for analyzing underwater acoustic recordings and
-        understanding dolphin communication patterns
-      </p>
-      <p style="color: var(--ocean-light); font-size: 1.1rem; margin-top: 0.5rem; font-style: italic;">
-        Where Marine Biology meets Signal Processing, AI, and Physics
-      </p>
-      <div class="header-badges">
-        <span class="badge badge-science">🔬 Signal Processing</span>
-        <span class="badge badge-ai">🤖 AI-Enhanced</span>
-        <span class="badge badge-data">📊 Gulf of Mexico Data</span>
-        <span class="badge badge-open">🌊 Open Science</span>
-      </div>
-    </header>
-
-    <div class="quote-box">
-      "For instance, on the planet Earth, man had always assumed that he was
-      more intelligent than dolphins because he had achieved so much—the
-      wheel, New York, wars and so on—whilst all the dolphins had ever done
-      was muck about in the water having a good time. But conversely, the
-      dolphins had always believed that they were far more intelligent than
-      man—for precisely the same reasons."
-      <div class="quote-author">
-        — Douglas Adams, The Hitchhiker's Guide to the Galaxy
-      </div>
-    </div>
-
-    <section id="about">
-      <h2>What is Dolphain?</h2>
-      <p>
-        Dolphain is a scientifically rigorous Python package for analyzing
-        underwater acoustic recordings from the
-        <span class="highlight">Gulf of Mexico</span>. Our mission: decode
-        dolphin communication patterns through clicks and whistles.
-      </p>
-
-      <div class="update-banner">
-        <h3>🎉 Latest Updates - December 2025</h3>
-        <ul style="list-style: none; padding: 0">
+  <body>
+    <!-- Mobile Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-logo">🐬 Dolphain</a>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
           <li>
-            💻 <strong>Dolphain Studio:</strong> Run Dolphain directly in your browser! No installation required.
-            Analyze data from HuggingFace instantly. <a href="portal/index.html">Try it now</a>.
+            <a href="portal/index.html" class="nav-link nav-special"
+              >💻 Studio</a
+            >
           </li>
-          <li>
-            ✨ <strong>Unique Signal Detection:</strong> New multi-band
-            spectral analysis mode finds exceptional acoustic features
+          <li><a href="showcase.html" class="nav-link">Showcase</a></li>
+          <li><a href="#examples" class="nav-link">Examples</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link">Tools ▾</a>
+            <ul class="dropdown-content">
+              <li><a href="dolphin-composer.html">🎵 Composer</a></li>
+              <li><a href="branch_explorer/">🌿 Branch Explorer</a></li>
+              <li><a href="data-explorer.html">📊 Data Explorer</a></li>
+            </ul>
           </li>
-          <li>
-            🎯 <strong>Conservative Detection:</strong> Ultra-precise chirp
-            and click train identification with minimal false positives
-          </li>
-          <li>
-            📊 <strong>Dual-Mode System:</strong> Choose standard detection or
-            unique feature hunting based on research goals
-          </li>
-          <li>
-            🌐 <strong>Enhanced Showcase:</strong> Interactive audio gallery
-            with synchronized visualization playback
-          </li>
+
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#getting-started" class="nav-link">Get Started</a></li>
         </ul>
       </div>
+    </nav>
 
-      <div class="attribution-box">
-        Data for this project comes from the
-        <strong>LADC-GEMM</strong> (Littoral Acoustic Demonstration Center -
-        Gulf Ecological Monitoring and Modeling) consortium, funded by the
-        <strong>Gulf of Mexico Research Initiative (GoMRI)</strong>. LADC-GEMM
-        deployed autonomous underwater vehicles and acoustic recorders
-        throughout the Gulf to track marine mammal recovery after the
-        Deepwater Horizon oil spill. <br /><br />
-        <a href="DATA_ATTRIBUTION.html" style="color: var(--sand)">
-          Learn more about data sources and attributions →
-        </a>
-      </div>
+    <!-- Bubble background -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-      <div class="science-fact">
-        Dolphins have individual "signature whistles" that function like
-        names. They can remember these unique whistles for over 20 years,
-        demonstrating long-term social memory comparable to humans.
-      </div>
-
-      <p>
-        We're working with EARS (Ecological Acoustic Recorder) data sampled at
-        192 kHz, perfect for capturing the 2-20 kHz range where dolphins
-        communicate with each other.
-      </p>
-    </section>
-
-    <div class="wave-divider">
-      <div class="wave"></div>
-    </div>
-
-    <!-- NEW: Examples Section -->
-    <section id="examples">
-      <h2>See It In Action</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 2rem">
-        Real outputs from analyzing Gulf of Mexico underwater recordings. All
-        visualizations generated from actual EARS data files.
-      </p>
-
-      <div class="example-item">
-        <h3>📈 Waveform Analysis</h3>
-        <p>
-          Time-domain visualization of a 21-second underwater recording. Each
-          peak represents acoustic energy from marine life, boats, or
-          environmental noise.
+    <div class="container">
+      <header>
+        <h1>🐬 Dolphain</h1>
+        <p class="tagline">"So long, and thanks for all the fish data"</p>
+        <p class="subtitle">
+          A Python toolkit for analyzing underwater acoustic recordings and
+          understanding dolphin communication patterns
         </p>
-        <img src="images/waveform.png" alt="Underwater acoustic waveform" class="example-image" />
-        <div class="code-block" style="margin-top: 1rem">
-          <code><span class="highlight">import</span> dolphain data =
+        <p
+          style="
+            color: var(--ocean-light);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+          "
+        >
+          Where Marine Biology meets Signal Processing, AI, and Physics
+        </p>
+        <div class="header-badges">
+          <span class="badge badge-science">🔬 Signal Processing</span>
+          <span class="badge badge-ai">🤖 AI-Enhanced</span>
+          <span class="badge badge-data">📊 Gulf of Mexico Data</span>
+          <span class="badge badge-open">🌊 Open Science</span>
+        </div>
+      </header>
+
+      <div class="quote-box">
+        "For instance, on the planet Earth, man had always assumed that he was
+        more intelligent than dolphins because he had achieved so much—the
+        wheel, New York, wars and so on—whilst all the dolphins had ever done
+        was muck about in the water having a good time. But conversely, the
+        dolphins had always believed that they were far more intelligent than
+        man—for precisely the same reasons."
+        <div class="quote-author">
+          — Douglas Adams, The Hitchhiker's Guide to the Galaxy
+        </div>
+      </div>
+
+      <section id="about">
+        <h2>What is Dolphain?</h2>
+        <p>
+          Dolphain is a scientifically rigorous Python package for analyzing
+          underwater acoustic recordings from the
+          <span class="highlight">Gulf of Mexico</span>. Our mission: decode
+          dolphin communication patterns through clicks and whistles.
+        </p>
+
+        <div class="update-banner">
+          <h3>🎉 Latest Updates - December 2025</h3>
+          <ul style="list-style: none; padding: 0">
+            <li>
+              💻 <strong>Dolphain Studio:</strong> Run Dolphain directly in your
+              browser! No installation required. Analyze data from HuggingFace
+              instantly. <a href="portal/index.html">Try it now</a>.
+            </li>
+            <li>
+              ✨ <strong>Unique Signal Detection:</strong> New multi-band
+              spectral analysis mode finds exceptional acoustic features
+            </li>
+            <li>
+              🎯 <strong>Conservative Detection:</strong> Ultra-precise chirp
+              and click train identification with minimal false positives
+            </li>
+            <li>
+              📊 <strong>Dual-Mode System:</strong> Choose standard detection or
+              unique feature hunting based on research goals
+            </li>
+            <li>
+              🌐 <strong>Enhanced Showcase:</strong> Interactive audio gallery
+              with synchronized visualization playback
+            </li>
+          </ul>
+        </div>
+
+        <div class="attribution-box">
+          Data for this project comes from the
+          <strong>LADC-GEMM</strong> (Littoral Acoustic Demonstration Center -
+          Gulf Ecological Monitoring and Modeling) consortium, funded by the
+          <strong>Gulf of Mexico Research Initiative (GoMRI)</strong>. LADC-GEMM
+          deployed autonomous underwater vehicles and acoustic recorders
+          throughout the Gulf to track marine mammal recovery after the
+          Deepwater Horizon oil spill. <br /><br />
+          <a href="DATA_ATTRIBUTION.html" style="color: var(--sand)">
+            Learn more about data sources and attributions →
+          </a>
+        </div>
+
+        <div class="science-fact">
+          Dolphins have individual "signature whistles" that function like
+          names. They can remember these unique whistles for over 20 years,
+          demonstrating long-term social memory comparable to humans.
+        </div>
+
+        <p>
+          We're working with EARS (Ecological Acoustic Recorder) data sampled at
+          192 kHz, perfect for capturing the 2-20 kHz range where dolphins
+          communicate with each other.
+        </p>
+      </section>
+
+      <div class="wave-divider">
+        <div class="wave"></div>
+      </div>
+
+      <!-- NEW: Examples Section -->
+      <section id="examples">
+        <h2>See It In Action</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem">
+          Real outputs from analyzing Gulf of Mexico underwater recordings. All
+          visualizations generated from actual EARS data files.
+        </p>
+
+        <div class="example-item">
+          <h3>📈 Waveform Analysis</h3>
+          <p>
+            Time-domain visualization of a 21-second underwater recording. Each
+            peak represents acoustic energy from marine life, boats, or
+            environmental noise.
+          </p>
+          <img
+            src="images/waveform.png"
+            alt="Underwater acoustic waveform"
+            class="example-image"
+          />
+          <div class="code-block" style="margin-top: 1rem">
+            <code
+              ><span class="highlight">import</span> dolphain data =
               dolphain.read_ears_file('recording.210')
               <span class="highlight"># Plot the waveform</span>
-              dolphain.plot_waveform(data)</code>
+              dolphain.plot_waveform(data)</code
+            >
+          </div>
         </div>
-      </div>
 
-      <div class="example-item">
-        <h3>🎨 Spectrogram Visualization</h3>
-        <p>
-          Frequency-time representation showing where dolphin communication
-          happens. Whistles appear as contours in the 2-20 kHz range, while
-          clicks show up as vertical lines at higher frequencies.
-        </p>
-        <img src="images/spectrogram.png" alt="Spectrogram showing dolphin vocalizations" class="example-image" />
-        <div class="science-fact" style="margin-top: 1rem">
-          The bright bands below 20 kHz indicate potential dolphin whistles.
-          Higher frequency clicks (>20 kHz) are used for echolocation and
-          hunting.
+        <div class="example-item">
+          <h3>🎨 Spectrogram Visualization</h3>
+          <p>
+            Frequency-time representation showing where dolphin communication
+            happens. Whistles appear as contours in the 2-20 kHz range, while
+            clicks show up as vertical lines at higher frequencies.
+          </p>
+          <img
+            src="images/spectrogram.png"
+            alt="Spectrogram showing dolphin vocalizations"
+            class="example-image"
+          />
+          <div class="science-fact" style="margin-top: 1rem">
+            The bright bands below 20 kHz indicate potential dolphin whistles.
+            Higher frequency clicks (>20 kHz) are used for echolocation and
+            hunting.
+          </div>
         </div>
-      </div>
 
-      <div class="example-item">
-        <h3>🌊 Wavelet Denoising</h3>
-        <p>
-          Before and after comparison showing how wavelet filtering removes
-          background noise while preserving dolphin vocalizations. The
-          denoised signal reveals clearer transient features for click
-          detection.
-        </p>
-        <img src="images/denoising.png" alt="Signal denoising comparison" class="example-image" />
-        <div class="code-block" style="margin-top: 1rem">
-          <code><span class="highlight"># Clean the signal</span>
+        <div class="example-item">
+          <h3>🌊 Wavelet Denoising</h3>
+          <p>
+            Before and after comparison showing how wavelet filtering removes
+            background noise while preserving dolphin vocalizations. The
+            denoised signal reveals clearer transient features for click
+            detection.
+          </p>
+          <img
+            src="images/denoising.png"
+            alt="Signal denoising comparison"
+            class="example-image"
+          />
+          <div class="code-block" style="margin-top: 1rem">
+            <code
+              ><span class="highlight"># Clean the signal</span>
               denoised = dolphain.wavelet_denoise(data['data'])
               <span class="highlight"># Compare results</span>
               dolphain.plot_denoising_comparison(data['data'], denoised,
-              data['fs'])</code>
+              data['fs'])</code
+            >
+          </div>
         </div>
+
+        <div class="attribution-box" style="margin-top: 2rem">
+          <strong>Real Data:</strong> All visualizations above were generated
+          from file <code>718587E0.210</code> recorded in the Gulf of Mexico as
+          part of the LADC-GEMM marine mammal monitoring project. Duration:
+          21.33 seconds, Sample rate: 192 kHz.
+        </div>
+      </section>
+
+      <div class="wave-divider">
+        <div class="wave"></div>
       </div>
 
-      <div class="attribution-box" style="margin-top: 2rem">
-        <strong>Real Data:</strong> All visualizations above were generated
-        from file <code>718587E0.210</code> recorded in the Gulf of Mexico as
-        part of the LADC-GEMM marine mammal monitoring project. Duration:
-        21.33 seconds, Sample rate: 192 kHz.
-      </div>
-    </section>
-
-    <div class="wave-divider">
-      <div class="wave"></div>
-    </div>
-
-    <section id="features">
-      <h2>Features</h2>
-      <p style="
+      <section id="features">
+        <h2>Features</h2>
+        <p
+          style="
             font-size: 1.1rem;
             text-align: center;
             margin-bottom: 2rem;
             color: var(--foam);
-          ">
-        Cutting-edge acoustic analysis tools powered by advanced signal
-        processing
-      </p>
-      <div class="feature-grid">
-        <div class="feature-card highlight-card">
-          <span class="feature-icon">✨</span>
-          <h3>Unique Signal Detection</h3>
-          <p>
-            <strong>NEW!</strong> Multi-band spectral analysis identifies
-            exceptional acoustic features: harmonics, fast frequency sweeps,
-            simultaneous signals, and spectral complexity. Automatically
-            scores and ranks the most unique recordings.
-          </p>
-          <div class="feature-tech">
-            Multi-band FFT • Harmonic detection • Entropy analysis •
-            Uniqueness scoring
-          </div>
-        </div>
-        <div class="feature-card highlight-card">
-          <span class="feature-icon">🎯</span>
-          <h3>Conservative Click & Chirp Detection</h3>
-          <p>
-            Ultra-precise detection of dolphin echolocation clicks and
-            communication chirps. Uses 99.5th percentile thresholding,
-            regularity analysis, and sharp peak detection to minimize false
-            positives.
-          </p>
-          <div class="feature-tech">
-            Teager-Kaiser operator • Click train analysis • Frequency sweep
-            detection
-          </div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">📁</span>
-          <h3>EARS File I/O</h3>
-          <p>
-            Read and process EARS binary format (.130, .190, .210) with full
-            metadata extraction.
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🌊</span>
-          <h3>Signal Processing</h3>
-          <p>
-            Wavelet-based denoising using VisuShrink thresholding for clean
-            acoustic data.
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">📊</span>
-          <h3>Visualization</h3>
-          <p>
-            Beautiful spectrograms, waveforms, and comparative analysis plots
-            with interactive audio players.
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">⚡</span>
-          <h3>Batch Processing</h3>
-          <p>
-            Process hundreds of files with progress tracking, checkpointing,
-            and error handling.
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🔍</span>
-          <h3>Automated Analysis Pipeline</h3>
-          <p>
-            Choose from standard detection (chirps & clicks) or unique signal
-            mode. Resumable processing with checkpoint system.
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🎵</span>
-          <h3>Interactive Showcase</h3>
-          <p>
-            Web-based gallery with synchronized waveform/spectrogram playback
-            and audio controls. Explore the most interesting recordings.
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🌿</span>
-          <h3>Branch Explorer</h3>
-          <p>
-            Follow curated pods by energy, harmony, and flow in our
-            interactive
-            <a href="branch_explorer/" style="color: var(--coral); text-decoration: underline">Branch Explorer</a>.
-          </p>
-        </div>
-      </div>
-
-      <div class="feature-highlight-box">
-        <h3>🚀 Latest Enhancement: Dual-Mode Detection System</h3>
-        <div class="detection-modes">
-          <div class="mode-card">
-            <h4>📍 Standard Mode</h4>
+          "
+        >
+          Cutting-edge acoustic analysis tools powered by advanced signal
+          processing
+        </p>
+        <div class="feature-grid">
+          <div class="feature-card highlight-card">
+            <span class="feature-icon">✨</span>
+            <h3>Unique Signal Detection</h3>
             <p>
-              Conservative detection of chirps (frequency sweeps >3kHz, 0.3s+)
-              and click trains (15+ clicks, ultra-regular spacing).
+              <strong>NEW!</strong> Multi-band spectral analysis identifies
+              exceptional acoustic features: harmonics, fast frequency sweeps,
+              simultaneous signals, and spectral complexity. Automatically
+              scores and ranks the most unique recordings.
             </p>
-            <code>python scripts/quick_find.py --mode standard</code>
+            <div class="feature-tech">
+              Multi-band FFT • Harmonic detection • Entropy analysis •
+              Uniqueness scoring
+            </div>
           </div>
-          <div class="mode-card">
-            <h4>✨ Unique Mode</h4>
+          <div class="feature-card highlight-card">
+            <span class="feature-icon">🎯</span>
+            <h3>Conservative Click & Chirp Detection</h3>
             <p>
-              Hunt for exceptional features: multi-band activity, harmonic
-              structures, ultra-fast sweeps, burst clicks, spectral
-              complexity.
+              Ultra-precise detection of dolphin echolocation clicks and
+              communication chirps. Uses 99.5th percentile thresholding,
+              regularity analysis, and sharp peak detection to minimize false
+              positives.
             </p>
-            <code>python scripts/quick_find.py --mode unique</code>
+            <div class="feature-tech">
+              Teager-Kaiser operator • Click train analysis • Frequency sweep
+              detection
+            </div>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">📁</span>
+            <h3>EARS File I/O</h3>
+            <p>
+              Read and process EARS binary format (.130, .190, .210) with full
+              metadata extraction.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🌊</span>
+            <h3>Signal Processing</h3>
+            <p>
+              Wavelet-based denoising using VisuShrink thresholding for clean
+              acoustic data.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">📊</span>
+            <h3>Visualization</h3>
+            <p>
+              Beautiful spectrograms, waveforms, and comparative analysis plots
+              with interactive audio players.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3>Batch Processing</h3>
+            <p>
+              Process hundreds of files with progress tracking, checkpointing,
+              and error handling.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🔍</span>
+            <h3>Automated Analysis Pipeline</h3>
+            <p>
+              Choose from standard detection (chirps & clicks) or unique signal
+              mode. Resumable processing with checkpoint system.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🎵</span>
+            <h3>Interactive Showcase</h3>
+            <p>
+              Web-based gallery with synchronized waveform/spectrogram playback
+              and audio controls. Explore the most interesting recordings.
+            </p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🌿</span>
+            <h3>Branch Explorer</h3>
+            <p>
+              Follow curated pods by energy, harmony, and flow in our
+              interactive
+              <a
+                href="branch_explorer/"
+                style="color: var(--coral); text-decoration: underline"
+                >Branch Explorer</a
+              >.
+            </p>
           </div>
         </div>
-        <p style="margin-top: 1rem; text-align: center">
-          Both modes output compatible results for the showcase generator.
-          Choose based on your research goals!
-        </p>
-      </div>
-    </section>
 
-    <section id="quickstart">
-      <h2>Get Started</h2>
+        <div class="feature-highlight-box">
+          <h3>🚀 Latest Enhancement: Dual-Mode Detection System</h3>
+          <div class="detection-modes">
+            <div class="mode-card">
+              <h4>📍 Standard Mode</h4>
+              <p>
+                Conservative detection of chirps (frequency sweeps >3kHz, 0.3s+)
+                and click trains (15+ clicks, ultra-regular spacing).
+              </p>
+              <code>python scripts/quick_find.py --mode standard</code>
+            </div>
+            <div class="mode-card">
+              <h4>✨ Unique Mode</h4>
+              <p>
+                Hunt for exceptional features: multi-band activity, harmonic
+                structures, ultra-fast sweeps, burst clicks, spectral
+                complexity.
+              </p>
+              <code>python scripts/quick_find.py --mode unique</code>
+            </div>
+          </div>
+          <p style="margin-top: 1rem; text-align: center">
+            Both modes output compatible results for the showcase generator.
+            Choose based on your research goals!
+          </p>
+        </div>
+      </section>
 
-      <div class="highlight-box" style="text-align: center; margin-bottom: 3rem; border: 2px solid var(--ocean-light); background: rgba(10, 24, 40, 0.6);">
-        <h3 style="color: var(--ocean-light); margin-bottom: 1rem;">🚀 Instant Start: No Installation Required</h3>
-        <p style="margin-bottom: 1.5rem;">
-          Jump straight into analysis with <strong>Dolphain Studio</strong>. Run real Python code in your browser, powered by Pyodide (WASM).
-        </p>
-        <a href="portal/index.html" class="cta-button" style="font-size: 1.2rem; padding: 1rem 2rem;">
-          💻 Launch Studio
-        </a>
-        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-          Perfect for learning the basics of signal processing and dolphin acoustics.
-        </p>
-      </div>
+      <section id="quickstart">
+        <h2>Get Started</h2>
 
-      <h3>Local Installation (for Developers)</h3>
-      <div class="code-block">
-        <code># Clone the repository git clone
+        <div
+          class="highlight-box"
+          style="
+            text-align: center;
+            margin-bottom: 3rem;
+            border: 2px solid var(--ocean-light);
+            background: rgba(10, 24, 40, 0.6);
+          "
+        >
+          <h3 style="color: var(--ocean-light); margin-bottom: 1rem">
+            🚀 Instant Start: No Installation Required
+          </h3>
+          <p style="margin-bottom: 1.5rem">
+            Jump straight into analysis with <strong>Dolphain Studio</strong>.
+            Run real Python code in your browser, powered by Pyodide (WASM).
+          </p>
+          <a
+            href="portal/index.html"
+            class="cta-button"
+            style="font-size: 1.2rem; padding: 1rem 2rem"
+          >
+            💻 Launch Studio
+          </a>
+          <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8">
+            Perfect for learning the basics of signal processing and dolphin
+            acoustics.
+          </p>
+        </div>
+
+        <h3>Local Installation (for Developers)</h3>
+        <div class="code-block">
+          <code
+            ># Clone the repository git clone
             https://github.com/micha2718l/dolphain.git cd dolphain # Create
             virtual environment python3 -m venv .venv source .venv/bin/activate
             # On Windows: .venv\Scripts\activate # Install in development mode
-            pip install -e .</code>
-      </div>
+            pip install -e .</code
+          >
+        </div>
 
-      <h3>Basic Usage</h3>
-      <div class="code-block">
-        <code><span class="highlight">import</span> dolphain
+        <h3>Basic Usage</h3>
+        <div class="code-block">
+          <code
+            ><span class="highlight">import</span> dolphain
 
             <span class="highlight"># Read an EARS file</span>
             data = dolphain.read_ears_file('data/recording.210')
@@ -380,277 +438,298 @@
 
             <span class="highlight"># View the difference</span>
             dolphain.plot_denoising_comparison(data['data'], denoised,
-            data['fs'])</code>
-      </div>
-
-      <div class="science-fact">
-        Dolphins use echolocation clicks at frequencies above 110 kHz (often
-        >220 kHz) to navigate and hunt. These clicks can be as loud as 220 dB
-        and can detect objects the size of a golf ball from 100 meters away.
-      </div>
-    </section>
-
-    <section id="science">
-      <h2>The Science of Dolphin Communication</h2>
-
-      <div class="stats-grid">
-        <div class="stat-box">
-          <span class="stat-number">2-20</span>
-          <span class="stat-label">kHz Whistle Range</span>
+            data['fs'])</code
+          >
         </div>
-        <div class="stat-box">
-          <span class="stat-number">>220</span>
-          <span class="stat-label">kHz Click Frequency</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number">20+</span>
-          <span class="stat-label">Years Memory</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-number">10×</span>
-          <span class="stat-label">Larger Acoustic Brain</span>
-        </div>
-      </div>
 
-      <h3>Two Types of Sounds</h3>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <span class="feature-icon">📍</span>
-          <h3>Clicks (Echolocation)</h3>
-          <p><strong>Purpose:</strong> Navigation and hunting</p>
-          <p><strong>Frequency:</strong> >110 kHz, peaks >220 kHz</p>
-          <p><strong>Duration:</strong> Microseconds to milliseconds</p>
-          <p>
-            <strong>Pattern:</strong> Rapid trains ending in "terminal buzz"
-            (200+ clicks/sec)
-          </p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">💬</span>
-          <h3>Whistles (Communication)</h3>
-          <p><strong>Purpose:</strong> Social interaction</p>
-          <p><strong>Frequency:</strong> 2-20 kHz</p>
-          <p><strong>Duration:</strong> 0.5-1.5 seconds</p>
-          <p>
-            <strong>Types:</strong> Signature whistles (individual "names"),
-            pulsed calls
-          </p>
-        </div>
-      </div>
-
-      <div class="science-fact">
-        The acoustic processing area of a dolphin's brain is 10 times larger
-        than the equivalent area in humans. Dolphins understand complex
-        syntax, word order, and demonstrate self-awareness—capabilities shared
-        by very few species.
-      </div>
-    </section>
-
-    <section id="research">
-      <h2>Current Research</h2>
-
-      <p>
-        We're analyzing 100+ underwater recordings from the Gulf of Mexico,
-        developing algorithms to automatically detect and classify dolphin
-        vocalizations.
-      </p>
-
-      <h3>Research Context</h3>
-      <p>
-        This work builds upon the LADC-GEMM project's extensive acoustic
-        monitoring infrastructure. The consortium deployed autonomous
-        underwater gliders, research vessels, and bottom-mounted EARS
-        recorders throughout the Gulf to assess marine mammal populations and
-        ambient noise levels following the Deepwater Horizon oil spill.
-      </p>
-
-      <div class="science-fact">
-        The LADC-GEMM project involved researchers from Oregon State
-        University, University of Louisiana at Lafayette, University of New
-        Orleans, University of Southern Mississippi, and multiple industry
-        partners—generating thousands of hours of acoustic recordings for
-        scientific analysis.
-      </div>
-
-      <h3>Achievements</h3>
-      <ul style="list-style: none; padding-left: 0">
-        <li>✅ <strong>Core Library:</strong> Stable and production-ready</li>
-        <li>
-          ✅ <strong>Click Detection:</strong> Teager-Kaiser energy operator
-          with threshold tuning
-        </li>
-        <li>
-          ✅ <strong>Batch Framework:</strong> Process hundreds of files
-          efficiently
-        </li>
-        <li>
-          ✅ <strong>Runtime Guardrails:</strong> Safe, memory-efficient
-          processing
-        </li>
-        <li>⏳ <strong>Whistle Detection:</strong> In development</li>
-        <li>⏳ <strong>Signature Matching:</strong> Future work</li>
-      </ul>
-
-      <p style="margin-top: 2rem">
-        <strong>Ready to contribute?</strong> Jump to our
-        <a href="#contribute" style="color: var(--coral); text-decoration: underline">
-          Contribution Guide
-        </a>
-        below to join the vibe coding revolution! 🚀
-      </p>
-    </section>
-
-    <div class="wave-divider">
-      <div class="wave"></div>
-    </div>
-
-    <!-- NEW: Comprehensive Contribution Section -->
-    <section id="contribute" class="contribute-section">
-      <h2>🌊 Join the Vibe Coding Revolution 🐬</h2>
-
-      <div class="contribute-intro">
-        <p style="font-size: 1.2rem; margin-bottom: 1.5rem">
-          This entire project was built through
-          <strong>"vibe coding"</strong> - a collaborative approach where
-          human intuition meets AI capabilities. You don't need to be an
-          expert. You just need curiosity, good vibes, and a willingness to
-          explore! 🎨✨
-        </p>
-        <p style="font-size: 1.1rem">
-          The more <strong>human brains + LLM brains</strong> we get working
-          together, the better. Let's decode dolphin communication as a team!
-          🧠🤖🐬
-        </p>
-      </div>
-
-      <section id="join-mission" style="margin-top: 4rem;">
-        <h2 style="text-align: center;">🌊 Join the Mission</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto; font-size: 1.2rem;">
-          Dolphain is more than code—it's a convergence of disciplines. Whether you're a physicist, a biologist, or a coder, your skills can unlock the secrets of the ocean.
-        </p>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <span class="feature-icon">🧬</span>
-            <h3>For Biologists</h3>
-            <p>
-              Help us validate our detections. Are we finding clicks or shrimp noise? Use the <strong>Showcase</strong> to listen and label. Your expertise grounds our algorithms in reality.
-            </p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">⚛️</span>
-            <h3>For Physicists</h3>
-            <p>
-              Underwater acoustics is complex physics. Help us improve our wave propagation models, refine our denoising algorithms, and understand the spectral properties of the Gulf.
-            </p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">🤖</span>
-            <h3>For AI Engineers</h3>
-            <p>
-              We're building the "Rosetta Stone" of dolphin communication. Help us train models to classify whistles, cluster similar signals, and detect patterns in the noise.
-            </p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">💻</span>
-            <h3>For Developers</h3>
-            <p>
-              Build tools that make science accessible. Improve the Studio, optimize our batch processing pipeline, or create new visualizations for the Branch Explorer.
-            </p>
-          </div>
+        <div class="science-fact">
+          Dolphins use echolocation clicks at frequencies above 110 kHz (often
+          >220 kHz) to navigate and hunt. These clicks can be as loud as 220 dB
+          and can detect objects the size of a golf ball from 100 meters away.
         </div>
       </section>
 
-      <div class="contribute-philosophy">
-        <h3>🎯 Our Philosophy</h3>
-        <div class="philosophy-grid">
-          <div class="philosophy-item">
-            <div class="philosophy-icon">🤝</div>
-            <h4>Human + AI Collaboration</h4>
+      <section id="science">
+        <h2>The Science of Dolphin Communication</h2>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-number">2-20</span>
+            <span class="stat-label">kHz Whistle Range</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">>220</span>
+            <span class="stat-label">kHz Click Frequency</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">20+</span>
+            <span class="stat-label">Years Memory</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">10×</span>
+            <span class="stat-label">Larger Acoustic Brain</span>
+          </div>
+        </div>
+
+        <h3>Two Types of Sounds</h3>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="feature-icon">📍</span>
+            <h3>Clicks (Echolocation)</h3>
+            <p><strong>Purpose:</strong> Navigation and hunting</p>
+            <p><strong>Frequency:</strong> >110 kHz, peaks >220 kHz</p>
+            <p><strong>Duration:</strong> Microseconds to milliseconds</p>
             <p>
-              Combine your creative vision with AI's technical execution. You
-              guide, AI builds.
+              <strong>Pattern:</strong> Rapid trains ending in "terminal buzz"
+              (200+ clicks/sec)
             </p>
           </div>
-          <div class="philosophy-item">
-            <div class="philosophy-icon">📚</div>
-            <h4>Document Everything</h4>
+          <div class="feature-card">
+            <span class="feature-icon">💬</span>
+            <h3>Whistles (Communication)</h3>
+            <p><strong>Purpose:</strong> Social interaction</p>
+            <p><strong>Frequency:</strong> 2-20 kHz</p>
+            <p><strong>Duration:</strong> 0.5-1.5 seconds</p>
             <p>
-              Keep notes, update docs, track decisions. Future you (and
-              others) will thank you!
-            </p>
-          </div>
-          <div class="philosophy-item">
-            <div class="philosophy-icon">🔄</div>
-            <h4>Plan for Context Loss</h4>
-            <p>
-              Sessions end, windows close. Design your work to be resumable by
-              anyone.
-            </p>
-          </div>
-          <div class="philosophy-item">
-            <div class="philosophy-icon">🎨</div>
-            <h4>Vibe First, Perfect Later</h4>
-            <p>
-              Get ideas flowing, iterate quickly, refine as you go. Progress >
-              Perfection.
+              <strong>Types:</strong> Signature whistles (individual "names"),
+              pulsed calls
             </p>
           </div>
         </div>
+
+        <div class="science-fact">
+          The acoustic processing area of a dolphin's brain is 10 times larger
+          than the equivalent area in humans. Dolphins understand complex
+          syntax, word order, and demonstrate self-awareness—capabilities shared
+          by very few species.
+        </div>
+      </section>
+
+      <section id="research">
+        <h2>Current Research</h2>
+
+        <p>
+          We're analyzing 100+ underwater recordings from the Gulf of Mexico,
+          developing algorithms to automatically detect and classify dolphin
+          vocalizations.
+        </p>
+
+        <h3>Research Context</h3>
+        <p>
+          This work builds upon the LADC-GEMM project's extensive acoustic
+          monitoring infrastructure. The consortium deployed autonomous
+          underwater gliders, research vessels, and bottom-mounted EARS
+          recorders throughout the Gulf to assess marine mammal populations and
+          ambient noise levels following the Deepwater Horizon oil spill.
+        </p>
+
+        <div class="science-fact">
+          The LADC-GEMM project involved researchers from Oregon State
+          University, University of Louisiana at Lafayette, University of New
+          Orleans, University of Southern Mississippi, and multiple industry
+          partners—generating thousands of hours of acoustic recordings for
+          scientific analysis.
+        </div>
+
+        <h3>Achievements</h3>
+        <ul style="list-style: none; padding-left: 0">
+          <li>✅ <strong>Core Library:</strong> Stable and production-ready</li>
+          <li>
+            ✅ <strong>Click Detection:</strong> Teager-Kaiser energy operator
+            with threshold tuning
+          </li>
+          <li>
+            ✅ <strong>Batch Framework:</strong> Process hundreds of files
+            efficiently
+          </li>
+          <li>
+            ✅ <strong>Runtime Guardrails:</strong> Safe, memory-efficient
+            processing
+          </li>
+          <li>⏳ <strong>Whistle Detection:</strong> In development</li>
+          <li>⏳ <strong>Signature Matching:</strong> Future work</li>
+        </ul>
+
+        <p style="margin-top: 2rem">
+          <strong>Ready to contribute?</strong> Jump to our
+          <a
+            href="#contribute"
+            style="color: var(--coral); text-decoration: underline"
+          >
+            Contribution Guide
+          </a>
+          below to join the vibe coding revolution! 🚀
+        </p>
+      </section>
+
+      <div class="wave-divider">
+        <div class="wave"></div>
       </div>
 
-      <div class="contribute-guide">
-        <h3>🚀 Quick Start: Your First Contribution</h3>
+      <!-- NEW: Comprehensive Contribution Section -->
+      <section id="contribute" class="contribute-section">
+        <h2>🌊 Join the Vibe Coding Revolution 🐬</h2>
 
-        <div class="step-by-step">
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h4>Fork & Clone</h4>
+        <div class="contribute-intro">
+          <p style="font-size: 1.2rem; margin-bottom: 1.5rem">
+            This entire project was built through
+            <strong>"vibe coding"</strong> - a collaborative approach where
+            human intuition meets AI capabilities. You don't need to be an
+            expert. You just need curiosity, good vibes, and a willingness to
+            explore! 🎨✨
+          </p>
+          <p style="font-size: 1.1rem">
+            The more <strong>human brains + LLM brains</strong> we get working
+            together, the better. Let's decode dolphin communication as a team!
+            🧠🤖🐬
+          </p>
+        </div>
+
+        <section id="join-mission" style="margin-top: 4rem">
+          <h2 style="text-align: center">🌊 Join the Mission</h2>
+          <p
+            style="
+              text-align: center;
+              max-width: 800px;
+              margin: 0 auto 3rem auto;
+              font-size: 1.2rem;
+            "
+          >
+            Dolphain is more than code—it's a convergence of disciplines.
+            Whether you're a physicist, a biologist, or a coder, your skills can
+            unlock the secrets of the ocean.
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <span class="feature-icon">🧬</span>
+              <h3>For Biologists</h3>
               <p>
-                Create your own copy of the repository. You'll work here
-                safely without affecting the main project.
+                Help us validate our detections. Are we finding clicks or shrimp
+                noise? Use the <strong>Showcase</strong> to listen and label.
+                Your expertise grounds our algorithms in reality.
               </p>
-              <pre><code>git clone https://github.com/YOUR-USERNAME/dolphain.git
-cd dolphain
-git remote add upstream https://github.com/micha2718l/dolphain.git</code></pre>
-              <p class="step-note">
-                ⚠️ <strong>Important:</strong> You cannot push directly to
-                main. This is intentional! It keeps the project safe and
-                encourages good collaboration practices.
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">⚛️</span>
+              <h3>For Physicists</h3>
+              <p>
+                Underwater acoustics is complex physics. Help us improve our
+                wave propagation models, refine our denoising algorithms, and
+                understand the spectral properties of the Gulf.
+              </p>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🤖</span>
+              <h3>For AI Engineers</h3>
+              <p>
+                We're building the "Rosetta Stone" of dolphin communication.
+                Help us train models to classify whistles, cluster similar
+                signals, and detect patterns in the noise.
+              </p>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">💻</span>
+              <h3>For Developers</h3>
+              <p>
+                Build tools that make science accessible. Improve the Studio,
+                optimize our batch processing pipeline, or create new
+                visualizations for the Branch Explorer.
               </p>
             </div>
           </div>
+        </section>
 
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h4>Create a Branch</h4>
+        <div class="contribute-philosophy">
+          <h3>🎯 Our Philosophy</h3>
+          <div class="philosophy-grid">
+            <div class="philosophy-item">
+              <div class="philosophy-icon">🤝</div>
+              <h4>Human + AI Collaboration</h4>
               <p>
-                Always work on a feature branch. Name it something
-                descriptive.
+                Combine your creative vision with AI's technical execution. You
+                guide, AI builds.
               </p>
-              <pre><code>git checkout -b feature/whistle-detection
+            </div>
+            <div class="philosophy-item">
+              <div class="philosophy-icon">📚</div>
+              <h4>Document Everything</h4>
+              <p>
+                Keep notes, update docs, track decisions. Future you (and
+                others) will thank you!
+              </p>
+            </div>
+            <div class="philosophy-item">
+              <div class="philosophy-icon">🔄</div>
+              <h4>Plan for Context Loss</h4>
+              <p>
+                Sessions end, windows close. Design your work to be resumable by
+                anyone.
+              </p>
+            </div>
+            <div class="philosophy-item">
+              <div class="philosophy-icon">🎨</div>
+              <h4>Vibe First, Perfect Later</h4>
+              <p>
+                Get ideas flowing, iterate quickly, refine as you go. Progress >
+                Perfection.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-guide">
+          <h3>🚀 Quick Start: Your First Contribution</h3>
+
+          <div class="step-by-step">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Fork & Clone</h4>
+                <p>
+                  Create your own copy of the repository. You'll work here
+                  safely without affecting the main project.
+                </p>
+                <pre><code>git clone https://github.com/YOUR-USERNAME/dolphain.git
+cd dolphain
+git remote add upstream https://github.com/micha2718l/dolphain.git</code></pre>
+                <p class="step-note">
+                  ⚠️ <strong>Important:</strong> You cannot push directly to
+                  main. This is intentional! It keeps the project safe and
+                  encourages good collaboration practices.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Create a Branch</h4>
+                <p>
+                  Always work on a feature branch. Name it something
+                  descriptive.
+                </p>
+                <pre><code>git checkout -b feature/whistle-detection
 # or
 git checkout -b docs/improve-readme
 # or
 git checkout -b fix/batch-processing-bug</code></pre>
-              <p class="step-note">
-                💡 <strong>Tip:</strong> Use prefixes like feature/, docs/,
-                fix/, experiment/ to keep things organized.
-              </p>
+                <p class="step-note">
+                  💡 <strong>Tip:</strong> Use prefixes like feature/, docs/,
+                  fix/, experiment/ to keep things organized.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h4>Set Up Your Environment</h4>
-              <p>
-                Get Python and dependencies installed. Use the AI to help you!
-              </p>
-              <pre><code># Create virtual environment
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Set Up Your Environment</h4>
+                <p>
+                  Get Python and dependencies installed. Use the AI to help you!
+                </p>
+                <pre><code># Create virtual environment
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
@@ -659,136 +738,162 @@ pip install -e .
 
 # Install dev dependencies if you're adding tests
 pip install pytest matplotlib numpy scipy</code></pre>
-              <p class="step-note">
-                🤖 <strong>Pro Tip:</strong> Ask your AI assistant: "Help me
-                set up the Dolphain development environment"
-              </p>
+                <p class="step-note">
+                  🤖 <strong>Pro Tip:</strong> Ask your AI assistant: "Help me
+                  set up the Dolphain development environment"
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-              <h4>Read the Context</h4>
-              <p>
-                Before diving in, understand where we are. These docs are your
-                map!
-              </p>
-              <ul style="margin-top: 0.5rem; padding-left: 1.5rem">
-                <li>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
-                    target="_blank">CONTINUATION_GUIDE.md</a>
-                  - Comprehensive overview & next steps
-                </li>
-                <li>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/PROJECT_STATUS.md"
-                    target="_blank">PROJECT_STATUS.md</a>
-                  - Current state of the project
-                </li>
-                <li>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/README.md" target="_blank">README.md</a>
-                  - Installation & basic usage
-                </li>
-                <li>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/SESSION_STATE.md"
-                    target="_blank">SESSION_STATE.md</a>
-                  - Latest session notes
-                </li>
-              </ul>
-              <p class="step-note">
-                📖 <strong>Why?</strong> These docs minimize lost time when
-                context windows clear or collaborators switch.
-              </p>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Read the Context</h4>
+                <p>
+                  Before diving in, understand where we are. These docs are your
+                  map!
+                </p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem">
+                  <li>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+                      target="_blank"
+                      >CONTINUATION_GUIDE.md</a
+                    >
+                    - Comprehensive overview & next steps
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/PROJECT_STATUS.md"
+                      target="_blank"
+                      >PROJECT_STATUS.md</a
+                    >
+                    - Current state of the project
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/README.md"
+                      target="_blank"
+                      >README.md</a
+                    >
+                    - Installation & basic usage
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/SESSION_STATE.md"
+                      target="_blank"
+                      >SESSION_STATE.md</a
+                    >
+                    - Latest session notes
+                  </li>
+                </ul>
+                <p class="step-note">
+                  📖 <strong>Why?</strong> These docs minimize lost time when
+                  context windows clear or collaborators switch.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">5</div>
-            <div class="step-content">
-              <h4>Pick Your Adventure</h4>
-              <p>What sounds fun to you? Choose based on your interests!</p>
-              <div class="adventure-grid">
-                <div class="adventure-card">
-                  <h5>🔬 Science Track</h5>
-                  <p>
-                    Work on signal processing, whistle detection, or click
-                    analysis
-                  </p>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md#whistle-detection-implementation-guide"
-                    class="adventure-link">Start Here →</a>
-                </div>
-                <div class="adventure-card">
-                  <h5>📊 Data Track</h5>
-                  <p>
-                    Improve batch processing, add visualizations, optimize
-                    performance
-                  </p>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/BATCH_IMPLEMENTATION.md"
-                    class="adventure-link">Start Here →</a>
-                </div>
-                <div class="adventure-card">
-                  <h5>📚 Documentation Track</h5>
-                  <p>
-                    Improve docs, add tutorials, create examples, write guides
-                  </p>
-                  <a href="https://github.com/micha2718l/dolphain/issues" class="adventure-link">Browse Issues →</a>
-                </div>
-                <div class="adventure-card">
-                  <h5>🎨 Creative Track</h5>
-                  <p>
-                    Build tools like the Dolphin Composer, make
-                    visualizations, have fun!
-                  </p>
-                  <a href="https://github.com/micha2718l/dolphain/blob/main/DOLPHIN_COMPOSER.md"
-                    class="adventure-link">Get Inspired →</a>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h4>Pick Your Adventure</h4>
+                <p>What sounds fun to you? Choose based on your interests!</p>
+                <div class="adventure-grid">
+                  <div class="adventure-card">
+                    <h5>🔬 Science Track</h5>
+                    <p>
+                      Work on signal processing, whistle detection, or click
+                      analysis
+                    </p>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md#whistle-detection-implementation-guide"
+                      class="adventure-link"
+                      >Start Here →</a
+                    >
+                  </div>
+                  <div class="adventure-card">
+                    <h5>📊 Data Track</h5>
+                    <p>
+                      Improve batch processing, add visualizations, optimize
+                      performance
+                    </p>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/BATCH_IMPLEMENTATION.md"
+                      class="adventure-link"
+                      >Start Here →</a
+                    >
+                  </div>
+                  <div class="adventure-card">
+                    <h5>📚 Documentation Track</h5>
+                    <p>
+                      Improve docs, add tutorials, create examples, write guides
+                    </p>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/issues"
+                      class="adventure-link"
+                      >Browse Issues →</a
+                    >
+                  </div>
+                  <div class="adventure-card">
+                    <h5>🎨 Creative Track</h5>
+                    <p>
+                      Build tools like the Dolphin Composer, make
+                      visualizations, have fun!
+                    </p>
+                    <a
+                      href="https://github.com/micha2718l/dolphain/blob/main/DOLPHIN_COMPOSER.md"
+                      class="adventure-link"
+                      >Get Inspired →</a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">6</div>
-            <div class="step-content">
-              <h4>Vibe Code with Your AI</h4>
-              <p>
-                Here's where the magic happens! Partner with an LLM to build.
-              </p>
-              <div class="vibe-tips">
-                <div class="vibe-tip">
-                  <strong>✨ Start with Vision:</strong> Tell your AI what you
-                  want to achieve. "I want to detect dolphin whistles in
-                  spectrograms."
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <h4>Vibe Code with Your AI</h4>
+                <p>
+                  Here's where the magic happens! Partner with an LLM to build.
+                </p>
+                <div class="vibe-tips">
+                  <div class="vibe-tip">
+                    <strong>✨ Start with Vision:</strong> Tell your AI what you
+                    want to achieve. "I want to detect dolphin whistles in
+                    spectrograms."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>🔍 Ask for Context:</strong> "Read the
+                    CONTINUATION_GUIDE and tell me what's already implemented."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>📝 Document as You Go:</strong> "Create a
+                    SESSION_NOTES.md file tracking what we're doing."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>🧪 Test Early:</strong> "Write a test for this
+                    function before implementing it."
+                  </div>
+                  <div class="vibe-tip">
+                    <strong>🎯 Stay Focused:</strong> Break big goals into small
+                    tasks. Complete one before moving on.
+                  </div>
                 </div>
-                <div class="vibe-tip">
-                  <strong>🔍 Ask for Context:</strong> "Read the
-                  CONTINUATION_GUIDE and tell me what's already implemented."
-                </div>
-                <div class="vibe-tip">
-                  <strong>📝 Document as You Go:</strong> "Create a
-                  SESSION_NOTES.md file tracking what we're doing."
-                </div>
-                <div class="vibe-tip">
-                  <strong>🧪 Test Early:</strong> "Write a test for this
-                  function before implementing it."
-                </div>
-                <div class="vibe-tip">
-                  <strong>🎯 Stay Focused:</strong> Break big goals into small
-                  tasks. Complete one before moving on.
-                </div>
+                <p class="step-note">
+                  🌟 <strong>Remember:</strong> You're the creative director.
+                  The AI is your implementation partner.
+                </p>
               </div>
-              <p class="step-note">
-                🌟 <strong>Remember:</strong> You're the creative director.
-                The AI is your implementation partner.
-              </p>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">7</div>
-            <div class="step-content">
-              <h4>Commit Often, Document Always</h4>
-              <p>Make small, frequent commits with clear messages.</p>
-              <pre><code>git add dolphain/signal.py
+            <div class="step">
+              <div class="step-number">7</div>
+              <div class="step-content">
+                <h4>Commit Often, Document Always</h4>
+                <p>Make small, frequent commits with clear messages.</p>
+                <pre><code>git add dolphain/signal.py
 git commit -m "Add whistle detection using spectrogram peaks
 
 - Implement peak finding with scipy
@@ -797,47 +902,47 @@ git commit -m "Add whistle detection using spectrogram peaks
 - Add basic unit tests"
 
 git push origin feature/whistle-detection</code></pre>
-              <p class="step-note">
-                💎 <strong>Good commits:</strong> Explain WHAT and WHY, not
-                just WHAT. Future readers will love you!
-              </p>
+                <p class="step-note">
+                  💎 <strong>Good commits:</strong> Explain WHAT and WHY, not
+                  just WHAT. Future readers will love you!
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">8</div>
-            <div class="step-content">
-              <h4>Update the Docs</h4>
-              <p>Before you finish, update relevant documentation.</p>
-              <ul style="margin-top: 0.5rem; padding-left: 1.5rem">
-                <li>Add your feature to <code>README.md</code></li>
-                <li>
-                  Update <code>PROJECT_STATUS.md</code> with what's complete
-                </li>
-                <li>
-                  Create or update <code>SESSION_STATE.md</code> with your
-                  progress
-                </li>
-                <li>
-                  If you finished a big feature, add a new doc file (like
-                  <code>WHISTLE_DETECTION.md</code>)
-                </li>
-              </ul>
-              <p class="step-note">
-                📚 <strong>Why?</strong> Documentation is a gift to the next
-                contributor (who might be you in 3 months!).
-              </p>
+            <div class="step">
+              <div class="step-number">8</div>
+              <div class="step-content">
+                <h4>Update the Docs</h4>
+                <p>Before you finish, update relevant documentation.</p>
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem">
+                  <li>Add your feature to <code>README.md</code></li>
+                  <li>
+                    Update <code>PROJECT_STATUS.md</code> with what's complete
+                  </li>
+                  <li>
+                    Create or update <code>SESSION_STATE.md</code> with your
+                    progress
+                  </li>
+                  <li>
+                    If you finished a big feature, add a new doc file (like
+                    <code>WHISTLE_DETECTION.md</code>)
+                  </li>
+                </ul>
+                <p class="step-note">
+                  📚 <strong>Why?</strong> Documentation is a gift to the next
+                  contributor (who might be you in 3 months!).
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="step">
-            <div class="step-number">9</div>
-            <div class="step-content">
-              <h4>Create a Pull Request</h4>
-              <p>Share your work! Go to GitHub and open a PR.</p>
-              <div class="pr-template">
-                <p><strong>PR Template to use:</strong></p>
-                <pre><code>## What This PR Does
+            <div class="step">
+              <div class="step-number">9</div>
+              <div class="step-content">
+                <h4>Create a Pull Request</h4>
+                <p>Share your work! Go to GitHub and open a PR.</p>
+                <div class="pr-template">
+                  <p><strong>PR Template to use:</strong></p>
+                  <pre><code>## What This PR Does
 Brief description of the feature/fix
 
 ## Changes Made
@@ -858,30 +963,30 @@ Anything special to know? Any decisions you made?
 
 ## AI Collaboration Notes
 Which AI you used, what worked well, any challenges?</code></pre>
+                </div>
+                <p class="step-note">
+                  🎉 <strong>Celebrate:</strong> You just contributed to dolphin
+                  communication research!
+                </p>
               </div>
-              <p class="step-note">
-                🎉 <strong>Celebrate:</strong> You just contributed to dolphin
-                communication research!
-              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="contribute-best-practices">
-        <h3>🏆 Best Practices for Vibe Coding</h3>
+        <div class="contribute-best-practices">
+          <h3>🏆 Best Practices for Vibe Coding</h3>
 
-        <div class="best-practices-grid">
-          <div class="practice-card">
-            <h4>📝 Session Notes Are Sacred</h4>
-            <p>
-              Start every session with: "Let's create a SESSION_NOTES.md to
-              track what we do today." This helps when you resume later or
-              hand off to another contributor.
-            </p>
-            <details>
-              <summary>See Example Session Notes</summary>
-              <pre><code># Session Notes - 2025-10-11
+          <div class="best-practices-grid">
+            <div class="practice-card">
+              <h4>📝 Session Notes Are Sacred</h4>
+              <p>
+                Start every session with: "Let's create a SESSION_NOTES.md to
+                track what we do today." This helps when you resume later or
+                hand off to another contributor.
+              </p>
+              <details>
+                <summary>See Example Session Notes</summary>
+                <pre><code># Session Notes - 2025-10-11
 
 ## Goal
 Implement basic whistle detection using spectrogram analysis
@@ -907,338 +1012,391 @@ Implement basic whistle detection using spectrogram analysis
 ## AI Used: GitHub Copilot
 ## Issues Encountered: None major
 ## Time: ~2 hours</code></pre>
-            </details>
-          </div>
+              </details>
+            </div>
 
-          <div class="practice-card">
-            <h4>🎯 One Feature Per Branch</h4>
-            <p>
-              Resist the temptation to fix "just one more thing." Keep
-              branches focused. It makes reviews easier and reduces merge
-              conflicts.
-            </p>
-          </div>
+            <div class="practice-card">
+              <h4>🎯 One Feature Per Branch</h4>
+              <p>
+                Resist the temptation to fix "just one more thing." Keep
+                branches focused. It makes reviews easier and reduces merge
+                conflicts.
+              </p>
+            </div>
 
-          <div class="practice-card">
-            <h4>🧪 Test Your Code</h4>
-            <p>
-              Ask your AI to write tests! Even simple tests catch bugs and
-              show future contributors how your code works.
-            </p>
-            <pre><code>pytest tests/
+            <div class="practice-card">
+              <h4>🧪 Test Your Code</h4>
+              <p>
+                Ask your AI to write tests! Even simple tests catch bugs and
+                show future contributors how your code works.
+              </p>
+              <pre><code>pytest tests/
 # Make sure existing tests still pass!</code></pre>
-          </div>
+            </div>
 
-          <div class="practice-card">
-            <h4>💬 Over-Communicate</h4>
-            <p>
-              In PRs, commits, and docs - explain your thinking. What seemed
-              obvious today will be mysterious in 6 months.
-            </p>
-          </div>
+            <div class="practice-card">
+              <h4>💬 Over-Communicate</h4>
+              <p>
+                In PRs, commits, and docs - explain your thinking. What seemed
+                obvious today will be mysterious in 6 months.
+              </p>
+            </div>
 
-          <div class="practice-card">
-            <h4>🔄 Sync Regularly</h4>
-            <p>
-              Pull changes from upstream often to avoid nasty merge conflicts.
-            </p>
-            <pre><code>git fetch upstream
+            <div class="practice-card">
+              <h4>🔄 Sync Regularly</h4>
+              <p>
+                Pull changes from upstream often to avoid nasty merge conflicts.
+              </p>
+              <pre><code>git fetch upstream
 git merge upstream/main
 # Fix any conflicts locally</code></pre>
-          </div>
+            </div>
 
-          <div class="practice-card">
-            <h4>🎨 Embrace Iteration</h4>
+            <div class="practice-card">
+              <h4>🎨 Embrace Iteration</h4>
+              <p>
+                First version doesn't need to be perfect. Get it working, get
+                feedback, improve. That's the vibe coding way!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-resources">
+          <h3>📚 Essential Resources</h3>
+          <div class="resources-grid">
+            <div class="resource-card">
+              <h4>🗺️ Project Documentation</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+                    target="_blank"
+                    >Continuation Guide</a
+                  >
+                  - Start here!
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/micha2718l/dolphain/blob/main/PROJECT_STATUS.md"
+                    target="_blank"
+                    >Project Status</a
+                  >
+                  - What's done
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/micha2718l/dolphain/blob/main/README.md"
+                    target="_blank"
+                    >README</a
+                  >
+                  - Installation & usage
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/micha2718l/dolphain/blob/main/DATA_ATTRIBUTION.md"
+                    target="_blank"
+                    >Data Attribution</a
+                  >
+                  - Data sources
+                </li>
+              </ul>
+            </div>
+
+            <div class="resource-card">
+              <h4>🔬 Scientific Background</h4>
+              <ul>
+                <li>
+                  <a href="http://ladcgemm.org/" target="_blank">LADC-GEMM</a> -
+                  Data source
+                </li>
+                <li>
+                  <a href="https://gulfresearchinitiative.org/" target="_blank"
+                    >GoMRI</a
+                  >
+                  - Funding organization
+                </li>
+                <li>
+                  <a
+                    href="https://dosits.org/animals/sound-production/how-do-marine-mammals-produce-sounds/"
+                    target="_blank"
+                    >Marine Mammal Sounds</a
+                  >
+                  - Educational resource
+                </li>
+              </ul>
+            </div>
+
+            <div class="resource-card">
+              <h4>💻 Technical Resources</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://docs.scipy.org/doc/scipy/reference/signal.html"
+                    target="_blank"
+                    >SciPy Signal Processing</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://matplotlib.org/stable/gallery/index.html"
+                    target="_blank"
+                    >Matplotlib Gallery</a
+                  >
+                </li>
+                <li>
+                  <a href="https://numpy.org/doc/stable/" target="_blank"
+                    >NumPy Documentation</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="resource-card">
+              <h4>🤖 AI Collaboration</h4>
+              <ul>
+                <li>
+                  <a href="https://github.com/features/copilot" target="_blank"
+                    >GitHub Copilot</a
+                  >
+                  - AI pair programmer
+                </li>
+                <li>Claude, ChatGPT, or your preferred LLM</li>
+                <li>Cursor, Cody, or AI-enhanced IDEs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="contribute-faq">
+          <h3>❓ Common Questions</h3>
+
+          <details class="faq-item">
+            <summary>I'm not a dolphin expert. Can I still contribute?</summary>
             <p>
-              First version doesn't need to be perfect. Get it working, get
-              feedback, improve. That's the vibe coding way!
+              <strong>Absolutely!</strong> Some of the best contributions come
+              from fresh perspectives. Focus on code quality, documentation,
+              testing, or tooling. The scientific knowledge can be learned along
+              the way!
             </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>I've never used AI to code before. Is that okay?</summary>
+            <p>
+              <strong>Perfect!</strong> This project is a great place to learn.
+              Start small: ask your AI to explain existing code, help write
+              tests, or improve documentation. Build confidence gradually!
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if I get stuck or context windows out?</summary>
+            <p>
+              <strong>That's expected!</strong> That's why we emphasize
+              documentation. Check SESSION_STATE.md, ask the maintainer
+              (Michael) for guidance, or create a GitHub issue explaining where
+              you got stuck. The community is here to help!
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I know what to work on?</summary>
+            <p>
+              <strong>Check the issues!</strong> Look for "good first issue" or
+              "help wanted" tags. Or read CONTINUATION_GUIDE.md and pick
+              something that sounds interesting. When in doubt, ask in a GitHub
+              issue!
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I just experiment without a clear goal?</summary>
+            <p>
+              <strong>Yes!</strong> Create an
+              <code>experiment/your-idea</code> branch and explore. Document
+              what you learn. Some of the best features started as experiments!
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if my PR doesn't get merged?</summary>
+            <p>
+              <strong>That's okay!</strong> You still learned something
+              valuable. PRs might not merge because of timing, scope, or
+              direction changes. Feedback helps everyone improve!
+            </p>
+          </details>
+        </div>
+
+        <div class="contribute-cta">
+          <h3>Ready to Dive In? 🌊</h3>
+          <p style="font-size: 1.1rem; margin-bottom: 2rem">
+            The dolphins are waiting for you to help decode their language! Pick
+            a path, grab your AI buddy, and let's vibe code together! 🐬✨
+          </p>
+          <div style="text-align: center">
+            <a
+              href="https://github.com/micha2718l/dolphain/fork"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #2d5f3f, #178ca4)"
+            >
+              🍴 Fork the Repository
+            </a>
+            <a
+              href="https://github.com/micha2718l/dolphain/issues"
+              class="cta-button secondary"
+            >
+              📋 Browse Issues
+            </a>
+            <a
+              href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
+              class="cta-button secondary"
+            >
+              📖 Read the Guide
+            </a>
           </div>
         </div>
-      </div>
 
-      <div class="contribute-resources">
-        <h3>📚 Essential Resources</h3>
-        <div class="resources-grid">
-          <div class="resource-card">
-            <h4>🗺️ Project Documentation</h4>
-            <ul>
-              <li>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md"
-                  target="_blank">Continuation Guide</a>
-                - Start here!
-              </li>
-              <li>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/PROJECT_STATUS.md" target="_blank">Project
-                  Status</a>
-                - What's done
-              </li>
-              <li>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/README.md" target="_blank">README</a>
-                - Installation & usage
-              </li>
-              <li>
-                <a href="https://github.com/micha2718l/dolphain/blob/main/DATA_ATTRIBUTION.md" target="_blank">Data
-                  Attribution</a>
-                - Data sources
-              </li>
-            </ul>
-          </div>
-
-          <div class="resource-card">
-            <h4>🔬 Scientific Background</h4>
-            <ul>
-              <li>
-                <a href="http://ladcgemm.org/" target="_blank">LADC-GEMM</a> -
-                Data source
-              </li>
-              <li>
-                <a href="https://gulfresearchinitiative.org/" target="_blank">GoMRI</a>
-                - Funding organization
-              </li>
-              <li>
-                <a href="https://dosits.org/animals/sound-production/how-do-marine-mammals-produce-sounds/"
-                  target="_blank">Marine Mammal Sounds</a>
-                - Educational resource
-              </li>
-            </ul>
-          </div>
-
-          <div class="resource-card">
-            <h4>💻 Technical Resources</h4>
-            <ul>
-              <li>
-                <a href="https://docs.scipy.org/doc/scipy/reference/signal.html" target="_blank">SciPy Signal
-                  Processing</a>
-              </li>
-              <li>
-                <a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Matplotlib Gallery</a>
-              </li>
-              <li>
-                <a href="https://numpy.org/doc/stable/" target="_blank">NumPy Documentation</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="resource-card">
-            <h4>🤖 AI Collaboration</h4>
-            <ul>
-              <li>
-                <a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a>
-                - AI pair programmer
-              </li>
-              <li>Claude, ChatGPT, or your preferred LLM</li>
-              <li>Cursor, Cody, or AI-enhanced IDEs</li>
-            </ul>
-          </div>
+        <div class="science-fact" style="margin-top: 3rem">
+          Fun fact: This entire contribution section was vibe coded! A human had
+          the vision ("make contributing easy and encourage AI collaboration"),
+          and an AI built it. That's exactly the approach we want you to use!
+          🎨🤖
         </div>
+      </section>
+
+      <div class="wave-divider">
+        <div class="wave"></div>
       </div>
 
-      <div class="contribute-faq">
-        <h3>❓ Common Questions</h3>
-
-        <details class="faq-item">
-          <summary>I'm not a dolphin expert. Can I still contribute?</summary>
-          <p>
-            <strong>Absolutely!</strong> Some of the best contributions come
-            from fresh perspectives. Focus on code quality, documentation,
-            testing, or tooling. The scientific knowledge can be learned along
-            the way!
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>I've never used AI to code before. Is that okay?</summary>
-          <p>
-            <strong>Perfect!</strong> This project is a great place to learn.
-            Start small: ask your AI to explain existing code, help write
-            tests, or improve documentation. Build confidence gradually!
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>What if I get stuck or context windows out?</summary>
-          <p>
-            <strong>That's expected!</strong> That's why we emphasize
-            documentation. Check SESSION_STATE.md, ask the maintainer
-            (Michael) for guidance, or create a GitHub issue explaining where
-            you got stuck. The community is here to help!
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>How do I know what to work on?</summary>
-          <p>
-            <strong>Check the issues!</strong> Look for "good first issue" or
-            "help wanted" tags. Or read CONTINUATION_GUIDE.md and pick
-            something that sounds interesting. When in doubt, ask in a GitHub
-            issue!
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>Can I just experiment without a clear goal?</summary>
-          <p>
-            <strong>Yes!</strong> Create an
-            <code>experiment/your-idea</code> branch and explore. Document
-            what you learn. Some of the best features started as experiments!
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>What if my PR doesn't get merged?</summary>
-          <p>
-            <strong>That's okay!</strong> You still learned something
-            valuable. PRs might not merge because of timing, scope, or
-            direction changes. Feedback helps everyone improve!
-          </p>
-        </details>
-      </div>
-
-      <div class="contribute-cta">
-        <h3>Ready to Dive In? 🌊</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem">
-          The dolphins are waiting for you to help decode their language! Pick
-          a path, grab your AI buddy, and let's vibe code together! 🐬✨
+      <section id="getting-started">
+        <h2>Dive In</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem">
+          Ready to help decode dolphin communication?
         </p>
-        <div style="text-align: center">
-          <a href="https://github.com/micha2718l/dolphain/fork" class="cta-button"
-            style="background: linear-gradient(135deg, #2d5f3f, #178ca4)">
-            🍴 Fork the Repository
-          </a>
-          <a href="https://github.com/micha2718l/dolphain/issues" class="cta-button secondary">
-            📋 Browse Issues
-          </a>
-          <a href="https://github.com/micha2718l/dolphain/blob/main/CONTINUATION_GUIDE.md" class="cta-button secondary">
-            📖 Read the Guide
-          </a>
-        </div>
-      </div>
 
-      <div class="science-fact" style="margin-top: 3rem">
-        Fun fact: This entire contribution section was vibe coded! A human had
-        the vision ("make contributing easy and encourage AI collaboration"),
-        and an AI built it. That's exactly the approach we want you to use!
-        🎨🤖
-      </div>
-    </section>
+        <div class="cta-grid">
+          <div class="cta-card">
+            <h3>🐬 Explore the Showcase</h3>
+            <p>
+              Listen to the most interesting dolphin vocalizations from the Gulf
+              of Mexico with interactive audio and synchronized spectrograms.
+            </p>
+            <a
+              href="showcase.html"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #ff6b6b, #ff8787)"
+            >
+              🎵 Open Showcase
+            </a>
+          </div>
 
-    <div class="wave-divider">
-      <div class="wave"></div>
-    </div>
+          <div class="cta-card">
+            <h3>🎨 Try the Dolphin Composer</h3>
+            <p>
+              Create your own dolphin-like sounds with our interactive
+              synthesizer. Experiment with frequencies, patterns, and effects!
+            </p>
+            <a
+              href="dolphin-composer.html"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #3ab0c8, #5dc4dc)"
+            >
+              🎹 Launch Composer
+            </a>
+          </div>
 
-    <section id="getting-started">
-      <h2>Dive In</h2>
-      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem">
-        Ready to help decode dolphin communication?
-      </p>
-
-      <div class="cta-grid">
-        <div class="cta-card">
-          <h3>🐬 Explore the Showcase</h3>
-          <p>
-            Listen to the most interesting dolphin vocalizations from the Gulf
-            of Mexico with interactive audio and synchronized spectrograms.
-          </p>
-          <a href="showcase.html" class="cta-button" style="background: linear-gradient(135deg, #ff6b6b, #ff8787)">
-            🎵 Open Showcase
-          </a>
-        </div>
-
-        <div class="cta-card">
-          <h3>🎨 Try the Dolphin Composer</h3>
-          <p>
-            Create your own dolphin-like sounds with our interactive
-            synthesizer. Experiment with frequencies, patterns, and effects!
-          </p>
-          <a href="dolphin-composer.html" class="cta-button"
-            style="background: linear-gradient(135deg, #3ab0c8, #5dc4dc)">
-            🎹 Launch Composer
-          </a>
+          <div class="cta-card">
+            <h3>🌿 Explore Branch Patterns</h3>
+            <p>
+              Navigate curated pods organized by energy, harmony, and flow in
+              our interactive branch explorer.
+            </p>
+            <a
+              href="branch_explorer/"
+              class="cta-button"
+              style="background: linear-gradient(135deg, #2d5f3f, #3d7f5f)"
+            >
+              🌳 Browse Branches
+            </a>
+          </div>
         </div>
 
-        <div class="cta-card">
-          <h3>🌿 Explore Branch Patterns</h3>
-          <p>
-            Navigate curated pods organized by energy, harmony, and flow in
-            our interactive branch explorer.
-          </p>
-          <a href="branch_explorer/" class="cta-button" style="background: linear-gradient(135deg, #2d5f3f, #3d7f5f)">
-            🌳 Browse Branches
-          </a>
-        </div>
-      </div>
-
-      <div style="text-align: center; margin-top: 3rem">
-        <h3 style="color: var(--sand); margin-bottom: 1.5rem">
-          For Developers & Researchers
-        </h3>
-        <div style="
+        <div style="text-align: center; margin-top: 3rem">
+          <h3 style="color: var(--sand); margin-bottom: 1.5rem">
+            For Developers & Researchers
+          </h3>
+          <div
+            style="
               display: flex;
               justify-content: center;
               flex-wrap: wrap;
               gap: 1rem;
-            ">
-          <a href="https://github.com/micha2718l/dolphain" class="cta-button">
-            📦 View on GitHub
-          </a>
-          <a href="https://github.com/micha2718l/dolphain/blob/main/README.md" class="cta-button secondary">
-            📖 Read the Docs
-          </a>
-          <a href="#contribute" class="cta-button secondary">
-            🚀 Start Contributing
-          </a>
+            "
+          >
+            <a href="https://github.com/micha2718l/dolphain" class="cta-button">
+              📦 View on GitHub
+            </a>
+            <a
+              href="https://github.com/micha2718l/dolphain/blob/main/README.md"
+              class="cta-button secondary"
+            >
+              📖 Read the Docs
+            </a>
+            <a href="#contribute" class="cta-button secondary">
+              🚀 Start Contributing
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="science-fact" style="margin-top: 3rem">
-        Dolphins have been observed teaching their young the specific whistles
-        associated with their social group—demonstrating cultural transmission
-        of vocal learning across generations. This is extremely rare in the
-        animal kingdom.
-      </div>
-    </section>
+        <div class="science-fact" style="margin-top: 3rem">
+          Dolphins have been observed teaching their young the specific whistles
+          associated with their social group—demonstrating cultural transmission
+          of vocal learning across generations. This is extremely rare in the
+          animal kingdom.
+        </div>
+      </section>
 
-    <footer>
-      <p>
-        <strong>Dolphain</strong> – Understanding dolphin communication, one
-        whistle at a time
-      </p>
-      <p style="margin-top: 1rem">
-        Data from <a href="http://ladcgemm.org/">LADC-GEMM</a> | Funded by
-        <a href="https://gulfresearchinitiative.org/">GoMRI</a>
-      </p>
-      <p style="margin-top: 0.5rem">
-        Built with <span class="emoji">🌊</span> and
-        <span class="emoji">🐬</span> |
-        <a href="https://github.com/micha2718l/dolphain">GitHub</a> |
-        <a href="DATA_ATTRIBUTION.html">Data Attribution</a>
-      </p>
-      <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8">
-        Website and documentation created with assistance from GitHub Copilot
-        (AI) | Research and analysis by Michael Haas
-      </p>
-      <p style="margin-top: 1.5rem; font-size: 0.85rem; font-style: italic">
-        "This research was made possible by a grant from The Gulf of Mexico
-        Research Initiative."
-      </p>
-      <p style="margin-top: 0.5rem; font-size: 0.9rem; font-style: italic">
-        "The Answer to the Ultimate Question of Life, the Universe, and
-        Everything might just be hidden in the clicks and whistles we haven't
-        decoded yet."
-      </p>
-    </footer>
-  </div>
+      <footer>
+        <p>
+          <strong>Dolphain</strong> – Understanding dolphin communication, one
+          whistle at a time
+        </p>
+        <p style="margin-top: 1rem">
+          Data from <a href="http://ladcgemm.org/">LADC-GEMM</a> | Funded by
+          <a href="https://gulfresearchinitiative.org/">GoMRI</a>
+        </p>
+        <p style="margin-top: 0.5rem">
+          Built with <span class="emoji">🌊</span> and
+          <span class="emoji">🐬</span> |
+          <a href="https://github.com/micha2718l/dolphain">GitHub</a> |
+          <a href="DATA_ATTRIBUTION.html">Data Attribution</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8">
+          Website and documentation created with assistance from GitHub Copilot
+          (AI) | Research and analysis by Michael Haas
+        </p>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; font-style: italic">
+          "This research was made possible by a grant from The Gulf of Mexico
+          Research Initiative."
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; font-style: italic">
+          "The Answer to the Ultimate Question of Life, the Universe, and
+          Everything might just be hidden in the clicks and whistles we haven't
+          decoded yet."
+        </p>
+      </footer>
+    </div>
 
-  <!-- The 42 Easter Egg -->
-  <div class="forty-two" title="Don't Panic!">42</div>
-  <div class="forty-two-tooltip">
-    The Answer to the Ultimate Question of Life, the Universe, and
-    Everything.<br />
-    <em>Don't forget your towel!</em>
-  </div>
+    <!-- The 42 Easter Egg -->
+    <div class="forty-two" title="Don't Panic!">42</div>
+    <div class="forty-two-tooltip">
+      The Answer to the Ultimate Question of Life, the Universe, and
+      Everything.<br />
+      <em>Don't forget your towel!</em>
+    </div>
 
-  <script src="js/script.js"></script>
-</body>
-
+    <script src="js/script.js"></script>
+  </body>
 </html>

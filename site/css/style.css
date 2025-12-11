@@ -109,7 +109,7 @@ body {
   position: absolute;
   background-color: rgba(10, 24, 40, 0.95);
   min-width: 180px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 5px;
   border: 1px solid rgba(58, 176, 200, 0.3);
@@ -217,7 +217,8 @@ body {
 }
 
 /* Mobile Navigation */
-@media (max-width: 1100px) { /* Increased breakpoint for earlier switch */
+@media (max-width: 1100px) {
+  /* Increased breakpoint for earlier switch */
   .nav-toggle {
     display: flex;
   }
@@ -249,13 +250,13 @@ body {
     border-bottom: 1px solid rgba(58, 176, 200, 0.2);
     font-size: 1.1rem; /* Larger text for touch */
   }
-  
+
   /* Mobile Dropdown Handling */
   .nav-dropdown {
     width: 100%;
     display: block;
   }
-  
+
   .nav-dropdown > .nav-link {
     background: rgba(255, 255, 255, 0.05);
   }
@@ -269,7 +270,7 @@ body {
     padding: 0;
     min-width: 100%;
   }
-  
+
   .dropdown-content a {
     padding-left: 2rem; /* Indent dropdown items */
     font-size: 1rem;

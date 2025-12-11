@@ -6,33 +6,36 @@ Welcome to the Dolphain project! This document outlines our current capabilities
 
 As of December 2025, Dolphain is a robust toolkit for acoustic analysis:
 
-*   **Data Ingestion**: Read and parse binary EARS data files (.130, .190, .210) efficiently.
-*   **Signal Processing**:
-    *   **Wavelet Denoising**: Clean noisy underwater recordings using VisuShrink thresholding.
-    *   **Spectrogram Generation**: Create high-resolution time-frequency visualizations.
-*   **Detection Algorithms**:
-    *   **Conservative Detection**: High-precision identification of clicks and chirps with minimal false positives.
-    *   **Unique Signal Detection**: A scoring system to find "interesting" or unusual acoustic events based on spectral entropy and harmonic structure.
-*   **Interactive Tools**:
-    *   **Dolphain Studio**: A browser-based environment to run Python analysis code on real data without installation.
-    *   **Showcase**: A curated gallery of the most interesting signals found so far.
+- **Data Ingestion**: Read and parse binary EARS data files (.130, .190, .210) efficiently.
+- **Signal Processing**:
+  - **Wavelet Denoising**: Clean noisy underwater recordings using VisuShrink thresholding.
+  - **Spectrogram Generation**: Create high-resolution time-frequency visualizations.
+- **Detection Algorithms**:
+  - **Conservative Detection**: High-precision identification of clicks and chirps with minimal false positives.
+  - **Unique Signal Detection**: A scoring system to find "interesting" or unusual acoustic events based on spectral entropy and harmonic structure.
+- **Interactive Tools**:
+  - **Dolphain Studio**: A browser-based environment to run Python analysis code on real data without installation.
+  - **Showcase**: A curated gallery of the most interesting signals found so far.
 
 ## 🟡 What We Want To Do (Future Goals)
 
 We have big plans to expand our understanding of dolphin communication:
 
 ### 1. Advanced Classification (The "Rosetta Stone" Goal)
-*   **Cluster Analysis**: Automatically group similar whistles and clicks to identify "vocabulary".
-*   **Signature Whistle ID**: Track individual dolphins across different recordings.
-*   **Machine Learning**: Train deep learning models (CNNs/Transformers) on our labeled data for better classification.
+
+- **Cluster Analysis**: Automatically group similar whistles and clicks to identify "vocabulary".
+- **Signature Whistle ID**: Track individual dolphins across different recordings.
+- **Machine Learning**: Train deep learning models (CNNs/Transformers) on our labeled data for better classification.
 
 ### 2. Infrastructure & Scale
-*   **Cloud Processing**: Scale our batch processing to handle terabytes of GoMRI data in the cloud.
-*   **Real-time Analysis**: Optimize algorithms to run on edge devices (buoys) for real-time monitoring.
+
+- **Cloud Processing**: Scale our batch processing to handle terabytes of GoMRI data in the cloud.
+- **Real-time Analysis**: Optimize algorithms to run on edge devices (buoys) for real-time monitoring.
 
 ### 3. Community & Education
-*   **Educational Notebooks**: Create a series of Jupyter notebooks teaching the basics of bioacoustics signal processing.
-*   **Citizen Science**: Build a tool for users to help label and verify detections.
+
+- **Educational Notebooks**: Create a series of Jupyter notebooks teaching the basics of bioacoustics signal processing.
+- **Citizen Science**: Build a tool for users to help label and verify detections.
 
 ## 🧪 Cool Things To Play With
 
@@ -46,10 +49,10 @@ If you're just exploring, here are some fun things to try:
 
 We want your help!
 
-*   **For Developers**: Check the `issues` tab on GitHub. We need help with optimization, UI improvements, and new feature implementation.
-*   **For Scientists**: We need help validating our detections. Are we finding clicks or shrimp noise? Let us know!
-*   **For Learners**: Read through the code in `dolphain/signal.py`. It's heavily commented to explain *why* we do things, not just *how*.
+- **For Developers**: Check the `issues` tab on GitHub. We need help with optimization, UI improvements, and new feature implementation.
+- **For Scientists**: We need help validating our detections. Are we finding clicks or shrimp noise? Let us know!
+- **For Learners**: Read through the code in `dolphain/signal.py`. It's heavily commented to explain _why_ we do things, not just _how_.
 
 ---
 
-*“So long, and thanks for all the fish data.”*
+_“So long, and thanks for all the fish data.”_

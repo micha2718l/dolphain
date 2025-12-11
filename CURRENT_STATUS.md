@@ -3,6 +3,7 @@
 ## ✅ Recent Accomplishments
 
 ### Web Portal & Browser Integration (Completed Today)
+
 - ✅ **Interactive Web Portal:** Created a fully functional browser-based analysis environment (`site/portal/index.html`).
   - Runs Python 3.11 entirely in the browser using Pyodide.
   - Executes `dolphain` library code client-side.
@@ -12,11 +13,13 @@
 - ✅ **UI/UX:** Built a split-pane interface with code editor and visualization panel.
 
 ### Infrastructure & Examples
+
 - ✅ **Git Resolution:** Resolved divergence between local and remote branches.
 - ✅ **HuggingFace Integration:** Fixed `examples/huggingface_quick_start.py` and created `examples/huggingface_demo.ipynb`.
 - ✅ **Wheel Build:** Successfully built `dolphain` as a pure Python wheel for browser distribution.
 
 ### Showcase Modernization (October 12, 2025)
+
 - ✅ Cleaned up monolithic 500+ line HTML into modular architecture
 - ✅ Fixed critical audio player bugs (skip to start, auto-play, non-seekable audio)
 - ✅ Created comprehensive documentation (4 new docs)
@@ -24,6 +27,7 @@
 - ✅ Performance: 26x faster showcase generation (95s → 3.6s per file)
 
 ### What Works Now
+
 - 🎵 Audio playback with play/pause controls
 - 🖱️ Click-to-seek on spectrograms and waveforms
 - ⏱️ Timeline scrubber with progress bar
@@ -34,7 +38,9 @@
 ## ⚠️ Known Issues
 
 ### High Priority
+
 1. **Mode switching seeking** - Clicking to seek after switching denoised→raw doesn't work
+
    - Root cause: Audio becomes non-seekable after src change
    - Workaround: Wait 1-2 seconds after mode switch
    - Fix: Add proper buffering wait in setMode()
@@ -71,6 +77,7 @@ dolphain/
 ## 🎯 Next Steps
 
 ### Immediate (When Drive Available)
+
 1. Connect external drive with EARS files
 2. Regenerate showcase with 10-20 top files:
    ```bash
@@ -82,11 +89,13 @@ dolphain/
    ```
 
 ### High Priority
+
 1. Fix mode switching seeking issue
 2. Cross-browser testing (Safari, Firefox)
 3. Deploy updated showcase to GitHub Pages
 
 ### Medium Priority
+
 1. Add keyboard shortcuts (Space, arrows)
 2. Add download buttons
 3. Improve mobile experience
@@ -95,6 +104,7 @@ dolphain/
 ## 🚀 Quick Commands
 
 ### View Showcase Locally
+
 ```bash
 cd /Users/mjhaas/code/dolphain/site
 python3 -m http.server 8000
@@ -102,6 +112,7 @@ python3 -m http.server 8000
 ```
 
 ### Check File Status
+
 ```bash
 cd /Users/mjhaas/code/dolphain/site/showcase
 ls -lh audio/ spectrograms/ waveforms/
@@ -109,6 +120,7 @@ cat showcase_data.json | python3 -m json.tool | head -50
 ```
 
 ### Test Audio Files
+
 ```bash
 cd /Users/mjhaas/code/dolphain/site/showcase/audio
 file rank_*.wav
@@ -118,6 +130,7 @@ afplay rank_01_71664B69.wav  # Test playback
 ## 📚 Documentation
 
 All up-to-date docs:
+
 - **SHOWCASE_CLEANUP_COMPLETE.md** - Complete cleanup summary
 - **AUDIO_PLAYER_FIX.md** - Bug fixes and solutions
 - **SHOWCASE_QUICK_REF.md** - Daily usage guide
@@ -126,16 +139,19 @@ All up-to-date docs:
 ## 🎓 Key Learnings
 
 ### Audio Element Gotchas
+
 - Not all loaded audio is seekable (check `seekable.end(0)`)
 - Changing src resets buffering state
 - Browser autoplay policies require user interaction
 
 ### Development Insights
+
 - Start modular (don't let files grow beyond 200-300 lines)
 - Use browser events, don't poll state
 - Test edge cases (non-seekable audio, rapid clicks)
 
 ### Performance Tips
+
 - Matplotlib Agg backend for server-side rendering
 - imshow vs pcolormesh: 26x difference!
 - CSS transitions over JS for smooth UI

@@ -376,7 +376,7 @@
     </div>
 
     <header>
-      <div style="display: flex; align-items: center; gap: 15px;">
+      <div style="display: flex; align-items: center; gap: 15px">
         <a href="../index.html" class="back-home-btn">← Home</a>
         <h1>🐬 Dolphain Studio</h1>
       </div>
@@ -541,7 +541,9 @@ safe_plot_overview(ears.metadata)
           <li>
             <code>dolphain</code>: Our custom library for acoustic analysis.
           </li>
-          <li><code>numpy</code>, <code>scipy</code>: For numerical processing.</li>
+          <li>
+            <code>numpy</code>, <code>scipy</code>: For numerical processing.
+          </li>
           <li>
             <code>matplotlib</code>: For plotting (pre-configured for dark
             mode).
@@ -550,9 +552,7 @@ safe_plot_overview(ears.metadata)
 
         <h3>Key Dolphain Functions</h3>
         <ul>
-          <li>
-            <code>dolphain.EARS(filename)</code>: Load an EARS recording.
-          </li>
+          <li><code>dolphain.EARS(filename)</code>: Load an EARS recording.</li>
           <li>
             <code>dolphain.signal.wavelet_denoise(data)</code>: Clean noisy
             signals.
@@ -733,7 +733,7 @@ plt.title(f"Detected {len(clicks)} High-Energy Events (Clicks)", color='#e0e0e0'
 plt.xlabel("Time [s]")
 plt.ylabel("Amplitude")
 plt.grid(True, alpha=0.2)
-plt.tight_layout()`
+plt.tight_layout()`,
       };
 
       function toggleHelp() {

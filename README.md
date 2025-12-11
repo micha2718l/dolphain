@@ -31,6 +31,7 @@ A Python library for analyzing underwater acoustic data from EARS (Embedded Acou
 ## 🎨 Interactive Showcase & Portal
 
 **Web Portal (New!):** https://micha2718l.github.io/dolphain/portal/index.html
+
 - 💻 Run Python code directly in your browser
 - 📡 Fetch data from HuggingFace instantly
 - 📊 Generate spectrograms and waveforms on the fly
@@ -58,7 +59,6 @@ cd site && python3 -m http.server 8000
 
 ---
 
-
 ## 🗺️ Roadmap & Future
 
 Curious about where we're going? Check out our [ROADMAP.md](ROADMAP.md) to see our plans for advanced classification, cloud scaling, and community science.
@@ -66,11 +66,11 @@ Curious about where we're going? Check out our [ROADMAP.md](ROADMAP.md) to see o
 ## 🎓 Learn & Explore
 
 We believe in learning by doing.
-*   **[Dolphain Studio](https://micha2718l.github.io/dolphain/portal/index.html)**: Run real Python analysis code in your browser. No installation required. Includes interactive examples for denoising and detection.
-*   **[Showcase](https://micha2718l.github.io/dolphain/showcase/index.html)**: Listen to the best signals we've found so far.
+
+- **[Dolphain Studio](https://micha2718l.github.io/dolphain/portal/index.html)**: Run real Python analysis code in your browser. No installation required. Includes interactive examples for denoising and detection.
+- **[Showcase](https://micha2718l.github.io/dolphain/showcase/index.html)**: Listen to the best signals we've found so far.
 
 ## 🛠️ Installation
-
 
 ```bash
 git clone https://github.com/micha2718l/dolphain.git
