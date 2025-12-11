@@ -80,9 +80,12 @@ class AudioPlayer {
 
     // Wait for audio to be ready before restoring position
     if (currentTime > 0 || wasPlaying) {
-      this.audioElement.addEventListener(
-        "canplay",
-        () => {
+      const restoreHandler = () => {
+        // Ensure we can seek
+        if (
+          this.audioElement.seekable.length > 0 &&
+          this.audioElement.seekable.end(0) > 0
+        ) {
           // Restore position if we had one
           if (currentTime > 0) {
             this.audioElement.currentTime = currentTime;
@@ -93,9 +96,15 @@ class AudioPlayer {
               .play()
               .catch((e) => console.log("Autoplay prevented:", e));
           }
-        },
-        { once: true }
-      );
+        } else {
+          // If not seekable yet, wait a bit and try again
+          setTimeout(restoreHandler, 50);
+        }
+      };
+
+      this.audioElement.addEventListener("canplay", restoreHandler, {
+        once: true,
+      });
     }
   }
 

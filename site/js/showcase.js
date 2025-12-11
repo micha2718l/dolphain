@@ -1,5 +1,39 @@
 // Showcase initialization and UI management
 const players = {};
+let activeRank = null;
+
+// Global keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+  // Only handle shortcuts if we have an active player
+  if (activeRank === null || !players[activeRank]) return;
+
+  const player = players[activeRank];
+
+  switch (e.code) {
+    case "Space":
+      e.preventDefault(); // Prevent scrolling
+      player.togglePlay();
+      break;
+    case "ArrowLeft":
+      e.preventDefault();
+      if (player.audioElement) {
+        player.audioElement.currentTime = Math.max(
+          0,
+          player.audioElement.currentTime - 5
+        );
+      }
+      break;
+    case "ArrowRight":
+      e.preventDefault();
+      if (player.audioElement) {
+        player.audioElement.currentTime = Math.min(
+          player.audioElement.duration,
+          player.audioElement.currentTime + 5
+        );
+      }
+      break;
+  }
+});
 
 function setupVizScrubbing(rank, type) {
   const container = document.getElementById(`${type}-${rank}`);
@@ -22,6 +56,7 @@ function setupVizScrubbing(rank, type) {
   container.addEventListener("click", (e) => {
     e.stopPropagation();
     e.preventDefault();
+    activeRank = rank;
     const rect = container.getBoundingClientRect();
     const percent = (e.clientX - rect.left) / rect.width;
     players[rank].seekTo(percent);
@@ -29,6 +64,7 @@ function setupVizScrubbing(rank, type) {
 }
 
 function handleTimelineClick(event, rank) {
+  activeRank = rank;
   const timeline = event.currentTarget;
   const rect = timeline.getBoundingClientRect();
   const percent = (event.clientX - rect.left) / rect.width;
@@ -206,6 +242,7 @@ fetch("showcase/showcase_data.json")
           e.preventDefault();
           return;
         }
+        activeRank = file.rank;
         player.togglePlay();
       });
 

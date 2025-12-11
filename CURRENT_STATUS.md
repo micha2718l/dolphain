@@ -90,13 +90,13 @@ dolphain/
 
 ### High Priority
 
-1. Fix mode switching seeking issue
+1. ✅ Fix mode switching seeking issue (Fixed in `audio-player.js`)
 2. Cross-browser testing (Safari, Firefox)
 3. Deploy updated showcase to GitHub Pages
 
 ### Medium Priority
 
-1. Add keyboard shortcuts (Space, arrows)
+1. ✅ Add keyboard shortcuts (Space, arrows) (Added in `showcase.js`)
 2. Add download buttons
 3. Improve mobile experience
 4. Add zoom on spectrograms
