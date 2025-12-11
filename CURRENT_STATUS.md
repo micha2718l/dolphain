@@ -97,7 +97,7 @@ dolphain/
 ### Medium Priority
 
 1. ✅ Add keyboard shortcuts (Space, arrows) (Added in `showcase.js`)
-2. Add download buttons
+2. ✅ Add download buttons (Added in `showcase.js` and `showcase.css`)
 3. Improve mobile experience
 4. Add zoom on spectrograms
 

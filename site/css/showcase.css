@@ -300,6 +300,28 @@ body {
   background: #00b8e6;
 }
 
+.download-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  transform: translateY(-2px);
+  color: #00fff0;
+}
+
 .time {
   color: #00d4ff;
   font-family: monospace;

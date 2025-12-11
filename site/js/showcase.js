@@ -190,6 +190,9 @@ fetch("showcase/showcase_data.json")
                         }"></div>
                     </div>
                     <span class="time" id="duration-${file.rank}">0:00</span>
+                    <a href="#" class="download-btn" id="download-${
+                      file.rank
+                    }" title="Download Audio">⬇</a>
                 </div>
                 
                 <div style="margin-top: 15px; display: flex; gap: 20px; flex-wrap: wrap;">
@@ -231,6 +234,24 @@ fetch("showcase/showcase_data.json")
       // Setup viz scrubbing
       setupVizScrubbing(file.rank, "spec");
       setupVizScrubbing(file.rank, "wave");
+
+      // Download button handler
+      const downloadBtn = document.getElementById(`download-${file.rank}`);
+      downloadBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const currentMode = player.currentMode;
+        const filename =
+          currentMode === "raw" ? file.audio_raw : file.audio_denoised;
+        const url = `showcase/${filename}`;
+
+        // Create a temporary link to force download
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename.split("/").pop(); // Extract filename
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
 
       // Add play button click handler with delay to prevent accidental clicks during page load
       let buttonClickEnabled = false;
