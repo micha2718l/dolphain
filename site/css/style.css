@@ -400,6 +400,29 @@ h1 {
   color: white;
 }
 
+.badge-experimental {
+  background: linear-gradient(135deg, #6b4c9a, #8e44ad);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.transparency-box {
+  background: rgba(142, 68, 173, 0.15);
+  border: 1px solid rgba(142, 68, 173, 0.4);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(5px);
+}
+
+.transparency-box h4 {
+  color: #d2b4de;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .badge-ai {
   background: linear-gradient(135deg, #7c98ab, #5a7a8f);
   color: white;
