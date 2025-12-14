@@ -9,7 +9,8 @@ __version__ = "0.1.0"
 __author__ = "Michael Haas"
 
 # Import all public functions from submodules
-from .io import read_ears_file, print_file_info, fetch_huggingface_file, EARS
+from .io import read_ears_file, print_file_info, fetch_huggingface_file, EARS, getData
+from .catalog import Catalog, build_catalog
 from .signal import wavelet_denoise, threshold, thresh_wave_coeffs, detect_whistles
 from .plotting import (
     plot_waveform,

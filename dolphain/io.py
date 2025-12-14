@@ -11,8 +11,28 @@ import numpy as np
 import tempfile
 import shutil
 import random
+from huggingface_hub import HfFileSystem
 
-__all__ = ["read_ears_file", "print_file_info", "fetch_huggingface_file", "EARS"]
+try:
+    from .catalog import Catalog
+except ImportError:
+    # Handle circular import or missing module during setup
+    pass
+
+__all__ = [
+    "read_ears_file",
+    "print_file_info",
+    "fetch_huggingface_file",
+    "EARS",
+    "getData",
+]
+
+# Constants
+RECORD_SIZE = 512
+HEADER_SIZE = 12
+SAMPLES_PER_RECORD = 250
+FS = 192000  # Sampling rate in Hz
+FS_TIME = 32000  # Timestamp sampling rate
 
 
 def read_ears_file(filepath, normalize=False):
@@ -44,13 +64,6 @@ def read_ears_file(filepath, normalize=False):
     >>> print(f"Duration: {ears_data['duration']:.2f} seconds")
     >>> print(f"Sampling rate: {ears_data['fs']} Hz")
     """
-    # Constants
-    RECORD_SIZE = 512
-    HEADER_SIZE = 12
-    SAMPLES_PER_RECORD = 250
-    FS = 192000  # Sampling rate in Hz
-    FS_TIME = 32000  # Timestamp sampling rate
-
     # Determine epoch based on filename
     filename = Path(filepath).name
     if filename[0] == "7":
@@ -423,7 +436,7 @@ class EARS:
         Parameters
         ----------
         plot_type : str, optional
-            Type of plot: 'waveform', 'spectrogram', 'overview', 
+            Type of plot: 'waveform', 'spectrogram', 'overview',
             'denoising' (default: 'overview')
         **kwargs : dict
             Additional arguments passed to plotting functions
@@ -468,3 +481,119 @@ class EARS:
         from .signal import detect_whistles
 
         return detect_whistles(self.data, self.fs, **kwargs)
+
+
+def read_ears_chunk(fs, file_path, start_sample, n_samples):
+    """
+    Read a specific chunk of samples from an EARS file on HuggingFace.
+    """
+    start_record = start_sample // SAMPLES_PER_RECORD
+    end_record = (
+        start_sample + n_samples + SAMPLES_PER_RECORD - 1
+    ) // SAMPLES_PER_RECORD
+
+    start_byte = start_record * RECORD_SIZE
+    end_byte = end_record * RECORD_SIZE
+
+    # Read bytes
+    with fs.open(file_path, "rb") as f:
+        f.seek(start_byte)
+        raw_data = f.read(end_byte - start_byte)
+
+    data = []
+    n_records = len(raw_data) // RECORD_SIZE
+
+    for i in range(n_records):
+        offset = RECORD_SIZE * i
+        # Extract data (250 16-bit signed integers, big-endian)
+        samples = struct.unpack_from(">250h", raw_data, offset=offset + HEADER_SIZE)
+        data.extend(samples)
+
+    # Slice to exact samples
+    offset_in_first_record = start_sample % SAMPLES_PER_RECORD
+    return np.array(
+        data[offset_in_first_record : offset_in_first_record + n_samples],
+        dtype=np.float64,
+    )
+
+
+def getData(source, start_time, length_seconds, catalog_path="catalog.csv"):
+    """
+    Get acoustic data for a specific time range, stitching multiple files if necessary.
+
+    Parameters
+    ----------
+    source : str
+        Dataset ID or source identifier (currently unused, assumes default catalog).
+    start_time : datetime.datetime
+        Start time of the requested data.
+    length_seconds : float
+        Duration of data in seconds.
+    catalog_path : str
+        Path to the catalog CSV file.
+
+    Returns
+    -------
+    np.array
+        Acoustic data samples.
+    """
+    try:
+        from .catalog import Catalog
+    except ImportError:
+        # Fallback if relative import fails (e.g. running script directly)
+        from dolphain.catalog import Catalog
+
+    cat = Catalog(catalog_path)
+    end_time = start_time + datetime.timedelta(seconds=length_seconds)
+
+    files = cat.query(start_time, end_time)
+
+    if files.empty:
+        print(f"No data found for range {start_time} to {end_time}")
+        return np.array([])
+
+    # Initialize result buffer
+    total_samples = int(length_seconds * FS)
+    result = np.zeros(total_samples)
+
+    fs = HfFileSystem()
+
+    for _, row in files.iterrows():
+        file_start = row["start_time"]
+        file_end = row["end_time"]
+        file_path = row["file_path"]
+
+        # Calculate overlap
+        overlap_start = max(start_time, file_start)
+        overlap_end = min(end_time, file_end)
+
+        if overlap_start >= overlap_end:
+            continue
+
+        # Calculate offsets in the file
+        file_offset_seconds = (overlap_start - file_start).total_seconds()
+        duration_seconds = (overlap_end - overlap_start).total_seconds()
+
+        # Convert to samples
+        start_sample = int(file_offset_seconds * FS)
+        n_samples = int(duration_seconds * FS)
+
+        # Read from file
+        try:
+            chunk_data = read_ears_chunk(fs, file_path, start_sample, n_samples)
+
+            # Place in result buffer
+            buffer_offset = int((overlap_start - start_time).total_seconds() * FS)
+
+            # Handle potential size mismatch due to rounding
+            chunk_len = len(chunk_data)
+            target_len = min(chunk_len, total_samples - buffer_offset)
+
+            if target_len > 0:
+                result[buffer_offset : buffer_offset + target_len] = chunk_data[
+                    :target_len
+                ]
+        except Exception as e:
+            print(f"Error reading chunk from {file_path}: {e}")
+
+    return result
