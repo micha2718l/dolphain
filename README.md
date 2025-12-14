@@ -1,4 +1,3 @@
-
 # 🐬 Dolphain - Dolphin Acoustic Analysis Library
 
 **Interactive Showcase:** https://dolphain.mantilabs.ai/showcase.html 🎵
@@ -102,6 +101,24 @@ ears.plot('denoising', fmax=50000)
 whistles = ears.detect_whistles()
 print(f"Found {len(whistles)} whistles in {ears.filename}")
 ```
+
+### 🕰️ Time-Based Data Access (New!)
+
+Forget about files. Just ask for the time range you want.
+
+```python
+from dolphain import getData, build_catalog
+import datetime
+
+# 1. Index the dataset (run once)
+build_catalog()
+
+# 2. Get 10 seconds of audio, even if it crosses file boundaries
+start = datetime.datetime(2017, 6, 28, 0, 20, 51)
+data = getData("GoMRI-17", start, 10.0)
+```
+
+See [DATA_ACCESS.md](DATA_ACCESS.md) for full details.
 
 **New!** Seamlessly fetch and analyze files from HuggingFace without any setup. See [HUGGINGFACE_INTEGRATION.md](HUGGINGFACE_INTEGRATION.md) for full documentation.
 
