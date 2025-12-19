@@ -3,6 +3,7 @@ import csv
 import struct
 import datetime
 import os
+import argparse
 from pathlib import Path
 from huggingface_hub import HfApi, CommitOperationAdd
 
@@ -111,6 +112,12 @@ def process_batch(
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--overwrite", action="store_true", help="Overwrite existing files"
+    )
+    args = parser.parse_args()
+
     # Check authentication first
     try:
         user = HfApi().whoami()
@@ -167,7 +174,10 @@ def main():
         current_paths = []
 
         for file_path_str in batch_files:
-            if file_path_str in uploaded_files:
+            # If overwrite is ON, we ignore uploaded_files check for the upload part,
+            # but we might still want to skip if it's in the catalog to avoid duplicate CSV entries.
+
+            if not args.overwrite and file_path_str in uploaded_files:
                 continue
 
             file_path = Path(file_path_str)
@@ -176,11 +186,16 @@ def main():
                 continue
 
             # Check if already in catalog (by filename)
-            if file_path.name in existing_catalog_files:
-                print(f"Skipping {file_path.name} (already in catalog)")
-                uploaded_files.add(file_path_str)
-                save_progress(uploaded_files)
-                continue
+            in_catalog = file_path.name in existing_catalog_files
+
+            if in_catalog:
+                if not args.overwrite:
+                    print(f"Skipping {file_path.name} (already in catalog)")
+                    uploaded_files.add(file_path_str)
+                    save_progress(uploaded_files)
+                    continue
+                else:
+                    print(f"Overwriting {file_path.name}...")
 
             try:
                 # 1. Get Metadata
@@ -208,17 +223,19 @@ def main():
                 )
                 current_ops.append(op)
 
-                # Create catalog entry
-                catalog_entry = {
-                    "file_path": f"datasets/{DATASET_ID}/{hf_path_in_repo}",
-                    "filename": meta["filename"],
-                    "start_time": meta["start_time"],
-                    "end_time": meta["end_time"],
-                    "duration": meta["duration"],
-                    "size": meta["size"],
-                    "n_samples": meta["n_samples"],
-                }
-                current_meta.append(catalog_entry)
+                # Create catalog entry ONLY if not already in catalog
+                if not in_catalog:
+                    catalog_entry = {
+                        "file_path": f"datasets/{DATASET_ID}/{hf_path_in_repo}",
+                        "filename": meta["filename"],
+                        "start_time": meta["start_time"],
+                        "end_time": meta["end_time"],
+                        "duration": meta["duration"],
+                        "size": meta["size"],
+                        "n_samples": meta["n_samples"],
+                    }
+                    current_meta.append(catalog_entry)
+
                 current_paths.append(file_path_str)
 
                 # 4. Process batch if full

@@ -30,6 +30,22 @@ This script will:
 3.  **Smart Batching**: Uploads are grouped into commits of 50 files each to avoid rate limits and keep the git history clean.
 4.  Update your local `dolphain/data/default_catalog.csv`.
 
+**Resuming an Upload:**
+If an upload is interrupted or you want to retry failed files from the _same_ batch without picking new random ones:
+
+```bash
+./scripts/upload_random.sh --resume
+```
+
+**Contiguous Block Upload:**
+To upload a contiguous block of files (e.g., a continuous time segment from a single buoy), use the `--contiguous` flag. This is useful for ensuring you have complete coverage for a specific time period.
+
+```bash
+./scripts/upload_random.sh --contiguous --count 200
+```
+
+_Note: This mode will pick a random buoy and a random start time, then take the next N files. It may overwrite existing files on HuggingFace if they overlap with the selected block._
+
 ### 2. Advanced Selection
 
 For more control, you can use the Python scripts directly:
