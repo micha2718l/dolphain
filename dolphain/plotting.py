@@ -16,6 +16,7 @@ __all__ = [
     "plot_overview",
     "plot_denoising_comparison",
     "plot_wavelet_comparison",
+    "plot_wavelet_decomposition",
 ]
 
 
@@ -382,3 +383,112 @@ def plot_wavelet_comparison(
 
     plt.tight_layout()
     plt.show()
+
+
+def plot_wavelet_decomposition(
+    audio_data,
+    sample_rate=192000,
+    wavelet="db20",
+    level=5,
+    duration=None,
+    start_offset=0,
+    figsize=(14, 10),
+):
+    """
+    Plot wavelet decomposition showing all coefficient levels.
+
+    This function decomposes the audio signal using wavelets and displays
+    each decomposition level (approximation and details) in a stacked plot,
+    showing how the signal is broken down into different frequency bands.
+
+    Parameters
+    ----------
+    audio_data : array_like
+        Audio sample data
+    sample_rate : int, optional
+        Sampling rate in Hz (default: 192000)
+    wavelet : str, optional
+        Wavelet name (default: 'db20')
+    level : int, optional
+        Number of decomposition levels (default: 5)
+    duration : float, optional
+        Duration in seconds to plot. If None, uses full signal
+    start_offset : float, optional
+        Start time in seconds (default: 0)
+    figsize : tuple, optional
+        Figure size (width, height)
+
+    Examples
+    --------
+    >>> import dolphain
+    >>> data = dolphain.read_ears_file('sample.200')
+    >>> dolphain.plot_wavelet_decomposition(data['data'])
+    
+    >>> # Plot first 10 seconds
+    >>> dolphain.plot_wavelet_decomposition(data['data'], duration=10)
+    
+    >>> # Plot 30 seconds starting at 5 seconds
+    >>> dolphain.plot_wavelet_decomposition(data['data'], duration=30, start_offset=5)
+    
+    >>> # With stitched data from getData
+    >>> audio_data = dolphain.getData("GoMRI-17", start_time, 30.0)
+    >>> dolphain.plot_wavelet_decomposition(audio_data, duration=10)
+
+    Notes
+    -----
+    The decomposition shows:
+    - Approximation (cA): Low-frequency components
+    - Details (cD1-cDN): High to low frequency details at each level
+    
+    Each level represents roughly half the frequency band of the previous level.
+    """
+    import pywt
+
+    audio_data = np.asarray(audio_data)
+
+    # Extract subset if requested
+    start_sample = int(start_offset * sample_rate)
+    if duration is not None:
+        subset_samples = int(duration * sample_rate)
+        data_subset = audio_data[start_sample : start_sample + subset_samples]
+        plot_duration = duration
+    else:
+        data_subset = audio_data[start_sample:]
+        plot_duration = len(data_subset) / sample_rate
+
+    # Perform wavelet decomposition
+    coeffs = pywt.wavedec(data_subset, wavelet, level=level)
+
+    # Create stacked plot
+    fig, axes = plt.subplots(len(coeffs), 1, figsize=figsize, sharex=True)
+
+    # Handle single level case
+    if len(coeffs) == 1:
+        axes = [axes]
+
+    # Plot each level
+    level_names = ["Approximation (cA)"] + [
+        f"Detail {i} (cD{i})" for i in range(1, len(coeffs))
+    ]
+    colors = plt.cm.viridis(np.linspace(0.2, 0.9, len(coeffs)))
+
+    for i, (coeff, name, color) in enumerate(zip(coeffs, level_names, colors)):
+        # Create time array for this level
+        t = np.linspace(0, plot_duration, len(coeff))
+        axes[i].plot(t, coeff, linewidth=0.5, color=color)
+        axes[i].set_ylabel(name, fontsize=10)
+        axes[i].grid(True, alpha=0.3)
+        axes[i].set_xlim(0, plot_duration)
+
+    axes[-1].set_xlabel("Time (s)", fontsize=11)
+    fig.suptitle(
+        f"Wavelet Decomposition ({wavelet}, {level} levels) - {plot_duration:.1f}s",
+        fontsize=13,
+        fontweight="bold",
+    )
+
+    plt.tight_layout()
+    plt.show()
+
+    print(f"Decomposition levels: {len(coeffs)}")
+    print(f"Coefficient counts: {[len(c) for c in coeffs]}")

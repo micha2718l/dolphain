@@ -9,7 +9,7 @@ __version__ = "0.1.0"
 __author__ = "Michael Haas"
 
 # Import all public functions from submodules
-from .io import read_ears_file, print_file_info, fetch_huggingface_file, EARS, getData
+from .io import read_ears_file, print_file_info, fetch_huggingface_file, EARS, getData, save_wav
 from .catalog import Catalog, build_catalog
 from .signal import wavelet_denoise, threshold, thresh_wave_coeffs, detect_whistles
 from .plotting import (
@@ -18,6 +18,7 @@ from .plotting import (
     plot_overview,
     plot_denoising_comparison,
     plot_wavelet_comparison,
+    plot_wavelet_decomposition,
 )
 from .batch import (
     find_data_files,
@@ -48,6 +49,11 @@ __all__ = [
     "print_file_info",
     "fetch_huggingface_file",
     "EARS",
+    "getData",
+    "save_wav",
+    # Catalog
+    "Catalog",
+    "build_catalog",
     # Signal processing
     "wavelet_denoise",
     "threshold",
@@ -59,6 +65,7 @@ __all__ = [
     "plot_overview",
     "plot_denoising_comparison",
     "plot_wavelet_comparison",
+    "plot_wavelet_decomposition",
     # Batch processing
     "find_data_files",
     "select_random_files",

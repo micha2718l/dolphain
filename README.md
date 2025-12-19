@@ -120,6 +120,30 @@ data = getData("GoMRI-17", start, 10.0)
 
 See [DATA_ACCESS.md](DATA_ACCESS.md) for full details.
 
+### 📚 Built-in Catalog (Fastest Start!)
+
+No need to build a catalog or download anything! Dolphain comes with a built-in catalog of 1000 sample files:
+
+```python
+from dolphain.catalog import Catalog
+import pandas as pd
+
+# Load the built-in catalog (no arguments needed!)
+catalog = Catalog()
+print(f"Loaded {len(catalog.df)} files")
+
+# Query for a specific time range
+start = pd.to_datetime("2017-06-28 00:30:00")
+end = pd.to_datetime("2017-06-28 01:00:00")
+files = catalog.query(start, end)
+print(f"Found {len(files)} files in that time range")
+
+# You can still use your own catalog if you have one
+my_catalog = Catalog("path/to/my/catalog.csv")
+```
+
+The built-in catalog will be expanded as more files are added to HuggingFace.
+
 **New!** Seamlessly fetch and analyze files from HuggingFace without any setup. See [HUGGINGFACE_INTEGRATION.md](HUGGINGFACE_INTEGRATION.md) for full documentation.
 
 ### Traditional - Local Files
@@ -257,7 +281,36 @@ whistles = dolphain.detect_whistles(
 dolphain.plot_analysis(data['data'], clean, data['fs'], data['time'])
 ```
 
-### 5. Batch Processing
+### 5. Wavelet Decomposition Visualization
+
+```python
+# Visualize wavelet decomposition levels
+# Shows how signal is broken down into frequency bands
+dolphain.plot_wavelet_decomposition(
+    data['data'],
+    duration=10,         # Plot first 10 seconds
+    start_offset=5,      # Start at 5 seconds
+    wavelet='db20',      # Wavelet type
+    level=5              # Decomposition levels
+)
+```
+
+### 6. Save Audio as WAV
+
+```python
+# Save audio data for playback or further analysis
+dolphain.save_wav(data['data'], 'output.wav')
+
+# Works with stitched data from getData
+audio_data = dolphain.getData("GoMRI-17", start_time, 30.0)
+dolphain.save_wav(audio_data, 'stitched_audio.wav')
+
+# Or use EARS class method
+ears = dolphain.EARS()
+ears.save_wav('recording.wav')
+```
+
+### 7. Batch Processing
 
 ```python
 from dolphain.batch import BatchProcessor
