@@ -1,12 +1,34 @@
 # 💾 Data Access Guide
 
-**Last Updated:** December 13, 2025
+**Last Updated:** December 17, 2025
 
 Dolphain provides a powerful abstraction layer for accessing the massive EARS dataset hosted on HuggingFace. Instead of managing thousands of individual binary files, you can query data by **time range**.
 
 ---
 
-## 🚀 Quick Start
+## 📚 Built-in Catalog (Fastest Start!)
+
+**New in v0.1.0:** Dolphain now includes a built-in catalog with 1000 sample files, so you can start immediately without building a catalog first!
+
+```python
+from dolphain.catalog import Catalog
+
+# No setup required - just load the built-in catalog
+catalog = Catalog()
+print(f"Loaded {len(catalog.df)} files")
+
+# Query for files in a time range
+import pandas as pd
+start = pd.to_datetime("2017-06-28 00:30:00")
+end = pd.to_datetime("2017-06-28 01:00:00")
+files = catalog.query(start, end)
+```
+
+The built-in catalog will be expanded as more files are added to HuggingFace. You can still build your own complete catalog for the full dataset (see below).
+
+---
+
+## 🚀 Quick Start (Full Dataset)
 
 ```python
 from dolphain import getData, build_catalog
@@ -74,7 +96,7 @@ def getData(
     source,
     start_time,
     length_seconds,
-    catalog_path="catalog.csv"
+    catalog_path=None
 ):
     ...
 ```
@@ -82,7 +104,7 @@ def getData(
 - **source**: Dataset identifier (currently unused, reserved for future multi-dataset support).
 - **start_time**: `datetime.datetime` object for the start of the audio.
 - **length_seconds**: Duration in seconds (float).
-- **catalog_path**: Path to the CSV index created by `build_catalog`.
+- **catalog_path**: Path to the CSV index created by `build_catalog`. If `None` (default), uses the built-in catalog with 1000 sample files.
 
 ---
 

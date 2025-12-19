@@ -279,20 +279,26 @@
         <div class="example-item">
           <h3>🧬 Wavelet Decomposition</h3>
           <p>
-            <strong>NEW!</strong> Visualize how wavelet transforms break down the signal into different frequency bands. 
-            Each level shows approximation (low-freq) and detail (high-freq) components, revealing the multi-scale 
-            structure used in denoising algorithms.
+            <strong>NEW!</strong> Visualize how wavelet transforms break down
+            the signal into different frequency bands. Each level shows
+            approximation (low-freq) and detail (high-freq) components,
+            revealing the multi-scale structure used in denoising algorithms.
           </p>
           <div class="code-block" style="margin-top: 1rem">
             <code
-              ><span class="highlight"># Decompose signal into frequency bands</span>
+              ><span class="highlight"
+                ># Decompose signal into frequency bands</span
+              >
               dolphain.plot_wavelet_decomposition(data['data'], duration=10)
-              <span class="highlight"># See approximation + 5 detail levels</span></code
+              <span class="highlight"
+                ># See approximation + 5 detail levels</span
+              ></code
             >
           </div>
           <div class="science-fact" style="margin-top: 1rem">
-            🎯 <strong>How It Works:</strong> The Daubechies 20 (db20) wavelet decomposes the signal into 6 levels. 
-            Level 1 details contain the highest frequencies (48-96 kHz), while the approximation contains 
+            🎯 <strong>How It Works:</strong> The Daubechies 20 (db20) wavelet
+            decomposes the signal into 6 levels. Level 1 details contain the
+            highest frequencies (48-96 kHz), while the approximation contains
             frequencies below 3 kHz where most dolphin whistles occur.
           </div>
         </div>
@@ -300,24 +306,31 @@
         <div class="example-item">
           <h3>🔗 Data Stitching Across Files</h3>
           <p>
-            <strong>NEW!</strong> Request data by time range without worrying about file boundaries. 
-            The built-in catalog automatically finds and stitches together multiple files, giving you 
-            seamless continuous audio.
+            <strong>NEW!</strong> Request data by time range without worrying
+            about file boundaries. The built-in catalog automatically finds and
+            stitches together multiple files, giving you seamless continuous
+            audio.
           </p>
           <div class="code-block" style="margin-top: 1rem">
             <code
-              ><span class="highlight"># Load built-in catalog (1000 files, ~6 hours)</span>
+              ><span class="highlight"
+                ># Load built-in catalog (1000 files, ~6 hours)</span
+              >
               catalog = dolphain.Catalog()
-              <span class="highlight"># Get 90 seconds spanning multiple files</span>
+              <span class="highlight"
+                ># Get 90 seconds spanning multiple files</span
+              >
               audio = dolphain.getData("GoMRI-17", start_time, 90.0)
               <span class="highlight"># Save as WAV for playback</span>
               dolphain.save_wav(audio, 'dolphins.wav')</code
             >
           </div>
           <div class="science-fact" style="margin-top: 1rem">
-            💡 <strong>Why This Matters:</strong> EARS files are ~21 seconds each. To analyze longer vocalizations 
-            or behavioral sequences, you need data spanning multiple files. Dolphain handles this automatically, 
-            so you can focus on the science instead of file management.
+            💡 <strong>Why This Matters:</strong> EARS files are ~21 seconds
+            each. To analyze longer vocalizations or behavioral sequences, you
+            need data spanning multiple files. Dolphain handles this
+            automatically, so you can focus on the science instead of file
+            management.
           </div>
         </div>
 
@@ -379,24 +392,28 @@
             <span class="feature-icon">🔗</span>
             <h3>Built-in Catalog & Data Stitching</h3>
             <p>
-              <strong>NEW!</strong> Instant access to 1000 sample files (~6 hours) with no setup. 
-              Request data by time range and automatically stitch across file boundaries. 
-              Save audio as WAV files for playback or further analysis.
+              <strong>NEW!</strong> Instant access to 1000 sample files (~6
+              hours) with no setup. Request data by time range and automatically
+              stitch across file boundaries. Save audio as WAV files for
+              playback or further analysis.
             </p>
             <div class="feature-tech">
-              Time-based indexing • Automatic stitching • WAV export • Zero configuration
+              Time-based indexing • Automatic stitching • WAV export • Zero
+              configuration
             </div>
           </div>
           <div class="feature-card highlight-card">
             <span class="feature-icon">🧬</span>
             <h3>Wavelet Decomposition Visualization</h3>
             <p>
-              <strong>NEW!</strong> See inside the wavelet transform! Visualize approximation 
-              and detail coefficients at each decomposition level to understand how denoising 
-              works and which frequency bands contain the signals of interest.
+              <strong>NEW!</strong> See inside the wavelet transform! Visualize
+              approximation and detail coefficients at each decomposition level
+              to understand how denoising works and which frequency bands
+              contain the signals of interest.
             </p>
             <div class="feature-tech">
-              Multi-level decomposition • Frequency band separation • Educational visualization
+              Multi-level decomposition • Frequency band separation •
+              Educational visualization
             </div>
           </div>
           <div class="feature-card">

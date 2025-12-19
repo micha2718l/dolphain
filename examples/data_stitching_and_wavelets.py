@@ -29,7 +29,9 @@ print()
 print("Step 1: Loading built-in catalog...")
 catalog = Catalog()
 print(f"  ✓ Loaded {len(catalog.df)} files")
-print(f"  Time range: {catalog.df['start_time'].min()} to {catalog.df['end_time'].max()}")
+print(
+    f"  Time range: {catalog.df['start_time'].min()} to {catalog.df['end_time'].max()}"
+)
 print()
 
 # ============================================================================
@@ -99,9 +101,7 @@ axes[0].set_ylabel("Amplitude")
 axes[0].grid(True, alpha=0.3)
 
 # Spectrogram
-axes[1].specgram(
-    audio_data, Fs=192000, NFFT=1024, noverlap=512, cmap="nipy_spectral"
-)
+axes[1].specgram(audio_data, Fs=192000, NFFT=1024, noverlap=512, cmap="nipy_spectral")
 axes[1].set_title("Spectrogram")
 axes[1].set_ylabel("Frequency (Hz)")
 axes[1].set_xlabel("Time (s)")

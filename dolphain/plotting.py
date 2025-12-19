@@ -423,13 +423,13 @@ def plot_wavelet_decomposition(
     >>> import dolphain
     >>> data = dolphain.read_ears_file('sample.200')
     >>> dolphain.plot_wavelet_decomposition(data['data'])
-    
+
     >>> # Plot first 10 seconds
     >>> dolphain.plot_wavelet_decomposition(data['data'], duration=10)
-    
+
     >>> # Plot 30 seconds starting at 5 seconds
     >>> dolphain.plot_wavelet_decomposition(data['data'], duration=30, start_offset=5)
-    
+
     >>> # With stitched data from getData
     >>> audio_data = dolphain.getData("GoMRI-17", start_time, 30.0)
     >>> dolphain.plot_wavelet_decomposition(audio_data, duration=10)
@@ -439,7 +439,7 @@ def plot_wavelet_decomposition(
     The decomposition shows:
     - Approximation (cA): Low-frequency components
     - Details (cD1-cDN): High to low frequency details at each level
-    
+
     Each level represents roughly half the frequency band of the previous level.
     """
     import pywt

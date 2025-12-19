@@ -531,7 +531,7 @@ def save_wav(audio_data, output_path, sample_rate=192000, normalize=True):
     >>> import dolphain
     >>> data = dolphain.read_ears_file('sample.200')
     >>> dolphain.save_wav(data['data'], 'output.wav')
-    
+
     >>> # With getData
     >>> audio_data = dolphain.getData("GoMRI-17", start_time, 30.0)
     >>> dolphain.save_wav(audio_data, 'stitched.wav')
