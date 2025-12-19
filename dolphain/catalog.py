@@ -6,6 +6,12 @@ from pathlib import Path
 import os
 import io
 
+try:
+    from importlib.resources import files
+except ImportError:
+    # Fallback for Python < 3.9
+    from importlib_resources import files
+
 # Constants
 RECORD_SIZE = 512
 SAMPLES_PER_RECORD = 250
@@ -120,7 +126,29 @@ def build_catalog(
 
 
 class Catalog:
-    def __init__(self, catalog_path="catalog.csv"):
+    def __init__(self, catalog_path=None):
+        """
+        Initialize a Catalog from a CSV file.
+
+        Parameters
+        ----------
+        catalog_path : str, optional
+            Path to a catalog CSV file. If None, uses the built-in default catalog
+            which contains 1000 sample files from the EARS dataset.
+        """
+        if catalog_path is None:
+            # Use the built-in default catalog
+            try:
+                # Use modern importlib.resources (Python 3.9+)
+                catalog_path = str(
+                    files("dolphain").joinpath("data/default_catalog.csv")
+                )
+            except Exception:
+                # Fallback for development installations
+                module_dir = Path(__file__).parent
+                catalog_path = module_dir / "data" / "default_catalog.csv"
+                catalog_path = str(catalog_path)
+
         if os.path.exists(catalog_path):
             self.df = pd.read_csv(catalog_path)
             self.df["start_time"] = pd.to_datetime(self.df["start_time"])

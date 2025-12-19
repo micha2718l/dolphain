@@ -25,6 +25,7 @@ __all__ = [
     "fetch_huggingface_file",
     "EARS",
     "getData",
+    "save_wav",
 ]
 
 # Constants
@@ -482,6 +483,72 @@ class EARS:
 
         return detect_whistles(self.data, self.fs, **kwargs)
 
+    def save_wav(self, output_path, normalize=True):
+        """
+        Save audio data as a WAV file.
+
+        Parameters
+        ----------
+        output_path : str or Path
+            Path where the WAV file will be saved
+        normalize : bool, optional
+            If True, normalize to prevent clipping (default: True)
+
+        Examples
+        --------
+        >>> ears = EARS()
+        >>> ears.save_wav('recording.wav')
+        """
+        from scipy.io import wavfile
+
+        if normalize:
+            # Normalize to int16 range, leaving 10% headroom to prevent clipping
+            normalized = np.int16(self.data / np.max(np.abs(self.data)) * 32767 * 0.9)
+        else:
+            normalized = np.int16(self.data)
+
+        wavfile.write(output_path, self.fs, normalized)
+        print(f"✓ Saved WAV file: {output_path}")
+
+
+def save_wav(audio_data, output_path, sample_rate=192000, normalize=True):
+    """
+    Save audio data as a WAV file.
+
+    Parameters
+    ----------
+    audio_data : array_like
+        Audio sample data
+    output_path : str or Path
+        Path where the WAV file will be saved
+    sample_rate : int, optional
+        Sampling rate in Hz (default: 192000)
+    normalize : bool, optional
+        If True, normalize to prevent clipping (default: True)
+
+    Examples
+    --------
+    >>> import dolphain
+    >>> data = dolphain.read_ears_file('sample.200')
+    >>> dolphain.save_wav(data['data'], 'output.wav')
+    
+    >>> # With getData
+    >>> audio_data = dolphain.getData("GoMRI-17", start_time, 30.0)
+    >>> dolphain.save_wav(audio_data, 'stitched.wav')
+    """
+    from scipy.io import wavfile
+
+    audio_data = np.asarray(audio_data)
+
+    if normalize:
+        # Normalize to int16 range, leaving 10% headroom to prevent clipping
+        normalized = np.int16(audio_data / np.max(np.abs(audio_data)) * 32767 * 0.9)
+    else:
+        normalized = np.int16(audio_data)
+
+    wavfile.write(output_path, sample_rate, normalized)
+    print(f"✓ Saved WAV file: {output_path}")
+
 
 def read_ears_chunk(fs, file_path, start_sample, n_samples):
     """
@@ -517,7 +584,7 @@ def read_ears_chunk(fs, file_path, start_sample, n_samples):
     )
 
 
-def getData(source, start_time, length_seconds, catalog_path="catalog.csv"):
+def getData(source, start_time, length_seconds, catalog_path=None):
     """
     Get acoustic data for a specific time range, stitching multiple files if necessary.
 
@@ -529,8 +596,8 @@ def getData(source, start_time, length_seconds, catalog_path="catalog.csv"):
         Start time of the requested data.
     length_seconds : float
         Duration of data in seconds.
-    catalog_path : str
-        Path to the catalog CSV file.
+    catalog_path : str, optional
+        Path to the catalog CSV file. If None, uses the built-in default catalog.
 
     Returns
     -------
