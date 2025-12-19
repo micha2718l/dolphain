@@ -1,6 +1,6 @@
 # 📚 Documentation Index
 
-**Last Updated:** December 13, 2025
+**Last Updated:** December 18, 2025
 **Quick Navigation:** All documentation files organized by purpose
 
 ---
@@ -10,7 +10,8 @@
 1. **`START_HERE.md`** - Main entry point, quick start guide (2-min read)
 2. **`README.md`** - Project overview, API documentation, and examples
 3. **`DATA_ACCESS.md`** - Guide to using the new time-based data access API (Catalog & getData)
-4. **`CURRENT_STATUS.md`** - Latest project status and next steps (3-min read)
+4. **`DATA_MANAGEMENT.md`** - 🆕 Guide to uploading data and managing the catalog
+5. **`CURRENT_STATUS.md`** - Latest project status and next steps (3-min read)
 
 ---
 
